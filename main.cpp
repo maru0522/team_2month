@@ -17,7 +17,7 @@ using namespace DirectX;
 #include<DirectXTex.h>
 #include<wrl.h>
 
-#include "mWindow.h"
+#include "mWindow.h" 
 
 using namespace Microsoft::WRL;
 
