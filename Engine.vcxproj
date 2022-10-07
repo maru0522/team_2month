@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mInput.cpp" />
     <ClCompile Include="mWindow.cpp" />
     <ClCompile Include="mUtil.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="mInput.h" />
     <ClInclude Include="mWindow.h" />
     <ClInclude Include="mUtil.h" />
   </ItemGroup>
