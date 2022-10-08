@@ -60,7 +60,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region WindowsAPI初期化
 
-    mWindow* wnd_ = mWindow::GetInstance();
+    mWindow* wnd = mWindow::GetInstance();
 
 #pragma endregion
 
@@ -205,7 +205,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
     // スワップチェーンの生成
     result = dxgiFactory->CreateSwapChainForHwnd(
-        commandQueue.Get(), wnd_->GetHwnd(), &swapChainDesc, nullptr, nullptr,
+        commandQueue.Get(), wnd->GetHwnd(), &swapChainDesc, nullptr, nullptr,
         &swapChain1);
     assert(SUCCEEDED(result));
 
@@ -265,8 +265,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     // リソース設定
     D3D12_RESOURCE_DESC depthResourceDesc{};
     depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-    depthResourceDesc.Width = mWindow::width;     // レンダーターゲットに合わせる
-    depthResourceDesc.Height = mWindow::height;   // レンダーターゲットに合わせる
+    depthResourceDesc.Width = mWindow::width_;     // レンダーターゲットに合わせる
+    depthResourceDesc.Height = mWindow::height_;   // レンダーターゲットに合わせる
     depthResourceDesc.DepthOrArraySize = 1;
     depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT;   // 深度値フォーマット
     depthResourceDesc.SampleDesc.Count = 1;
@@ -316,7 +316,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     // DirectInputの初期化
     IDirectInput8* directInput = nullptr;
     result = DirectInput8Create(
-        wnd_->GetHInstance(), DIRECTINPUT_VERSION, IID_IDirectInput8,
+        wnd->GetHInstance(), DIRECTINPUT_VERSION, IID_IDirectInput8,
         (void**)&directInput, nullptr);
     assert(SUCCEEDED(result));
 
@@ -331,7 +331,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
     // 排他制御レベルのセット
     result = keyboard->SetCooperativeLevel(
-        wnd_->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
+        wnd->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
     assert(SUCCEEDED(result));
 #pragma endregion
 
@@ -762,7 +762,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     // 射影変換行列（透視投影）
     XMMATRIX matProjection = XMMatrixPerspectiveFovLH(
         XMConvertToRadians(45.0f),				// 上下画角45度
-        static_cast<float>(mWindow::width / mWindow::height),	// アスペクト比（画面横幅/画面縦幅)
+        static_cast<float>(mWindow::width_ / mWindow::height_),	// アスペクト比（画面横幅/画面縦幅)
         0.1f, 1000.0f							// 前端,奥端
     );
 
@@ -1051,7 +1051,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region ウィンドウメッセージ処理
 
-        if (!wnd_->IsKeep()) {
+        if (!wnd->IsKeep()) {
             break;
         }
 
@@ -1184,8 +1184,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         // ４．描画コマンドここから
         // ビューポート設定コマンド
         D3D12_VIEWPORT viewport{};
-        viewport.Width = mWindow::width;
-        viewport.Height = mWindow::height;
+        viewport.Width = mWindow::width_;
+        viewport.Height = mWindow::height_;
         viewport.TopLeftX = 0;
         viewport.TopLeftY = 0;
         viewport.MinDepth = 0.0f;
@@ -1196,9 +1196,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         // シザー矩形
         D3D12_RECT scissorRect{};
         scissorRect.left = 0; // 切り抜き座標左
-        scissorRect.right = scissorRect.left + mWindow::width; // 切り抜き座標右
+        scissorRect.right = scissorRect.left + mWindow::width_; // 切り抜き座標右
         scissorRect.top = 0; // 切り抜き座標上
-        scissorRect.bottom = scissorRect.top + mWindow::height; // 切り抜き座標下
+        scissorRect.bottom = scissorRect.top + mWindow::height_; // 切り抜き座標下
         // シザー矩形設定コマンドを、コマンドリストに積む
         commandList->RSSetScissorRects(1, &scissorRect);
 
@@ -1313,7 +1313,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     indexBuff.Reset();
 
     // ウィンドウクラスを登録解除
-    wnd_->DelWindow();
+    wnd->DelWindow();
 
     return 0;
 }
