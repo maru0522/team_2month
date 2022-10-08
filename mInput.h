@@ -5,6 +5,7 @@
 #include <dinput.h>
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"dxguid.lib")
+#include <wrl.h>
 
 namespace mInput {
     class Keyboard
@@ -23,8 +24,11 @@ namespace mInput {
         static bool IsReleased(UINT8 key) { return preKeys[key] && !keys[key]; }
 
     private: // 変数
-        static IDirectInput8* directInput; // DirectInput生成
-        static IDirectInputDevice8* keyboard; // キーボードデバイス生成
+        // エイリアステンプレート
+        template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+
+        static ComPtr<IDirectInput8> directInput; // DirectInput生成
+        static ComPtr<IDirectInputDevice8> keyboard; // キーボードデバイス生成
         static std::array<BYTE, 256> preKeys;
         static std::array<BYTE, 256> keys;
     };
