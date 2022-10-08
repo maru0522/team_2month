@@ -15,22 +15,22 @@ namespace mInput {
         static void Update();
 
         // 押した瞬間
-        static bool IsTrigger(UINT8 key) { return !preKeys[key] && keys[key]; }
+        static bool IsTrigger(UINT8 key) { return !keysPre_[key] && keys_[key]; }
 
         // 押されているとき
-        static bool IsDown(UINT8 key) { return keys[key]; }
+        static bool IsDown(UINT8 key) { return keys_[key]; }
 
         // 離された瞬間
-        static bool IsReleased(UINT8 key) { return preKeys[key] && !keys[key]; }
+        static bool IsReleased(UINT8 key) { return keysPre_[key] && !keys_[key]; }
 
     private: // 変数
         // エイリアステンプレート
         template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-        static ComPtr<IDirectInput8> directInput; // DirectInput生成
-        static ComPtr<IDirectInputDevice8> keyboard; // キーボードデバイス生成
-        static std::array<BYTE, 256> preKeys;
-        static std::array<BYTE, 256> keys;
+        static ComPtr<IDirectInput8> directInput_; // DirectInput生成
+        static ComPtr<IDirectInputDevice8> keyboard_; // キーボードデバイス生成
+        static std::array<BYTE, 256> keysPre_;
+        static std::array<BYTE, 256> keys_;
     };
 };
 
