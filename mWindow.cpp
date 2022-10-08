@@ -23,29 +23,29 @@ LRESULT mWindow::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
     return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-const wchar_t mWindow::windowClassName[] = L"maruyamaEngine";
+const wchar_t mWindow::windowClassName_[] = L"maruyamaEngine";
 
 mWindow::mWindow()
 {
     // ウィンドウクラスの設定
-    w.cbSize = sizeof(WNDCLASSEX);
-    w.lpfnWndProc = static_cast<WNDPROC>(WindowProc);   // ウィンドウプロシージャを設定
-    w.lpszClassName = windowClassName;                  // ウィンドウクラス名
-    w.hInstance = GetModuleHandle(nullptr);             // ウィンドウハンドル
-    w.hCursor = LoadCursor(NULL, IDC_ARROW);            // カーソル指定
+    w_.cbSize = sizeof(WNDCLASSEX);
+    w_.lpfnWndProc = static_cast<WNDPROC>(WindowProc);   // ウィンドウプロシージャを設定
+    w_.lpszClassName = windowClassName_;                  // ウィンドウクラス名
+    w_.hInstance = GetModuleHandle(nullptr);             // ウィンドウハンドル
+    w_.hCursor = LoadCursor(NULL, IDC_ARROW);            // カーソル指定
 
     // ウィンドウクラスをOSに登録する
-    RegisterClassEx(&w);
+    RegisterClassEx(&w_);
 
     // ウィンドウサイズ{ X座標 Y座標 横幅 縦幅 }
-    RECT wrc = { 0, 0, width, height };
+    RECT wrc = { 0, 0, width_, height_ };
     // 自動でサイズを補正する
     AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
     // ウィンドウオブジェクトの生成
-    hwnd = CreateWindow(
-        windowClassName,      // クラス名
-        w.lpszClassName,      // タイトルバーの文字
+    hwnd_ = CreateWindow(
+        w_.lpszClassName,     // クラス名
+        windowClassName_,     // タイトルバーの文字
         WS_OVERLAPPEDWINDOW,  // 標準的なウィンドウスタイル
         CW_USEDEFAULT,        // 表示X座標（OSに任せる）
         CW_USEDEFAULT,        // 表示Y座標（OSに任せる）
@@ -53,28 +53,28 @@ mWindow::mWindow()
         wrc.bottom - wrc.top, // ウィンドウ縦幅
         nullptr,              // 親ウィンドウハンドル
         nullptr,              // メニューハンドル
-        w.hInstance,          // 呼び出しアプリケーションハンドル
+        w_.hInstance,         // 呼び出しアプリケーションハンドル
         nullptr               // オプション
     );
 
     // ウィンドウを表示状態にする
-    ShowWindow(hwnd, SW_SHOW);
+    ShowWindow(hwnd_, SW_SHOW);
 }
 
 mWindow::mWindow(const char* title)
 {
     // ウィンドウクラスの設定
-    w.cbSize = sizeof(WNDCLASSEX);
-    w.lpfnWndProc = static_cast<WNDPROC>(WindowProc);   // ウィンドウプロシージャを設定
-    w.lpszClassName = windowClassName;                  // ウィンドウクラス名
-    w.hInstance = GetModuleHandle(nullptr);             // ウィンドウハンドル
-    w.hCursor = LoadCursor(NULL, IDC_ARROW);            // カーソル指定
+    w_.cbSize = sizeof(WNDCLASSEX);
+    w_.lpfnWndProc = static_cast<WNDPROC>(WindowProc);   // ウィンドウプロシージャを設定
+    w_.lpszClassName = windowClassName_;                  // ウィンドウクラス名
+    w_.hInstance = GetModuleHandle(nullptr);             // ウィンドウハンドル
+    w_.hCursor = LoadCursor(NULL, IDC_ARROW);            // カーソル指定
 
     // ウィンドウクラスをOSに登録する
-    RegisterClassEx(&w);
+    RegisterClassEx(&w_);
 
     // ウィンドウサイズ{ X座標 Y座標 横幅 縦幅 }
-    RECT wrc = { 0, 0, width, height };
+    RECT wrc = { 0, 0, width_, height_ };
     // 自動でサイズを補正する
     AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
@@ -82,8 +82,8 @@ mWindow::mWindow(const char* title)
     std::wstring wstrTitle = Convert::CharToWString(title);
 
     // ウィンドウオブジェクトの生成
-    hwnd = CreateWindow(
-        w.lpszClassName,      // クラス名
+    hwnd_ = CreateWindow(
+        w_.lpszClassName,     // クラス名
         wstrTitle.c_str(),    // タイトルバーの文字
         WS_OVERLAPPEDWINDOW,  // 標準的なウィンドウスタイル
         CW_USEDEFAULT,        // 表示X座標 (OSに任せる)
@@ -92,22 +92,22 @@ mWindow::mWindow(const char* title)
         wrc.bottom - wrc.top, // ウィンドウ縦幅
         nullptr,              // 親ウィンドウハンドル
         nullptr,              // メニューハンドル
-        w.hInstance,          // 呼び出しアプリケーションハンドル
+        w_.hInstance,          // 呼び出しアプリケーションハンドル
         nullptr               // オプション
     );
 
     // ウィンドウを表示状態にする
-    ShowWindow(hwnd, SW_SHOW);
+    ShowWindow(hwnd_, SW_SHOW);
 }
 
 void mWindow::DelWindow()
 {
-    UnregisterClass(w.lpszClassName, w.hInstance);
+    UnregisterClass(w_.lpszClassName, w_.hInstance);
 }
 
 void mWindow::SetDisplay(int nCmdShow)
 {
-    ShowWindow(hwnd, nCmdShow);
+    ShowWindow(hwnd_, nCmdShow);
 }
 
 bool mWindow::IsKeep()
