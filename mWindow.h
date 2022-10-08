@@ -1,5 +1,5 @@
 #pragma once
-#include <Windows.h>        // CG2_01_01   12枚目
+#include <Windows.h>
 
 class mWindow
 {
@@ -9,11 +9,11 @@ public: // 静的関数
 
 public: // 静的変数
     // ウィンドウサイズ
-    static const size_t width = 1280;
-    static const size_t height = 720;
+    static const size_t width_ = 1280;
+    static const size_t height_ = 720;
 
     // ウィンドウクラス名
-    static const wchar_t windowClassName[];
+    static const wchar_t windowClassName_[];
 
 public: // 関数
     mWindow();
@@ -30,14 +30,14 @@ public: // 関数
 
     // ウィンドウハンドルの取得
     // const: 引き渡しするメンバ変数のメンバ関数内部における変更の禁止
-    HWND GetHwnd() const { return hwnd; }
+    HWND GetHwnd() const { return hwnd_; }
 
-    HINSTANCE GetHInstance() const { return w.hInstance; }
+    HINSTANCE GetHInstance() const { return w_.hInstance; }
 
 private: // 変数
     // ウィンドウクラスの生成
-    WNDCLASSEX w{};
+    WNDCLASSEX w_{};
 
     // ウィンドウハンドルの生成
-    HWND hwnd;
+    HWND hwnd_;
 };
