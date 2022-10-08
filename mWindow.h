@@ -1,5 +1,5 @@
 #pragma once
-#include <Windows.h>        // CG2_01_01   12–‡–Ú
+#include <Windows.h>
 
 class mWindow
 {
