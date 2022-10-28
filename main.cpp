@@ -15,6 +15,7 @@ using namespace DirectX;
 
 #include "mWindow.h"
 #include "mInput.h"
+#include "mInitDirectX.h"
 
 using namespace Microsoft::WRL;
 
