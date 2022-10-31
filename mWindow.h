@@ -26,7 +26,7 @@ public: // 関数
 
     // ウィンドウ固定用のメッセージループ処理
     // WM_QUITならFALSEを返す
-    bool IsKeep();
+    bool GetKeepWindow();
 
     // ウィンドウハンドルの取得
     // const: 引き渡しするメンバ変数のメンバ関数内部における変更の禁止

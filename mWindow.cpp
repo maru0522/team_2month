@@ -110,7 +110,7 @@ void mWindow::SetDisplay(int nCmdShow)
     ShowWindow(hwnd_, nCmdShow);
 }
 
-bool mWindow::IsKeep()
+bool mWindow::GetKeepWindow()
 {
     // メッセージ
     MSG msg{};
