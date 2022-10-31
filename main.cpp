@@ -1051,7 +1051,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region ウィンドウメッセージ処理
 
-        if (!wnd->IsKeep()) {
+        if (!wnd->GetKeepWindow()) {
             break;
         }
 
