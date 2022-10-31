@@ -36,6 +36,6 @@ namespace mInput {
 
 #ifndef NON_NAMESPACE_mInput
 
-using namespace mInput;
+using KEY = mInput::Keyboard;
 
 #endif // ‚à‚µmInput‚Ìnamespace‚ª‚ ‚é‚È‚ç
