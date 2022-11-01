@@ -58,7 +58,7 @@ private: // 変数
 	UINT64 fenceVal_ = 0;
 #pragma endregion
 
-    // Initialize() で使用
+	// Initialize() で使用
 	mCtrlFPS fpsCtrler_; // FPSを制御
 
 private: // 関数
