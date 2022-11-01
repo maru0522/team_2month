@@ -3,7 +3,7 @@
 #include <dxgi1_6.h>
 #include <vector>
 #include <wrl.h>
-#include "mCtrlFPS.h"
+#include "CtrlFPS.h"
 
 class mInitDirectX
 {

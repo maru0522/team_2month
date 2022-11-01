@@ -1,4 +1,4 @@
-#include "mInitDirectX.h"
+#include "InitDirectX.h"
 #include <cassert>
 #include <vector>
 #include "mWindow.h"

@@ -1,4 +1,4 @@
-#include "mCtrlFPS.h"
+#include "CtrlFPS.h"
 #include <thread>
 
 void mCtrlFPS::Initialize(void)
