@@ -2,6 +2,8 @@
 #include <string>
 #include "mUtil.h"
 
+#pragma comment(lib,"winmm.lib")
+
 static mWindow wnd;
 mWindow* mWindow::GetInstance()
 {
@@ -27,6 +29,9 @@ const wchar_t mWindow::windowClassName_[] = L"maruyamaEngine";
 
 mWindow::mWindow()
 {
+    // システムタイマーの分解能を上げる
+    timeBeginPeriod(1);
+
     // ウィンドウクラスの設定
     w_.cbSize = sizeof(WNDCLASSEX);
     w_.lpfnWndProc = static_cast<WNDPROC>(WindowProc);   // ウィンドウプロシージャを設定

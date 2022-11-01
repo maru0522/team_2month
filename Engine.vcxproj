@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mCtrlFPS.cpp" />
     <ClCompile Include="mInitDirectX.cpp" />
     <ClCompile Include="mInput.cpp" />
     <ClCompile Include="mWindow.cpp" />
@@ -170,6 +171,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="mCtrlFPS.h" />
     <ClInclude Include="mInitDirectX.h" />
     <ClInclude Include="mInput.h" />
     <ClInclude Include="mWindow.h" />

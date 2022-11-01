@@ -3,6 +3,7 @@
 #include <dxgi1_6.h>
 #include <vector>
 #include <wrl.h>
+#include "mCtrlFPS.h"
 
 class mInitDirectX
 {
@@ -22,6 +23,7 @@ private: // 変数
 	// エイリアステンプレート
 	template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+#pragma region DX12変数
 	// DebugLayer() で初期化
 	ComPtr<ID3D12Debug1> debugController_;
 
@@ -54,6 +56,10 @@ private: // 変数
 	// Fence() で初期化
 	ComPtr<ID3D12Fence> fence_ = nullptr;
 	UINT64 fenceVal_ = 0;
+#pragma endregion
+
+    // Initialize() で使用
+	mCtrlFPS fpsCtrler_; // FPSを制御
 
 private: // 関数
 	void DebugLayer(void);

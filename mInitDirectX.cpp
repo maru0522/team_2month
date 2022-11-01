@@ -11,6 +11,9 @@ mInitDirectX* mInitDirectX::GetInstance(void)
 
 void mInitDirectX::Initialize(void)
 {
+	// FPS固定化処理初期化
+	fpsCtrler_.Initialize();
+
 	DebugLayer();       // デバッグレイヤーをオン
 	DXGIDevice();
 	SuppressErrors();   // 一部のエラーを抑制
@@ -127,6 +130,9 @@ void mInitDirectX::PostDraw(void)
 			CloseHandle(event);
 		}
 	}
+
+	// FPS固定
+	fpsCtrler_.Update();
 
 	// キューをクリア
 	r = cmdAllocator_->Reset();
