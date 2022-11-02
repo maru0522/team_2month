@@ -1,16 +1,16 @@
-﻿#include "mWindow.h"
+﻿#include "Window.h"
 #include <string>
-#include "mUtil.h"
+#include "Util.h"
 
 #pragma comment(lib,"winmm.lib")
 
-static mWindow wnd;
-mWindow* mWindow::GetInstance()
+static Window wnd;
+Window* Window::GetInstance()
 {
     return &wnd;
 }
 
-LRESULT mWindow::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
+LRESULT Window::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
     // メッセージに応じてゲーム固有の処理を行う
     switch (msg) {
@@ -25,9 +25,9 @@ LRESULT mWindow::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
     return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-const wchar_t mWindow::windowClassName_[] = L"maruyamaEngine";
+const wchar_t Window::windowClassName_[] = L"maruyamaEngine";
 
-mWindow::mWindow()
+Window::Window()
 {
     // システムタイマーの分解能を上げる
     timeBeginPeriod(1);
@@ -66,7 +66,7 @@ mWindow::mWindow()
     ShowWindow(hwnd_, SW_SHOW);
 }
 
-mWindow::mWindow(const char* title)
+Window::Window(const char* title)
 {
     // ウィンドウクラスの設定
     w_.cbSize = sizeof(WNDCLASSEX);
@@ -105,17 +105,17 @@ mWindow::mWindow(const char* title)
     ShowWindow(hwnd_, SW_SHOW);
 }
 
-void mWindow::DelWindow()
+void Window::DelWindow()
 {
     UnregisterClass(w_.lpszClassName, w_.hInstance);
 }
 
-void mWindow::SetDisplay(int nCmdShow)
+void Window::SetDisplay(int nCmdShow)
 {
     ShowWindow(hwnd_, nCmdShow);
 }
 
-bool mWindow::GetKeepWindow()
+bool Window::GetKeepWindow()
 {
     // メッセージ
     MSG msg{};

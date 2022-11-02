@@ -1,10 +1,10 @@
 #pragma once
 #include <Windows.h>
 
-class mWindow
+class Window
 {
 public: // 静的関数
-    static mWindow* GetInstance(); // インスタンスを取得
+    static Window* GetInstance(); // インスタンスを取得
     static LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 public: // 静的変数
@@ -16,8 +16,8 @@ public: // 静的変数
     static const wchar_t windowClassName_[];
 
 public: // 関数
-    mWindow();
-    mWindow(const char* title);
+    Window();
+    Window(const char* title);
     void DelWindow();
 
     // ウィンドウの表示状態を変更する関数

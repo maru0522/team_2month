@@ -1,13 +1,13 @@
 #include "CtrlFPS.h"
 #include <thread>
 
-void mCtrlFPS::Initialize(void)
+void CtrlFPS::Initialize(void)
 {
     // Œ»İŠÔ‚ğ‹L˜^‚·‚é
     timeRef_ = std::chrono::steady_clock::now();
 }
 
-void mCtrlFPS::Update(void)
+void CtrlFPS::Update(void)
 {
     //@Œ»İŠÔ‚ğæ“¾‚·‚é
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();

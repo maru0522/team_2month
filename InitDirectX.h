@@ -5,10 +5,10 @@
 #include <wrl.h>
 #include "CtrlFPS.h"
 
-class mInitDirectX
+class InitDirectX
 {
 public: // 静的関数
-	static mInitDirectX* GetInstance(void);
+	static InitDirectX* GetInstance(void);
 
 public: // 関数
 	void Initialize(void);
@@ -59,7 +59,7 @@ private: // 変数
 #pragma endregion
 
 	// Initialize() で使用
-	mCtrlFPS fpsCtrler_; // FPSを制御
+	CtrlFPS fpsCtrler_; // FPSを制御
 
 private: // 関数
 	void DebugLayer(void);
@@ -76,8 +76,8 @@ private: // 関数
 	void ClearDepthBuff(void);  // 深度バッファをクリア
 
 private: // singleton design
-	mInitDirectX(void) {};
-	~mInitDirectX(void) {};
-	mInitDirectX(const mInitDirectX&) = delete;
-	mInitDirectX& operator=(const mInitDirectX&) = delete;
+	InitDirectX(void) {};
+	~InitDirectX(void) {};
+	InitDirectX(const InitDirectX&) = delete;
+	InitDirectX& operator=(const InitDirectX&) = delete;
 };

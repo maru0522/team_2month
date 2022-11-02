@@ -141,12 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CtrlFPS.cpp" />
     <ClCompile Include="InitDirectX.cpp" />
-    <ClCompile Include="mInput.cpp" />
-    <ClCompile Include="mWindow.cpp" />
-    <ClCompile Include="mUtil.cpp" />
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicPS.hlsl">
@@ -173,9 +173,9 @@
   <ItemGroup>
     <ClInclude Include="CtrlFPS.h" />
     <ClInclude Include="InitDirectX.h" />
-    <ClInclude Include="mInput.h" />
-    <ClInclude Include="mWindow.h" />
-    <ClInclude Include="mUtil.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Util.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

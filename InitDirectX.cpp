@@ -1,15 +1,15 @@
 #include "InitDirectX.h"
 #include <cassert>
 #include <vector>
-#include "mWindow.h"
+#include "Window.h"
 
-mInitDirectX* mInitDirectX::GetInstance(void)
+InitDirectX* InitDirectX::GetInstance(void)
 {
-	static mInitDirectX mIDX;
+	static InitDirectX mIDX;
 	return &mIDX;
 }
 
-void mInitDirectX::Initialize(void)
+void InitDirectX::Initialize(void)
 {
 	// FPS固定化処理初期化
 	fpsCtrler_.Initialize();
@@ -25,7 +25,7 @@ void mInitDirectX::Initialize(void)
 	Fence();
 }
 
-void mInitDirectX::PreDraw(void)
+void InitDirectX::PreDraw(void)
 {
 #pragma region リソースバリアの変更
 	// バックバッファの番号を取得（2つなので0番か1番）
@@ -64,8 +64,8 @@ void mInitDirectX::PreDraw(void)
 	// ４．描画コマンドここから
 	// ビューポート設定コマンド
 	D3D12_VIEWPORT viewport{};
-	viewport.Width = mWindow::width_;
-	viewport.Height = mWindow::height_;
+	viewport.Width = Window::width_;
+	viewport.Height = Window::height_;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -76,16 +76,16 @@ void mInitDirectX::PreDraw(void)
 	// シザー矩形
 	D3D12_RECT scissorRect{};
 	scissorRect.left = 0; // 切り抜き座標左
-	scissorRect.right = scissorRect.left + mWindow::width_; // 切り抜き座標右
+	scissorRect.right = scissorRect.left + Window::width_; // 切り抜き座標右
 	scissorRect.top = 0; // 切り抜き座標上
-	scissorRect.bottom = scissorRect.top + mWindow::height_; // 切り抜き座標下
+	scissorRect.bottom = scissorRect.top + Window::height_; // 切り抜き座標下
 	// シザー矩形設定コマンドを、コマンドリストに積む
 	commandList_->RSSetScissorRects(1, &scissorRect);
 #pragma endregion
 	// ----- ↓↓↓PreDraw()とPostDraw()の間に描画コマンドを書き込む↓↓↓ ----- //
 }
 
-void mInitDirectX::PostDraw(void)
+void InitDirectX::PostDraw(void)
 {
 	// ----- ↑↑↑PreDraw()とPostDraw()の間に描画コマンドを書き込む↑↑↑ ----- //
 	// ４．描画コマンドここまで
@@ -149,7 +149,7 @@ void mInitDirectX::PostDraw(void)
 #pragma endregion
 }
 
-void mInitDirectX::DebugLayer(void)
+void InitDirectX::DebugLayer(void)
 {
 #ifdef _DEBUG
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController_)))) {
@@ -159,7 +159,7 @@ void mInitDirectX::DebugLayer(void)
 #endif // _DEBUG
 }
 
-void mInitDirectX::DXGIDevice(void)
+void InitDirectX::DXGIDevice(void)
 {
 #pragma region アダプタの列挙
 	// DXGIファクトリーの生成
@@ -230,7 +230,7 @@ void mInitDirectX::DXGIDevice(void)
 #pragma endregion
 }
 
-void mInitDirectX::SuppressErrors(void)
+void InitDirectX::SuppressErrors(void)
 {
 	if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&infoQueue_)))) {
 		infoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);    //やばいエラーの時止まる
@@ -253,7 +253,7 @@ void mInitDirectX::SuppressErrors(void)
 	infoQueue_->PushStorageFilter(&filter);
 }
 
-void mInitDirectX::Commands(void)
+void InitDirectX::Commands(void)
 {
 #pragma region コマンドアロケータ
 	// コマンドアロケータを生成
@@ -286,9 +286,9 @@ void mInitDirectX::Commands(void)
 #pragma endregion
 }
 
-void mInitDirectX::SwapChain(void)
+void InitDirectX::SwapChain(void)
 {
-	mWindow* wnd = mWindow::GetInstance();
+	Window* wnd = Window::GetInstance();
 
 #pragma region スワップチェーンの生成
 	// スワップチェーンの設定
@@ -317,7 +317,7 @@ void mInitDirectX::SwapChain(void)
 #pragma endregion
 }
 
-void mInitDirectX::RTVDescHeap(void)
+void InitDirectX::RTVDescHeap(void)
 {
 	// swapChainDesc1 の 空変数を宣言
 	DXGI_SWAP_CHAIN_DESC swcd{};
@@ -339,7 +339,7 @@ void mInitDirectX::RTVDescHeap(void)
 #pragma endregion
 }
 
-void mInitDirectX::RTV(void)
+void InitDirectX::RTV(void)
 {
 	// swapChainDesc1 の 空変数を宣言
 	DXGI_SWAP_CHAIN_DESC swcd{};
@@ -372,14 +372,14 @@ void mInitDirectX::RTV(void)
 #pragma endregion
 }
 
-void mInitDirectX::DepthBuffer(void)
+void InitDirectX::DepthBuffer(void)
 {
 #pragma region 深度テスト深度バッファ
 	// リソース設定
 	D3D12_RESOURCE_DESC depthResourceDesc{};
 	depthResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	depthResourceDesc.Width = mWindow::width_;     // レンダーターゲットに合わせる
-	depthResourceDesc.Height = mWindow::height_;   // レンダーターゲットに合わせる
+	depthResourceDesc.Width = Window::width_;     // レンダーターゲットに合わせる
+	depthResourceDesc.Height = Window::height_;   // レンダーターゲットに合わせる
 	depthResourceDesc.DepthOrArraySize = 1;
 	depthResourceDesc.Format = DXGI_FORMAT_D32_FLOAT;   // 深度値フォーマット
 	depthResourceDesc.SampleDesc.Count = 1;
@@ -432,7 +432,7 @@ void mInitDirectX::DepthBuffer(void)
 #pragma endregion
 }
 
-void mInitDirectX::Fence(void)
+void InitDirectX::Fence(void)
 {
 #pragma region フェンス
 	// フェンスの生成
@@ -444,7 +444,7 @@ void mInitDirectX::Fence(void)
 #pragma endregion
 }
 
-void mInitDirectX::ClearRTV(void)
+void InitDirectX::ClearRTV(void)
 {
 	// バックバッファの番号を取得（2つなので0番か1番）
 	UINT bbIndex = swapChain_->GetCurrentBackBufferIndex();
@@ -459,7 +459,7 @@ void mInitDirectX::ClearRTV(void)
 	commandList_->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 }
 
-void mInitDirectX::ClearDepthBuff(void)
+void InitDirectX::ClearDepthBuff(void)
 {
 	// 深度ステンシルビュー用デスクリプタヒープのハンドルを取得
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap_->GetCPUDescriptorHandleForHeapStart();

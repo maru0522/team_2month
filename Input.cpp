@@ -1,18 +1,18 @@
-#include "mInput.h"
+#include "Input.h"
 #include <cassert>
 
 // 実体の生成
-Microsoft::WRL::ComPtr<IDirectInput8> mInput::Keyboard::directInput_ = nullptr;
-Microsoft::WRL::ComPtr<IDirectInputDevice8> mInput::Keyboard::keyboard_ = nullptr;
-std::array<BYTE, 256> mInput::Keyboard::keysPre_ = { 0 };
-std::array<BYTE, 256> mInput::Keyboard::keys_ = { 0 };
+Microsoft::WRL::ComPtr<IDirectInput8> Input::Keyboard::directInput_ = nullptr;
+Microsoft::WRL::ComPtr<IDirectInputDevice8> Input::Keyboard::keyboard_ = nullptr;
+std::array<BYTE, 256> Input::Keyboard::keysPre_ = { 0 };
+std::array<BYTE, 256> Input::Keyboard::keys_ = { 0 };
 
-void mInput::Keyboard::Initialize()
+void Input::Keyboard::Initialize()
 {
     HRESULT result = S_FALSE;
 
     // ウィンドウのインスタンス取得
-    mWindow* wnd_ = mWindow::GetInstance();
+    Window* wnd_ = Window::GetInstance();
 
     // DirectInputの初期化
     result = DirectInput8Create(
@@ -33,7 +33,7 @@ void mInput::Keyboard::Initialize()
     assert(SUCCEEDED(result));
 }
 
-void mInput::Keyboard::Update()
+void Input::Keyboard::Update()
 {
     // preKeysへ情報保存
     memcpy(keysPre_.data(), keys_.data(), sizeof(keys_));

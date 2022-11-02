@@ -1,13 +1,13 @@
 #pragma once
 #define DIRECTINPUT_VERSION 0x0800
-#include "mWindow.h"
+#include "Window.h"
 #include <array>
 #include <dinput.h>
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"dxguid.lib")
 #include <wrl.h>
 
-namespace mInput {
+namespace Input {
     class Keyboard
     {
     public: // ŠÖ”
@@ -34,8 +34,8 @@ namespace mInput {
     };
 };
 
-#ifndef NON_NAMESPACE_mInput
+#ifndef NON_NAMESPACE_Input
 
-using KEY = mInput::Keyboard;
+using KEY = Input::Keyboard;
 
-#endif // ‚à‚µmInput‚Ìnamespace‚ª‚ ‚é‚È‚ç
+#endif // ‚à‚µInput‚Ìnamespace‚ª‚ ‚é‚È‚ç

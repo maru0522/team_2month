@@ -1,7 +1,7 @@
 #pragma once
 #include <chrono>
 
-class mCtrlFPS
+class CtrlFPS
 {
 public: // Ã“I•Ï”
     static constexpr std::chrono::microseconds kMinTime_{uint64_t(1000000.0f / 60.0f)}; // 1/60•b‚Ò‚Á‚½‚è‚ÌŠÔ
