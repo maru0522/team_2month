@@ -194,7 +194,7 @@ void InitDirectX::DXGIDevice(void)
 		DXGI_ADAPTER_DESC3 adapterDesc;
 
 		// アダプターの情報を取得する
-		adapters[i]->GetDesc3(&adapterDesc);
+		adapters.at(i)->GetDesc3(&adapterDesc);
 
 		// ソフトウェアデバイスを回避
 		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE)) {
