@@ -112,7 +112,7 @@ void Texture::Load(const std::string& relativePath, const std::string& fileName)
         &textureResourceDesc,
         D3D12_RESOURCE_STATE_GENERIC_READ,
         nullptr,
-        IID_PPV_ARGS(&std::get<0>(tmp.info_))); // MAP_VALUEのbuff_へ書き込み
+        IID_PPV_ARGS(&tmp.info_.buff_)); // MAP_VALUEのbuff_へ書き込み
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG
@@ -121,8 +121,8 @@ void Texture::Load(const std::string& relativePath, const std::string& fileName)
     // デスクリプタのサイズを取得する
     uint32_t incrementSize = iDX->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
     // MAP_VALUEのsrvCPUHandle_へ書き込み
-    std::get<1>(tmp.info_) = srvHeap_.Get()->GetCPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
-    std::get<1>(tmp.info_).ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
+    tmp.info_.srvCpuHandle_ = srvHeap_.Get()->GetCPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
+    tmp.info_.srvCpuHandle_.ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
 
     // 全ミップマップについて
     for (size_t i = 0; i < metadata.mipLevels; i++) {
@@ -130,7 +130,7 @@ void Texture::Load(const std::string& relativePath, const std::string& fileName)
         const DirectX::Image* img = scratchImg.GetImage(i, 0, 0);
 
         // テクスチャバッファにデータ転送
-        r = std::get<0>(tmp.info_)-> // MAP_VALUEのbuff_
+        r = tmp.info_.buff_-> // MAP_VALUEのbuff_
             WriteToSubresource(
                 static_cast<UINT>(i),
                 nullptr,		// 全領域へコピー
@@ -151,11 +151,11 @@ void Texture::Load(const std::string& relativePath, const std::string& fileName)
     srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
 
     // ハンドルのさす位置にシェーダーリソースビューの作成
-    iDX->GetDevice()->CreateShaderResourceView(std::get<0>(tmp.info_).Get(), &srvDesc, std::get<1>(tmp.info_));
+    iDX->GetDevice()->CreateShaderResourceView(tmp.info_.buff_.Get(), &srvDesc, tmp.info_.srvCpuHandle_);
     // MAP_VALUEのsrvGPUHandle_へ書き込み
-    std::get<2>(tmp.info_) = srvHeap_.Get()->GetGPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
+    tmp.info_.srvGpuHandle_ = srvHeap_.Get()->GetGPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
     // ハンドルを進める
-    std::get<2>(tmp.info_).ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
+    tmp.info_.srvGpuHandle_.ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
 
     // mapへの挿入（or 代入）※代入の場合、同一KEYに対してVALUEが上書きされるため注意
     textures_.insert_or_assign(tmp.name_, tmp.info_); // 代入時であっても全く同じVALUEが入るとは思われる。
@@ -240,7 +240,7 @@ void Texture::Load(const std::string& pathAndFileName)
         &textureResourceDesc,
         D3D12_RESOURCE_STATE_GENERIC_READ,
         nullptr,
-        IID_PPV_ARGS(&std::get<0>(tmp.info_))); // MAP_VALUEのbuff_へ書き込み
+        IID_PPV_ARGS(&tmp.info_.buff_)); // MAP_VALUEのbuff_へ書き込み
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG
@@ -249,8 +249,8 @@ void Texture::Load(const std::string& pathAndFileName)
     // デスクリプタのサイズを取得する
     uint32_t incrementSize = iDX->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
     // MAP_VALUEのsrvCPUHandle_へ書き込み
-    std::get<1>(tmp.info_) = srvHeap_.Get()->GetCPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
-    std::get<1>(tmp.info_).ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
+    tmp.info_.srvCpuHandle_ = srvHeap_.Get()->GetCPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
+    tmp.info_.srvCpuHandle_.ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
 
     // 全ミップマップについて
     for (size_t i = 0; i < metadata.mipLevels; i++) {
@@ -258,7 +258,7 @@ void Texture::Load(const std::string& pathAndFileName)
         const DirectX::Image* img = scratchImg.GetImage(i, 0, 0);
 
         // テクスチャバッファにデータ転送
-        r = std::get<0>(tmp.info_)-> // MAP_VALUEのbuff_
+        r = tmp.info_.buff_-> // MAP_VALUEのbuff_
             WriteToSubresource(
                 static_cast<UINT>(i),
                 nullptr,		// 全領域へコピー
@@ -279,11 +279,11 @@ void Texture::Load(const std::string& pathAndFileName)
     srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
 
     // ハンドルのさす位置にシェーダーリソースビューの作成
-    iDX->GetDevice()->CreateShaderResourceView(std::get<0>(tmp.info_).Get(), &srvDesc, std::get<1>(tmp.info_));
+    iDX->GetDevice()->CreateShaderResourceView(tmp.info_.buff_.Get(), &srvDesc, tmp.info_.srvCpuHandle_);
     // MAP_VALUEのsrvGPUHandle_へ書き込み
-    std::get<2>(tmp.info_) = srvHeap_.Get()->GetGPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
+    tmp.info_.srvGpuHandle_ = srvHeap_.Get()->GetGPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
     // ハンドルを進める
-    std::get<2>(tmp.info_).ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
+    tmp.info_.srvGpuHandle_.ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
 
     // mapへの挿入（or 代入）※代入の場合、同一KEYに対してVALUEが上書きされるため注意
     textures_.insert_or_assign(tmp.name_, tmp.info_); // 代入時であっても全く同じVALUEが入るとは思われる。
@@ -341,8 +341,7 @@ const Texture::MAP_VALUE& Texture::GetTextureInfo(const std::string& pathAndFile
 
 const D3D12_GPU_DESCRIPTOR_HANDLE& Texture::GetTexSRVGpuH(const std::string& pathAndFileName)
 {
-    MAP_VALUE  a = textures_.at(pathAndFileName);
-    return std::get<2>(a);
+    return textures_.at(pathAndFileName).srvGpuHandle_;
 }
 
 void Texture::SetMapKey(const std::string keyName)

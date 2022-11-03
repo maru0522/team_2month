@@ -11,7 +11,12 @@ class Texture
 public: // Ã“IŠÖ”
     // map‚ÌŒ®‚Æ’l
     using MAP_KEY = std::string;
-    using MAP_VALUE = std::tuple < Microsoft::WRL::ComPtr<ID3D12Resource>, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE >;
+    struct MAP_VALUE
+    {
+        Microsoft::WRL::ComPtr<ID3D12Resource> buff_{ nullptr };
+        D3D12_CPU_DESCRIPTOR_HANDLE srvCpuHandle_{};
+        D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle_{};
+    };
 
     // srv‚Ì‰Šú‰»
     static void Initialize(void);
