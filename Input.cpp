@@ -9,28 +9,34 @@ std::array<BYTE, 256> Input::Keyboard::keys_ = { 0 };
 
 void Input::Keyboard::Initialize()
 {
-    HRESULT result = S_FALSE;
-
     // ウィンドウのインスタンス取得
     Window* wnd_ = Window::GetInstance();
 
     // DirectInputの初期化
-    result = DirectInput8Create(
+    HRESULT r = DirectInput8Create(
         wnd_->GetHInstance(), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput_, nullptr);
-    assert(SUCCEEDED(result));
+#ifdef _DEBUG
+	assert(SUCCEEDED(r));
+#endif // _DEBUG
 
     // キーボードデバイスの生成
-    result = directInput_->CreateDevice(GUID_SysKeyboard, &keyboard_, NULL);
-    assert(SUCCEEDED(result));
+    r = directInput_->CreateDevice(GUID_SysKeyboard, &keyboard_, NULL);
+#ifdef _DEBUG
+    assert(SUCCEEDED(r));
+#endif // _DEBUG
 
     // 入力データ形式のセット
-    result = keyboard_->SetDataFormat(&c_dfDIKeyboard); // 標準形式
-    assert(SUCCEEDED(result));
+    r = keyboard_->SetDataFormat(&c_dfDIKeyboard); // 標準形式
+#ifdef _DEBUG
+    assert(SUCCEEDED(r));
+#endif // _DEBUG
 
     // 排他制御レベルのセット
-    result = keyboard_->SetCooperativeLevel(
+    r = keyboard_->SetCooperativeLevel(
         wnd_->GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
-    assert(SUCCEEDED(result));
+#ifdef _DEBUG
+    assert(SUCCEEDED(r));
+#endif // _DEBUG
 }
 
 void Input::Keyboard::Update()

@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CtrlFPS.cpp" />
     <ClCompile Include="InitDirectX.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -174,6 +175,7 @@
     <ClInclude Include="CtrlFPS.h" />
     <ClInclude Include="InitDirectX.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

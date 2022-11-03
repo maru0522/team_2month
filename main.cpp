@@ -16,6 +16,8 @@ using namespace DirectX;
 #include "Window.h"
 #include "Input.h"
 #include "InitDirectX.h"
+#include "Texture.h"
+#include <utility>
 
 using namespace Microsoft::WRL;
 
@@ -71,7 +73,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region DirectInput初期化
 
-    KEY::Initialize();
+    KEYS::Initialize();
 
 #pragma endregion
 
@@ -583,179 +585,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     //}
 #pragma endregion
 
-#pragma region テクスチャマッピング
-    //// 横方向ピクセル数
-    //const size_t textureWidth = 256;
-    //// 縦方向ピクセル数
-    //const size_t textureHeight = 256;
-    //// 配列の要素数
-    //const size_t imageDataCount = textureWidth * textureHeight;
+#pragma region テクスチャ読み込み
 
-    //画像イメージデータ配列
-    TexMetadata metadata{};
-    ScratchImage scratchImg{};
+    Texture::Initialize();
+    Texture::Load("Resources/reimu.png");
 
-    // WICテクスチャのロード
-    result = LoadFromWICFile(
-        L"Resources/mario.jpg",   //「Resources」フォルダの「texture.png」
-        WIC_FLAGS_NONE,
-        &metadata, scratchImg);
-
-    ScratchImage mipChain{};
-    // ミップマップ生成
-    result = GenerateMipMaps(
-        scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(),
-        TEX_FILTER_DEFAULT, 0, mipChain);
-    if (SUCCEEDED(result)) {
-        scratchImg = std::move(mipChain);
-        metadata = scratchImg.GetMetadata();
-    }
-
-    // 読み込んだディフューズテクスチャをSRGBとして扱う
-    metadata.format = MakeSRGB(metadata.format);
-
-
-    // 2枚目用
-    TexMetadata metadata2{};
-    ScratchImage scratchImg2{};
-
-    // WICテクスチャのロード
-    result = LoadFromWICFile(
-        L"Resources/reimu.png",   //「Resources」フォルダの「texture.png」
-        WIC_FLAGS_NONE,
-        &metadata2, scratchImg2);
-
-    ScratchImage mipChain2{};
-    // ミップマップ生成
-    result = GenerateMipMaps(
-        scratchImg2.GetImages(), scratchImg2.GetImageCount(), scratchImg2.GetMetadata(),
-        TEX_FILTER_DEFAULT, 0, mipChain2);
-    if (SUCCEEDED(result)) {
-        scratchImg2 = std::move(mipChain2);
-        metadata2 = scratchImg2.GetMetadata();
-    }
-
-    // 読み込んだディフューズテクスチャをSRGBとして扱う
-    metadata2.format = MakeSRGB(metadata2.format);
-
-    //// 画像イメージデータ配列
-    //XMFLOAT4* imageData = new XMFLOAT4[imageDataCount];		// ※必ず後で解放する
-
-    //// 全ピクセルの色を初期化
-    //for (size_t i = 0; i < imageDataCount; i++) {
-    //	imageData[i].x = 1.0f;		//R
-    //	imageData[i].y = 0.0f;		//G
-    //	imageData[i].z = 0.0f;		//B
-    //	imageData[i].w = 1.0f;		//A
-    //}
-
-    // ヒープ設定
-    D3D12_HEAP_PROPERTIES textureHeapProp{};
-    textureHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
-    textureHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-    textureHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
-    // リソース設定
-    D3D12_RESOURCE_DESC textureResourceDesc{};
-    textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-    textureResourceDesc.Format = metadata.format;
-    textureResourceDesc.Width = metadata.width;
-    textureResourceDesc.Height = (UINT)metadata.height;
-    textureResourceDesc.DepthOrArraySize = (UINT16)metadata.arraySize;
-    textureResourceDesc.MipLevels = (UINT16)metadata.mipLevels;
-    textureResourceDesc.SampleDesc.Count = 1;
-
-    // リソース設定2
-    D3D12_RESOURCE_DESC textureResourceDesc2{};
-    textureResourceDesc2.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-    textureResourceDesc2.Format = metadata2.format;
-    textureResourceDesc2.Width = metadata2.width;
-    textureResourceDesc2.Height = (UINT)metadata2.height;
-    textureResourceDesc2.DepthOrArraySize = (UINT16)metadata2.arraySize;
-    textureResourceDesc2.MipLevels = (UINT16)metadata2.mipLevels;
-    textureResourceDesc2.SampleDesc.Count = 1;
-
-    // テクスチャバッファの生成
-    ComPtr<ID3D12Resource> texBuff = nullptr;
-    result = iDX->GetDevice()->CreateCommittedResource(
-        &textureHeapProp,
-        D3D12_HEAP_FLAG_NONE,
-        &textureResourceDesc,
-        D3D12_RESOURCE_STATE_GENERIC_READ,
-        nullptr,
-        IID_PPV_ARGS(&texBuff));
-    assert(SUCCEEDED(result));
-
-    // テクスチャバッファの生成2
-    ComPtr<ID3D12Resource> texBuff2 = nullptr;
-    result = iDX->GetDevice()->CreateCommittedResource(
-        &textureHeapProp,
-        D3D12_HEAP_FLAG_NONE,
-        &textureResourceDesc2,
-        D3D12_RESOURCE_STATE_GENERIC_READ,
-        nullptr,
-        IID_PPV_ARGS(&texBuff2));
-    assert(SUCCEEDED(result));
-
-    // 全ミップマップについて
-    for (size_t i = 0; i < metadata.mipLevels; i++) {
-        // ミップマップレベルを指定してイメージを取得
-        const Image* img = scratchImg.GetImage(i, 0, 0);
-
-        // テクスチャバッファにデータ転送
-        result = texBuff->WriteToSubresource(
-            (UINT)i,
-            nullptr,		// 全領域へコピー
-            img->pixels,	// 元データアドレス
-            (UINT)img->rowPitch,	// 1ラインサイズ
-            (UINT)img->slicePitch	// 全サイズ
-        );
-        assert(SUCCEEDED(result));
-    }
-
-    // 全ミップマップについて
-    for (size_t i = 0; i < metadata2.mipLevels; i++) {
-        // ミップマップレベルを指定してイメージを取得
-        const Image* img2 = scratchImg2.GetImage(i, 0, 0);
-
-        // テクスチャバッファにデータ転送
-        result = texBuff2->WriteToSubresource(
-            (UINT)i,
-            nullptr,		// 全領域へコピー
-            img2->pixels,	// 元データアドレス
-            (UINT)img2->rowPitch,	// 1ラインサイズ
-            (UINT)img2->slicePitch	// 全サイズ
-        );
-        assert(SUCCEEDED(result));
-    }
-
-    //// 元データ解放
-    //delete[] imageData;
-
-    // シェーダリソースビュー設定
-    D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-    srvDesc.Format = textureResourceDesc.Format;
-    srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-    srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-    srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
-
-    // ハンドルのさす位置にシェーダーリソースビューの作成
-    iDX->GetDevice()->CreateShaderResourceView(texBuff.Get(), &srvDesc, srvHandle);
-
-
-    // 1つハンドルを進める
-    UINT incrementSize = iDX->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-    srvHandle.ptr += incrementSize;
-
-    // シェーダリソースビュー設定
-    D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc2{};
-    srvDesc2.Format = textureResourceDesc2.Format;
-    srvDesc2.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-    srvDesc2.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-    srvDesc2.Texture2D.MipLevels = textureResourceDesc2.MipLevels;
-
-    // ハンドルの指す位置にシェーダーリソースビュー作成
-    iDX->GetDevice()->CreateShaderResourceView(texBuff2.Get(), &srvDesc2, srvHandle);
 #pragma endregion
 
 #pragma region キーボード入力設定
@@ -819,7 +653,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region キーボード情報の取得
 
-        KEY::Update();
+        KEYS::Update();
 
 #pragma endregion
 
@@ -893,11 +727,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         //constMapTransform1->mat = matWorld1 * matView * matProjection;
 #pragma endregion
 
-        if (KEY::IsDown(DIK_W) || KEY::IsDown(DIK_S) || KEY::IsDown(DIK_A) || KEY::IsDown(DIK_D)) {
-            if (KEY::IsDown(DIK_W)) { object3ds[0].position.y += 1.0f; }
-            else if (KEY::IsDown(DIK_S)) { object3ds[0].position.y -= 1.0f; }
-            if (KEY::IsDown(DIK_A)) { object3ds[0].position.x -= 1.0f; }
-            else if (KEY::IsDown(DIK_D)) { object3ds[0].position.x += 1.0f; }
+        if (KEYS::IsDown(DIK_W) || KEYS::IsDown(DIK_S) || KEYS::IsDown(DIK_A) || KEYS::IsDown(DIK_D)) {
+            if (KEYS::IsDown(DIK_W)) { object3ds[0].position.y += 1.0f; }
+            else if (KEYS::IsDown(DIK_S)) { object3ds[0].position.y -= 1.0f; }
+            if (KEYS::IsDown(DIK_A)) { object3ds[0].position.x -= 1.0f; }
+            else if (KEYS::IsDown(DIK_D)) { object3ds[0].position.x += 1.0f; }
         }
 
         for (size_t i = 0; i < _countof(object3ds); i++) {
@@ -935,12 +769,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         //commandList->SetDescriptorHeaps(1, &srvHeap);
 
 
-        // SRVヒープの先頭ハンドルを取得(SRVを指しているはず)
-        D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
 
-        // 2枚目を指し示すようにしたSRVのハンドルをルートパラメータ1番に設定
-        srvGpuHandle.ptr += incrementSize;
-        iDX->GetCommandList()->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
+        iDX->GetCommandList()->SetGraphicsRootDescriptorTable(1, Texture::GetTexSRVGpuH("Resources/reimu.png"));
 
         // 全オブジェクトについて処理
         for (int i = 0; i < _countof(object3ds); i++) {

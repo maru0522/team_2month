@@ -36,6 +36,6 @@ namespace Input {
 
 #ifndef NON_NAMESPACE_Input
 
-using KEY = Input::Keyboard;
+using KEYS = Input::Keyboard;
 
 #endif // ‚à‚µInput‚Ìnamespace‚ª‚ ‚é‚È‚ç

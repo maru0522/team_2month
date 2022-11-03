@@ -84,7 +84,7 @@ Window::Window(const char* title)
     AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
     // ウィンドウタイトルをwstring(wchar_t)に変換
-    std::wstring wstrTitle = Convert::CharToWString(title);
+    std::wstring wstrTitle = Util::Convert::CharToWString(title);
 
     // ウィンドウオブジェクトの生成
     hwnd_ = CreateWindow(
