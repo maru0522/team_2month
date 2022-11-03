@@ -18,9 +18,9 @@ namespace Util {
         std::wstring WCharToWString(const wchar_t* wcstr);
 
         // string -> wstring(unicode)
-        std::wstring StringToWString(std::string str);
+        std::wstring StringToWString(const std::string str);
         // wstring(unicode) -> string
-        std::string WstringToString(std::wstring wstr);
+        std::string WstringToString(const std::wstring wstr);
     }
 
     class Timer {
