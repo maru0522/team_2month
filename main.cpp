@@ -76,25 +76,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     KEYS::Initialize();
 
 #pragma endregion
-
-#pragma region srv
-    // SRVの最大個数
-    const size_t kMaxSRVCount = 2056;
-
-    // デスクリプタヒープの設定
-    D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-    srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-    srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;	// シェーダから見えるように
-    srvHeapDesc.NumDescriptors = kMaxSRVCount;
-
-    // 設定を元にSRV用デスクリプタヒープを作成
-    ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
-    result = iDX->GetDevice()->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&srvHeap));
-    assert(SUCCEEDED(result));
-
-    // SRVヒープの先頭ハンドルを取得
-    D3D12_CPU_DESCRIPTOR_HANDLE srvHandle = srvHeap->GetCPUDescriptorHandleForHeapStart();
-#pragma endregion
 #pragma endregion
 
 #pragma region 描画初期化処理
@@ -764,13 +745,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         iDX->GetCommandList()->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetGPUVirtualAddress());
         // SRVヒープの設定コマンド
         // // デスクリプタヒープの配列
-        ID3D12DescriptorHeap* ppHeaps[] = { srvHeap.Get() };
+        ID3D12DescriptorHeap* ppHeaps[] = { Texture::GetSRVHeap()};
         iDX->GetCommandList()->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
         //commandList->SetDescriptorHeaps(1, &srvHeap);
 
 
 
-        iDX->GetCommandList()->SetGraphicsRootDescriptorTable(1, Texture::GetTexSRVGpuH("Resources/reimu.png"));
+        iDX->GetCommandList()->SetGraphicsRootDescriptorTable(1, Texture::GetTextureInfo("Resources/reimu.png").srvGpuHandle_);
 
         // 全オブジェクトについて処理
         for (int i = 0; i < _countof(object3ds); i++) {

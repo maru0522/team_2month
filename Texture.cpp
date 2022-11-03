@@ -289,7 +289,7 @@ void Texture::Load(const std::string& pathAndFileName)
     textures_.insert_or_assign(tmp.name_, tmp.info_); // ‘ã“ü‚Å‚ ‚Á‚Ä‚à‘S‚­“¯‚¶VALUE‚ª“ü‚é‚Æ‚Ív‚í‚ê‚éB
 }
 
-const Texture& Texture::GetTexture(const std::string& relativePath, const std::string& fileName)
+const Texture Texture::GetTexture(const std::string& relativePath, const std::string& fileName)
 {
     Texture tmp{}; // ˆêobj
 
@@ -307,7 +307,7 @@ const Texture& Texture::GetTexture(const std::string& relativePath, const std::s
     return tmp;
 }
 
-const Texture& Texture::GetTexture(const std::string& pathAndFileName)
+const Texture Texture::GetTexture(const std::string& pathAndFileName)
 {
     Texture tmp{}; // ˆêobj
 
@@ -317,7 +317,7 @@ const Texture& Texture::GetTexture(const std::string& pathAndFileName)
     return tmp;
 }
 
-const Texture::MAP_VALUE& Texture::GetTextureInfo(const std::string& relativePath, const std::string& fileName)
+const Texture::MAP_VALUE Texture::GetTextureInfo(const std::string& relativePath, const std::string& fileName)
 {
     std::string name{};
 
@@ -334,14 +334,9 @@ const Texture::MAP_VALUE& Texture::GetTextureInfo(const std::string& relativePat
     return textures_.at(name);
 }
 
-const Texture::MAP_VALUE& Texture::GetTextureInfo(const std::string& pathAndFileName)
+const Texture::MAP_VALUE Texture::GetTextureInfo(const std::string& pathAndFileName)
 {
     return textures_.at(pathAndFileName);
-}
-
-const D3D12_GPU_DESCRIPTOR_HANDLE& Texture::GetTexSRVGpuH(const std::string& pathAndFileName)
-{
-    return textures_.at(pathAndFileName).srvGpuHandle_;
 }
 
 void Texture::SetMapKey(const std::string keyName)

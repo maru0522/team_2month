@@ -26,14 +26,12 @@ public: // 静的関数
     static void Load(const std::string& pathAndFileName);
 
     // 読込済のテクスチャを検索し返す
-    static const Texture& GetTexture(const std::string& relativePath, const std::string& fileName);
-    static const Texture& GetTexture(const std::string& pathAndFileName);
+    static const Texture GetTexture(const std::string& relativePath, const std::string& fileName);
+    static const Texture GetTexture(const std::string& pathAndFileName);
 
     // 読込済のテクスチャの情報だけ返す
-    static const MAP_VALUE& GetTextureInfo(const std::string& relativePath, const std::string& fileName);
-    static const MAP_VALUE& GetTextureInfo(const std::string& pathAndFileName);
-
-    static const D3D12_GPU_DESCRIPTOR_HANDLE& GetTexSRVGpuH(const std::string& pathAndFileName);
+    static const MAP_VALUE GetTextureInfo(const std::string& relativePath, const std::string& fileName);
+    static const MAP_VALUE GetTextureInfo(const std::string& pathAndFileName);
 
     // private変数: srvHeap を取得
     static ID3D12DescriptorHeap* GetSRVHeap(void) { return srvHeap_.Get(); }
