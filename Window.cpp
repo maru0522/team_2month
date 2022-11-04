@@ -15,10 +15,10 @@ LRESULT Window::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
     // メッセージに応じてゲーム固有の処理を行う
     switch (msg) {
         // ウィンドウが破棄された
-        case WM_DESTROY:
-            // OSに対して、アプリの終了を伝える
-            PostQuitMessage(0);
-            return 0;
+    case WM_DESTROY:
+        // OSに対して、アプリの終了を伝える
+        PostQuitMessage(0);
+        return 0;
     }
 
     // 標準のメッセージ処理を行う
@@ -84,7 +84,8 @@ Window::Window(const char* title)
     AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
     // ウィンドウタイトルをwstring(wchar_t)に変換
-    std::wstring wstrTitle = Util::Convert::CharToWString(title);
+    std::string strTitle{ title };
+    std::wstring wstrTitle{ strTitle.begin(),strTitle.end() };
 
     // ウィンドウオブジェクトの生成
     hwnd_ = CreateWindow(

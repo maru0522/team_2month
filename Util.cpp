@@ -2,39 +2,6 @@
 #include <chrono>
 #include <cmath>
 
-std::string Util::Convert::CharToString(const char* cstr)
-{
-    return std::string(cstr);
-}
-
-std::wstring Util::Convert::CharToWString(const char* cstr)
-{
-    std::string str(cstr);
-
-    return std::wstring(str.begin(), str.end());
-}
-
-std::string Util::Convert::WCharToString(const wchar_t* wcstr)
-{
-    std::wstring wstr(wcstr);
-
-    return std::string(wstr.begin(), wstr.end());
-}
-
-std::wstring Util::Convert::WCharToWString(const wchar_t* wcstr)
-{
-    return std::wstring(wcstr);
-}
-
-std::wstring Util::Convert::StringToWString(const std::string str)
-{
-    return std::wstring(str.begin(), str.end());
-}
-
-std::string Util::Convert::WstringToString(const std::wstring wstr)
-{
-    return std::string(wstr.begin(), wstr.end());
-}
 
 using namespace std::chrono;
 
