@@ -34,7 +34,7 @@ namespace Input {
     };
 };
 
-#ifndef NON_NAMESPACE_Input
+#ifndef NON_NAMESPACE_Input // ’è‹`‚Åusing‰ğœ
 
 using KEYS = Input::Keyboard;
 

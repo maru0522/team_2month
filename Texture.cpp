@@ -7,6 +7,7 @@
 // 静的変数の実体生成
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Texture::srvHeap_ = nullptr;
 std::map<Texture::MAP_KEY, Texture::MAP_VALUE> Texture::textures_{};
+std::map<Texture::MAP_ID, Texture::MAP_KEY> Texture::mapKeys_{};
 uint32_t Texture::indexNextDescHeap_{ 0 };
 
 void Texture::Initialize(void)
@@ -34,15 +35,7 @@ void Texture::Load(const std::string& relativePath, const std::string& fileName)
 
     Texture tmp{}; // 一時obj
 
-    // relativePathの末尾に"/"があるか確認
-    if (!std::string{ relativePath.back() }.compare("/")) { // 一致している場合0を返すので!で非0としている。
-        // ある場合、そのまま名前を設定
-        tmp.SetMapKey(relativePath + fileName);
-    }
-    else {
-        // がない場合、"/"を加えて名前を設定
-        tmp.SetMapKey(relativePath + "/" + fileName);
-    }
+    tmp.CheckPath(relativePath, fileName);
 
     // 既に読み込んだテクスチャとの重複確認。
     if (textures_.count(tmp.name_)) {
@@ -289,19 +282,60 @@ void Texture::Load(const std::string& pathAndFileName)
     textures_.insert_or_assign(tmp.name_, tmp.info_); // 代入時であっても全く同じVALUEが入るとは思われる。
 }
 
+void Texture::CreateIdForTexPath(const std::string& relativePath, const std::string& fileName, const std::string& id)
+{
+    // 一時obj
+    Texture tmp;
+
+    // pathの確認と修正
+    tmp.CheckPath(relativePath, fileName);
+
+    // 既に読み込んでいるテクスチャの中に一致するものがあるか確認
+    if (textures_.count(tmp.name_)) {
+        // ある場合、IDと紐付けて保存
+        mapKeys_.insert_or_assign(id, tmp.name_);
+    }
+    else {
+        try {
+            // ない場合、例外を投げる
+            throw std::logic_error("Specified MAP_KEY does not exist.");
+        }
+        catch(const std::logic_error& e) {
+            // 強制終了。
+            std::exit(1);
+        }
+    }
+}
+
+void Texture::CreateIdForTexPath(const std::string& pathAndFileName, const std::string& id)
+{
+    // 既に読み込んでいるテクスチャの中に一致するものがあるか確認
+    if (textures_.count(pathAndFileName)) {
+        // ある場合、IDと紐付けて保存
+        mapKeys_.insert_or_assign(id, pathAndFileName);
+    }
+    else {
+        try {
+            // ない場合、例外を投げる
+            throw std::logic_error("Specified MAP_KEY does not exist.");
+        }
+        catch (const std::logic_error& e) {
+            // 強制終了。
+            std::exit(1);
+        }
+    }
+}
+
+const Texture::MAP_KEY Texture::GetTextureKey(const std::string& id)
+{
+    return mapKeys_.at(id);
+}
+
 const Texture Texture::GetTexture(const std::string& relativePath, const std::string& fileName)
 {
     Texture tmp{}; // 一時obj
 
-    // relativePathの末尾に"/"があるか確認
-    if (!std::string{ relativePath.back() }.compare("/")) { // 一致している場合0を返すので!で非0としている。
-        // ある場合、そのまま名前を設定
-        tmp.SetMapKey(relativePath + fileName);
-    }
-    else {
-        // がない場合、"/"を加えて名前を設定
-        tmp.SetMapKey(relativePath + "/" + fileName);
-    }
+    tmp.CheckPath(relativePath, fileName);
     tmp.info_ = textures_.at(tmp.name_);
 
     return tmp;
@@ -312,6 +346,16 @@ const Texture Texture::GetTexture(const std::string& pathAndFileName)
     Texture tmp{}; // 一時obj
 
     tmp.SetMapKey(pathAndFileName);
+    tmp.info_ = textures_.at(tmp.name_);
+
+    return tmp;
+}
+
+const Texture Texture::GetTextureById(const std::string& id)
+{
+    Texture tmp{}; // 一時obj
+
+    tmp.SetMapKey(GetTextureKey(id));
     tmp.info_ = textures_.at(tmp.name_);
 
     return tmp;
@@ -339,7 +383,25 @@ const Texture::MAP_VALUE Texture::GetTextureInfo(const std::string& pathAndFileN
     return textures_.at(pathAndFileName);
 }
 
+const Texture::MAP_VALUE Texture::GetTextureInfoById(const std::string& id)
+{
+    return textures_.at(GetTextureKey(id));
+}
+
 void Texture::SetMapKey(const std::string keyName)
 {
     name_ = keyName;
+}
+
+void Texture::CheckPath(const std::string& relativePath, const std::string& fileName)
+{
+    // relativePathの末尾に"/"があるか確認
+    if (!std::string{ relativePath.back() }.compare("/")) { // 一致している場合0を返すので!で非0としている。
+        // ある場合、そのまま名前を設定
+        SetMapKey(relativePath + fileName);
+    }
+    else {
+        // がない場合、"/"を加えて名前を設定
+        SetMapKey(relativePath + "/" + fileName);
+    }
 }
