@@ -3,10 +3,10 @@
 
 namespace Util {
     namespace Convert {
-        //----------//
-        /* •¶Žš—ñ•ÏŠ· */
-        //----------//
+        constexpr float MY_PI{ 3.14159265f };
 
+        inline constexpr float DegsToRads(float fDegrees);
+        inline constexpr float RadsToDegs(float fRadians);
     }
 
     class Timer {

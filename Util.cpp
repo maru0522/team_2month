@@ -2,7 +2,6 @@
 #include <chrono>
 #include <cmath>
 
-
 using namespace std::chrono;
 
 template<class TimeUnit>
@@ -23,4 +22,14 @@ const bool Util::Timer::GetIsEnd(void)
 {
     float_t elapsedTime = (GetNowCount<milliseconds>() - startTime_) / 1000.0f;
     return endTime_ < elapsedTime;
+}
+
+constexpr float Util::Convert::DegsToRads(float fDegrees)
+{
+    return fDegrees * MY_PI / 180.0f;
+}
+
+constexpr float Util::Convert::RadsToDegs(float fRadians)
+{
+    return fRadians * 180.0f / MY_PI;
 }

@@ -631,7 +631,7 @@ void Texture::CreateIdForTexPath(const std::string& relativePath, const std::str
             // ない場合、例外を投げる
             throw std::logic_error("Specified MAP_KEY does not exist.");
         }
-        catch (const std::logic_error& e) {
+        catch (const std::logic_error&) {
             // 強制終了。
             std::exit(1);
         }
@@ -650,7 +650,7 @@ void Texture::CreateIdForTexPath(const std::string& pathAndFileName, const std::
             // ない場合、例外を投げる
             throw std::logic_error("Specified MAP_KEY does not exist.");
         }
-        catch (const std::logic_error& e) {
+        catch (const std::logic_error&) {
             // 強制終了。
             std::exit(1);
         }

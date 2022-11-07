@@ -76,9 +76,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region 描画初期化処理
 
-    Sprite test{};
-    test.SetColor({ 255.0f,0.0f,0.0f,127.0f });
-
     //// 頂点データ構造体
     //struct Vertex
     //{
@@ -479,6 +476,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion
 
+    Sprite test{ "Resources/reimu.png" , CMode::PATH };
+    test.SetColor({ 255.0f,0.0f,0.0f,127.0f });
+
 #pragma region キーボード入力設定
     // mInputクラスへ移行
 #pragma endregion
@@ -546,6 +546,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
         matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 
+        test.Update(); 
 
         // DirectX毎フレーム処理　ここまで
 #pragma endregion
