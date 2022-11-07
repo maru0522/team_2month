@@ -17,16 +17,17 @@ public: // 静的関数
         D3D12_CPU_DESCRIPTOR_HANDLE srvCpuHandle_{};
         D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle_{};
     };
-
+    // mapの鍵のID
     using MAP_ID = std::string;
 
     // srvの初期化
     static void Initialize(void);
 
-    // 読込 そのうちここからちょくidできるようにしとく
+    // 読込 
     static void Load(const std::string& relativePath, const std::string& fileName);
     static void Load(const std::string& pathAndFileName);
     static void Load(const std::string& relativePath, const std::string& fileName, const std::string& id);
+    static void LoadWithId(const std::string& pathAndFileName, const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
 
     // 読込済のテクスチャを検索し返す
     static const Texture GetTexture(const std::string& relativePath, const std::string& fileName);
