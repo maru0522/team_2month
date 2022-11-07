@@ -26,6 +26,7 @@ public: // 静的関数
     // 読込 そのうちここからちょくidできるようにしとく
     static void Load(const std::string& relativePath, const std::string& fileName);
     static void Load(const std::string& pathAndFileName);
+    static void Load(const std::string& relativePath, const std::string& fileName, const std::string& id);
 
     // 読込済のテクスチャを検索し返す
     static const Texture GetTexture(const std::string& relativePath, const std::string& fileName);
