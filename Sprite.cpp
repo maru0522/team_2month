@@ -558,14 +558,17 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
 
 void Sprite::Update(void)
 {
+    // ワールド行列の初期化
+    matWorld_ = DirectX::XMMatrixIdentity();
+
     // 回転行列の宣言と初期化
     DirectX::XMMATRIX matRot{ DirectX::XMMatrixIdentity() };
-    matRot *= DirectX::XMMatrixRotationZ(rotate_); // z度回転
+    matRot *= DirectX::XMMatrixRotationZ(rotation_); // z度回転
     matWorld_ *= matRot; // ワールド行列に回転を反映
 
     // 平行移動行列の宣言と初期化
     DirectX::XMMATRIX matTrans{ DirectX::XMMatrixIdentity() };
-    matTrans = DirectX::XMMatrixTranslation(position_.x, position_.y, position_.z); // 平行移動
+    matTrans = DirectX::XMMatrixTranslation(position_.x, position_.y, 0.0f); // 平行移動
     matWorld_ *= matTrans; // ワールド行列に平行移動を反映
 
     // 親を設定している場合は親のワールド行列を合成
@@ -611,6 +614,42 @@ void Sprite::SetColor(DirectX::XMFLOAT4 rgba)
     rgba.z = (std::max)(rgba.z, 0.0f);
     rgba.w = (std::max)(rgba.w, 0.0f);
 
+    // 値が1.0fより大きい時1.0fにする
+    rgba.x = (std::min)(1.0f, rgba.x);
+    rgba.y = (std::min)(1.0f, rgba.y);
+    rgba.z = (std::min)(1.0f, rgba.z);
+    rgba.w = (std::min)(1.0f, rgba.w);
+
+    // 値を書き込むと自動的に転送される
+    cbMaterial_.GetConstBuffMap()->color_ = rgba;
+}
+
+void Sprite::SetColor(float_t r, float_t g, float_t b, float_t a)
+{
+    // 値が0.0fより小さい時0.0fにする
+    r = (std::max)(r, 0.0f);
+    g = (std::max)(g, 0.0f);
+    b = (std::max)(b, 0.0f);
+    a = (std::max)(a, 0.0f);
+
+    // 値が1.0fより大きい時1.0fにする
+    r = (std::min)(1.0f, r);
+    g = (std::min)(1.0f, g);
+    b = (std::min)(1.0f, b);
+    a = (std::min)(1.0f, a);
+
+    // 値を書き込むと自動的に転送される
+    cbMaterial_.GetConstBuffMap()->color_ = { r,g,b,a };
+}
+
+void Sprite::SetColor255(DirectX::XMFLOAT4 rgba)
+{
+    // 値が0.0fより小さい時0.0fにする
+    rgba.x = (std::max)(rgba.x, 0.0f);
+    rgba.y = (std::max)(rgba.y, 0.0f);
+    rgba.z = (std::max)(rgba.z, 0.0f);
+    rgba.w = (std::max)(rgba.w, 0.0f);
+
     // 値が255.0fより大きい時255.0fにする
     rgba.x = (std::min)(255.0f, rgba.x);
     rgba.y = (std::min)(255.0f, rgba.y);
@@ -629,7 +668,7 @@ void Sprite::SetColor(DirectX::XMFLOAT4 rgba)
     cbMaterial_.GetConstBuffMap()->color_ = rgba;
 }
 
-void Sprite::SetColor(float_t r, float_t g, float_t b, float_t a)
+void Sprite::SetColor255(float_t r, float_t g, float_t b, float_t a)
 {
     // 値が0.0fより小さい時0.0fにする
     r = (std::max)(r, 0.0f);

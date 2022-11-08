@@ -477,7 +477,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #pragma endregion
 
     Sprite test{ "Resources/reimu.png" , CMode::PATH };
-    test.SetColor({ 255.0f,0.0f,0.0f,127.0f });
+    test.SetColor255({ 0.0f,255.0f,0.0f,127.0f });
+    test.SetPosition({ 50,100 });
+    test.SetRotation({ 0.785398f });
 
 #pragma region キーボード入力設定
     // mInputクラスへ移行
