@@ -558,7 +558,7 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
 
 void Sprite::Update(void)
 {
-    //TransferVertex();
+    TransferVertex();
 
     // ワールド行列の初期化
     matWorld_ = DirectX::XMMatrixIdentity();
@@ -584,6 +584,10 @@ void Sprite::Update(void)
 
 void Sprite::Draw(void)
 {
+    if (isInvisible_) {
+        return;
+    }
+
     SetCommandsBeforeDraw();
 
     InitDirectX* iDX = InitDirectX::GetInstance();
@@ -703,11 +707,34 @@ void Sprite::SetParent(Sprite* parent)
 
 void Sprite::TransferVertex(void)
 {
+#pragma region アンカーポイントの変更
+    float_t left{ (0.0f - anchorPoint_.x) * size_.x };
+    float_t right{ (1.0f - anchorPoint_.x) * size_.x };
+    float_t top{ (0.0f - anchorPoint_.y) * size_.y };
+    float_t bottom{ (1.0f - anchorPoint_.y) * size_.y };
+#pragma endregion
+
+#pragma region フリップの変更
+    // グラフィックスパイプラインの背面カリングをオフにしていないと描画されなくなる
+
+    // 左右フリップ
+    if (isFlipX_) {
+        left = -left; // 左
+        right = -right; // 右
+    }
+
+    // 上下フリップ
+    if (isFlipY_) {
+        top = -top; // 上
+        bottom = -bottom; // 下
+    }
+#pragma endregion
+
 #pragma region 頂点座標の変更
-    vertices_.at(static_cast<int>(VertNum::LeftBottom)).pos_ =  {    0.0f, size_.y, 0.0f };
-    vertices_.at(static_cast<int>(VertNum::LeftTop)).pos_ =     {    0.0f,    0.0f, 0.0f };
-    vertices_.at(static_cast<int>(VertNum::RightBottom)).pos_ = { size_.x, size_.y, 0.0f };
-    vertices_.at(static_cast<int>(VertNum::LeftTop)).pos_ =     { size_.x, size_.y, 0.0f };
+    vertices_.at(static_cast<int>(VertNum::LeftBottom)).pos_ = { left, bottom, 0.0f };      // 左下
+    vertices_.at(static_cast<int>(VertNum::LeftTop)).pos_ = { left, top, 0.0f };            // 左上
+    vertices_.at(static_cast<int>(VertNum::RightBottom)).pos_ = { right, bottom, 0.0f };    // 右下
+    vertices_.at(static_cast<int>(VertNum::RightTop)).pos_ = { right, top, 0.0f };          // 右上
 #pragma endregion
 
 #pragma region 頂点バッファビュー

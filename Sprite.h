@@ -71,7 +71,19 @@ public: // 関数
 
     // 表示サイズ（ピクセル）を設定
     void SetSize(const DirectX::XMFLOAT2& size) { size_ = size; }
+
+    // アンカーポイントを設定
+    void SetAnchorPoint(const DirectX::XMFLOAT2& anchorPoint) { anchorPoint_ = anchorPoint; }
+
+    // フリップを設定
+    void SetFlipX(bool isFlipX) { isFlipX_ = isFlipX; } // 左右フリップ
+    void SetFlipY(bool isFlipY) { isFlipY_ = isFlipY; } // 上下フリップ
+    void SetFlip(bool isFlipX, bool isFlipY) { isFlipX_ = isFlipX, isFlipY_ = isFlipY; } // 一括フリップ
+
+    // 非表示の有無を設定
+    void SetInvisible(bool isInvisible) { isInvisible_ = isInvisible; }
 #pragma endregion
+
 #pragma region getter
     // 座標を取得
     const DirectX::XMFLOAT2& GetPosition(void) const { return position_; }
@@ -81,6 +93,16 @@ public: // 関数
 
     // 表示サイズ（ピクセル）を取得
     const DirectX::XMFLOAT2& GetSize(void) const { return size_; }
+
+    // アンカーポイントを取得
+    const DirectX::XMFLOAT2& GetAnchorPoint(void) const { return anchorPoint_; }
+
+    // フリップを取得
+    bool GetFlipX(void) { return isFlipX_; } // 左右フリップ
+    bool GetFlipY(void) { return isFlipY_; } // 上下フリップ
+
+    // 非表示の有無を取得
+    bool GetInvisible(void) { return isInvisible_; }
 #pragma endregion
 private: // 関数
     void TransferVertex(void);
@@ -123,4 +145,8 @@ private: // 変数
     DirectX::XMFLOAT2 position_{ 0.0f, 0.0f }; // 座標
     float_t rotation_{ 0.0f }; // 回転角
     DirectX::XMFLOAT2 size_{ 100.0f,100.0f }; //表示サイズ（ピクセル）
+    DirectX::XMFLOAT2 anchorPoint_{ 0.0f,0.0f }; // アンカーポイント
+    bool isFlipX_{ false }; // 左右フリップ
+    bool isFlipY_{ false }; // 上下フリップ
+    bool isInvisible_{ false }; //非表示の有無
 };

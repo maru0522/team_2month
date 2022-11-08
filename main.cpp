@@ -480,7 +480,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     test.SetColor255({ 0.0f,255.0f,0.0f,127.0f });
     //test.SetPosition({ 50,100 });
     //test.SetRotation({ 0.785398f });
-    test.SetSize({ 100,100 });
+    //test.SetSize({ 200,500 });
+    //test.SetAnchorPoint({ 0.5f,0.5f });
+    //test.SetFlipY(true);
 
 #pragma region キーボード入力設定
     // mInputクラスへ移行
