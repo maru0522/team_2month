@@ -38,7 +38,13 @@ private: // 定義
         DirectX::XMFLOAT2 uv_;        // uv座標
     };
 
-
+    enum class VertNum
+    {
+        LeftBottom,     // 左下
+        LeftTop,        // 左上
+        RightBottom,    // 右下
+        RightTop        // 右上
+    };
 
 public: // 関数
     Sprite(const std::string& relativePath, const std::string& fileName);
@@ -77,6 +83,7 @@ public: // 関数
     const DirectX::XMFLOAT2& GetSize(void) const { return size_; }
 #pragma endregion
 private: // 関数
+    void TransferVertex(void);
     void TransferMatrix(void);
 
     void SetCBTransform(void); // CBTrans

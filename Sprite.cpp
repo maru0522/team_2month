@@ -558,6 +558,8 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
 
 void Sprite::Update(void)
 {
+    //TransferVertex();
+
     // ワールド行列の初期化
     matWorld_ = DirectX::XMMatrixIdentity();
 
@@ -697,6 +699,38 @@ void Sprite::SetColor255(float_t r, float_t g, float_t b, float_t a)
 void Sprite::SetParent(Sprite* parent)
 {
     parent_ = parent;
+}
+
+void Sprite::TransferVertex(void)
+{
+#pragma region 頂点座標の変更
+    vertices_.at(static_cast<int>(VertNum::LeftBottom)).pos_ =  {    0.0f, size_.y, 0.0f };
+    vertices_.at(static_cast<int>(VertNum::LeftTop)).pos_ =     {    0.0f,    0.0f, 0.0f };
+    vertices_.at(static_cast<int>(VertNum::RightBottom)).pos_ = { size_.x, size_.y, 0.0f };
+    vertices_.at(static_cast<int>(VertNum::LeftTop)).pos_ =     { size_.x, size_.y, 0.0f };
+#pragma endregion
+
+#pragma region 頂点バッファビュー
+    vbView_.BufferLocation = vertBuff_->GetGPUVirtualAddress(); // GPUが参照するアドレスを渡す
+    vbView_.SizeInBytes = static_cast<UINT>(sizeof(vertices_[0]) * vertices_.size()); // 頂点バッファのサイズ = 頂点データ全体のサイズ
+    vbView_.StrideInBytes = sizeof(vertices_[0]); // 頂点1つ分のデータサイズ
+#pragma endregion
+
+#pragma region 座標の更新
+    // GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
+    Vertex_st* vertMap{ nullptr };
+    // マッピング
+    HRESULT r = vertBuff_->Map(0, nullptr, (void**)&vertMap);
+#ifdef _DEBUG
+    assert(SUCCEEDED(r));
+#endif // _DEBUG
+
+    // 座標のコピー
+    std::copy(vertices_.begin(), vertices_.end(), vertMap);
+
+    // マッピング解除
+    vertBuff_->Unmap(0, nullptr);
+#pragma endregion
 }
 
 void Sprite::TransferMatrix(void)
