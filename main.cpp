@@ -473,16 +473,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
     Texture::Initialize();
     Texture::Load("Resources/reimu.png");
+    Texture::Load("Resources/mario.jpg");
 
 #pragma endregion
 
-    Sprite test{ "Resources/reimu.png" , CMode::PATH };
-    test.SetColor255({ 0.0f,255.0f,0.0f,127.0f });
-    //test.SetPosition({ 50,100 });
-    //test.SetRotation({ 0.785398f });
-    //test.SetSize({ 200,500 });
-    //test.SetAnchorPoint({ 0.5f,0.5f });
-    //test.SetFlipY(true);
+    Sprite test{ "Resources/mario.jpg" , CMode::PATH };
+    //test.SetPosition({ 200,200 });
+    Sprite test2{ "Resources/reimu.png" , CMode::PATH };
+    test2.SetPosition({ 50,50 });
 
 #pragma region キーボード入力設定
     // mInputクラスへ移行
@@ -552,6 +550,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         matView = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 
         test.Update(); 
+        test2.Update();
 
         // DirectX毎フレーム処理　ここまで
 #pragma endregion
@@ -584,6 +583,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         //commandList->SetDescriptorHeaps(1, &srvHeap);
 
         test.Draw();
+        test2.Draw();
 
         //iDX->GetCommandList()->SetGraphicsRootDescriptorTable(1, Texture::GetTextureInfo("Resources/reimu.png").srvGpuHandle_);
 

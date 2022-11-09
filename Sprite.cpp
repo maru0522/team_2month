@@ -276,6 +276,8 @@ Sprite::Sprite(const std::string& relativePath, const std::string& fileName)
 #pragma region cbTransform
     SetCBTransform();
 #pragma endregion
+
+    SetColor({ 1.0f,1.0f,1.0f,1.0f });
 }
 
 Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
@@ -538,7 +540,6 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
     assert(SUCCEEDED(r));
 #endif // _DEBUG
 
-    rootSigBlob->Release();
 #pragma endregion
 
     // パイプラインにルートシグネチャをセット
@@ -554,6 +555,8 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
 #pragma region cbTransform
     SetCBTransform();
 #pragma endregion
+
+    SetColor({ 1.0f,1.0f,1.0f,1.0f });
 }
 
 void Sprite::Update(void)
