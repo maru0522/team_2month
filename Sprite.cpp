@@ -53,7 +53,7 @@ Sprite::Sprite(const std::string& relativePath, const std::string& fileName)
 #endif // _DEBUG
 
     // GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
-    Vertex_st* vertMap{ nullptr };
+    VertexSprite_st* vertMap{ nullptr };
     r = vertBuff_->Map(0, nullptr, (void**)&vertMap);
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
@@ -333,7 +333,7 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
 #endif // _DEBUG
 
     // GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
-    Vertex_st* vertMap{ nullptr };
+    VertexSprite_st* vertMap{ nullptr };
     r = vertBuff_->Map(0, nullptr, (void**)&vertMap);
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
@@ -446,6 +446,7 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
     blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;        // 1.0f - ソースのアルファ値
 #pragma endregion
 
+#pragma region 頂点レイアウトの設定
     // 頂点レイアウト
     D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
         {   // xyz座標(1行で書いたほうが見やすい)
@@ -459,6 +460,7 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
             D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
         },
     };
+#pragma endregion
 
     // 頂点レイアウトの設定
     pipelineDesc_.InputLayout.pInputElementDescs = inputLayout;
@@ -539,7 +541,6 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG
-
 #pragma endregion
 
     // パイプラインにルートシグネチャをセット
@@ -748,7 +749,7 @@ void Sprite::TransferVertex(void)
 
 #pragma region 座標の更新
     // GPU上のバッファに対応した仮想メモリ(メインメモリ上)を取得
-    Vertex_st* vertMap{ nullptr };
+    VertexSprite_st* vertMap{ nullptr };
     // マッピング
     HRESULT r = vertBuff_->Map(0, nullptr, (void**)&vertMap);
 #ifdef _DEBUG
@@ -765,7 +766,7 @@ void Sprite::TransferVertex(void)
 
 void Sprite::TransferMatrix(void)
 {
-       cbTransform_.GetConstBuffMap()->mat_ = matWorld_ * matProjection_;
+    cbTransform_.GetConstBuffMap()->mat_ = matWorld_ * matProjection_;
 }
 
 void Sprite::SetCBTransform(void)

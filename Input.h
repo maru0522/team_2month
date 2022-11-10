@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #define DIRECTINPUT_VERSION 0x0800
 #include "Window.h"
 #include <array>
@@ -10,32 +10,32 @@
 namespace Input {
     class Keyboard
     {
-    public: // ŠÖ”
+    public: // é–¢æ•°
         static void Initialize();
         static void Update();
 
-        // ‰Ÿ‚µ‚½uŠÔ
+        // æŠ¼ã—ãŸç¬é–“
         static bool IsTrigger(UINT8 key) { return !keysPre_[key] && keys_[key]; }
 
-        // ‰Ÿ‚³‚ê‚Ä‚¢‚é‚Æ‚«
+        // æŠ¼ã•ã‚Œã¦ã„ã‚‹ã¨ã
         static bool IsDown(UINT8 key) { return keys_[key]; }
 
-        // —£‚³‚ê‚½uŠÔ
+        // é›¢ã•ã‚ŒãŸç¬é–“
         static bool IsReleased(UINT8 key) { return keysPre_[key] && !keys_[key]; }
 
-    private: // •Ï”
-        // ƒGƒCƒŠƒAƒXƒeƒ“ƒvƒŒ[ƒg
+    private: // å¤‰æ•°
+        // ã‚¨ã‚¤ãƒªã‚¢ã‚¹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
         template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-        static ComPtr<IDirectInput8> directInput_; // DirectInput¶¬
-        static ComPtr<IDirectInputDevice8> keyboard_; // ƒL[ƒ{[ƒhƒfƒoƒCƒX¶¬
+        static ComPtr<IDirectInput8> directInput_; // DirectInputç”Ÿæˆ
+        static ComPtr<IDirectInputDevice8> keyboard_; // ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ‡ãƒã‚¤ã‚¹ç”Ÿæˆ
         static std::array<BYTE, 256> keysPre_;
         static std::array<BYTE, 256> keys_;
     };
 };
 
-#ifndef NON_NAMESPACE_Input // ’è‹`‚Åusing‰ğœ
+#ifndef NON_NAMESPACE_Input // å®šç¾©ã§usingè§£é™¤
 
 using KEYS = Input::Keyboard;
 
-#endif // ‚à‚µInput‚Ìnamespace‚ª‚ ‚é‚È‚ç
+#endif // ã‚‚ã—Inputã®namespaceãŒã‚ã‚‹ãªã‚‰

@@ -18,6 +18,7 @@ using namespace DirectX;
 #include "InitDirectX.h"
 #include "Texture.h"
 #include "Sprite.h"
+#include "Cube.h"
 
 using namespace Microsoft::WRL;
 
@@ -482,6 +483,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     Sprite test2{ "Resources/reimu.png" , CMode::PATH };
     test2.SetPosition({ 50,50 });
 
+    Cube tmp{ "Resources/mario.jpg" };
+    Cube tmp2{ "Resources/mario.jpg" };
 #pragma region キーボード入力設定
     // mInputクラスへ移行
 #pragma endregion
@@ -552,6 +555,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         test.Update(); 
         test2.Update();
 
+        tmp.Update();
+        tmp2.Update();
+
         // DirectX毎フレーム処理　ここまで
 #pragma endregion
 
@@ -584,6 +590,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
         test.Draw();
         test2.Draw();
+
+        tmp.Draw();
+        tmp2.Draw();
 
         //iDX->GetCommandList()->SetGraphicsRootDescriptorTable(1, Texture::GetTextureInfo("Resources/reimu.png").srvGpuHandle_);
 

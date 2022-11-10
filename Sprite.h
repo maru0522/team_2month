@@ -31,7 +31,7 @@ private: // 定義
 #pragma endregion
 
     // 頂点データ構造体
-    struct Vertex_st
+    struct VertexSprite_st
     {
         DirectX::XMFLOAT3 pos_;       // xyz座標
         //DirectX::XMFLOAT3 normal;    // 法線ベクトル
@@ -119,7 +119,7 @@ private: // 変数
     D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandleCopy_{};
 
 #pragma region 頂点
-    std::array<Vertex_st, 4> vertices_{}; // 頂点データ
+    std::array<VertexSprite_st, 4> vertices_{}; // 頂点データ
     ComPtr<ID3D12Resource> vertBuff_{ nullptr }; // 頂点バッファの生成
     D3D12_VERTEX_BUFFER_VIEW vbView_{}; // 頂点バッファビューの作成
 #pragma endregion
@@ -132,16 +132,13 @@ private: // 変数
     ConstBuffer<CBDataMaterial_st> cbMaterial_{};
     ConstBuffer<CBDataTransform_st> cbTransform_{};
 
-    // 親
-    Sprite* parent_{ nullptr };
-
     // 行列
     DirectX::XMMATRIX matWorld_{ DirectX::XMMatrixIdentity() }; // ワールド変換
     float_t nearZ_{ 0.0f };
     float_t farZ_{ 1.0f };
     DirectX::XMMATRIX matProjection_{ DirectX::XMMatrixOrthographicOffCenterLH(0.0f,static_cast<float_t>(Window::width_),static_cast<float_t>(Window::height_),0.0f,nearZ_,farZ_) }; // 平行投影
 
-    // Spriteに対する情報
+    // Spriteのもつ情報
     DirectX::XMFLOAT2 position_{ 0.0f, 0.0f }; // 座標
     float_t rotation_{ 0.0f }; // 回転角
     DirectX::XMFLOAT2 size_{ 100.0f,100.0f }; //表示サイズ（ピクセル）
@@ -149,4 +146,7 @@ private: // 変数
     bool isFlipX_{ false }; // 左右フリップ
     bool isFlipY_{ false }; // 上下フリップ
     bool isInvisible_{ false }; //非表示の有無
+
+    // 親オブジェクトへのポインタ
+    Sprite* parent_{ nullptr };
 };
