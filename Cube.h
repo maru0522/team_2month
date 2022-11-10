@@ -73,7 +73,7 @@ private: // 変数
     DirectX::XMMATRIX matWorld_{ DirectX::XMMatrixIdentity() }; // ワールド変換
     float_t nearZ_{ 0.1f };
     float_t farZ_{ 1000.0f };
-    DirectX::XMMATRIX matProjection_{ DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(45.0f), static_cast<float>(Window::width_ / Window::height_), nearZ_, farZ_) };
+    DirectX::XMMATRIX matProjection_{ DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(45.0f), (float)Window::width_ / Window::height_, nearZ_, farZ_) };
     //てんぽらり
     DirectX::XMFLOAT3 eye_{ 0, 0, -100 };       // 視点座標
     DirectX::XMFLOAT3 target_{ 0, 0, 0 };       // 注視点座標
@@ -82,7 +82,7 @@ private: // 変数
 
     // objのもつ情報
     DirectX::XMFLOAT3 scale_{ 1.0f, 1.0f, 1.0f };
-    DirectX::XMFLOAT3 rotation_{ 0.0f, 0.0f, 0.0f };
+    DirectX::XMFLOAT3 rotation_{ 1.0f, 1.0f, 0.0f };
     DirectX::XMFLOAT3 position_{ 0.0f, 0.0f, 0.0f };
 
     // 親オブジェクトのポインタ

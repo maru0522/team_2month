@@ -9,8 +9,8 @@ public: // 静的関数
 
 public: // 静的変数
     // ウィンドウサイズ
-    static const size_t width_ = 1280;
-    static const size_t height_ = 720;
+    static constexpr size_t width_ = 1280;
+    static constexpr size_t height_ = 720;
 
     // ウィンドウクラス名
     static const wchar_t windowClassName_[];

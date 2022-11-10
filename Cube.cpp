@@ -354,6 +354,10 @@ Cube::Cube(const std::string& pathAndFileName_or_Id)
     assert(SUCCEEDED(r));
 #pragma endregion
 
+    SetColor();
+
+    //SetCBTransform();
+
 #pragma region インデックスバッファの生成
     // インデックスデータ全体のサイズ
     uint32_t sizeIB = static_cast<uint32_t>(sizeof(uint16_t) * indices_.size());
@@ -395,10 +399,6 @@ Cube::Cube(const std::string& pathAndFileName_or_Id)
     ibView_.Format = DXGI_FORMAT_R16_UINT;
     ibView_.SizeInBytes = sizeIB;
 #pragma endregion
-
-    //SetCBTransform();
-
-    SetColor();
 }
 
 void Cube::Update(void)
