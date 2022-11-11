@@ -19,6 +19,7 @@ using namespace DirectX;
 #include "Texture.h"
 #include "Sprite.h"
 #include "Cube.h"
+#include "Camera.h"
 
 using namespace Microsoft::WRL;
 
@@ -54,12 +55,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion
 
+    Camera tmpCam;
+
     //Sprite test{ "Resources/mario.jpg" , CMode::PATH };
     ////test.SetPosition({ 200,200 });
     //Sprite test2{ "Resources/reimu.png" , CMode::PATH };
     //test2.SetPosition({ 50,50 });
 
-    Cube tmp{ "Resources/mario.jpg" };
+    Cube tmp{ "Resources/mario.jpg" , &tmpCam };
     //Cube tmp2{ "Resources/mario.jpg" };
 
 #pragma endregion
@@ -85,7 +88,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion
 
+        if (KEYS::IsDown(DIK_A)) {
+            tmpCam.eye_.x -= 2;
+        }
+        if (KEYS::IsDown(DIK_D)) {
+            tmpCam.eye_.x += 2;
+        }
 
+        if (KEYS::IsDown(DIK_LEFTARROW)) {
+            tmpCam.target_.x -= 2;
+        }
+        if (KEYS::IsDown(DIK_RIGHTARROW)) {
+            tmpCam.target_.x += 2;
+        }
+
+        tmpCam.Update();
         //test.Update(); 
         //test2.Update();
 
