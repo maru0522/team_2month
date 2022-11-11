@@ -1,8 +1,11 @@
 #pragma once
 #include "ConstBuffer.h"
+#include <DirectXMath.h>
 #include <array>
 #include "Window.h"
 #include <string>
+#include <wrl.h>
+#include "Camera.h"
 #include <d3d12.h>
 
 #pragma comment(lib,"d3d12.lib")
@@ -32,6 +35,7 @@ private: // 定義
 
 public: // 関数
     Cube(const std::string& pathAndFileName_or_Id);
+    Cube(const std::string& pathAndFileName_or_Id, Camera* pCamera);
     void Update(void);
     void Draw(void);
 
@@ -71,6 +75,7 @@ private: // 変数
 
     // 行列
     DirectX::XMMATRIX matWorld_{ DirectX::XMMatrixIdentity() }; // ワールド変換
+#pragma region カメラ指定がない時用
     float_t nearZ_{ 0.1f };
     float_t farZ_{ 1000.0f };
     DirectX::XMMATRIX matProjection_{ DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(45.0f), (float)Window::width_ / Window::height_, nearZ_, farZ_) };
@@ -79,6 +84,7 @@ private: // 変数
     DirectX::XMFLOAT3 target_{ 0, 0, 0 };       // 注視点座標
     DirectX::XMFLOAT3 up_{ 0, 1, 0 };           // 上方向ベクトル
     DirectX::XMMATRIX matView_{ DirectX::XMMatrixLookAtLH(DirectX::XMLoadFloat3(&eye_), DirectX::XMLoadFloat3(&target_), DirectX::XMLoadFloat3(&up_)) };
+#pragma endregion
 
     // objのもつ情報
     DirectX::XMFLOAT3 scale_{ 1.0f, 1.0f, 1.0f };
@@ -87,4 +93,7 @@ private: // 変数
 
     // 親オブジェクトのポインタ
     Cube* parent_{ nullptr };
+
+    // カメラ
+    Camera* pCamera_{ nullptr };
 };
