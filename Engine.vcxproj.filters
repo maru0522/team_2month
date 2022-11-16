@@ -93,6 +93,9 @@
     <ClCompile Include="Util.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
+    <ClCompile Include="Obj3d.cpp">
+      <Filter>ソース ファイル\object\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicVS.hlsl" />
@@ -165,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj3d.h">
+      <Filter>ヘッダー ファイル\object\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

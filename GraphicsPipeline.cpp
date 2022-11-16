@@ -244,7 +244,7 @@ GraphicsPipeline::GraphicsPipeline(GPType type)
     ComPtr<ID3DBlob> psBlob = nullptr; // ピクセルシェーダオブジェクト
     ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
     // 頂点シェーダの読み込みとコンパイル
-    r = D3DCompileFromFile(L"ModelVS.hlsl", nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "main", "vs_5_0", D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, 0, &vsBlob, &errorBlob);
+    r = D3DCompileFromFile(L"Resources/Shaders/ModelVS.hlsl", nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "main", "vs_5_0", D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, 0, &vsBlob, &errorBlob);
 
     // エラーなら
     if (FAILED(r)) {
@@ -263,7 +263,7 @@ GraphicsPipeline::GraphicsPipeline(GPType type)
 
 #pragma region ピクセルシェーダ
     // ピクセルシェーダの読み込みとコンパイル
-    r = D3DCompileFromFile(L"ModelPS.hlsl", nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "main", "ps_5_0", D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, 0, &psBlob, &errorBlob);
+    r = D3DCompileFromFile(L"Resources/Shaders/ModelPS.hlsl", nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "main", "ps_5_0", D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, 0, &psBlob, &errorBlob);
 
     // エラーなら
     if (FAILED(r)) {

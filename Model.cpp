@@ -290,10 +290,14 @@ void Model::LoadMaterial(Model model, const fsPath& pathAndObjName)
 
         // 先頭文字列がmap_Kdならテクスチャファイル名
         if (key == "map_Kd") {
+            Texture::TEXTURE_KEY tmpName;
+
             // テクスチャのファイル名読み込み
-            line_stream >> model.info_.material_.texKey;
+            line_stream >> tmpName;
+            model.info_.material_.texKey = path + tmpName;
+
             // テクスチャ読み込み
-            Texture::Load(path + model.info_.material_.texKey);
+            Texture::Load(model.info_.material_.texKey);
         }
     }
 }
@@ -310,6 +314,23 @@ void Model::UpdateMaterial(void)
     info_.constBuffB1_.GetConstBuffMap()->specular = info_.material_.specular;
     info_.constBuffB1_.GetConstBuffMap()->alpha = info_.material_.alpha;
 }
+
+//void Model::PreDraw(void)
+//{
+//    // インスタンス取得
+//    InitDirectX* iDX = InitDirectX::GetInstance();
+//
+//    // パイプラインステートとルートシグネチャの設定コマンド
+//    iDX->GetCommandList()->SetPipelineState(graphicsPipeline_.GetPipelineState());
+//    iDX->GetCommandList()->SetGraphicsRootSignature(graphicsPipeline_.GetRootSignature());
+//
+//    // プリミティブ形状の設定コマンド
+//    iDX->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト
+//
+//    ID3D12DescriptorHeap* ppHeaps[] = { Texture::GetSRVHeap() };
+//    // SRVヒープの設定コマンド
+//    iDX->GetCommandList()->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+//}
 
 //void Model::Draw(void)
 //{

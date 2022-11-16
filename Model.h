@@ -45,6 +45,7 @@ public: // 静的関数
     static void Load(const fsPath& pathAndObjName); // .objまで入れる
 
 #pragma region getter
+    static GraphicsPipeline& GetGraphicsPipeline(void) { return graphicsPipeline_; }
     static const MODEL_VALUE GetMODEL_VALUE(const fsPath& pathAndObjName);
 #pragma endregion
 
@@ -58,12 +59,16 @@ private: // 静的変数
 public: // 関数
     void Update(void);
 
+#pragma region setter
+    void SetMODEL_KEY(const fsPath& pathAndObjName) { name_ = pathAndObjName; }
+    void SetMODEL_VALUE(const MODEL_VALUE& info) { info_ = info; }
+#pragma endregion
 
-private: // 関数
 #pragma region getter
     MODEL_KEY* GetModelKeyName(void) { return &name_; }
     MODEL_VALUE* GetModelValueInfo(void) { return &info_; }
 #pragma endregion
+private: // 関数
 
     void UpdateMaterial(void); // 定数バッファのほうに値を送る。
 

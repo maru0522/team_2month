@@ -21,6 +21,7 @@ using namespace DirectX;
 #include "Cube.h"
 #include "Camera.h"
 #include "Model.h"
+#include "Obj3d.h"
 
 using namespace Microsoft::WRL;
 
@@ -46,72 +47,37 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #pragma endregion
 
 #pragma region 描画初期化処理
-
-
-#pragma region テクスチャ読み込み
-
+    // テクスチャ読み込み
     Texture::Initialize();
     Texture::Load("Resources/reimu.png");
     Texture::Load("Resources/mario.jpg");
 
+    // 3d.obj読み込み
     Model::Load("Resources/3dModels/cube/untitled.obj");
 #pragma endregion
 
-    Camera cameraT;
-
-    Sprite spriteT{ "Resources/mario.jpg" , CMode::PATH };
-    ////test.SetPosition({ 200,200 });
-    //Sprite test2{ "Resources/reimu.png" , CMode::PATH };
-    //test2.SetPosition({ 50,50 });
-
-    //Cube cubeT{ "Resources/mario.jpg" , &cameraT };
-    //Cube tmp2{ "Resources/mario.jpg" };
-
-#pragma endregion
+    // 使用する変数宣言
+    Obj3d objT{ "Resources/3dModels/cube/untitled.obj" };
 
 
     // ゲームループ
     while (true) {
-
 #pragma region ウィンドウメッセージ処理
-
         if (!wnd->GetKeepWindow()) {
             break;
         }
-
 #pragma endregion
 
 #pragma region DirextX毎フレーム処理
-        // DirectX毎フレーム処理　ここから
+        // 更新処理　ここから
 
-#pragma region キーボード情報の取得
-
+        // キーボード情報の取得
         KEYS::Update();
 
-#pragma endregion
 
-        if (KEYS::IsDown(DIK_A)) {
-            cameraT.eye_.x -= 2;
-        }
-        if (KEYS::IsDown(DIK_D)) {
-            cameraT.eye_.x += 2;
-        }
+        objT.Update();
 
-        if (KEYS::IsDown(DIK_LEFTARROW)) {
-            cameraT.target_.x -= 2;
-        }
-        if (KEYS::IsDown(DIK_RIGHTARROW)) {
-            cameraT.target_.x += 2;
-        }
-
-        cameraT.Update();
-        spriteT.Update(); 
-        //test2.Update();
-
-        //cubeT.Update();
-        //tmp2.Update();
-
-        // DirectX毎フレーム処理　ここまで
+        // 更新処理　ここまで
 #pragma endregion
 
 #pragma region 描画開始
@@ -119,16 +85,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         iDX->PreDraw();
 
 #pragma endregion
+        // 描画処理　ここから
+        Obj3d::PreDraw();
 
-        spriteT.Draw();
-        //test2.Draw();
+        objT.Draw();
 
-        //cubeT.Draw();
-        //tmp2.Draw();
-
-
-        // ４．描画コマンドここまで
-
+        // 描画処理　ここまで
 #pragma region 描画終了
 
         iDX->PostDraw();

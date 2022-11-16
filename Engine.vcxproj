@@ -156,6 +156,7 @@
     <ClCompile Include="InitDirectX.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Obj3d.cpp" />
     <ClCompile Include="SharedStruct.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Obj3d.h" />
     <ClInclude Include="SharedStruct.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
