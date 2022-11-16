@@ -40,10 +40,10 @@ public: // ŠÖ”
     void Draw(void);
 
     void SetColor(DirectX::XMFLOAT4 rgba = { 1.0f,1.0f,1.0f,1.0f });
-private:
+
+private: // ŠÖ”
     void TransferMatrix(void);
 
-    void SetCBTransform(void);
     void SetCommandsBeforeDraw(void);
 
 private: // •Ï”

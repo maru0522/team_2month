@@ -20,6 +20,7 @@ using namespace DirectX;
 #include "Sprite.h"
 #include "Cube.h"
 #include "Camera.h"
+#include "Model.h"
 
 using namespace Microsoft::WRL;
 
@@ -53,16 +54,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     Texture::Load("Resources/reimu.png");
     Texture::Load("Resources/mario.jpg");
 
+    Model::Load("Resources/3dModels/cube/untitled.obj");
 #pragma endregion
 
-    Camera tmpCam;
+    Camera cameraT;
 
-    //Sprite test{ "Resources/mario.jpg" , CMode::PATH };
+    Sprite spriteT{ "Resources/mario.jpg" , CMode::PATH };
     ////test.SetPosition({ 200,200 });
     //Sprite test2{ "Resources/reimu.png" , CMode::PATH };
     //test2.SetPosition({ 50,50 });
 
-    Cube tmp{ "Resources/mario.jpg" , &tmpCam };
+    //Cube cubeT{ "Resources/mario.jpg" , &cameraT };
     //Cube tmp2{ "Resources/mario.jpg" };
 
 #pragma endregion
@@ -89,24 +91,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #pragma endregion
 
         if (KEYS::IsDown(DIK_A)) {
-            tmpCam.eye_.x -= 2;
+            cameraT.eye_.x -= 2;
         }
         if (KEYS::IsDown(DIK_D)) {
-            tmpCam.eye_.x += 2;
+            cameraT.eye_.x += 2;
         }
 
         if (KEYS::IsDown(DIK_LEFTARROW)) {
-            tmpCam.target_.x -= 2;
+            cameraT.target_.x -= 2;
         }
         if (KEYS::IsDown(DIK_RIGHTARROW)) {
-            tmpCam.target_.x += 2;
+            cameraT.target_.x += 2;
         }
 
-        tmpCam.Update();
-        //test.Update(); 
+        cameraT.Update();
+        spriteT.Update(); 
         //test2.Update();
 
-        tmp.Update();
+        //cubeT.Update();
         //tmp2.Update();
 
         // DirectX毎フレーム処理　ここまで
@@ -118,11 +120,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion
 
-        //test.Draw();
+        spriteT.Draw();
         //test2.Draw();
 
-        tmp.Draw();
+        //cubeT.Draw();
         //tmp2.Draw();
+
 
         // ４．描画コマンドここまで
 

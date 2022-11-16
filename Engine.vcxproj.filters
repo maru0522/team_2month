@@ -16,20 +16,8 @@
     <Filter Include="ヘッダー ファイル\base">
       <UniqueIdentifier>{6e74f6e1-bf99-4361-a4fb-8a3ddd6cda8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\2d">
-      <UniqueIdentifier>{ca88b857-684b-4fae-a9d1-f847023fa16d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\3d">
-      <UniqueIdentifier>{c0ad25a2-b40b-4eb1-bde0-e134dd505c61}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\base">
       <UniqueIdentifier>{c1683018-51dc-4601-a2b7-ddd81c97d6d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\3d">
-      <UniqueIdentifier>{17b32238-6a64-4172-bf6d-8b3866c8b3c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\2d">
-      <UniqueIdentifier>{33f2f4f6-8429-42fd-9f14-625d13345626}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Resource">
       <UniqueIdentifier>{831a65b3-bab0-437b-b86e-3ff7637b9b49}</UniqueIdentifier>
@@ -37,12 +25,30 @@
     <Filter Include="ヘッダー ファイル\Resource">
       <UniqueIdentifier>{d390da2b-0705-49ca-8832-1cbad99b2d2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\object">
+      <UniqueIdentifier>{6d6c8107-95d3-44c2-b027-88358890eeb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object\2d">
+      <UniqueIdentifier>{ca88b857-684b-4fae-a9d1-f847023fa16d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object\3d">
+      <UniqueIdentifier>{c0ad25a2-b40b-4eb1-bde0-e134dd505c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object">
+      <UniqueIdentifier>{da1920c6-d477-4bdc-ab90-32a611e86d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object\3d">
+      <UniqueIdentifier>{17b32238-6a64-4172-bf6d-8b3866c8b3c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object\2d">
+      <UniqueIdentifier>{33f2f4f6-8429-42fd-9f14-625d13345626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\shader">
+      <UniqueIdentifier>{e3667543-9039-4809-bddd-a57c5f67affa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="CtrlFPS.cpp">
@@ -58,32 +64,63 @@
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル\3d</Filter>
+      <Filter>ソース ファイル\object\3d</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
-      <Filter>ソース ファイル\3d</Filter>
+      <Filter>ソース ファイル\object\3d</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル\2d</Filter>
+      <Filter>ソース ファイル\object\2d</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>ソース ファイル\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>ソース ファイル\object\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpLoader.cpp">
+      <Filter>ソース ファイル\object\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedStruct.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldCoordinate.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsPipeline.cpp">
+      <Filter>ソース ファイル\object</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>ソース ファイル\base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicVS.hlsl" />
     <FxCompile Include="BasicPS.hlsl" />
-    <FxCompile Include="Resources\Shaders\SpriteVS.hlsl" />
-    <FxCompile Include="Resources\Shaders\SpritePS.hlsl" />
+    <FxCompile Include="Resources\Shaders\ModelVS.hlsl">
+      <Filter>リソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ModelPS.hlsl">
+      <Filter>リソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\SpriteVS.hlsl">
+      <Filter>リソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\SpritePS.hlsl">
+      <Filter>リソース ファイル\shader</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.hlsli" />
-    <None Include="Resources\Shaders\Sprite.hlsli" />
+    <None Include="packages.config" />
+    <None Include="Resources\Shaders\Model.hlsli">
+      <Filter>リソース ファイル\shader</Filter>
+    </None>
+    <None Include="Resources\Shaders\Sprite.hlsli">
+      <Filter>リソース ファイル\shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Util.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
@@ -97,19 +134,37 @@
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstBuffer.h">
-      <Filter>ヘッダー ファイル\base</Filter>
+      <Filter>ヘッダー ファイル\object\2d</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル\3d</Filter>
+      <Filter>ヘッダー ファイル\object\3d</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>ヘッダー ファイル\3d</Filter>
+      <Filter>ヘッダー ファイル\object\3d</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>ヘッダー ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>ヘッダー ファイル\object\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpLoader.h">
+      <Filter>ヘッダー ファイル\object\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedStruct.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldCoordinate.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsPipeline.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstBuffer.h">
+      <Filter>ヘッダー ファイル\object</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include<d3dcompiler.h>
 
 #pragma comment(lib,"d3dcompiler.lib")
+
 Cube::Cube(const std::string& pathAndFileName_or_Id)
 {
     srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id).srvGpuHandle_;
@@ -892,17 +893,6 @@ void Cube::TransferMatrix(void)
     }
 
     cbTransform_.GetConstBuffMap()->mat_ = matWorld_ * matView_ * matProjection_;
-}
-
-void Cube::SetCBTransform(void)
-{
-#pragma region cbTransform
-    cbTransform_.GetConstBuffMap()->mat_ = DirectX::XMMatrixIdentity();
-    cbTransform_.GetConstBuffMap()->mat_.r[0].m128_f32[0] = 2.0f / Window::width_;
-    cbTransform_.GetConstBuffMap()->mat_.r[1].m128_f32[1] = -2.0f / Window::height_;
-    cbTransform_.GetConstBuffMap()->mat_.r[3].m128_f32[0] = -1.0f;
-    cbTransform_.GetConstBuffMap()->mat_.r[3].m128_f32[1] = 1.0f;
-#pragma endregion
 }
 
 void Cube::SetCommandsBeforeDraw(void)

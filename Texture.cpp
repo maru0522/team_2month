@@ -6,8 +6,8 @@
 
 // 静的変数の実体生成
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> Texture::srvHeap_ = nullptr;
-std::map<Texture::MAP_KEY, Texture::MAP_VALUE> Texture::textures_{};
-std::map<Texture::MAP_ID, Texture::MAP_KEY> Texture::mapKeys_{};
+std::map<Texture::TEXTURE_KEY, Texture::TEXTURE_VALUE> Texture::textures_{};
+std::map<Texture::TEX_KEY_ID, Texture::TEXTURE_KEY> Texture::mapKeys_{};
 uint32_t Texture::indexNextDescHeap_{ 0 };
 
 void Texture::Initialize(void)
@@ -629,7 +629,7 @@ void Texture::CreateIdForTexPath(const std::string& relativePath, const std::str
     else {
         try {
             // ない場合、例外を投げる
-            throw std::logic_error("Specified MAP_KEY does not exist.");
+            throw std::logic_error("Specified TEXTURE_KEY does not exist.");
         }
         catch (const std::logic_error&) {
             // 強制終了。
@@ -648,7 +648,7 @@ void Texture::CreateIdForTexPath(const std::string& pathAndFileName, const std::
     else {
         try {
             // ない場合、例外を投げる
-            throw std::logic_error("Specified MAP_KEY does not exist.");
+            throw std::logic_error("Specified TEXTURE_KEY does not exist.");
         }
         catch (const std::logic_error&) {
             // 強制終了。
@@ -657,7 +657,7 @@ void Texture::CreateIdForTexPath(const std::string& pathAndFileName, const std::
     }
 }
 
-const Texture::MAP_KEY Texture::GetTextureKey(const std::string& id)
+const Texture::TEXTURE_KEY Texture::GetTextureKey(const std::string& id)
 {
     return mapKeys_.at(id);
 }
@@ -692,7 +692,7 @@ const Texture Texture::GetTextureById(const std::string& id)
     return tmp;
 }
 
-const Texture::MAP_VALUE Texture::GetTextureInfo(const std::string& relativePath, const std::string& fileName)
+const Texture::TEXTURE_VALUE Texture::GetTextureInfo(const std::string& relativePath, const std::string& fileName)
 {
     std::string name{};
 
@@ -709,12 +709,12 @@ const Texture::MAP_VALUE Texture::GetTextureInfo(const std::string& relativePath
     return textures_.at(name);
 }
 
-const Texture::MAP_VALUE Texture::GetTextureInfo(const std::string& pathAndFileName)
+const Texture::TEXTURE_VALUE Texture::GetTextureInfo(const std::string& pathAndFileName)
 {
     return textures_.at(pathAndFileName);
 }
 
-const Texture::MAP_VALUE Texture::GetTextureInfoById(const std::string& id)
+const Texture::TEXTURE_VALUE Texture::GetTextureInfoById(const std::string& id)
 {
     return textures_.at(GetTextureKey(id));
 }

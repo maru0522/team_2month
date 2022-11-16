@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <chrono>
 
 namespace Util {
     namespace Convert {
@@ -10,6 +11,14 @@ namespace Util {
     }
 
     class Timer {
+    public: // 定義
+        using nanoseconds = std::chrono::nanoseconds;
+        using microseconds = std::chrono::microseconds;
+        using milliseconds = std::chrono::milliseconds;
+        using seconds = std::chrono::seconds;
+        using minutes = std::chrono::minutes;
+        using hours = std::chrono::hours;
+
     public: // 静的関数
         /// <summary>
         /// <para>Windowsが起動してからの経過時間をミリ秒単位であらわした値を返す。</para>
@@ -34,4 +43,8 @@ namespace Util {
 
         bool isEnd_{ false }; // endTime_ < elapsedTime_ = true
     };
+
+    namespace expt {
+        
+    }
 }

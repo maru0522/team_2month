@@ -57,9 +57,9 @@ private: // 変数
     // エイリアステンプレート
     template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-    ComPtr<ID3D12Resource> buffer_ = nullptr;
+    ComPtr<ID3D12Resource> buffer_{ nullptr };
 
-    CBType* cbTypeMap_ = nullptr;
+    CBType* cbTypeMap_{ nullptr };
 
 private: // 関数
     // cBMaterialとcMapMaterialのマッピング
