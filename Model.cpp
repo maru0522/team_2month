@@ -14,7 +14,6 @@
 #pragma comment(lib,"d3dcompiler.lib")
 
 // 静的変数の実体
-GraphicsPipeline Model::graphicsPipeline_{ GraphicsPipeline::GPType::MODEL };
 std::map<Model::MODEL_KEY, Model::MODEL_VALUE> Model::models_{};
 
 void Model::Load(const fsPath& pathAndObjName)
@@ -235,14 +234,17 @@ const Model::MODEL_VALUE Model::GetMODEL_VALUE(const fsPath& pathAndObjName)
     return models_.at(pathAndObjName);
 }
 
-void Model::LoadMaterial(Model model, const fsPath& pathAndObjName)
+void Model::LoadMaterial(Model& model, const fsPath& pathAndObjName)
 {
     const std::string path{ pathAndObjName.parent_path().string() + "/" };
+    const std::string mtlname{ pathAndObjName.stem().string() + ".mtl" };
+
+    const std::string a{ "Resources/3dModels/cube/untitled.mtl" };
 
     // ファイルストリーム
     std::ifstream file;
     // マテリアルファイルを開く
-    file.open(pathAndObjName);
+    file.open(a);
     // ファイルオープン失敗をチェック
     if (file.fail()) assert(0);
 

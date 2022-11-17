@@ -41,10 +41,10 @@ public: // 関数
         // 定数バッファのマッピング
         CBMap();
         //SetColorは使用先に委任
+        CBUnMap();
     }
 
     ~ConstBuffer(void) {
-        CBUnMap();
     }
 
     // private変数: cBTypeMap_ を取得

@@ -6,6 +6,16 @@
 
 #pragma comment(lib,"d3dcompiler.lib")
 
+//静的変数の実体
+GraphicsPipeline GraphicsPipeline::gPipeline2d_{};
+GraphicsPipeline GraphicsPipeline::gPipeline3d_{};
+
+void GraphicsPipeline::Initialize(void)
+{
+    gPipeline2d_ = GraphicsPipeline(GraphicsPipeline::GPType::SPRITE);
+    gPipeline3d_ = GraphicsPipeline(GraphicsPipeline::GPType::MODEL);
+}
+
 GraphicsPipeline::GraphicsPipeline(GPType type)
 {
     // インスタンス取得

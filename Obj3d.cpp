@@ -2,10 +2,14 @@
 #include "Model.h"
 #include "InitDirectX.h"
 
+GraphicsPipeline* Obj3d::graphicsPipeline_;
+
 Obj3d::Obj3d(const fsPath& pathAndObjName)
 {
     model_.SetMODEL_KEY(pathAndObjName);
     model_.SetMODEL_VALUE(Model::GetMODEL_VALUE(pathAndObjName)); // なんかこれ凄く危険な渡し方な気がする
+
+    // ここで止まってるなら.mtl内で正しい画像が記されていない可能性。
     srvGpuHandleCopy_ = Texture::GetTextureInfo(model_.GetModelValueInfo()->material_.texKey).srvGpuHandle_;
 }
 
@@ -15,14 +19,19 @@ void Obj3d::Update(void)
     worldCoordinate_.Update();
 }
 
+void Obj3d::Initialize(void)
+{
+    graphicsPipeline_ = GraphicsPipeline::GetGraphicsPipeLine3d();
+}
+
 void Obj3d::PreDraw(void)
 {
     // インスタンス取得
     InitDirectX* iDX = InitDirectX::GetInstance();
 
     // パイプラインステートとルートシグネチャの設定コマンド
-    iDX->GetCommandList()->SetPipelineState(Model::GetGraphicsPipeline().GetPipelineState());
-    iDX->GetCommandList()->SetGraphicsRootSignature(Model::GetGraphicsPipeline().GetRootSignature());
+    iDX->GetCommandList()->SetPipelineState(graphicsPipeline_->GetPipelineState());
+    iDX->GetCommandList()->SetGraphicsRootSignature(graphicsPipeline_->GetRootSignature());
 
     // プリミティブ形状の設定コマンド
     iDX->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 三角形リスト

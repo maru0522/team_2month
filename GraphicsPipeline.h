@@ -17,7 +17,18 @@ private: // 定義
     // エイリアステンプレート
     template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+public: // 静的関数
+    static void Initialize(void);
+
+    static GraphicsPipeline* GetGraphicsPipeLine2d(void) { return &gPipeline2d_; }
+    static GraphicsPipeline* GetGraphicsPipeLine3d(void) { return &gPipeline3d_; }
+
+private: // 静的変数
+    static GraphicsPipeline gPipeline2d_;
+    static GraphicsPipeline gPipeline3d_;
+
 public: // 関数
+    GraphicsPipeline() {}
     GraphicsPipeline(GPType type);
 
 #pragma region getter

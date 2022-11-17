@@ -31,8 +31,8 @@ public: // 定義
         D3D12_VERTEX_BUFFER_VIEW vbView_{};
         D3D12_INDEX_BUFFER_VIEW ibView_{};
 
-        MaterialModel3d_st material_;
-        ConstBuffer<CBDataB1> constBuffB1_; // マテリアル
+        MaterialModel3d_st material_{};
+        ConstBuffer<CBDataB1> constBuffB1_{}; // マテリアル
     };
 
 private: // 定義
@@ -45,18 +45,17 @@ public: // 静的関数
     static void Load(const fsPath& pathAndObjName); // .objまで入れる
 
 #pragma region getter
-    static GraphicsPipeline& GetGraphicsPipeline(void) { return graphicsPipeline_; }
     static const MODEL_VALUE GetMODEL_VALUE(const fsPath& pathAndObjName);
 #pragma endregion
 
 private: // 静的関数
-    static void LoadMaterial(Model model, const fsPath& pathAndObjName);
+    static void LoadMaterial(Model& model, const fsPath& pathAndObjName);
 
 private: // 静的変数
-    static GraphicsPipeline graphicsPipeline_;
     static std::map<MODEL_KEY, MODEL_VALUE> models_;
 
 public: // 関数
+    Model(void) {}
     void Update(void);
 
 #pragma region setter
