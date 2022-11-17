@@ -36,6 +36,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
     // Input初期化
     KEYS::Initialize();
+    DPAD::Initialize();
 
 #pragma region 描画初期化処理
     // graphicsPipeline初期化
@@ -73,6 +74,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
         // キーボード情報の取得
         KEYS::Update();
+        DPAD::Update();
 
         objT.Update();
         objT2.Update();
