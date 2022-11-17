@@ -239,12 +239,12 @@ void Model::LoadMaterial(Model& model, const fsPath& pathAndObjName)
     const std::string path{ pathAndObjName.parent_path().string() + "/" };
     const std::string mtlname{ pathAndObjName.stem().string() + ".mtl" };
 
-    const std::string a{ "Resources/3dModels/cube/untitled.mtl" };
+    //const std::string a{ "Resources/3dModels/cube/untitled.mtl" };
 
     // ファイルストリーム
     std::ifstream file;
     // マテリアルファイルを開く
-    file.open(a);
+    file.open(path + mtlname);
     // ファイルオープン失敗をチェック
     if (file.fail()) assert(0);
 

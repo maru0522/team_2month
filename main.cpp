@@ -57,6 +57,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
     // 使用する変数宣言
     Obj3d objT{ "Resources/3dModels/cube/untitled.obj" };
+    Obj3d objT2{ "Resources/3dModels/cube/untitled.obj" };
+
+    objT2.worldCoordinate_.position_ = { 15,0,0 };
 
     // ゲームループ
     while (true) {
@@ -72,6 +75,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         KEYS::Update();
 
         objT.Update();
+        objT2.Update();
 
         // 更新処理　ここまで
 #pragma endregion
@@ -84,6 +88,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         Obj3d::PreDraw();
 
         objT.Draw();
+        objT2.Draw();
 
         // 描画処理　ここまで
 
