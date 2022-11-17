@@ -196,3 +196,15 @@ const DirectX::XMFLOAT2& Input::XPad::GetRStickCustom(void)
 
     return { xState_.Gamepad.sThumbRX, xState_.Gamepad.sThumbRY };
 }
+
+void Input::XPad::Vibrate(int32_t lPower, int32_t rPower)
+{
+    XINPUT_VIBRATION v;
+
+    ZeroMemory(&v, sizeof(XINPUT_VIBRATION));
+
+    v.wLeftMotorSpeed = lPower;
+    v.wRightMotorSpeed = rPower;
+
+    XInputSetState(0, &v);
+}

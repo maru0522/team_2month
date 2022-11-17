@@ -97,6 +97,8 @@ namespace Input {
 
         static bool IsTriggerRT(void) { return xState_.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD; }
         static uint8_t GetRT(void) { return xState_.Gamepad.bRightTrigger; }
+
+        static void Vibrate(int32_t lPower = 0, int32_t rPower = 0); // 引数なしで振動停止
         
 #pragma region setter
         static void SetDeadZone(const CustomDeadZone& deadzone) { deadZone_ = deadzone; }
