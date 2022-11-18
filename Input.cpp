@@ -142,58 +142,78 @@ void Input::XPad::Update(void)
     }
 }
 
-const DirectX::XMFLOAT2& Input::XPad::GetLStick(void)
+const DirectX::XMFLOAT2 Input::XPad::GetLStick(void)
 {
+    DirectX::XMFLOAT2 tmp;
+
+    tmp.x = xState_.Gamepad.sThumbLX;
+    tmp.y = xState_.Gamepad.sThumbLY;
+
     if ((xState_.Gamepad.sThumbLX < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && xState_.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&
         (xState_.Gamepad.sThumbLY < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && xState_.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)) {
-        xState_.Gamepad.sThumbLX = 0;
-        xState_.Gamepad.sThumbLY = 0;
+        tmp.x = 0;
+        tmp.y = 0;
     }
 
-    return { xState_.Gamepad.sThumbLX, xState_.Gamepad.sThumbLY };
+    return { (float)tmp.x, (float)tmp.y };
 }
 
-const DirectX::XMFLOAT2& Input::XPad::GetLStickRaw(void)
+const DirectX::XMFLOAT2 Input::XPad::GetLStickRaw(void)
 {
-    return { xState_.Gamepad.sThumbLX, xState_.Gamepad.sThumbLY };
+    return { (float)xState_.Gamepad.sThumbLX, (float)xState_.Gamepad.sThumbLY };
 }
 
-const DirectX::XMFLOAT2& Input::XPad::GetLStickCustom(void)
+const DirectX::XMFLOAT2 Input::XPad::GetLStickCustom(void)
 {
+    DirectX::XMFLOAT2 tmp;
+
+    tmp.x = xState_.Gamepad.sThumbLX;
+    tmp.y = xState_.Gamepad.sThumbLY;
+
     if ((xState_.Gamepad.sThumbLX < deadZone_.xLeftValueX && xState_.Gamepad.sThumbLX > -deadZone_.xLeftValueX) &&
         (xState_.Gamepad.sThumbLY < deadZone_.xLeftValueY && xState_.Gamepad.sThumbLY > -deadZone_.xLeftValueY)) {
-        xState_.Gamepad.sThumbLX = 0;
-        xState_.Gamepad.sThumbLY = 0;
+        tmp.x = 0;
+        tmp.y = 0;
     }
 
-    return { xState_.Gamepad.sThumbLX, xState_.Gamepad.sThumbLY };
+    return { (float)tmp.x, (float)tmp.y };
 }
 
-const DirectX::XMFLOAT2& Input::XPad::GetRStick(void)
+const DirectX::XMFLOAT2 Input::XPad::GetRStick(void)
 {
+    DirectX::XMFLOAT2 tmp;
+
+    tmp.x = xState_.Gamepad.sThumbRX;
+    tmp.y = xState_.Gamepad.sThumbRY;
+
     if ((xState_.Gamepad.sThumbRX <  XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE && xState_.Gamepad.sThumbRX > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE) &&
         (xState_.Gamepad.sThumbRY <  XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE && xState_.Gamepad.sThumbRY > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)) {
-        xState_.Gamepad.sThumbRX = 0;
-        xState_.Gamepad.sThumbRY = 0;
+        tmp.x = 0;
+        tmp.y = 0;
     }
 
-    return { xState_.Gamepad.sThumbRX, xState_.Gamepad.sThumbRY };
+    return { (float)tmp.x, (float)tmp.y };
 }
 
-const DirectX::XMFLOAT2& Input::XPad::GetRStickRaw(void)
+const DirectX::XMFLOAT2 Input::XPad::GetRStickRaw(void)
 {
-    return { xState_.Gamepad.sThumbRX, xState_.Gamepad.sThumbRY };
+    return { (float)xState_.Gamepad.sThumbRX, (float)xState_.Gamepad.sThumbRY };
 }
 
-const DirectX::XMFLOAT2& Input::XPad::GetRStickCustom(void)
+const DirectX::XMFLOAT2 Input::XPad::GetRStickCustom(void)
 {
+    DirectX::XMFLOAT2 tmp;
+
+    tmp.x = xState_.Gamepad.sThumbRX;
+    tmp.y = xState_.Gamepad.sThumbRY;
+
     if ((xState_.Gamepad.sThumbRX < deadZone_.xRightValueX && xState_.Gamepad.sThumbRX > -deadZone_.xRightValueX) &&
         (xState_.Gamepad.sThumbRY <  deadZone_.xRightValueY && xState_.Gamepad.sThumbRY > -deadZone_.xRightValueY)) {
-        xState_.Gamepad.sThumbRX = 0;
-        xState_.Gamepad.sThumbRY = 0;
+        tmp.x = 0;
+        tmp.y = 0;
     }
 
-    return { xState_.Gamepad.sThumbRX, xState_.Gamepad.sThumbRY };
+    return { (float)tmp.x, (float)tmp.y };
 }
 
 void Input::XPad::Vibrate(int32_t lPower, int32_t rPower)

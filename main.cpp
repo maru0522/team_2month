@@ -56,9 +56,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion
 
+    Camera cameraT{};
+
     // 使用する変数宣言
-    Obj3d objT{ "Resources/3dModels/cube/untitled.obj" };
-    Obj3d objT2{ "Resources/3dModels/cube/untitled.obj" };
+    Obj3d objT{ "Resources/3dModels/cube/untitled.obj", &cameraT };
+    Obj3d objT2{ "Resources/3dModels/cube/untitled.obj", &cameraT };
 
     objT2.worldCoordinate_.position_ = { 15,0,0 };
 
@@ -75,6 +77,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         // キーボード情報の取得
         KEYS::Update();
         DPAD::Update();
+
+        cameraT.Update();
+
+        if (KEYS::IsDown(DIK_W)) {
+            cameraT.eye_.z -= 5;
+        }
+        if (KEYS::IsDown(DIK_S)) {
+            cameraT.eye_.z += 5;
+        }
+        if (KEYS::IsDown(DIK_A)) {
+            cameraT.eye_.x -= 5;
+        }
+        if (KEYS::IsDown(DIK_D)) {
+            cameraT.eye_.x += 5;
+        }
+
+        if (KEYS::IsDown(DIK_LEFTARROW)) {
+            objT.worldCoordinate_.position_.x -= 2;
+        }
+        if (KEYS::IsDown(DIK_RIGHTARROW)) {
+            objT.worldCoordinate_.position_.x += 2;
+        }
 
         objT.Update();
         objT2.Update();

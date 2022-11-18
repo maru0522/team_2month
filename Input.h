@@ -84,13 +84,13 @@ namespace Input {
         // 離された瞬間
         static bool IsReleased(uint8_t button) { return xStatePre_.Gamepad.wButtons == button && xState_.Gamepad.wButtons != button; }
 
-        static const DirectX::XMFLOAT2& GetLStick(void);
-        static const DirectX::XMFLOAT2& GetLStickRaw(void);
-        static const DirectX::XMFLOAT2& GetLStickCustom(void);
+        static const DirectX::XMFLOAT2 GetLStick(void);
+        static const DirectX::XMFLOAT2 GetLStickRaw(void);
+        static const DirectX::XMFLOAT2 GetLStickCustom(void);
 
-        static const DirectX::XMFLOAT2& GetRStick(void);
-        static const DirectX::XMFLOAT2& GetRStickRaw(void);
-        static const DirectX::XMFLOAT2& GetRStickCustom(void);
+        static const DirectX::XMFLOAT2 GetRStick(void);
+        static const DirectX::XMFLOAT2 GetRStickRaw(void);
+        static const DirectX::XMFLOAT2 GetRStickCustom(void);
 
         static bool IsTriggerLT(void) { return xState_.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD; }
         static uint8_t GetLT(void) { return xState_.Gamepad.bLeftTrigger; }

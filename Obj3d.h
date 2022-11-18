@@ -18,6 +18,7 @@ public: // Ã“I•Ï”
 
 public: // ŠÖ”
     Obj3d(const fsPath& pathAndObjName);
+    Obj3d(const fsPath& pathAndObjName, Camera* pCamera);
     void Update(void);
     void Draw(void);
 
