@@ -54,7 +54,7 @@ namespace Input {
         static BOOL __stdcall DeviceFindCallBack(const DIDEVICEINSTANCE* pdidInstance, void* pContext);
 
     private: // 変数
-        static ComPtr<IDirectInputDevice8> diPad_; // キーボードデバイス生成
+        static ComPtr<IDirectInputDevice8> diPad_; 
         static DIJOYSTATE diStatePre_;
         static DIJOYSTATE diState_;
         static bool isConnect_;
@@ -108,7 +108,6 @@ namespace Input {
         static CustomDeadZone deadZone_;
         static XINPUT_STATE xStatePre_;
         static XINPUT_STATE xState_;
-        static XINPUT_VIBRATION vibration_; // 未実装
         static bool isConnect_;
     };
 };

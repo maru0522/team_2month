@@ -21,7 +21,6 @@ bool Input::DIPad::isConnect_{ false };
 Input::XPad::CustomDeadZone Input::XPad::deadZone_{ 0 };
 XINPUT_STATE Input::XPad::xStatePre_{ 0 };
 XINPUT_STATE Input::XPad::xState_{ 0 };
-XINPUT_VIBRATION Input::XPad::vibration_{ 0 };
 bool Input::XPad::isConnect_{ false };
 #pragma endregion
 
