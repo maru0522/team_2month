@@ -52,15 +52,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     Texture::Load("Resources/mario.jpg");
 
     // 3d.obj読み込み
-    Model::Load("Resources/3dModels/cube/untitled.obj");
+    Model::Load("Resources/3dModels/cube/cube.obj");
 
 #pragma endregion
 
     Camera cameraT{};
 
     // 使用する変数宣言
-    Obj3d objT{ "Resources/3dModels/cube/untitled.obj", &cameraT };
-    Obj3d objT2{ "Resources/3dModels/cube/untitled.obj", &cameraT };
+    Obj3d objT{ "Resources/3dModels/cube/cube.obj", &cameraT };
+    Obj3d objT2{ "Resources/3dModels/cube/cube.obj", &cameraT };
 
     objT2.worldCoordinate_.position_ = { 15,0,0 };
 
@@ -81,10 +81,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         cameraT.Update();
 
         if (KEYS::IsDown(DIK_W)) {
-            cameraT.eye_.z -= 5;
+            cameraT.eye_.z += 5;
         }
         if (KEYS::IsDown(DIK_S)) {
-            cameraT.eye_.z += 5;
+            cameraT.eye_.z -= 5;
         }
         if (KEYS::IsDown(DIK_A)) {
             cameraT.eye_.x -= 5;
