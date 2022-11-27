@@ -14,7 +14,7 @@ class Texture
 {
 public: // 定義
     // mapの鍵と値
-    using TEXTURE_KEY = std::string;
+    using TEXTURE_KEY = std::experimental::filesystem::path;
     struct TEXTURE_VALUE
     {
         Microsoft::WRL::ComPtr<ID3D12Resource> buff_{ nullptr };
@@ -33,27 +33,27 @@ public: // 静的関数
     static void Initialize(void);
 
     // 読込 
-    static void Load(const std::string& relativePath, const std::string& fileName);
-    static void Load(const std::string& pathAndFileName);
-    static void Load(const std::string& relativePath, const std::string& fileName, const std::string& id);
-    static void LoadWithId(const std::string& pathAndFileName, const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
+    static void Load(const fsPath& relativePath, const fsPath& fileName);
+    static void Load(const fsPath& pathAndFileName);
+    static void Load(const fsPath& relativePath, const fsPath& fileName, const std::string& id);
+    static void LoadWithId(const fsPath& pathAndFileName, const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
 
     // 読込済のテクスチャを検索し返す
-    static const Texture GetTexture(const std::string& relativePath, const std::string& fileName);
-    static const Texture GetTexture(const std::string& pathAndFileName);
+    static const Texture GetTexture(const fsPath& relativePath, const fsPath& fileName);
+    static const Texture GetTexture(const fsPath& pathAndFileName);
     static const Texture GetTextureById(const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
 
     // 読込済のテクスチャの情報だけ返す
-    static const TEXTURE_VALUE GetTextureInfo(const std::string& relativePath, const std::string& fileName);
-    static const TEXTURE_VALUE GetTextureInfo(const std::string& pathAndFileName);
-    static const TEXTURE_VALUE GetTextureInfoById(const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
+    static const TEXTURE_VALUE* GetTextureInfo(const fsPath& relativePath, const fsPath& fileName);
+    static const TEXTURE_VALUE* GetTextureInfo(const fsPath& pathAndFileName);
+    static const TEXTURE_VALUE* GetTextureInfoById(const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
 
     // テクスチャのパスに名称を設定して呼び出しを簡略化。※あだ名付けてやるくらいの感覚でいい
-    static void CreateIdForTexPath(const std::string& relativePath, const std::string& fileName, const std::string& id);
-    static void CreateIdForTexPath(const std::string& pathAndFileName, const std::string& id);
+    static void CreateIdForTexPath(const fsPath& relativePath, const fsPath& fileName, const std::string& id);
+    static void CreateIdForTexPath(const fsPath& pathAndFileName, const std::string& id);
 
     // 設定したIDからMAP_KEYを取得する。publicにしてはいるが基本関数内で使う
-    static const TEXTURE_KEY GetTextureKey(const std::string& id);
+    static const TEXTURE_KEY* GetTextureKey(const std::string& id);
 
     // private変数: srvHeap を取得
     static ID3D12DescriptorHeap* GetSRVHeap(void) { return srvHeap_.Get(); }
@@ -82,6 +82,5 @@ private: // 変数
     //============================================//
 
 private: // 関数
-    void SetMapKey(std::string keyName);
-    void CheckPath(const std::string& relativePath, const std::string& fileName);
+    void SetMapKey(const fsPath& keyName);
 };

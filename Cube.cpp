@@ -8,7 +8,7 @@
 
 Cube::Cube(const std::string& pathAndFileName_or_Id)
 {
-    srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id).srvGpuHandle_;
+    srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id)->srvGpuHandle_;
 
     // 頂点データの設定
 #pragma region 頂点座標挿入
@@ -404,7 +404,7 @@ Cube::Cube(const std::string& pathAndFileName_or_Id)
 
 Cube::Cube(const std::string& pathAndFileName_or_Id, Camera* pCamera)
 {
-    srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id).srvGpuHandle_;
+    srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id)->srvGpuHandle_;
 
     pCamera_ = pCamera;
 

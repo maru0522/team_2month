@@ -10,7 +10,7 @@ Obj3d::Obj3d(void)
     model_.SetMODEL_VALUE(*Model::GetMODEL_VALUE("Resources/3dModels/cube/cube.obj")); // ‚È‚ñ‚©‚±‚ê¦‚­ŠëŒ¯‚È“n‚µ•û‚È‹C‚ª‚·‚é
 
     // ‚±‚±‚ÅŽ~‚Ü‚Á‚Ä‚é‚È‚ç.mtl“à‚Å³‚µ‚¢‰æ‘œ‚ª‹L‚³‚ê‚Ä‚¢‚È‚¢‰Â”\«B
-    srvGpuHandleCopy_ = Texture::GetTextureInfo(model_.GetModelValueInfo()->material_.texKey).srvGpuHandle_;
+    srvGpuHandleCopy_ = Texture::GetTextureInfo(model_.GetModelValueInfo()->material_.texKey)->srvGpuHandle_;
 }
 
 Obj3d::Obj3d(const fsPath& pathAndObjName)
@@ -19,7 +19,7 @@ Obj3d::Obj3d(const fsPath& pathAndObjName)
     model_.SetMODEL_VALUE(*Model::GetMODEL_VALUE(pathAndObjName)); // ‚È‚ñ‚©‚±‚ê¦‚­ŠëŒ¯‚È“n‚µ•û‚È‹C‚ª‚·‚é
 
     // ‚±‚±‚ÅŽ~‚Ü‚Á‚Ä‚é‚È‚ç.mtl“à‚Å³‚µ‚¢‰æ‘œ‚ª‹L‚³‚ê‚Ä‚¢‚È‚¢‰Â”\«B
-    srvGpuHandleCopy_ = Texture::GetTextureInfo(model_.GetModelValueInfo()->material_.texKey).srvGpuHandle_;
+    srvGpuHandleCopy_ = Texture::GetTextureInfo(model_.GetModelValueInfo()->material_.texKey)->srvGpuHandle_;
 }
 
 Obj3d::Obj3d(const fsPath& pathAndObjName, Camera* pCamera)
@@ -31,7 +31,7 @@ Obj3d::Obj3d(const fsPath& pathAndObjName, Camera* pCamera)
     model_.SetMODEL_VALUE(*Model::GetMODEL_VALUE(pathAndObjName)); // ‚È‚ñ‚©‚±‚ê¦‚­ŠëŒ¯‚È“n‚µ•û‚È‹C‚ª‚·‚é
 
     // ‚±‚±‚ÅŽ~‚Ü‚Á‚Ä‚é‚È‚ç.mtl“à‚Å³‚µ‚¢‰æ‘œ‚ª‹L‚³‚ê‚Ä‚¢‚È‚¢‰Â”\«B
-    srvGpuHandleCopy_ = Texture::GetTextureInfo(model_.GetModelValueInfo()->material_.texKey).srvGpuHandle_;
+    srvGpuHandleCopy_ = Texture::GetTextureInfo(model_.GetModelValueInfo()->material_.texKey)->srvGpuHandle_;
 }
 
 void Obj3d::Update(void)

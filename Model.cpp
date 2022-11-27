@@ -296,7 +296,7 @@ void Model::LoadMaterial(Model& model, const fsPath& pathAndObjName)
 
             // テクスチャのファイル名読み込み
             line_stream >> tmpName;
-            model.info_.material_.texKey = path + tmpName;
+            model.info_.material_.texKey = pathAndObjName.parent_path() / tmpName;
 
             // テクスチャ読み込み
             Texture::Load(model.info_.material_.texKey);

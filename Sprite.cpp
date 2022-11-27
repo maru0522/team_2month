@@ -11,7 +11,7 @@
 Sprite::Sprite(const std::string& relativePath, const std::string& fileName)
 {
 #pragma region gpuHandleの受け取り
-    srvGpuHandleCopy_ = Texture::GetTextureInfo(relativePath, fileName).srvGpuHandle_;
+    srvGpuHandleCopy_ = Texture::GetTextureInfo(relativePath, fileName)->srvGpuHandle_;
 #pragma endregion
 
 #pragma region 頂点情報処理
@@ -285,11 +285,11 @@ Sprite::Sprite(const std::string& pathAndFileName_or_Id, CMode mode)
 #pragma region gpuHandleの受け取り
     if (!static_cast<int>(CMode::PATH)) {
         // コンストラクタモードがPATHの場合
-        srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id).srvGpuHandle_;
+        srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id)->srvGpuHandle_;
     }
     else {
         // コンストラクタモードがIDの場合
-        srvGpuHandleCopy_ = Texture::GetTextureInfoById(pathAndFileName_or_Id).srvGpuHandle_;
+        srvGpuHandleCopy_ = Texture::GetTextureInfoById(pathAndFileName_or_Id)->srvGpuHandle_;
     }
 #pragma endregion
 
