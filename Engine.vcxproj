@@ -158,6 +158,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Obj3d.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SharedStruct.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Obj3d.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SharedStruct.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />

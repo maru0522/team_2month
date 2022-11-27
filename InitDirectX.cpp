@@ -16,7 +16,9 @@ void InitDirectX::Initialize(void)
 
 	DebugLayer();       // デバッグレイヤーをオン
 	DXGIDevice();
+#ifdef _DEBUG
 	SuppressErrors();   // 一部のエラーを抑制
+#endif
 	Commands();
 	SwapChain();
 	RTVDescHeap();

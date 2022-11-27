@@ -5,10 +5,14 @@
 #include <array>
 #include <map>
 #include <stdexcept>
+#if _MSC_VER > 1922 && !defined(_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#endif
+#include <experimental/filesystem>
 
 class Texture
 {
-public: // 静的関数
+public: // 定義
     // mapの鍵と値
     using TEXTURE_KEY = std::string;
     struct TEXTURE_VALUE
@@ -19,6 +23,11 @@ public: // 静的関数
     };
     // mapの鍵のID
     using TEX_KEY_ID = std::string;
+
+private: // 定義
+    using fsPath = std::experimental::filesystem::path;
+
+public: // 静的関数
 
     // srvの初期化
     static void Initialize(void);

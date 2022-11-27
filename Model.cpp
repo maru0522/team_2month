@@ -229,9 +229,9 @@ void Model::Load(const fsPath& pathAndObjName)
     models_.insert_or_assign(tmp.name_, tmp.info_); // ‘ã“ü‚Å‚ ‚Á‚Ä‚à‘S‚­“¯‚¶VALUE‚ª“ü‚é‚Æ‚Ív‚í‚ê‚éB
 }
 
-const Model::MODEL_VALUE Model::GetMODEL_VALUE(const fsPath& pathAndObjName)
+const Model::MODEL_VALUE* Model::GetMODEL_VALUE(const fsPath& pathAndObjName)
 {
-    return models_.at(pathAndObjName);
+    return &models_.at(pathAndObjName);
 }
 
 void Model::LoadMaterial(Model& model, const fsPath& pathAndObjName)

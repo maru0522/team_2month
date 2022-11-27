@@ -76,13 +76,13 @@ namespace Input {
         static void Update(void);
 
         // 押した瞬間
-        static bool IsTrigger(uint8_t button) { return xStatePre_.Gamepad.wButtons != button && xState_.Gamepad.wButtons == button; }
+        static bool IsTrigger(uint16_t button) { return xStatePre_.Gamepad.wButtons != button && xState_.Gamepad.wButtons == button; }
 
         // 押されているとき
-        static bool IsDown(uint8_t button) { return xState_.Gamepad.wButtons == button; }
+        static bool IsDown(uint16_t button) { return xState_.Gamepad.wButtons == button; }
 
         // 離された瞬間
-        static bool IsReleased(uint8_t button) { return xStatePre_.Gamepad.wButtons == button && xState_.Gamepad.wButtons != button; }
+        static bool IsReleased(uint16_t button) { return xStatePre_.Gamepad.wButtons == button && xState_.Gamepad.wButtons != button; }
 
         static const DirectX::XMFLOAT2 GetLStick(void);
         static const DirectX::XMFLOAT2 GetLStickRaw(void);

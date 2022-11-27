@@ -17,16 +17,15 @@ public: // Ã“I•Ï”
     static GraphicsPipeline* graphicsPipeline_;
 
 public: // ŠÖ”
+    Obj3d(void); // ”z—ñ—p
     Obj3d(const fsPath& pathAndObjName);
     Obj3d(const fsPath& pathAndObjName, Camera* pCamera);
     void Update(void);
     void Draw(void);
 
-
+    void SetCamera(Camera* pCamera) { worldCoordinate_.SetCamera(pCamera); }
 public: // •Ï”
-    Camera* pCamera_{ nullptr };
-
-    WorldCoordinate worldCoordinate_{ pCamera_ };
+    WorldCoordinate worldCoordinate_{};
 
 private: // •Ï”
     Model model_{};

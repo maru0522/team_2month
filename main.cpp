@@ -59,6 +59,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     Camera cameraT{};
 
     // 使用する変数宣言
+    Sprite spriteT{ "Resources/reimu.png" ,CMode::PATH };
+
     Obj3d objT{ "Resources/3dModels/cube/cube.obj", &cameraT };
     Obj3d objT2{ "Resources/3dModels/cube/cube.obj", &cameraT };
 
@@ -100,6 +102,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
             objT.worldCoordinate_.position_.x += 2;
         }
 
+        spriteT.Update();
         objT.Update();
         objT2.Update();
 
@@ -109,12 +112,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #pragma region 描画開始
         iDX->PreDraw();
 #pragma endregion
+        // SpriteのDraw OK
 
         // 描画処理　ここから
         Obj3d::PreDraw();
 
+        // SpriteのDraw NG
+
         objT.Draw();
         objT2.Draw();
+
+        // SpriteのDraw OK
+        spriteT.Draw();
 
         // 描画処理　ここまで
 
