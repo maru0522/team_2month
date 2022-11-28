@@ -38,12 +38,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     KEYS::Initialize();
     DPAD::Initialize();
 
-#pragma region 描画初期化処理
     // graphicsPipeline初期化
     GraphicsPipeline::Initialize();
-
-    Obj3d::Initialize();
-#pragma endregion
 
 #pragma region リソース読み込み
     // テクスチャ読み込み

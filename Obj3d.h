@@ -10,7 +10,6 @@ private: // ’è‹`
     using fsPath = std::experimental::filesystem::path;
 
 public: // Ã“IŠÖ”
-    static void Initialize(void);
     static void PreDraw(void);
 
 public: // Ã“I•Ï”

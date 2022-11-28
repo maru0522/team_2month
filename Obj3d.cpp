@@ -2,7 +2,7 @@
 #include "Model.h"
 #include "InitDirectX.h"
 
-GraphicsPipeline* Obj3d::graphicsPipeline_;
+GraphicsPipeline* Obj3d::graphicsPipeline_{ GraphicsPipeline::GetGraphicsPipeLine3d() };
 
 Obj3d::Obj3d(void)
 {
@@ -38,11 +38,6 @@ void Obj3d::Update(void)
 {
     model_.Update();
     worldCoordinate_.Update();
-}
-
-void Obj3d::Initialize(void)
-{
-    graphicsPipeline_ = GraphicsPipeline::GetGraphicsPipeLine3d();
 }
 
 void Obj3d::PreDraw(void)
