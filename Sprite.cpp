@@ -34,12 +34,14 @@ Sprite::Sprite(const fsPath& relativePath, const fsPath& fileName)
     srvGpuHandleCopy_ = Texture::GetTextureInfo(relativePath / fileName)->srvGpuHandle_;
 
     ConstructorCommon();
+    SetOriginalSize(relativePath / fileName, CMode::PATH);
+    AdjustTextureSize();
 }
 
 Sprite::Sprite(const fsPath& pathAndFileName_or_Id, CMode mode)
 {
 #pragma region gpuHandleの受け取り
-    if (!static_cast<int>(CMode::PATH)) {
+    if (!static_cast<int>(mode)) {
         // コンストラクタモードがPATHの場合
         srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id)->srvGpuHandle_;
     }
@@ -50,6 +52,8 @@ Sprite::Sprite(const fsPath& pathAndFileName_or_Id, CMode mode)
 #pragma endregion
 
     ConstructorCommon();
+    SetOriginalSize(pathAndFileName_or_Id, mode);
+    AdjustTextureSize();
 }
 
 void Sprite::Update(void)
@@ -246,6 +250,19 @@ void Sprite::TransferVertex(void)
     assert(SUCCEEDED(r));
 #endif // _DEBUG
 
+    if (!cutLength_.x) cutLength_.x = cutEndPoint_.x - cutStartPoint_.x;
+    if (!cutLength_.y) cutLength_.y = cutEndPoint_.y - cutStartPoint_.y;
+
+    float_t tex_left = cutStartPoint_.x / originalSize_.x;
+    float_t tex_rigit = (cutStartPoint_.x + cutLength_.x) / originalSize_.x;
+    float_t tex_top = cutStartPoint_.y / originalSize_.y;
+    float_t tex_bottom = (cutStartPoint_.y + cutLength_.y) / originalSize_.y;
+
+    vertices_.at(static_cast<int>(VertNum::LeftBottom)).uv_ = { tex_left,tex_bottom };
+    vertices_.at(static_cast<int>(VertNum::LeftTop)).uv_ = { tex_left, tex_top };
+    vertices_.at(static_cast<int>(VertNum::RightBottom)).uv_ = { tex_rigit,tex_bottom };
+    vertices_.at(static_cast<int>(VertNum::RightTop)).uv_ = { tex_rigit,tex_top };
+
     // 座標のコピー
     std::copy(vertices_.begin(), vertices_.end(), vertMap);
 
@@ -342,4 +359,23 @@ void Sprite::ConstructorCommon(void)
 #pragma endregion
 
     SetColor({ 1.0f,1.0f,1.0f,1.0f });
+}
+
+void Sprite::AdjustTextureSize(void)
+{
+    cutLength_ = originalSize_;
+    size_ = cutLength_;
+}
+
+void Sprite::SetOriginalSize(const fsPath& path, CMode mode)
+{
+    if (!static_cast<int>(mode)) {
+        // mode == PATH
+        originalSize_.x = (float_t)Texture::GetTextureInfo(path)->buff_->GetDesc().Width;
+        originalSize_.y = (float_t)Texture::GetTextureInfo(path)->buff_->GetDesc().Height;
+    }
+    else {
+        originalSize_.x = (float_t)Texture::GetTextureInfoById(path.string())->buff_->GetDesc().Width;
+        originalSize_.y = (float_t)Texture::GetTextureInfoById(path.string())->buff_->GetDesc().Height;
+    }
 }

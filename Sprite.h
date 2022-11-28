@@ -88,6 +88,13 @@ public: // 関数
     // アンカーポイントを設定
     void SetAnchorPoint(const DirectX::XMFLOAT2& anchorPoint) { anchorPoint_ = anchorPoint; }
 
+    // 切り出し時の始点を設定
+    void SetCutStartPoint(const DirectX::XMFLOAT2& cutStartPoint) { cutStartPoint_ = cutStartPoint; }
+    // 切り出し時の終点を設定（サイズとどちらかで良い)
+    void SetCutEndPoint(const DirectX::XMFLOAT2& cutEndPoint) { cutEndPoint_ = cutEndPoint; }
+    // 切り出し時のサイズを設定（終点とどちらかで良い）
+    void SetCutLength(const DirectX::XMFLOAT2& cutLength) { cutLength_ = cutLength; }
+
     // フリップを設定
     void SetFlipX(bool isFlipX) { isFlipX_ = isFlipX; } // 左右フリップ
     void SetFlipY(bool isFlipY) { isFlipY_ = isFlipY; } // 上下フリップ
@@ -110,6 +117,13 @@ public: // 関数
     // アンカーポイントを取得
     const DirectX::XMFLOAT2& GetAnchorPoint(void) const { return anchorPoint_; }
 
+    // 切り出し時の始点を取得
+    const DirectX::XMFLOAT2& GetCutStartPoint(void) const { return cutStartPoint_; }
+    // 切り出し時の終点を取得
+    const DirectX::XMFLOAT2& GetCutEndPoint(void) const { return cutEndPoint_; }
+    // 切り出し時のサイズを取得
+    const DirectX::XMFLOAT2& GetCutLength(void) const { return cutLength_; }
+
     // フリップを取得
     bool GetFlipX(void) { return isFlipX_; } // 左右フリップ
     bool GetFlipY(void) { return isFlipY_; } // 上下フリップ
@@ -123,6 +137,8 @@ private: // 関数
     void TransferVertex(void);
     void TransferMatrix(void);
 
+    void SetOriginalSize(const fsPath& path, CMode mode);
+    void AdjustTextureSize(void);
     void SetCBTransform(void); // CBTrans
 
 private: // 変数
@@ -131,6 +147,7 @@ private: // 変数
 
     // テクスチャ情報の引き出しハンドル
     D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandleCopy_{};
+    DirectX::XMFLOAT2 originalSize_{}; // テクスチャの全体サイズ
 
 #pragma region 頂点
     std::array<VertexSprite_st, 4> vertices_{}; // 頂点データ
@@ -151,8 +168,12 @@ private: // 変数
     // Spriteのもつ情報
     DirectX::XMFLOAT2 position_{ 0.0f, 0.0f }; // 座標
     float_t rotation_{ 0.0f }; // 回転角
-    DirectX::XMFLOAT2 size_{ 100.0f,100.0f }; //表示サイズ（ピクセル）
-    DirectX::XMFLOAT2 anchorPoint_{ 0.0f,0.0f }; // アンカーポイント
+    DirectX::XMFLOAT2 size_{ 0.0f, 0.0f }; //表示サイズ（ピクセル）
+    DirectX::XMFLOAT2 anchorPoint_{ 0.0f, 0.0f }; // アンカーポイント
+    DirectX::XMFLOAT2 cutStartPoint_{ 0.0f, 0.0f }; // 切り出し時の原点（左上）
+    DirectX::XMFLOAT2 cutEndPoint_{ 0.0f, 0.0f }; // 切り出し時の原点（右下)
+    DirectX::XMFLOAT2 cutLength_{ 0.0f, 0.0f }; // 切り出し時のサイズ
+
     bool isFlipX_{ false }; // 左右フリップ
     bool isFlipY_{ false }; // 上下フリップ
     bool isInvisible_{ false }; //非表示の有無
