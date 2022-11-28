@@ -23,6 +23,11 @@ public: // 関数
     void Draw(void);
 
     void SetCamera(Camera* pCamera) { worldCoordinate_.SetCamera(pCamera); }
+
+    // Texture::Load("パス")で読み込んだ"パス"を書き込む
+    void SetTexture(const fsPath& pathAndFileName);
+    void SetTextureById(const std::string& id);
+
 public: // 変数
     WorldCoordinate worldCoordinate_{};
 

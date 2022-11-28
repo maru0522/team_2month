@@ -61,6 +61,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     Obj3d objT2{ "Resources/3dModels/cube/cube.obj", &cameraT };
 
     objT2.worldCoordinate_.position_ = { 15,0,0 };
+    objT2.SetTexture("Resources/reimu.png");
 
     // ゲームループ
     while (true) {

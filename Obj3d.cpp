@@ -88,3 +88,13 @@ void Obj3d::Draw(void)
     // 描画コマンドリスト
     iDX->GetCommandList()->DrawIndexedInstanced((uint32_t)model_.GetModelValueInfo()->indices_.size(), 1, 0, 0, 0);
 }
+
+void Obj3d::SetTexture(const fsPath& pathAndFileName)
+{
+    srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName)->srvGpuHandle_;
+}
+
+void Obj3d::SetTextureById(const std::string& id)
+{
+    srvGpuHandleCopy_ = Texture::GetTextureInfoById(id)->srvGpuHandle_;
+}
