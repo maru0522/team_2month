@@ -112,17 +112,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #pragma region 描画開始
         iDX->PreDraw();
 #pragma endregion
-        // SpriteのDraw OK
-
         // 描画処理　ここから
         Obj3d::PreDraw();
-
-        // SpriteのDraw NG
 
         objT.Draw();
         objT2.Draw();
 
-        // SpriteのDraw OK
+        Sprite::PreDraw();
         spriteT.Draw();
 
         // 描画処理　ここまで

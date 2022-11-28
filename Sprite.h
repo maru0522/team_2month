@@ -9,6 +9,7 @@
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #endif
 #include <experimental/filesystem>
+#include "GraphicsPipeline.h"
 #include <d3d12.h>
 
 #pragma comment(lib,"d3d12.lib")
@@ -51,6 +52,12 @@ private: // 定義
     };
 
     using fsPath = std::experimental::filesystem::path;
+
+public: // 静的関数
+    static void PreDraw(void);
+
+private: // 静的変数
+    static GraphicsPipeline* graphicsPipeline_;
 
 public: // 関数
     Sprite(const fsPath& relativePath, const fsPath& fileName);
@@ -115,7 +122,6 @@ private: // 関数
     void TransferMatrix(void);
 
     void SetCBTransform(void); // CBTrans
-    void SetCommandsBeforeDraw(void); // 共通設定のコマンドリスト積み込み
 
 private: // 変数
     // エイリアステンプレート
@@ -129,10 +135,6 @@ private: // 変数
     ComPtr<ID3D12Resource> vertBuff_{ nullptr }; // 頂点バッファの生成
     D3D12_VERTEX_BUFFER_VIEW vbView_{}; // 頂点バッファビューの作成
 #pragma endregion
-
-    ComPtr<ID3D12RootSignature> rootSignature_; // ルートシグネチャ
-    D3D12_GRAPHICS_PIPELINE_STATE_DESC pipelineDesc_; // グラフィックスパイプライン設定
-    ComPtr<ID3D12PipelineState> pipelineState_; // パイプランステートの生成
 
     // 定数バッファ
     ConstBuffer<CBDataMaterial_st> cbMaterial_{};
