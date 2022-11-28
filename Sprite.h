@@ -5,6 +5,10 @@
 #include "ConstBuffer.h"
 #include <string>
 #include "Window.h"
+#if _MSC_VER > 1922 && !defined(_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#endif
+#include <experimental/filesystem>
 #include <d3d12.h>
 
 #pragma comment(lib,"d3d12.lib")
@@ -46,9 +50,11 @@ private: // íËã`
         RightTop        // âEè„
     };
 
+    using fsPath = std::experimental::filesystem::path;
+
 public: // ä÷êî
-    Sprite(const std::string& relativePath, const std::string& fileName);
-    Sprite(const std::string& pathAndFileName_or_Id, CMode mode);
+    Sprite(const fsPath& relativePath, const fsPath& fileName);
+    Sprite(const fsPath& pathAndFileName_or_Id, CMode mode);
     void Update(void);
     void Draw(void);
 

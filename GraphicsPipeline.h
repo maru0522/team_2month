@@ -28,7 +28,7 @@ private: // Ã“I•Ï”
     static GraphicsPipeline gPipeline3d_;
 
 public: // ŠÖ”
-    GraphicsPipeline() {}
+    GraphicsPipeline() {} // Ã“I•Ï”—p“r
     GraphicsPipeline(GPType type);
 
 #pragma region getter
