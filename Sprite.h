@@ -118,6 +118,8 @@ public: // ä÷êî
     bool GetInvisible(void) { return isInvisible_; }
 #pragma endregion
 private: // ä÷êî
+    void ConstructorCommon(void);
+
     void TransferVertex(void);
     void TransferMatrix(void);
 
