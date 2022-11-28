@@ -9,10 +9,6 @@ public: //@ŠÖ”
 
 class SceneManager
 {
-public: // ’è‹`
-private: // singleton
-    SceneManager(void) = default;
-    ~SceneManager(void) = default;
-    SceneManager(const SceneManager& ins) = delete;
-    SceneManager& operator=(const SceneManager& ins) = delete;
+public: // Ã“IŠÖ”
+    template<class Scene> static void Transition(void);
 };
