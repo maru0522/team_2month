@@ -171,7 +171,7 @@ private: // 変数
     DirectX::XMFLOAT2 size_{ 0.0f, 0.0f }; //表示サイズ（ピクセル）
     DirectX::XMFLOAT2 anchorPoint_{ 0.0f, 0.0f }; // アンカーポイント
     DirectX::XMFLOAT2 cutStartPoint_{ 0.0f, 0.0f }; // 切り出し時の原点（左上）
-    DirectX::XMFLOAT2 cutEndPoint_{ 0.0f, 0.0f }; // 切り出し時の原点（右下)
+    DirectX::XMFLOAT2 cutEndPoint_{ 0.0f, 0.0f }; // 切り出し時の終点（右下)
     DirectX::XMFLOAT2 cutLength_{ 0.0f, 0.0f }; // 切り出し時のサイズ
 
     bool isFlipX_{ false }; // 左右フリップ

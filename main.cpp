@@ -23,6 +23,8 @@ using namespace DirectX;
 #include "Model.h"
 #include "Obj3d.h"
 
+#include "ImGui/imgui.h"
+
 using namespace Microsoft::WRL;
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -56,7 +58,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
     // 使用する変数宣言
     Sprite spriteT{ "Resources/reimu.png" ,CMode::PATH };
-    spriteT.SetSize({100.0f, 100.0f});
+    //spriteT.SetSize({100.0f, 100.0f});
 
     Obj3d objT{ "Resources/3dModels/cube/cube.obj", &cameraT };
     Obj3d objT2{ "Resources/3dModels/cube/cube.obj", &cameraT };

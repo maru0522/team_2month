@@ -13,38 +13,50 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル\base">
-      <UniqueIdentifier>{6e74f6e1-bf99-4361-a4fb-8a3ddd6cda8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\base">
-      <UniqueIdentifier>{c1683018-51dc-4601-a2b7-ddd81c97d6d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Resource">
       <UniqueIdentifier>{831a65b3-bab0-437b-b86e-3ff7637b9b49}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Resource">
       <UniqueIdentifier>{d390da2b-0705-49ca-8832-1cbad99b2d2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\object">
-      <UniqueIdentifier>{6d6c8107-95d3-44c2-b027-88358890eeb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\object\2d">
-      <UniqueIdentifier>{ca88b857-684b-4fae-a9d1-f847023fa16d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\object\3d">
-      <UniqueIdentifier>{c0ad25a2-b40b-4eb1-bde0-e134dd505c61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\object">
-      <UniqueIdentifier>{da1920c6-d477-4bdc-ab90-32a611e86d41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\object\3d">
-      <UniqueIdentifier>{17b32238-6a64-4172-bf6d-8b3866c8b3c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\object\2d">
-      <UniqueIdentifier>{33f2f4f6-8429-42fd-9f14-625d13345626}</UniqueIdentifier>
-    </Filter>
     <Filter Include="リソース ファイル\shader">
       <UniqueIdentifier>{e3667543-9039-4809-bddd-a57c5f67affa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object">
+      <UniqueIdentifier>{da1920c6-d477-4bdc-ab90-32a611e86d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\3d">
+      <UniqueIdentifier>{17b32238-6a64-4172-bf6d-8b3866c8b3c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\2d">
+      <UniqueIdentifier>{33f2f4f6-8429-42fd-9f14-625d13345626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Object\elem">
+      <UniqueIdentifier>{ebcae5f9-1690-4e99-a478-8919935e14b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MakeGame">
+      <UniqueIdentifier>{1187e140-c136-4337-a213-3f85e6d9a584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base">
+      <UniqueIdentifier>{c1683018-51dc-4601-a2b7-ddd81c97d6d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Base">
+      <UniqueIdentifier>{6e74f6e1-bf99-4361-a4fb-8a3ddd6cda8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object">
+      <UniqueIdentifier>{6d6c8107-95d3-44c2-b027-88358890eeb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\2d">
+      <UniqueIdentifier>{ca88b857-684b-4fae-a9d1-f847023fa16d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\3d">
+      <UniqueIdentifier>{c0ad25a2-b40b-4eb1-bde0-e134dd505c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\elem">
+      <UniqueIdentifier>{f0d46203-b032-427f-9da2-9a0c159c3e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MakeGame">
+      <UniqueIdentifier>{d3e6502a-f343-4e6c-91ef-1361126ce9c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,55 +64,58 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="CtrlFPS.cpp">
-      <Filter>ソース ファイル\base</Filter>
+      <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
     <ClCompile Include="InitDirectX.cpp">
-      <Filter>ソース ファイル\base</Filter>
+      <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
-      <Filter>ソース ファイル\base</Filter>
+      <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル\object\3d</Filter>
+      <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
-      <Filter>ソース ファイル\object\3d</Filter>
+      <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル\object\2d</Filter>
+      <Filter>ソース ファイル\Object\2d</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル\object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="AssimpLoader.cpp">
-      <Filter>ソース ファイル\object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="SharedStruct.cpp">
-      <Filter>ソース ファイル\object</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldCoordinate.cpp">
-      <Filter>ソース ファイル\object</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsPipeline.cpp">
-      <Filter>ソース ファイル\object</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>ソース ファイル\base</Filter>
-    </ClCompile>
     <ClCompile Include="Obj3d.cpp">
-      <Filter>ソース ファイル\object\3d</Filter>
+      <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>ソース ファイル\base</Filter>
+      <Filter>ソース ファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>ソース ファイル\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpLoader.cpp">
+      <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
-      <Filter>ソース ファイル\base</Filter>
+      <Filter>ソース ファイル\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldCoordinate.cpp">
+      <Filter>ソース ファイル\Object\elem</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedStruct.cpp">
+      <Filter>ソース ファイル\Object\elem</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsPipeline.cpp">
+      <Filter>ソース ファイル\Object\elem</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\MakeGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>ソース ファイル\MakeGame</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiController.cpp">
+      <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,58 +146,61 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
-      <Filter>ヘッダー ファイル\base</Filter>
+      <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
     <ClInclude Include="CtrlFPS.h">
-      <Filter>ヘッダー ファイル\base</Filter>
+      <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
     <ClInclude Include="InitDirectX.h">
-      <Filter>ヘッダー ファイル\base</Filter>
+      <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル\object\2d</Filter>
+      <Filter>ヘッダー ファイル\Object\2d</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル\object\3d</Filter>
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>ヘッダー ファイル\object\3d</Filter>
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>ヘッダー ファイル\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>ヘッダー ファイル\object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="AssimpLoader.h">
-      <Filter>ヘッダー ファイル\object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="SharedStruct.h">
-      <Filter>ヘッダー ファイル\object</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldCoordinate.h">
-      <Filter>ヘッダー ファイル\object</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsPipeline.h">
-      <Filter>ヘッダー ファイル\object</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstBuffer.h">
-      <Filter>ヘッダー ファイル\object</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>ヘッダー ファイル\base</Filter>
-    </ClInclude>
     <ClInclude Include="Obj3d.h">
-      <Filter>ヘッダー ファイル\object\3d</Filter>
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>ヘッダー ファイル\base</Filter>
+      <Filter>ヘッダー ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>ヘッダー ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpLoader.h">
+      <Filter>ヘッダー ファイル\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Audio.h">
-      <Filter>ヘッダー ファイル\base</Filter>
+      <Filter>ヘッダー ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstBuffer.h">
+      <Filter>ヘッダー ファイル\Object\elem</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsPipeline.h">
+      <Filter>ヘッダー ファイル\Object\elem</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedStruct.h">
+      <Filter>ヘッダー ファイル\Object\elem</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldCoordinate.h">
+      <Filter>ヘッダー ファイル\Object\elem</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\MakeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>ヘッダー ファイル\MakeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiController.h">
+      <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
