@@ -10,7 +10,7 @@ inline int32_t Util::Timer::GetNowCount(void)
     // template‚ÌŒ^‚Í[ŠÔŠÔŠu‚ğ‚ğ•\‚·Œ^]‚Å‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
     // ref: https://cpprefjp.github.io/reference/chrono/duration_aliases.html
 
-    return static_cast<int32_t>(duration_cast<TimeUnit>(steady_clock::now().time_since_epoch()).count());
+    return (int32_t)duration_cast<TimeUnit>(steady_clock::now().time_since_epoch()).count();
 }
 
 void Util::Timer::Start(float_t endTime)

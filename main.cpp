@@ -23,12 +23,13 @@ using namespace DirectX;
 #include "Model.h"
 #include "Obj3d.h"
 
-#include "ImGui/imgui.h"
+#include "ImGuiController.h"
 
 using namespace Microsoft::WRL;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+#pragma region 基礎機能の初期化
     // WinAPI初期化
     Window* wnd = Window::GetInstance();
 
@@ -42,6 +43,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
     // graphicsPipeline初期化
     GraphicsPipeline::Initialize();
+
+    std::unique_ptr<ImGuiController> imGuiCtrller = std::make_unique<ImGuiController>();
+#pragma endregion
 
 #pragma region リソース読み込み
     // テクスチャ読み込み
@@ -59,6 +63,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     // 使用する変数宣言
     Sprite spriteT{ "Resources/reimu.png" ,CMode::PATH };
     //spriteT.SetSize({100.0f, 100.0f});
+    spriteT.SetPosition({ 100,100 });
 
     Obj3d objT{ "Resources/3dModels/cube/cube.obj", &cameraT };
     Obj3d objT2{ "Resources/3dModels/cube/cube.obj", &cameraT };
@@ -106,6 +111,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         objT.Update();
         objT2.Update();
 
+        //imGuiCtrller->Update();
+        static float xy[2]{spriteT.GetPosition().x,spriteT.GetPosition().y };
+
+        imGuiCtrller->Begin();
+        imGuiCtrller->SpriteSlider(xy);
+        imGuiCtrller->End();
+
+        spriteT.SetPosition({ xy[0], xy[1] });
         // 更新処理　ここまで
 #pragma endregion
 
@@ -121,6 +134,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
         Sprite::PreDraw();
         spriteT.Draw();
 
+        imGuiCtrller->Draw();
         // 描画処理　ここまで
 
 #pragma region 描画終了

@@ -18,6 +18,7 @@ public: // 関数
 	// getter
 	ID3D12Device* GetDevice(void) { return device_.Get(); }
 	ID3D12GraphicsCommandList* GetCommandList(void) { return commandList_.Get(); }
+    size_t GetBackBufferCount() const { return backBuffers_.size(); }
 
 private: // 変数
 	// エイリアステンプレート
@@ -59,7 +60,7 @@ private: // 変数
 #pragma endregion
 
 	// Initialize() で使用
-	CtrlFPS fpsCtrler_; // FPSを制御
+	CtrlFPS fpsCtrller_; // FPSを制御
 
 private: // 関数
 	void DebugLayer(void);

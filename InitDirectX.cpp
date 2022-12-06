@@ -12,7 +12,7 @@ InitDirectX* InitDirectX::GetInstance(void)
 void InitDirectX::Initialize(void)
 {
 	// FPS固定化処理初期化
-	fpsCtrler_.Initialize();
+	fpsCtrller_.Initialize();
 
 	DebugLayer();       // デバッグレイヤーをオン
 	DXGIDevice();
@@ -134,7 +134,7 @@ void InitDirectX::PostDraw(void)
 	}
 
 	// FPS固定
-	fpsCtrler_.Update();
+	fpsCtrller_.Update();
 
 	// キューをクリア
 	r = cmdAllocator_->Reset();
