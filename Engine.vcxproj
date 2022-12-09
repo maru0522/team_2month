@@ -151,7 +151,9 @@
   <ItemGroup>
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="BasicFrame.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GraphicsPipeline.cpp" />
     <ClCompile Include="ImGuiController.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -224,9 +226,11 @@
   <ItemGroup>
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="BasicFrame.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ConstBuffer.h" />
     <ClInclude Include="CtrlFPS.h" />
+    <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GraphicsPipeline.h" />
     <ClInclude Include="ImGuiController.h" />
     <ClInclude Include="InitDirectX.h" />
