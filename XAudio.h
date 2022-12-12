@@ -5,6 +5,7 @@
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #endif
 #include <experimental/filesystem>
+#include <map>
 #include <xaudio2.h>
 
 #pragma comment(lib,"xaudio2.lib")
@@ -12,7 +13,7 @@
 class XAudio
 {
 public: // 定義
-    using AUDIO_KEY = std::string;
+    using AUDIO_KEY = std::experimental::filesystem::path;
     struct AUDIO_VALUE {
         WAVEFORMATEX wfex;
         uint8_t* pBuffer;
@@ -50,13 +51,22 @@ private: // 定義
         WAVEFORMATEX fmt;
     };
 
-public: // 関数
+public: // 静的関数
     static void Initialize(void);
     static SoundData Load(const fsPath pathAndFileName);
+    static void Load(const fsPath& pathAndFileName);
     static void UnLoad(SoundData* soundData);
     static void PlayWave(IXAudio2* xAudio2, const SoundData& soundData);
+    static void Finalize(void);
 
-private: // 変数
+private:
+    static void LoadWave(const fsPath& pathAndFileName);
+
+    // fstreamの読み込み位置を検索した識別子の直前にする
+    static void SearchHeader(std::ifstream& file, const char* chunkId);
+
+private: // 静的変数
     static ComPtr<IXAudio2> xAudio2_;
     static IXAudio2MasteringVoice* masterVoice_;
+    static std::map<AUDIO_KEY, AUDIO_VALUE> audios_;
 };

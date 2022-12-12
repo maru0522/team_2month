@@ -96,7 +96,7 @@
     <ClCompile Include="AssimpLoader.cpp">
       <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
+    <ClCompile Include="XAudio.cpp">
       <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
     <ClCompile Include="WorldCoordinate.cpp">
@@ -122,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="BasicFrame.cpp">
       <Filter>ソース ファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル\MakeGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,7 +187,7 @@
     <ClInclude Include="AssimpLoader.h">
       <Filter>ヘッダー ファイル\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
+    <ClInclude Include="XAudio.h">
       <Filter>ヘッダー ファイル\Resource</Filter>
     </ClInclude>
     <ClInclude Include="ConstBuffer.h">
@@ -213,6 +216,9 @@
     </ClInclude>
     <ClInclude Include="BasicFrame.h">
       <Filter>ヘッダー ファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ヘッダー ファイル\MakeGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
