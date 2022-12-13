@@ -9,6 +9,7 @@
 
 Microsoft::WRL::ComPtr<IXAudio2> XAudio::xAudio2_{ nullptr };
 IXAudio2MasteringVoice* XAudio::masterVoice_{ nullptr };
+std::map<XAudio::AUDIO_KEY, XAudio::AUDIO_VALUE> XAudio::audios_{};
 
 void XAudio::Initialize(void)
 {
