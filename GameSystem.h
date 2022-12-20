@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include "BasicFrame.h"
-#include "GameScene.h"
+#include "BaseScene.h"
 
 class GameSystem : public BasicFrame
 {
@@ -14,5 +14,5 @@ public: // ä÷êî
     void Finalize(void) override;
 
 private: 
-    std::unique_ptr<GameScene> scene_{ nullptr };
+    std::unique_ptr<BaseScene> scene_{ nullptr };
 };

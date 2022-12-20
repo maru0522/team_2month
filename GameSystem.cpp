@@ -1,6 +1,8 @@
 #include "GameSystem.h"
 #include "Obj3d.h"
 #include "Sprite.h"
+#include "GameScene.h"
+#include "TitleScene.h"
 
 GameSystem::GameSystem(void)
 {
@@ -10,7 +12,7 @@ void GameSystem::Initialize(void)
 {
     BasicFrame::Initialize();
 
-    scene_ = std::make_unique<GameScene>();
+    scene_ = std::make_unique<TitleScene>();
     scene_->Initialize();
 }
 

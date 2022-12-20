@@ -150,6 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssimpLoader.cpp" />
+    <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="XAudio.cpp" />
     <ClCompile Include="BasicFrame.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -226,6 +228,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssimpLoader.h" />
+    <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="XAudio.h" />
     <ClInclude Include="BasicFrame.h" />
     <ClInclude Include="Camera.h" />
