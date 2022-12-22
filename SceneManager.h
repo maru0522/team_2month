@@ -1,14 +1,22 @@
 #pragma once
-class SceneAB
-{
-public: //Å@ä÷êî
-    virtual void Initialize(void) = 0;
-    virtual void Update(void) = 0;
-    virtual void Draw(void) = 0;
-};
+#include <memory>
+#include "BaseScene.h"
+
+using std::unique_ptr;
 
 class SceneManager
 {
-public: // ê√ìIä÷êî
-    template<class Scene> static void Transition(void);
+public:
+    ~SceneManager(void);
+
+    void SetNextScene(unique_ptr<BaseScene>& nextScene) { nextScene_ = std::move(nextScene); }
+
+    void Update(void);
+    void Draw3d(void);
+    void Draw2d(void);
+    void Finalize(void);
+
+private:
+    unique_ptr<BaseScene> currentScene_{ nullptr };
+    unique_ptr<BaseScene> nextScene_{ nullptr };
 };

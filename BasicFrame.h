@@ -3,6 +3,7 @@
 #include "InitDirectX.h"
 #include "ImGuiController.h"
 #include <memory>
+#include "SceneManager.h"
 
 class BasicFrame
 {
@@ -20,9 +21,11 @@ public: // ŠÖ”
 
 protected: // •Ï”
     InitDirectX* iDX_{ nullptr };
+    std::unique_ptr<SceneManager> sceneManager_{ nullptr };
+
 
 private: // •Ï”
     Window* wnd_{ nullptr };
-    std::unique_ptr<ImGuiController> imGuiController_;
+    std::unique_ptr<ImGuiController> imGuiController_{ nullptr };
 };
 
