@@ -16,7 +16,7 @@ void SceneManager::Update(void)
         currentScene_ = std::move(nextScene_);
         nextScene_.reset();
         
-        currentScene_->Initialize();
+        currentScene_->Initialize(this);
     }
 
     currentScene_->Update();

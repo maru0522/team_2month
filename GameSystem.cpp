@@ -13,7 +13,7 @@ void GameSystem::Initialize(void)
     BasicFrame::Initialize();
 
     scene_ = std::make_unique<TitleScene>();
-    sceneManager_->SetNextScene(scene_);
+    sceneManager_->RequestChangeScene(scene_);
 }
 
 void GameSystem::Update(void)

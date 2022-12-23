@@ -2,9 +2,13 @@
 #include "Texture.h"
 #include "Model.h"
 #include "Input.h"
+#include "SceneManager.h"
+#include "GameScene.h"
 
-void TitleScene::Initialize(void)
+void TitleScene::Initialize(SceneManager* pSceneManager)
 {
+    BaseScene::Initialize(pSceneManager);
+
     // テクスチャ読み込み
     Texture::Load("Resources/reimu.png");
     Texture::Load("Resources/mario.jpg");
@@ -46,6 +50,11 @@ void TitleScene::Update(void)
 
     spriteT_->Update();
     objT_->Update();
+
+    if (KEYS::IsTrigger(DIK_RETURN)) {
+        std::unique_ptr<BaseScene> next{ std::make_unique<GameScene>() };
+        sceneManager_->RequestChangeScene(next);
+    }
 }
 
 void TitleScene::Draw3d(void)

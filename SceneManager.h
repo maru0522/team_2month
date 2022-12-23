@@ -9,7 +9,7 @@ class SceneManager
 public:
     ~SceneManager(void);
 
-    void SetNextScene(unique_ptr<BaseScene>& nextScene) { nextScene_ = std::move(nextScene); }
+    void RequestChangeScene(unique_ptr<BaseScene>& nextScene) { nextScene_ = std::move(nextScene); }
 
     void Update(void);
     void Draw3d(void);

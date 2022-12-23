@@ -3,8 +3,10 @@
 #include "Model.h"
 #include "Input.h"
 
-void GameScene::Initialize(void)
+void GameScene::Initialize(SceneManager* pSceneManager)
 {
+    BaseScene::Initialize(pSceneManager);
+
     // テクスチャ読み込み
     Texture::Load("Resources/reimu.png");
     Texture::Load("Resources/mario.jpg");
