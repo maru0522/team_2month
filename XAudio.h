@@ -53,7 +53,6 @@ private: // ’è‹`
 
 public: // Ã“IŠÖ”
     static void Initialize(void);
-    static SoundData Load(const fsPath pathAndFileName);
     static void Load(const fsPath& pathAndFileName);
     static void UnLoad(SoundData* soundData);
     static void PlayWave(IXAudio2* xAudio2, const SoundData& soundData);
