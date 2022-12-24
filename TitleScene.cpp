@@ -52,8 +52,8 @@ void TitleScene::Update(void)
     objT_->Update();
 
     if (KEYS::IsTrigger(DIK_RETURN)) {
-        std::unique_ptr<BaseScene> next{ std::make_unique<GameScene>() };
-        sceneManager_->RequestChangeScene(next);
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
+        sceneManager_->RequestChangeScene(nextScene);
     }
 }
 

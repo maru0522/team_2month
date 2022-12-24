@@ -5,6 +5,11 @@ SceneManager::~SceneManager(void)
     Finalize();
 }
 
+std::unique_ptr<BaseScene> SceneManager::CreateScene(const std::string& sceneName)
+{
+    return std::move(sceneFactory_->CreateScene(sceneName));
+}
+
 void SceneManager::Update(void)
 {
     if (nextScene_) {

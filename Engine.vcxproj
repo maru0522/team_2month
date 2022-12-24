@@ -149,8 +149,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractSceneFactory.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="XAudio.cpp" />
     <ClCompile Include="BasicFrame.cpp" />
@@ -227,8 +229,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="XAudio.h" />
     <ClInclude Include="BasicFrame.h" />
