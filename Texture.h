@@ -33,30 +33,27 @@ public: // 静的関数
     static void Initialize(void);
 
     // 読込 
-    static void Load(const fsPath& relativePath, const fsPath& fileName);
     static void Load(const fsPath& pathAndFileName);
-    static void Load(const fsPath& relativePath, const fsPath& fileName, const std::string& id);
-    static void LoadWithId(const fsPath& pathAndFileName, const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
-
-    // 読込済のテクスチャを検索し返す
-    static const Texture GetTexture(const fsPath& relativePath, const fsPath& fileName);
-    static const Texture GetTexture(const fsPath& pathAndFileName);
-    static const Texture GetTextureById(const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
+    static void Load(const fsPath& pathAndFileName, const std::string& registerId);
 
     // 読込済のテクスチャの情報だけ返す
-    static const TEXTURE_VALUE* GetTextureInfo(const fsPath& relativePath, const fsPath& fileName);
     static const TEXTURE_VALUE* GetTextureInfo(const fsPath& pathAndFileName);
     static const TEXTURE_VALUE* GetTextureInfoById(const std::string& id); // 関数名変えたくなかったけど回避案思い浮かばんかった。
 
     // テクスチャのパスに名称を設定して呼び出しを簡略化。※あだ名付けてやるくらいの感覚でいい
-    static void CreateIdForTexPath(const fsPath& relativePath, const fsPath& fileName, const std::string& id);
-    static void CreateIdForTexPath(const fsPath& pathAndFileName, const std::string& id);
+    static void SetId(const fsPath& pathAndFileName, const std::string& id);
 
     // 設定したIDからMAP_KEYを取得する。publicにしてはいるが基本関数内で使う
     static const TEXTURE_KEY* GetTextureKey(const std::string& id);
 
     // private変数: srvHeap を取得
     static ID3D12DescriptorHeap* GetSRVHeap(void) { return srvHeap_.Get(); }
+
+    // 解放
+    static void Eject(const fsPath& pathAndFileName);
+    
+    // ID削除
+    static void DeleteId(const std::string& id);
 
 private: // 静的変数
     // エイリアステンプレート

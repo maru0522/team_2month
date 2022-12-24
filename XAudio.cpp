@@ -130,7 +130,7 @@ void XAudio::LoadWave(const fsPath& pathAndFileName)
     char* pBuffer = new char[data.size];
     file.read(pBuffer, data.size);
 
-    AUDIO_VALUE tmp{ format.fmt, reinterpret_cast<uint8_t*>(pBuffer), data.size };
+    AUDIO_VALUE tmp{ format.fmt, reinterpret_cast<uint8_t*>(pBuffer), (uint32_t)data.size };
     audios_.insert({ pathAndFileName, tmp });
 
     file.close();

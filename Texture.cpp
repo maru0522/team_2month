@@ -27,11 +27,6 @@ void Texture::Initialize(void)
 #endif // _DEBUG
 }
 
-void Texture::Load(const fsPath& relativePath, const fsPath& fileName)
-{
-    Texture::Load(relativePath / fileName);
-}
-
 void Texture::Load(const fsPath& pathAndFileName)
 {
 #pragma region いろいろ確認
@@ -45,11 +40,9 @@ void Texture::Load(const fsPath& pathAndFileName)
 
     // 既に読み込んだテクスチャとの重複確認。
     if (textures_.count(tmp.name_)) {
-        // 重複があった場合イテレータを返す。
-        decltype(textures_)::iterator it{ textures_.find(tmp.name_) };
-
-        // イテレータからハンドルを取得する
-        handle = static_cast<uint32_t>(std::distance(textures_.begin(), it));
+        // 重複があった場合は読み込みはしない。
+        OutputDebugString(L"WARNING: An image with the same name was loaded.");
+        return;
     }
     else {
         // 重複がなかった場合は次のテクスチャのためにハンドルの指標を1進める。
@@ -132,7 +125,7 @@ void Texture::Load(const fsPath& pathAndFileName)
     uint32_t incrementSize = iDX->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
     // MAP_VALUEのsrvCPUHandle_へ書き込み
     tmp.info_.srvCpuHandle_ = srvHeap_.Get()->GetCPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
-    tmp.info_.srvCpuHandle_.ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
+    tmp.info_.srvCpuHandle_.ptr += (size_t)incrementSize * (size_t)handle;
 
     // 全ミップマップについて
     for (size_t i = 0; i < metadata.mipLevels; i++) {
@@ -170,54 +163,61 @@ void Texture::Load(const fsPath& pathAndFileName)
     // MAP_VALUEのsrvGPUHandle_へ書き込み
     tmp.info_.srvGpuHandle_ = srvHeap_.Get()->GetGPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
     // ハンドルを進める
-    tmp.info_.srvGpuHandle_.ptr += static_cast<size_t>(incrementSize) * static_cast<size_t>(handle);
+    tmp.info_.srvGpuHandle_.ptr += (size_t)incrementSize * (size_t)handle;
 
-    // mapへの挿入（or 代入）※代入の場合、同一KEYに対してVALUEが上書きされるため注意
-    textures_.insert_or_assign(tmp.name_, tmp.info_); // 代入時であっても全く同じVALUEが入るとは思われる。
+    // mapへの挿入
+    textures_.insert({ tmp.name_, tmp.info_ });
 #pragma endregion
 }
 
-void Texture::Load(const fsPath& relativePath, const fsPath& fileName, const std::string& id)
+void Texture::Load(const fsPath& pathAndFileName, const std::string& registerId)
 {
-    Load(relativePath / fileName);
-
-    // MAP_KEYとの紐付け
-    mapKeys_.insert_or_assign(id, relativePath / fileName);
-}
-
-void Texture::LoadWithId(const fsPath& pathAndFileName, const std::string& id)
-{
-    Load(pathAndFileName);
-
-    // MAP_KEYとの紐付け
-    mapKeys_.insert_or_assign(id, pathAndFileName);
-}
-
-void Texture::CreateIdForTexPath(const fsPath& relativePath, const fsPath& fileName, const std::string& id)
-{
-    // 既に読み込んでいるテクスチャの中に一致するものがあるか確認
-    if (textures_.count(relativePath / fileName)) {
-        // ある場合、IDと紐付けて保存
-        mapKeys_.insert_or_assign(id, relativePath / fileName);
+    // 既に読み込んだテクスチャとの重複確認。
+    if (textures_.count(pathAndFileName)) {
+        // 重複があった場合は読み込みはしない。
+        OutputDebugString(L"WARNING: An image with the same name was loaded.");
+        return;
     }
     else {
+        // 重複がない場合読み込み
+        Load(pathAndFileName);
+    }
+
+    // 既に設定したidとの重複確認
+    if (mapKeys_.count(registerId)) {
         try {
-            // ない場合、例外を投げる
-            throw std::logic_error("Specified TEXTURE_KEY does not exist.");
+            // 重複がある場合例外スロー
+            throw std::logic_error("ERROR: The same \"registerId\"(TEX_KEY_ID) is already in use.");
         }
         catch (const std::logic_error&) {
             // 強制終了。
             std::exit(1);
         }
     }
+    // MAP_KEYとの紐付け
+    mapKeys_.insert({ registerId, pathAndFileName });
 }
 
-void Texture::CreateIdForTexPath(const fsPath& pathAndFileName, const std::string& id)
+void Texture::SetId(const fsPath& pathAndFileName, const std::string& id)
 {
     // 既に読み込んでいるテクスチャの中に一致するものがあるか確認
     if (textures_.count(pathAndFileName)) {
-        // ある場合、IDと紐付けて保存
-        mapKeys_.insert_or_assign(id, pathAndFileName);
+        // ある場合、IDの重複を確認
+        if (mapKeys_.count(id)) {
+            // IDもある場合
+            try {
+                // 例外スロー
+                throw std::logic_error("ERROR: The same \"registerId\"(TEX_KEY_ID) is already in use.");
+            }
+            catch (const std::logic_error&) {
+                // 強制終了。
+                std::exit(1);
+            }
+        }
+        else {
+            // IDを割り当てるテクスチャが存在している + IDが被っていない場合
+            mapKeys_.insert({ id, pathAndFileName });
+        }
     }
     else {
         try {
@@ -236,39 +236,28 @@ const Texture::TEXTURE_KEY* Texture::GetTextureKey(const std::string& id)
     return &mapKeys_.at(id);
 }
 
-const Texture Texture::GetTexture(const fsPath& relativePath, const fsPath& fileName)
+void Texture::Eject(const fsPath& pathAndFileName)
 {
-    Texture tmp{}; // 一時obj
-
-    tmp.SetMapKey(relativePath / fileName);
-    tmp.info_ = textures_.at(tmp.name_);
-
-    return tmp;
+    //textures_.erase(pathAndFileName);
 }
 
-const Texture Texture::GetTexture(const fsPath& pathAndFileName)
+void Texture::DeleteId(const std::string& id)
 {
-    Texture tmp{}; // 一時obj
-
-    tmp.SetMapKey(pathAndFileName);
-    tmp.info_ = textures_.at(tmp.name_);
-
-    return tmp;
-}
-
-const Texture Texture::GetTextureById(const std::string& id)
-{
-    Texture tmp{}; // 一時obj
-
-    tmp.SetMapKey(*GetTextureKey(id));
-    tmp.info_ = textures_.at(tmp.name_);
-
-    return tmp;
-}
-
-const Texture::TEXTURE_VALUE* Texture::GetTextureInfo(const fsPath& relativePath, const fsPath& fileName)
-{
-    return &textures_.at(relativePath / fileName);
+    // idが存在するか
+    if (!mapKeys_.count(id)) {
+        try {
+            // 存在しない場合例外スロー
+            throw std::logic_error("ERROR: Specified \"id\"(TEX_KEY_ID) does not exist.");
+        }
+        catch (const std::logic_error&) {
+            // 強制終了。
+            std::exit(1);
+        }
+    }
+    else {
+        // 存在する場合削除
+        mapKeys_.erase(id);
+    }
 }
 
 const Texture::TEXTURE_VALUE* Texture::GetTextureInfo(const fsPath& pathAndFileName)
