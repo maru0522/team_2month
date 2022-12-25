@@ -7,13 +7,6 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 {
     BaseScene::Initialize(pSceneManager);
 
-    // テクスチャ読み込み
-    Texture::Load("Resources/reimu.png");
-    Texture::Load("Resources/mario.jpg");
-
-    // 3d.obj読み込み
-    Model::Load("Resources/3dModels/cube/cube.obj");
-
     // 変数初期化
     cameraT_ = std::make_unique<Camera>();
     spriteT_ = std::make_unique<Sprite>("Resources/reimu.png", CMode::PATH);
