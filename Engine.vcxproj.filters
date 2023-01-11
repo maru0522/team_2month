@@ -58,6 +58,18 @@
     <Filter Include="ヘッダー ファイル\MakeGame">
       <UniqueIdentifier>{d3e6502a-f343-4e6c-91ef-1361126ce9c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Base\Scene">
+      <UniqueIdentifier>{66ce161e-9113-4a47-840a-8343a912b6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MakeGame\Scene">
+      <UniqueIdentifier>{9a53d678-2ccd-4f90-b655-3abe43dc10ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Base\Scene">
+      <UniqueIdentifier>{a8c604e3-ce20-4aec-a07f-7d9fe3be8423}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MakeGame\Scene">
+      <UniqueIdentifier>{8652458c-7107-4f83-a4b1-9d350c6a5931}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -123,23 +135,23 @@
     <ClCompile Include="BasicFrame.cpp">
       <Filter>ソース ファイル\Base</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
+    <ClCompile Include="AbstractSceneFactory.cpp">
+      <Filter>ソース ファイル\Base\Scene</Filter>
     </ClCompile>
     <ClCompile Include="BaseScene.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="AbstractSceneFactory.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Base\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneFactory.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Base\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル\MakeGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル\MakeGame\Scene</Filter>
     </ClCompile>
     <ClCompile Include="ResourceLoad.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
+      <Filter>ソース ファイル\MakeGame\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,23 +244,23 @@
     <ClInclude Include="BasicFrame.h">
       <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
     <ClInclude Include="BaseScene.h">
       <Filter>ヘッダー ファイル\Base</Filter>
     </ClInclude>
     <ClInclude Include="AbstractSceneFactory.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Base\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneFactory.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Base\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="ResourceLoad.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
+      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

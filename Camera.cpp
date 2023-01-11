@@ -35,7 +35,7 @@ void Camera::SwitchProjection(void)
     }
     else {
         // “§Ž‹“Š‰e
-        nearZ_ = 0.0f, farZ_ = 1.0f;
+        nearZ_ = 0.0f, farZ_ = 1000.0f;
         matProjection_ = DirectX::XMMatrixOrthographicOffCenterLH(0.0f, Window::width_, Window::height_, 0.0f, nearZ_, farZ_);
         projectionState_ = Camera::Projection::ORTHOGRAPHIC; // ORTHOGRAPHIC
     }
