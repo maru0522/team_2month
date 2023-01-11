@@ -10,4 +10,3 @@ class SceneFactory :
 public:
     std::unique_ptr<BaseScene> CreateScene(const std::string& sceneName) override;
 };
-

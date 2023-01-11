@@ -25,6 +25,8 @@ void Texture::Initialize(void)
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG
+
+    GenerateMissingTexture();
 }
 
 void Texture::Load(const fsPath& pathAndFileName)
@@ -120,7 +122,6 @@ void Texture::Load(const fsPath& pathAndFileName)
 #pragma endregion
 
 #pragma region srvCpuHandleの保存とバッファへのデータ転送
-    // 要確認: static_castを外すと警告↓
     // デスクリプタのサイズを取得する
     uint32_t incrementSize = iDX->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
     // MAP_VALUEのsrvCPUHandle_へ書き込み
@@ -170,7 +171,7 @@ void Texture::Load(const fsPath& pathAndFileName)
 #pragma endregion
 }
 
-void Texture::Load(const fsPath& pathAndFileName, const std::string& registerId)
+void Texture::Load(const fsPath& pathAndFileName, const std::string& id)
 {
     // 既に読み込んだテクスチャとの重複確認。
     if (textures_.count(pathAndFileName)) {
@@ -184,7 +185,7 @@ void Texture::Load(const fsPath& pathAndFileName, const std::string& registerId)
     }
 
     // 既に設定したidとの重複確認
-    if (mapKeys_.count(registerId)) {
+    if (mapKeys_.count(id)) {
         try {
             // 重複がある場合例外スロー
             throw std::logic_error("ERROR: The same \"registerId\"(TEX_KEY_ID) is already in use.");
@@ -195,7 +196,12 @@ void Texture::Load(const fsPath& pathAndFileName, const std::string& registerId)
         }
     }
     // MAP_KEYとの紐付け
-    mapKeys_.insert({ registerId, pathAndFileName });
+    mapKeys_.insert({ id, pathAndFileName });
+}
+
+const bool Texture::ExistTexture(const std::string& path)
+{
+    return textures_.count(path);
 }
 
 void Texture::SetId(const fsPath& pathAndFileName, const std::string& id)
@@ -258,6 +264,130 @@ void Texture::DeleteId(const std::string& id)
         // 存在する場合削除
         mapKeys_.erase(id);
     }
+}
+
+void Texture::GenerateMissingTexture(void)
+{
+#pragma region エラー画像の生成と登録
+#pragma region missingTexture生成
+    uint32_t handle{ indexNextDescHeap_ };
+
+    Texture tmp{}; // てんぽらりん
+
+    tmp.SetMapKey("ERROR_IMAGE");
+    indexNextDescHeap_++;
+
+    // 一辺のピクセル数
+    constexpr size_t imageLength{ 256 };
+    // 配列の要素数
+    constexpr size_t imageDataCount{ imageLength * imageLength };
+
+    // イメージデータ配列
+    DirectX::XMFLOAT4* imageData{ new DirectX::XMFLOAT4[imageDataCount] };
+
+    // 生成
+    for (size_t i = 0; i < imageDataCount; i++) {
+        if (i < 32513) {
+            if (i % 256 < 128) {
+                imageData[i] = { 0.0f, 0.0f, 0.0f, 1.0f };
+            }
+            else if (i % 256 >= 128) {
+                imageData[i] = { 1.0f, 0.0f, 1.0f, 1.0f };
+            }
+        }
+        else {
+            if (i % 256 < 128) {
+                imageData[i] = { 1.0f, 0.0f, 1.0f, 1.0f };
+            }
+            else if (i % 256 >= 128) {
+                imageData[i] = { 0.0f, 0.0f, 0.0f, 1.0f };
+            }
+        }
+    }
+
+#pragma endregion
+#pragma region ヒープ設定とデスクリプタ設定
+    // ヒープ設定
+    D3D12_HEAP_PROPERTIES texHeapProp{};
+    texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
+    texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+    texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+
+    // リソース設定
+    D3D12_RESOURCE_DESC textureResourceDesc{};
+    textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+    textureResourceDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    textureResourceDesc.Width = imageLength;
+    textureResourceDesc.Height = imageLength;
+    textureResourceDesc.DepthOrArraySize = 1;
+    textureResourceDesc.MipLevels = 1;
+    textureResourceDesc.SampleDesc.Count = 1;
+#pragma endregion
+
+    // InitDirectXのインスタンス取得
+    InitDirectX* iDX = InitDirectX::GetInstance();
+
+#pragma region テクスチャバッファ
+    // テクスチャバッファの生成
+    HRESULT r = iDX->GetDevice()->CreateCommittedResource(
+        &texHeapProp,
+        D3D12_HEAP_FLAG_NONE,
+        &textureResourceDesc,
+        D3D12_RESOURCE_STATE_GENERIC_READ,
+        nullptr,
+        IID_PPV_ARGS(&tmp.info_.buff_)); // MAP_VALUEのbuff_へ書き込み
+#ifdef _DEBUG
+    assert(SUCCEEDED(r));
+#endif // _DEBUG
+#pragma endregion
+
+#pragma region srvCpuHandleの保存とバッファへのデータ転送
+    // デスクリプタのサイズを取得する
+    uint32_t incrementSize = iDX->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+    // MAP_VALUEのsrvCPUHandle_へ書き込み
+    tmp.info_.srvCpuHandle_ = srvHeap_.Get()->GetCPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
+    tmp.info_.srvCpuHandle_.ptr += (size_t)incrementSize * (size_t)handle;
+
+    // テクスチャバッファにデータ転送
+    r = tmp.info_.buff_-> // MAP_VALUEのbuff_
+        WriteToSubresource(
+            0,
+            nullptr,		// 全領域へコピー
+            imageData,	// 元データアドレス
+            sizeof(DirectX::XMFLOAT4) * imageLength,	// 1ラインサイズ
+            sizeof(DirectX::XMFLOAT4) * imageDataCount// 全サイズ
+        );
+
+    //イメージデータ解放
+    delete[] imageData;
+
+#ifdef _DEBUG
+    assert(SUCCEEDED(r));
+#endif // _DEBUG
+#pragma endregion
+
+#pragma region SRVの設定と生成
+    // シェーダリソースビュー設定
+    D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+    srvDesc.Format = textureResourceDesc.Format;
+    srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+    srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+    srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
+
+    // ハンドルのさす位置にシェーダーリソースビューの作成
+    iDX->GetDevice()->CreateShaderResourceView(tmp.info_.buff_.Get(), &srvDesc, tmp.info_.srvCpuHandle_);
+#pragma endregion
+
+#pragma region srvGpuHandleの保存とmapに紐づけて保存
+    // MAP_VALUEのsrvGPUHandle_へ書き込み
+    tmp.info_.srvGpuHandle_ = srvHeap_.Get()->GetGPUDescriptorHandleForHeapStart(); // Descのヒープ領域のスタート位置を取得
+    // ハンドルを進める
+    tmp.info_.srvGpuHandle_.ptr += (size_t)incrementSize * (size_t)handle;
+
+    // mapへの挿入
+    textures_.insert({ tmp.name_, tmp.info_ });
+#pragma endregion
+#pragma endregion
 }
 
 const Texture::TEXTURE_VALUE* Texture::GetTextureInfo(const fsPath& pathAndFileName)

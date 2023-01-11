@@ -6,8 +6,8 @@ namespace Util {
     namespace Convert {
         constexpr float MY_PI{ 3.14159265f };
 
-        inline constexpr float DegsToRads(float fDegrees);
-        inline constexpr float RadsToDegs(float fRadians);
+        inline constexpr float ToRadian(float fDegrees) { return fDegrees * MY_PI / 180.0f; }
+        inline constexpr float ToDegree(float fRadians) { return fRadians * 180.0f / MY_PI; }
     }
 
     class Timer {
@@ -45,6 +45,6 @@ namespace Util {
     };
 
     namespace expt {
-        
+
     }
 }

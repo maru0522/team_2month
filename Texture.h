@@ -34,7 +34,9 @@ public: // 静的関数
 
     // 読込 
     static void Load(const fsPath& pathAndFileName);
-    static void Load(const fsPath& pathAndFileName, const std::string& registerId);
+    static void Load(const fsPath& pathAndFileName, const std::string& id);
+
+    static const bool ExistTexture(const std::string& path);
 
     // 読込済のテクスチャの情報だけ返す
     static const TEXTURE_VALUE* GetTextureInfo(const fsPath& pathAndFileName);
@@ -51,9 +53,12 @@ public: // 静的関数
 
     // 解放
     static void Eject(const fsPath& pathAndFileName);
-    
+
     // ID削除
     static void DeleteId(const std::string& id);
+
+private:
+    static void GenerateMissingTexture(void);
 
 private: // 静的変数
     // エイリアステンプレート

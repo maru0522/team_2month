@@ -31,29 +31,59 @@ void Sprite::PreDraw(void)
 
 Sprite::Sprite(const fsPath& relativePath, const fsPath& fileName)
 {
-    srvGpuHandleCopy_ = Texture::GetTextureInfo(relativePath / fileName)->srvGpuHandle_;
+    std::string path{ fsPath{relativePath / fileName}.string() };
 
-    ConstructorCommon();
-    SetOriginalSize(relativePath / fileName, CMode::PATH);
-    AdjustTextureSize();
+    try {
+        if (Texture::ExistTexture(path)) {// テクスチャが存在している場合
+            srvGpuHandleCopy_ = Texture::GetTextureInfo(path)->srvGpuHandle_;
+            ConstructorCommon();
+            SetOriginalSize(path, CMode::PATH);
+            AdjustTextureSize();
+        }
+        else {// テクスチャが存在していない場合エラーを送出
+            throw std::logic_error("Error: Specified Texture does not exist.");
+        }
+    }
+    catch (const std::logic_error&) {
+        srvGpuHandleCopy_ = Texture::GetTextureInfo("ERROR_IMAGE")->srvGpuHandle_;
+        ConstructorCommon();
+        SetOriginalSize("ERROR_IMAGE", CMode::PATH);
+        AdjustTextureSize();
+    }
 }
 
 Sprite::Sprite(const fsPath& pathAndFileName_or_Id, CMode mode)
 {
-#pragma region gpuHandleの受け取り
-    if (!static_cast<int>(mode)) {
-        // コンストラクタモードがPATHの場合
-        srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id)->srvGpuHandle_;
+    std::string path;
+    if (static_cast<bool>(mode)) {// CMode == ID
+        path = Texture::GetTextureKey(pathAndFileName_or_Id.string())->string();
     }
-    else {
-        // コンストラクタモードがIDの場合
-        srvGpuHandleCopy_ = Texture::GetTextureInfoById(pathAndFileName_or_Id.string())->srvGpuHandle_;
+    else {// CMode == PATH
+        path = pathAndFileName_or_Id.string();
     }
-#pragma endregion
 
-    ConstructorCommon();
-    SetOriginalSize(pathAndFileName_or_Id, mode);
-    AdjustTextureSize();
+    try {
+        if (Texture::ExistTexture(path)) {// テクスチャが存在している場合
+            if (static_cast<int>(mode)) {// CModeがIDの場合
+                srvGpuHandleCopy_ = Texture::GetTextureInfoById(pathAndFileName_or_Id.string())->srvGpuHandle_;
+            }
+            else {// CModeがPATHの場合
+                srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName_or_Id)->srvGpuHandle_;
+            }
+            ConstructorCommon();
+            SetOriginalSize(pathAndFileName_or_Id, mode);
+            AdjustTextureSize();
+        }
+        else {// テクスチャが存在していない場合エラーを送出
+            throw std::logic_error("Error: Specified Texture does not exist.");
+        }
+    }
+    catch (const std::logic_error&) {
+        srvGpuHandleCopy_ = Texture::GetTextureInfo("ERROR_IMAGE")->srvGpuHandle_;
+        ConstructorCommon();
+        SetOriginalSize("ERROR_IMAGE", mode);
+        AdjustTextureSize();
+    }
 }
 
 void Sprite::Update(void)
