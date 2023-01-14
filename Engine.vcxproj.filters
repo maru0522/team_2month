@@ -153,6 +153,9 @@
     <ClCompile Include="ResourceLoad.cpp">
       <Filter>ソース ファイル\MakeGame\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Object\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicVS.hlsl" />
@@ -261,6 +264,9 @@
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

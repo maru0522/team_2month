@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "Obj3d.h"
 #include "BaseScene.h"
+#include "Player.h"
 
 using std::unique_ptr;
 
@@ -17,8 +18,7 @@ public: // ä÷êî
     void Finalize(void) override;
 
 private:
-    unique_ptr<Camera> cameraT_{};
-    unique_ptr<Sprite> spriteT_{};
-    unique_ptr<Obj3d> objT_{};
+    unique_ptr<Camera> cameraT_{ std::make_unique<Camera>() };
+    unique_ptr<Player> player_{ std::make_unique<Player>(cameraT_.get()) };
 };
 
