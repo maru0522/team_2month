@@ -54,6 +54,7 @@ void GameScene::Draw3d(void)
 
 void GameScene::Draw2d(void)
 {
+    player_->Draw2D();
 }
 
 void GameScene::Finalize(void)

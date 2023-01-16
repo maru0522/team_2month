@@ -1,4 +1,5 @@
 #pragma once
+#include"Sprite.h"
 #include "Obj3d.h"
 #include <memory>
 #include "Camera.h"
@@ -16,9 +17,12 @@ public: // ’è”
     void Update(void);
     void Draw(void);
 
+    void Draw2D(void);
+
 private:
     void Move(void);
     void Jump(void);
+    void Throw(void);//“Š‚°‚éŠÖ”
 
 private: // •Ï”
     std::unique_ptr<Obj3d> object_{};
@@ -27,4 +31,8 @@ private: // •Ï”
 
     bool isJump_{ false };
     bool isFloat_{ false };
+
+    std::unique_ptr<Sprite> ropeSp_{};
+    DirectX::XMFLOAT2 ropePos_{ 0.0f,0.0f };
+    bool isThrow_{ false };//“Š‚°‚½‚Ìƒtƒ‰ƒO
 };
