@@ -12,6 +12,8 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     // テクスチャ読み込み
     Texture::Load("Resources/mario.jpg");
     Texture::Load("Resources/thinking.png");
+    Texture::Load("Resources/Image/Type_START.png");
+    Texture::Load("Resources/Image/Type_PATH.png");
 
     // 3d.obj読み込み
     Model::Load("Resources/3dModels/cube/cube.obj");

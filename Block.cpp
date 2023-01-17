@@ -1,9 +1,18 @@
 #include "Block.h"
 
-Block::Block(Camera* pCamera)
+Block::Block(Type type, Camera* pCamera)
 {
-    object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
-    object_->SetTexture("Resources/thinking.png");
+    switch (type) {
+    case Type::START:
+        object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
+        object_->SetTexture("Resources/Image/Type_START.png");
+        break;
+
+    case Type::PATH:
+        object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
+        object_->SetTexture("Resources/Image/Type_PATH.png");
+        break;
+    }
 }
 
 void Block::Update(void)

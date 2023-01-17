@@ -15,9 +15,56 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
 
+
     for (size_t i = 0; i < blocks_.size(); i++) {
-        blocks_[i] = std::make_unique<Block>(cameraT_.get());
-        blocks_[i]->object_->worldCoordinate_.position_ = { 2.0f * i,0,0 };
+        if (i < 3) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::START, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 2.0f * i - 2.0f, 0.0f,  -2.0f };
+        }
+        if (3 <= i && i <= 5) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::START, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 2 * (i % 3) - 2.0f, 0.0f , 0.0f };
+        }
+        if (6 <= i && i <= 8) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::START, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 2 * (i % 3) - 2.0f, 0.0f , 2.0f };
+        }
+
+        if (9 <= i && i <= 14) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::PATH, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 2.0f * i - 14.0f, 0.0f , 0.0f };
+        }
+
+        if (15 <= i && i <= 21) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::PATH, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 2.0f * i - 8.0f , 0.0f , 0.0f };
+        }
+
+        if (22 <= i && i <= 24) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::PATH, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 2.0f * i - 14.0f, 0.0f , 2.0f };
+        }
+
+        if (25 <= i && i <= 27) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::PATH, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 34.0f, 2.0f * (i - 25) + 2.0f , 2.0f };
+        }
+
+        if (28 <= i && i <= 31) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::PATH, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 30.0f, 2.0f * (i - 28) , 4.0f};
+        }
+
+        if (32 <= i && i <= 35) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::PATH, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 32.0f, 2.0f * (i - 32) , 4.0f };
+        }
+
+        if (36 <= i && i <= 39) {
+            blocks_[i] = std::make_unique<Block>(Block::Type::PATH, cameraT_.get());
+            blocks_[i]->object_->worldCoordinate_.position_ = { 34.0f, 2.0f * (i - 36) , 4.0f };
+        }
+
     }
 }
 
@@ -73,7 +120,7 @@ void GameScene::Draw3d(void)
 {
     player_->Draw();
 
-    for (size_t i = 0; i < blocks_.size(); i++) {
+    for (size_t i = 0; i < 40; i++) {
         blocks_[i]->Draw();
     }
 }
@@ -88,7 +135,7 @@ void GameScene::Finalize(void)
 
 void GameScene::Col(void)
 {
-    for (size_t i = 0; i < blocks_.size(); i++) {
+    for (size_t i = 0; i < 40; i++) {
         if (std::abs(blocks_[i]->object_->worldCoordinate_.position_.x - player_->GetObject3d()->worldCoordinate_.position_.x) <= rangeIntoPlayer_ ||
             std::abs(blocks_[i]->object_->worldCoordinate_.position_.y - player_->GetObject3d()->worldCoordinate_.position_.y) <= rangeIntoPlayer_ ||
             std::abs(blocks_[i]->object_->worldCoordinate_.position_.z - player_->GetObject3d()->worldCoordinate_.position_.z) <= rangeIntoPlayer_) {
@@ -139,14 +186,14 @@ void GameScene::Col(void)
                 player_->GetObject3d()->worldCoordinate_.position_.y < blocks_[i]->object_->worldCoordinate_.position_.y + (Block::radius_ + Player::radius_.y)
                 ) {
                 // Žè‘O‚©‚çN“ü‚µ‚½ê‡
-                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z &&
-                    player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
+                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ <= player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z &&
+                    player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z <= blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
                     player_->SetPosZ(player_->GetOldPos().z);
                 }
 
                 // ‰œ‚©‚çN“ü‚µ‚½ê‡
-                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z &&
-                    player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
+                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ <= player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z &&
+                    player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z <= blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
                     player_->SetPosZ(player_->GetOldPos().z);
                 }
             }
