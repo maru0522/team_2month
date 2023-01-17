@@ -32,7 +32,7 @@ private:
     void Move(void);
     void Jump(void);
     void Gravity(void);
-
+    void Throw(void);//投げる関数
 private: // 変数
     std::unique_ptr<Obj3d> object_{};
 
@@ -42,4 +42,14 @@ private: // 変数
 
     bool isJump_{ false };
     bool isFloat_{ false };
+
+    std::unique_ptr<Obj3d>  ropeObj_{};
+    DirectX::XMFLOAT3 ropePos_{ 0.0f,0.0f,0.0f };
+    bool isThrow_{ false };//投げた時のフラグ
+
+    bool LimitDecrease_{ false };
+
+    float ropeUpLimit_ = 5.0f;//ロープの上限
+
+    bool isConduction_{ false };
 };
