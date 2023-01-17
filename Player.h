@@ -6,10 +6,10 @@
 class Player
 {
 public: // íËêî
-    static constexpr float speed_{ 1.0f };
-    static constexpr float jumpPower_{ 2.4f }; // Å¶
-    static constexpr float jumpAttenuation_{ 0.25f };
-    static constexpr float gravity_{ 0.7f };
+    static constexpr float speed_{ 0.4f };
+    static constexpr float jumpPower_{ 1.2f }; // 2.4f -> 1.2f
+    static constexpr float jumpAttenuation_{ 0.125f };
+    static constexpr float gravity_{ 0.35f };
     static constexpr DirectX::XMFLOAT3 radius_{ 1.0f,1.0f,1.0f };
 
     // ä÷êî
