@@ -45,7 +45,7 @@ void Player::Move(void)
 
 void Player::Jump(void)
 {
-    if (KEYS::IsTrigger(DIK_SPACE)) {
+    if (KEYS::IsTrigger(DIK_SPACE) && isJump_ == false && isFloat_ == false) {
         isJump_ = true;
         isFloat_ = true;
         jumpValue_ = jumpPower_;

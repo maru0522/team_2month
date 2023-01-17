@@ -25,6 +25,9 @@ public: // ’è”
     void SetPosX(const float posX) { object_->worldCoordinate_.position_.x = posX; }
     void SetPosY(const float posY) { object_->worldCoordinate_.position_.y = posY; }
     void SetPosZ(const float posZ) { object_->worldCoordinate_.position_.z = posZ; }
+
+    void SetJumpFlag(bool isJump) { isJump_ = isJump; }
+    void SetFloatFlag(bool isFloat) { isFloat_ = isFloat; }
 private:
     void Move(void);
     void Jump(void);
