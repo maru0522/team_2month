@@ -32,7 +32,14 @@ private: // 変数
     bool isJump_{ false };
     bool isFloat_{ false };
 
-    std::unique_ptr<Sprite> ropeSp_{};
-    DirectX::XMFLOAT2 ropePos_{ 0.0f,0.0f };
+    std::unique_ptr<Obj3d>  ropeObj_{};
+    DirectX::XMFLOAT3 ropePos_{ 0.0f,0.0f,0.0f };
     bool isThrow_{ false };//投げた時のフラグ
+
+    bool LimitDecrease_{ false };
+
+    float ropeUpLimit_ = 5.0f;//ロープの上限
+
+    bool isConduction_{ false };
+
 };

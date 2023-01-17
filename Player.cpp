@@ -1,20 +1,29 @@
 #include "Player.h"
 #include "Input.h"
-
+#include "Util.h"
 Player::Player(Camera* pCamera)
 {
     object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
-    ropeSp_ = std::make_unique<Sprite>("Resources/rope.png", CMode::PATH);
+    object_->SetTexture("Resources/mario.jpg");
+    ropeObj_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
+
+   
+    ropeObj_->worldCoordinate_.rotation_ = { 0.0f,0.0f,Util::Convert::ToRadian(90.0f) };
 
 }
 
 void Player::Update(void)
 {
+    ropeObj_->worldCoordinate_.scale_ = { ropeUpLimit_,1.0f,1.0f };
+
     if (KEYS::IsTrigger(DIK_RETURN))
     {
         if (isThrow_ == false)
         {
+            
+            LimitDecrease_ = true;
             isThrow_ = true;
+           
         }
         else
         {
@@ -22,9 +31,33 @@ void Player::Update(void)
         }
     }
 
+    if (KEYS::IsTrigger(DIK_1))
+    {
+        if (isConduction_ == false)
+        {
+
+
+            isConduction_ = true;
+
+        }
+        else
+        {
+            isConduction_ = false;
+        }
+    }
+
     if (isThrow_ == false)
     {
-        Move();
+       
+        Move(); 
+        ropeObj_->worldCoordinate_.position_.x = object_->worldCoordinate_.position_.x + 3.0f;
+        ropeObj_->worldCoordinate_.position_.y = object_->worldCoordinate_.position_.y + 5.0f;
+        ropeObj_->worldCoordinate_.position_.z = object_->worldCoordinate_.position_.z;
+       
+        if (ropeUpLimit_ <= 0.0f)
+        {
+            ropeUpLimit_ = 0.0f;
+        }
 
     }
     else
@@ -32,25 +65,42 @@ void Player::Update(void)
         Throw();
     }
 
+    if (LimitDecrease_ == true)
+    {
+        ropeUpLimit_ --;
+        LimitDecrease_ = false;
+    }
+    if (LimitDecrease_ == false)
+    {
+        
+    }
+
+
     Jump();
-    ropeSp_->SetPosition({ object_->worldCoordinate_.position_.x,object_->worldCoordinate_.position_.y });
-    ropeSp_->Update();
+   
     object_->Update();
+   
+    ropeObj_->Update();
 }
 
 void Player::Draw(void)
 {
+    
+    if (isThrow_ == true)
+    {
+        if (ropeObj_->worldCoordinate_.scale_.x >= 1.0f)
+        {
+            ropeObj_->Draw();
+        }
+       
+    }
     object_->Draw();
-
    
 }
 
 void Player::Draw2D(void)
 {
-    if (isThrow_ == true)
-    {
-        ropeSp_->Draw();
-    }
+  
 }
 
 void Player::Move(void)
@@ -97,20 +147,34 @@ void Player::Jump(void)
 
 void Player::Throw(void)
 {
-
+    
     DirectX::XMFLOAT3 move{};
 
     if (isThrow_ == true)
     {
         if (KEYS::IsDown(DIK_W)) {
-            move.y += speed_ / 2.5f;
+            if (object_->worldCoordinate_.position_.y <= ropeObj_->worldCoordinate_.position_.y + ropeUpLimit_-1.0f)
+            {
+                move.y += speed_ / 2.5f;
+            }
+           
         }
         if (KEYS::IsDown(DIK_S)) {
             move.y -= speed_ / 2.5f;
         }
+        if (isJump_ == true)
+        {
+            if (KEYS::IsDown(DIK_A)) {
+                move.x -= speed_;
+            }
+            if (KEYS::IsDown(DIK_D)) {
+                move.x += speed_;
+            }
+        }
+        object_->worldCoordinate_.position_.x += move.x;
         object_->worldCoordinate_.position_.y += move.y;
     }
-
+   
     
    /* ropeSp_->SetRotation(90/3.14f);*/
     /*ropeSp_->SetCutEndPoint(ropePos_);*/
