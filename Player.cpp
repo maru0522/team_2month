@@ -20,31 +20,17 @@ void Player::Update(void)
     {
         if (isThrow_ == false)
         {
-
+            isHold_ = true;
             LimitDecrease_ = true;
             isThrow_ = true;
 
         }
         else
         {
+            isHold_ = false;
             isThrow_ = false;
         }
     }
-
-  /*  if (KEYS::IsTrigger(DIK_1))
-    {
-        if (isConduction_ == false)
-        {
-
-
-            isConduction_ = true;
-
-        }
-        else
-        {
-            isConduction_ = false;
-        }
-    }*/
 
     if (isThrow_ == false)
     {
@@ -52,7 +38,7 @@ void Player::Update(void)
         Move();
        
         ropeObj_->worldCoordinate_.position_.x = object_->worldCoordinate_.position_.x + 3.0f;
-        ropeObj_->worldCoordinate_.position_.y = object_->worldCoordinate_.position_.y + 5.0f;
+        ropeObj_->worldCoordinate_.position_.y = object_->worldCoordinate_.position_.y + 3.0f;
         ropeObj_->worldCoordinate_.position_.z = object_->worldCoordinate_.position_.z;
 
         if (ropeUpLimit_ <= 0.0f)
@@ -63,7 +49,17 @@ void Player::Update(void)
     }
     else
     {
-        Throw();
+        if (std::abs(ropeObj_->worldCoordinate_.position_.x - object_->worldCoordinate_.position_.x) < 2.0f &&
+            /*std::abs(ropeObj_->worldCoordinate_.position_.y - object_->worldCoordinate_.position_.y) < 2.0f+ropeUpLimit_ &&*/
+            std::abs(ropeObj_->worldCoordinate_.position_.z - object_->worldCoordinate_.position_.z) < 2.0f)
+        {
+            Throw();
+        }
+        else
+        {
+            Move();
+        }
+      
     }
 
     if (isHold_ != true)
@@ -122,15 +118,12 @@ void Player::Move(void)
 
 void Player::Jump(void)
 {
-  
-    isZip_ = false;
-    if (isHold_ == true)
-    {
-        isHold_ = false;
-    }
    
     if (KEYS::IsTrigger(DIK_SPACE) && isJump_ == false && isFloat_ == false) {
-       
+        if (isHold_ == true)
+        {
+            isHold_ = false;
+        }
         isJump_ = true;
         isFloat_ = true;
         jumpValue_ = jumpPower_;
@@ -157,7 +150,6 @@ void Player::Gravity(void)
 
 void Player::Throw(void)
 {
-    isZip_ = true;
     DirectX::XMFLOAT3 move{};
 
     if (isThrow_ == true)
@@ -189,9 +181,5 @@ void Player::Throw(void)
         object_->worldCoordinate_.position_.x += move.x;
         object_->worldCoordinate_.position_.y += move.y;
     }
-    if (isZip_ == true)
-    {
-            isHold_ = true;
-    }
-
+     
 }

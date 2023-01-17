@@ -47,7 +47,7 @@ private: // 変数
     DirectX::XMFLOAT3 ropePos_{ 0.0f,0.0f,0.0f };
     bool isThrow_{ false };//投げた時のフラグ
     bool isHold_{ false };
-    bool isZip_ {false};
+
     bool LimitDecrease_{ false };
 
     float ropeUpLimit_ = 5.0f;//ロープの上限
