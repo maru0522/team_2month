@@ -31,7 +31,7 @@ void Player::Update(void)
         }
     }
 
-    if (KEYS::IsTrigger(DIK_1))
+  /*  if (KEYS::IsTrigger(DIK_1))
     {
         if (isConduction_ == false)
         {
@@ -44,12 +44,13 @@ void Player::Update(void)
         {
             isConduction_ = false;
         }
-    }
+    }*/
 
     if (isThrow_ == false)
     {
 
         Move();
+       
         ropeObj_->worldCoordinate_.position_.x = object_->worldCoordinate_.position_.x + 3.0f;
         ropeObj_->worldCoordinate_.position_.y = object_->worldCoordinate_.position_.y + 5.0f;
         ropeObj_->worldCoordinate_.position_.z = object_->worldCoordinate_.position_.z;
@@ -65,16 +66,19 @@ void Player::Update(void)
         Throw();
     }
 
+    if (isHold_ != true)
+    {
+        Gravity();
+    }
+
+
     if (LimitDecrease_ == true)
     {
         ropeUpLimit_--;
         LimitDecrease_ = false;
     }
-    if (LimitDecrease_ == false)
-    {
-
-    }
-    Gravity();
+    
+  
     Jump();
 
     object_->Update();
@@ -118,18 +122,27 @@ void Player::Move(void)
 
 void Player::Jump(void)
 {
+  
+    isZip_ = false;
+    if (isHold_ == true)
+    {
+        isHold_ = false;
+    }
+   
     if (KEYS::IsTrigger(DIK_SPACE) && isJump_ == false && isFloat_ == false) {
+       
         isJump_ = true;
         isFloat_ = true;
         jumpValue_ = jumpPower_;
     }
 
     if (isJump_) {
+       
         if (jumpValue_ > 0.0f) {
             jumpValue_ -= jumpAttenuation_;
         }
         else {
-            isJump_ = false;
+           
             jumpValue_ = 0.0f;
         }
     }
@@ -144,12 +157,14 @@ void Player::Gravity(void)
 
 void Player::Throw(void)
 {
-
+    isZip_ = true;
     DirectX::XMFLOAT3 move{};
 
     if (isThrow_ == true)
     {
+       
         if (KEYS::IsDown(DIK_W)) {
+           
             if (object_->worldCoordinate_.position_.y <= ropeObj_->worldCoordinate_.position_.y + ropeUpLimit_ - 1.0f)
             {
                 move.y += speed_ / 2.5f;
@@ -157,10 +172,12 @@ void Player::Throw(void)
 
         }
         if (KEYS::IsDown(DIK_S)) {
+           
             move.y -= speed_ / 2.5f;
         }
         if (isJump_ == true)
         {
+
             if (KEYS::IsDown(DIK_A)) {
                 move.x -= speed_;
             }
@@ -168,12 +185,13 @@ void Player::Throw(void)
                 move.x += speed_;
             }
         }
+       
         object_->worldCoordinate_.position_.x += move.x;
         object_->worldCoordinate_.position_.y += move.y;
     }
-
-
-    /* ropeSp_->SetRotation(90/3.14f);*/
-     /*ropeSp_->SetCutEndPoint(ropePos_);*/
+    if (isZip_ == true)
+    {
+            isHold_ = true;
+    }
 
 }

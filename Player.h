@@ -46,7 +46,8 @@ private: // 変数
     std::unique_ptr<Obj3d>  ropeObj_{};
     DirectX::XMFLOAT3 ropePos_{ 0.0f,0.0f,0.0f };
     bool isThrow_{ false };//投げた時のフラグ
-
+    bool isHold_{ false };
+    bool isZip_ {false};
     bool LimitDecrease_{ false };
 
     float ropeUpLimit_ = 5.0f;//ロープの上限

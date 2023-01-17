@@ -105,6 +105,7 @@ void GameScene::Col(void)
                     player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y <= blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
                     player_->SetPosY(player_->GetOldPos().y);
                     player_->SetFloatFlag(false);
+                    player_->SetJumpFlag(false);
                 }
 
                 // ‰º‚©‚çN“ü‚µ‚½ê‡
