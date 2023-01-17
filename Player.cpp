@@ -21,7 +21,6 @@ void Player::Update(void)
         if (isThrow_ == false)
         {
             isHold_ = true;
-            LimitDecrease_ = true;
             isThrow_ = true;
 
         }
@@ -29,6 +28,7 @@ void Player::Update(void)
         {
             isHold_ = false;
             isThrow_ = false;
+            LimitDecrease_ = true;
         }
     }
 
@@ -38,7 +38,7 @@ void Player::Update(void)
         Move();
        
         ropeObj_->worldCoordinate_.position_.x = object_->worldCoordinate_.position_.x + 3.0f;
-        ropeObj_->worldCoordinate_.position_.y = object_->worldCoordinate_.position_.y + 3.0f;
+        ropeObj_->worldCoordinate_.position_.y = object_->worldCoordinate_.position_.y + ropeUpLimit_;
         ropeObj_->worldCoordinate_.position_.z = object_->worldCoordinate_.position_.z;
 
         if (ropeUpLimit_ <= 0.0f)
