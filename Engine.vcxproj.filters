@@ -156,6 +156,15 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
+    <ClCompile Include="BlowerBlock.cpp">
+      <Filter>ソース ファイル\Object\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalBlock.cpp">
+      <Filter>ソース ファイル\Object\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtendBlock.cpp">
+      <Filter>ソース ファイル\Object\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicVS.hlsl" />
@@ -266,6 +275,15 @@
       <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="BlowerBlock.h">
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalBlock.h">
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtendBlock.h">
       <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
   </ItemGroup>

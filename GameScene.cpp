@@ -12,6 +12,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     cameraT_->eye_ = { 0,0, -100 };
     cameraT_->target_ = { 0 ,0, 0 };
     player_ = std::make_unique<Player>(cameraT_.get());
+    block = new ExtendBlock(cameraT_.get());
+    block->Init({ 1,1,1 });
 }
 
 void GameScene::Update(void)
@@ -43,13 +45,24 @@ void GameScene::Update(void)
         cameraT_->target_.x += 5;
     }
 
+    if (KEYS::IsDown(DIK_R))
+    {
+        block->SetIsflow(true);
+    }
+    if (KEYS::IsDown(DIK_T))
+    {
+        block->SetIsflow(false);
+    }
+
     cameraT_->Update();
     player_->Update();
+    block->Update();
 }
 
 void GameScene::Draw3d(void)
 {
     player_->Draw();
+    block->Draw();
 }
 
 void GameScene::Draw2d(void)
@@ -58,4 +71,5 @@ void GameScene::Draw2d(void)
 
 void GameScene::Finalize(void)
 {
+    delete block;
 }

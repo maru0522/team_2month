@@ -5,6 +5,7 @@
 #include "Obj3d.h"
 #include "BaseScene.h"
 #include "Player.h"
+#include "ExtendBlock.h"
 
 using std::unique_ptr;
 
@@ -20,5 +21,7 @@ public: // ä÷êî
 private:
     unique_ptr<Camera> cameraT_{ std::make_unique<Camera>() };
     unique_ptr<Player> player_{ std::make_unique<Player>(cameraT_.get()) };
+
+    ExtendBlock* block;
 };
 
