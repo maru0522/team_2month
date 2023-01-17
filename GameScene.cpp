@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Model.h"
 #include "Input.h"
+#include "SceneManager.h"
 
 void GameScene::Initialize(SceneManager* pSceneManager)
 {
@@ -9,8 +10,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     // •Ï”‰Šú‰»
     cameraT_ = std::make_unique<Camera>();
-    cameraT_->eye_ = { 0,0, -100 };
-    cameraT_->target_ = { 0 ,0, 0 };
+    cameraT_->eye_ = { 0,10, -50 };
+    cameraT_->target_ = { 0 ,10, 0 };
 
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
@@ -149,6 +150,10 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
 void GameScene::Update(void)
 {
+    if (KEYS::IsTrigger(DIK_R)) {
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
+        sceneManager_->RequestChangeScene(nextScene);
+    }
 
     //if (KEYS::IsDown(DIK_W)) {
     //    cameraT_->eye_.z += 5;
@@ -193,6 +198,11 @@ void GameScene::Update(void)
     player_->Update();
 
     Col();
+
+    reset_->Update();
+
+    cameraT_->eye_.x = player_->GetObject3d()->worldCoordinate_.position_.x;
+    cameraT_->target_.x = player_->GetObject3d()->worldCoordinate_.position_.x;
 }
 
 void GameScene::Draw3d(void)
@@ -206,6 +216,7 @@ void GameScene::Draw3d(void)
 
 void GameScene::Draw2d(void)
 {
+    reset_->Draw();
 }
 
 void GameScene::Finalize(void)

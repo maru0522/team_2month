@@ -17,8 +17,7 @@ public: // ä÷êî
     void Finalize(void) override;
 
 private:
-    unique_ptr<Camera> cameraT_{};
-    unique_ptr<Sprite> spriteT_{};
-    unique_ptr<Obj3d> objT_{};
+    unique_ptr<Sprite> title_{};
+    unique_ptr<Sprite> enter_{};
 };
 

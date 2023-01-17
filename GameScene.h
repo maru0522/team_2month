@@ -28,6 +28,8 @@ private:
     unique_ptr<Camera> cameraT_{ std::make_unique<Camera>() };
     unique_ptr<Player> player_{ std::make_unique<Player>(cameraT_.get()) };
 
+    unique_ptr<Sprite> reset_{ std::make_unique<Sprite>("Resources/Image/Reset.png",CMode::PATH) };
+
     std::array<unique_ptr<Block>, 100> blocks_{};
 };
 

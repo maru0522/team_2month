@@ -14,6 +14,9 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/thinking.png");
     Texture::Load("Resources/Image/Type_START.png");
     Texture::Load("Resources/Image/Type_PATH.png");
+    Texture::Load("Resources/Image/title.png");
+    Texture::Load("Resources/Image/title2.png");
+    Texture::Load("Resources/Image/Reset.png");
 
     // 3d.objì«Ç›çûÇ›
     Model::Load("Resources/3dModels/cube/cube.obj");
