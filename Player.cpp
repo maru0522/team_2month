@@ -8,8 +8,11 @@ Player::Player(Camera* pCamera)
 
 void Player::Update(void)
 {
+    oldPos_ = object_->worldCoordinate_.position_;
+
     Move();
     Jump();
+    Gravity();
 
     object_->Update();
 }
@@ -59,4 +62,9 @@ void Player::Jump(void)
     }
 
     object_->worldCoordinate_.position_.y += jumpValue_;
+}
+
+void Player::Gravity(void)
+{
+    object_->worldCoordinate_.position_.y -= gravity_;
 }

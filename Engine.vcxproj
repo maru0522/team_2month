@@ -152,6 +152,7 @@
     <ClCompile Include="AbstractSceneFactory.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceLoad.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceLoad.h" />
     <ClInclude Include="SceneFactory.h" />
