@@ -231,27 +231,35 @@ void GameScene::Col(void)
             std::abs(blocks_[i]->object_->worldCoordinate_.position_.z - player_->GetObject3d()->worldCoordinate_.position_.z) <= rangeIntoPlayer_) {
             blocks_[i]->Update();
 
-            // y•ûŒü
-            if (blocks_[i]->object_->worldCoordinate_.position_.x - (Block::radius_ + Player::radius_.x) < player_->GetObject3d()->worldCoordinate_.position_.x &&
-                player_->GetObject3d()->worldCoordinate_.position_.x < blocks_[i]->object_->worldCoordinate_.position_.x + (Block::radius_ + Player::radius_.x) && // <- or?
-                blocks_[i]->object_->worldCoordinate_.position_.z - (Block::radius_ + Player::radius_.z) < player_->GetObject3d()->worldCoordinate_.position_.z &&
-                player_->GetObject3d()->worldCoordinate_.position_.z < blocks_[i]->object_->worldCoordinate_.position_.z + (Block::radius_ + Player::radius_.z)
-                ) {
-                // ã‚©‚çN“ü‚µ‚½ê‡
-                if (blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y - Player::gravity_ &&
-                    player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y - Player::gravity_ < blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
-                    while ((player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y) - (blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) < 0)
-                    {
-                        player_->SetPosY(player_->GetObject3d()->worldCoordinate_.position_.y + 0.01f);
+            try {
+                // y•ûŒü
+                if (blocks_[i]->object_->worldCoordinate_.position_.x - (Block::radius_ + Player::radius_.x) < player_->GetObject3d()->worldCoordinate_.position_.x &&
+                    player_->GetObject3d()->worldCoordinate_.position_.x < blocks_[i]->object_->worldCoordinate_.position_.x + (Block::radius_ + Player::radius_.x) && // <- or?
+                    blocks_[i]->object_->worldCoordinate_.position_.z - (Block::radius_ + Player::radius_.z) < player_->GetObject3d()->worldCoordinate_.position_.z &&
+                    player_->GetObject3d()->worldCoordinate_.position_.z < blocks_[i]->object_->worldCoordinate_.position_.z + (Block::radius_ + Player::radius_.z)
+                    ) {
+                    // ã‚©‚çN“ü‚µ‚½ê‡
+                    if (blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.y - (Player::radius_.y + Player::gravity_) &&
+                        player_->GetObject3d()->worldCoordinate_.position_.y - (Player::radius_.y + Player::gravity_) < blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
+                        while ((player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y) - (blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) < 0.0f)
+                        {
+                            player_->SetPosY(player_->GetObject3d()->worldCoordinate_.position_.y + 0.01f);
+                        }
+                        player_->SetFloatFlag(false);
                     }
-                    player_->SetFloatFlag(false);
-                }
 
-                // ‰º‚©‚çN“ü‚µ‚½ê‡
-                if (blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_ <= player_->GetObject3d()->worldCoordinate_.position_.y + Player::radius_.y &&
-                    player_->GetObject3d()->worldCoordinate_.position_.y + Player::radius_.y <= blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
-                    //player_->SetPosY(player_->GetOldPos().y);
+                    // ‰º‚©‚çN“ü‚µ‚½ê‡
+                    if (blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.y + Player::radius_.y &&
+                        player_->GetObject3d()->worldCoordinate_.position_.y + Player::radius_.y < blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
+                        while ((blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_) - (player_->GetObject3d()->worldCoordinate_.position_.y + Player::radius_.y) < 0.0f)
+                        {
+                            player_->SetPosY(player_->GetObject3d()->worldCoordinate_.position_.y - 0.01f);
+                        }
+                    }
                 }
+            }
+            catch() {
+
             }
 
             // x•ûŒü
@@ -263,12 +271,18 @@ void GameScene::Col(void)
                 // ¶‚©‚çN“ü‚µ‚½ê‡
                 if (blocks_[i]->object_->worldCoordinate_.position_.x - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.x + Player::radius_.x &&
                     player_->GetObject3d()->worldCoordinate_.position_.x + Player::radius_.x < blocks_[i]->object_->worldCoordinate_.position_.x + Block::radius_) {
-                    //player_->SetPosX(player_->GetOldPos().x);
+                    //while ((blocks_[i]->object_->worldCoordinate_.position_.x - Block::radius_) - (player_->GetObject3d()->worldCoordinate_.position_.x + Player::radius_.x) < 0.0f)
+                    //{
+                    //    player_->SetPosX(player_->GetObject3d()->worldCoordinate_.position_.x - 0.01f);
+                    //}
                 }
                 // ‰E‚©‚çN“ü‚µ‚½ê‡
                 if (blocks_[i]->object_->worldCoordinate_.position_.x - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.x - Player::radius_.x &&
                     player_->GetObject3d()->worldCoordinate_.position_.x - Player::radius_.x < blocks_[i]->object_->worldCoordinate_.position_.x + Block::radius_) {
-                    //player_->SetPosX(player_->GetOldPos().x);
+                    //while ((player_->GetObject3d()->worldCoordinate_.position_.x - Player::radius_.x) + (blocks_[i]->object_->worldCoordinate_.position_.x + Block::radius_) - (player_->GetObject3d()->worldCoordinate_.position_.x + Player::radius_.x) < 0.0f)
+                    //{
+                    //    player_->SetPosX(player_->GetObject3d()->worldCoordinate_.position_.x + 0.01f);
+                    //}
                 }
             }
 
@@ -279,15 +293,21 @@ void GameScene::Col(void)
                 player_->GetObject3d()->worldCoordinate_.position_.y < blocks_[i]->object_->worldCoordinate_.position_.y + (Block::radius_ + Player::radius_.y)
                 ) {
                 // Žè‘O‚©‚çN“ü‚µ‚½ê‡
-                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z &&
-                    player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
-                    //player_->SetPosZ(player_->GetOldPos().z);
+                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z + (Player::radius_.z + Player::speed_)&&
+                    player_->GetObject3d()->worldCoordinate_.position_.z + (Player::radius_.z + Player::speed_) < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
+                    while ((blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_) - (player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z) < 0.0f)
+                    {
+                        player_->SetPosZ(player_->GetObject3d()->worldCoordinate_.position_.z - 0.01f);
+                    }
                 }
 
                 // ‰œ‚©‚çN“ü‚µ‚½ê‡
-                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z &&
-                    player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
-                    //player_->SetPosZ(player_->GetOldPos().z);
+                if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z - (Player::radius_.z + Player::speed_) &&
+                    player_->GetObject3d()->worldCoordinate_.position_.z - (Player::radius_.z + Player::speed_) < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
+                    while ((blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) - (player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z) < 0.0f)
+                    {
+                        player_->SetPosZ(player_->GetObject3d()->worldCoordinate_.position_.z + 0.01f);
+                    }
                 }
             }
         }
