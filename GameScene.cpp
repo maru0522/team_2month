@@ -226,8 +226,8 @@ void GameScene::Finalize(void)
 void GameScene::Col(void)
 {
     for (size_t i = 0; i < 95; i++) {
-        if (std::abs(blocks_[i]->object_->worldCoordinate_.position_.x - player_->GetObject3d()->worldCoordinate_.position_.x) <= rangeIntoPlayer_ ||
-            std::abs(blocks_[i]->object_->worldCoordinate_.position_.y - player_->GetObject3d()->worldCoordinate_.position_.y) <= rangeIntoPlayer_ ||
+        if (std::abs(blocks_[i]->object_->worldCoordinate_.position_.x - player_->GetObject3d()->worldCoordinate_.position_.x) <= rangeIntoPlayer_ &&
+            std::abs(blocks_[i]->object_->worldCoordinate_.position_.y - player_->GetObject3d()->worldCoordinate_.position_.y) <= rangeIntoPlayer_ &&
             std::abs(blocks_[i]->object_->worldCoordinate_.position_.z - player_->GetObject3d()->worldCoordinate_.position_.z) <= rangeIntoPlayer_) {
             blocks_[i]->Update();
 

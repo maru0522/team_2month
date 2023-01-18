@@ -12,7 +12,7 @@ using std::unique_ptr;
 class GameScene : public BaseScene
 {
 private:
-    static constexpr float rangeIntoPlayer_{ 10.0f };
+    static constexpr float rangeIntoPlayer_{ 50.0f };
 
 public: // ä÷êî
     void Initialize(SceneManager* sceneManager) override;
