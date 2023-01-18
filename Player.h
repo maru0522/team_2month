@@ -19,7 +19,6 @@ public: // ’è”
     void Draw(void);
 
     const std::unique_ptr<Obj3d>& GetObject3d(void) const { return object_; }
-    const DirectX::XMFLOAT3& GetOldPos(void) const { return oldPos_; }
 
     void SetPos(const DirectX::XMFLOAT3& pos) { object_->worldCoordinate_.position_ = pos; }
     void SetPosX(const float posX) { object_->worldCoordinate_.position_.x = posX; }
@@ -35,8 +34,6 @@ private:
 
 private: // •Ï”
     std::unique_ptr<Obj3d> object_{};
-
-    DirectX::XMFLOAT3 oldPos_{};
 
     float jumpValue_{ 0.0f };
 

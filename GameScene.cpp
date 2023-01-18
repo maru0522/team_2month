@@ -238,16 +238,19 @@ void GameScene::Col(void)
                 player_->GetObject3d()->worldCoordinate_.position_.z < blocks_[i]->object_->worldCoordinate_.position_.z + (Block::radius_ + Player::radius_.z)
                 ) {
                 // ã‚©‚çN“ü‚µ‚½ê‡
-                if (blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_ <= player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y &&
-                    player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y <= blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
-                    player_->SetPosY(player_->GetOldPos().y);
+                if (blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y - Player::gravity_ &&
+                    player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y - Player::gravity_ < blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
+                    while ((player_->GetObject3d()->worldCoordinate_.position_.y - Player::radius_.y) - (blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) < 0)
+                    {
+                        player_->SetPosY(player_->GetObject3d()->worldCoordinate_.position_.y + 0.01f);
+                    }
                     player_->SetFloatFlag(false);
                 }
 
                 // ‰º‚©‚çN“ü‚µ‚½ê‡
                 if (blocks_[i]->object_->worldCoordinate_.position_.y - Block::radius_ <= player_->GetObject3d()->worldCoordinate_.position_.y + Player::radius_.y &&
                     player_->GetObject3d()->worldCoordinate_.position_.y + Player::radius_.y <= blocks_[i]->object_->worldCoordinate_.position_.y + Block::radius_) {
-                    player_->SetPosY(player_->GetOldPos().y);
+                    //player_->SetPosY(player_->GetOldPos().y);
                 }
             }
 
@@ -260,12 +263,12 @@ void GameScene::Col(void)
                 // ¶‚©‚çN“ü‚µ‚½ê‡
                 if (blocks_[i]->object_->worldCoordinate_.position_.x - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.x + Player::radius_.x &&
                     player_->GetObject3d()->worldCoordinate_.position_.x + Player::radius_.x < blocks_[i]->object_->worldCoordinate_.position_.x + Block::radius_) {
-                    player_->SetPosX(player_->GetOldPos().x);
+                    //player_->SetPosX(player_->GetOldPos().x);
                 }
                 // ‰E‚©‚çN“ü‚µ‚½ê‡
                 if (blocks_[i]->object_->worldCoordinate_.position_.x - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.x - Player::radius_.x &&
                     player_->GetObject3d()->worldCoordinate_.position_.x - Player::radius_.x < blocks_[i]->object_->worldCoordinate_.position_.x + Block::radius_) {
-                    player_->SetPosX(player_->GetOldPos().x);
+                    //player_->SetPosX(player_->GetOldPos().x);
                 }
             }
 
@@ -278,13 +281,13 @@ void GameScene::Col(void)
                 // Žè‘O‚©‚çN“ü‚µ‚½ê‡
                 if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z &&
                     player_->GetObject3d()->worldCoordinate_.position_.z + Player::radius_.z < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
-                    player_->SetPosZ(player_->GetOldPos().z);
+                    //player_->SetPosZ(player_->GetOldPos().z);
                 }
 
                 // ‰œ‚©‚çN“ü‚µ‚½ê‡
                 if (blocks_[i]->object_->worldCoordinate_.position_.z - Block::radius_ < player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z &&
                     player_->GetObject3d()->worldCoordinate_.position_.z - Player::radius_.z < blocks_[i]->object_->worldCoordinate_.position_.z + Block::radius_) {
-                    player_->SetPosZ(player_->GetOldPos().z);
+                    //player_->SetPosZ(player_->GetOldPos().z);
                 }
             }
         }
