@@ -74,9 +74,7 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
 
         // y軸,z軸においてプレイヤーがブロック内の座標にある時。
-        if (/*0 < std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) &&*/
-            std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0 &&
-            /*0 < std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) &&*/
+        if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0 &&
             std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0) {
             // DirectionX
             // 移動先(+vel)がblock内かどうか
@@ -93,9 +91,7 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
         }
 
         // x軸,z軸においてプレイヤーがブロック内の座標にある時。
-        if (/*0 < std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) &&*/
-            std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0 &&
-            /*0 < std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) &&*/
+        if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0 &&
             std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0) {
             // DirectionY
             // 移動先(+vel)がblock内かどうか
@@ -112,9 +108,7 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
         }
 
         // x軸,y軸においてプレイヤーがブロック内の座標にある時。
-        if (/*0 < std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) &&*/
-            std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0 &&
-            /*0 < std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) &&*/
+        if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0 &&
             std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0) {
             // DirectionZ
             // 移動先(+vel)がblock内かどうか
