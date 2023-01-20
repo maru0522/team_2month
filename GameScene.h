@@ -5,7 +5,7 @@
 #include "Obj3d.h"
 #include "BaseScene.h"
 #include "Player.h"
-#include "Block.h"
+#include "NormalBlock.h"
 
 using std::unique_ptr;
 
@@ -22,7 +22,7 @@ public: // ä÷êî
     void Finalize(void) override;
 
 private:
-    void Col(void);
+    //void Col(void);
 
 private:
     unique_ptr<Camera> cameraT_{ std::make_unique<Camera>() };
@@ -30,6 +30,7 @@ private:
 
     unique_ptr<Sprite> reset_{ std::make_unique<Sprite>("Resources/Image/Reset.png",CMode::PATH) };
 
-    std::array<unique_ptr<Block>, 100> blocks_{};
+    //unique_ptr<IBlock> blockT_{};
+    //unique_ptr<Obj3d> obj3dT_{};
 };
 

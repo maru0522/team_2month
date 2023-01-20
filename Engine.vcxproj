@@ -149,13 +149,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlockManager.cpp" />
+    <ClCompile Include="IBlock.cpp" />
     <ClCompile Include="AbstractSceneFactory.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="BaseScene.cpp" />
-    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="NormalBlock.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceLoad.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StartBlock.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="XAudio.cpp" />
     <ClCompile Include="BasicFrame.cpp" />
@@ -232,13 +236,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlockManager.h" />
+    <ClInclude Include="IBlock.h" />
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="BaseScene.h" />
-    <ClInclude Include="Block.h" />
+    <ClInclude Include="NormalBlock.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceLoad.h" />
     <ClInclude Include="SceneFactory.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="StartBlock.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="XAudio.h" />
     <ClInclude Include="BasicFrame.h" />

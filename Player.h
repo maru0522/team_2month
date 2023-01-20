@@ -30,7 +30,7 @@ public: // ’è”
 private:
     void Move(void);
     void Jump(void);
-    void Gravity(void);
+    void Collision(DirectX::XMFLOAT3& vel);
 
 private: // •Ï”
     std::unique_ptr<Obj3d> object_{};

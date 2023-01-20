@@ -89,6 +89,15 @@ void Obj3d::Draw(void)
     iDX->GetCommandList()->DrawIndexedInstanced((uint32_t)model_.GetModelValueInfo()->indices_.size(), 1, 0, 0, 0);
 }
 
+void Obj3d::SetModel(const fsPath& path)
+{
+    model_.SetMODEL_KEY(path);
+
+    model_.SetMODEL_VALUE(*Model::GetMODEL_VALUE(path));
+
+    srvGpuHandleCopy_ = srvGpuHandleCopy_ = Texture::GetTextureInfo(path)->srvGpuHandle_;
+}
+
 void Obj3d::SetTexture(const fsPath& pathAndFileName)
 {
     srvGpuHandleCopy_ = Texture::GetTextureInfo(pathAndFileName)->srvGpuHandle_;
