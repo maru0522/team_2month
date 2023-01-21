@@ -15,6 +15,7 @@ public:
         NORMAL,
         START,
         GOAL,
+        HOOK,
     };
 
     virtual ~IBlock(void) = default;
@@ -26,6 +27,7 @@ public:
 
     const DirectX::XMFLOAT3* GetPos(void) { return &body_->worldCoordinate_.position_; }
     const DirectX::XMFLOAT3* GetRadius(void) { return &radius_; }
+    const Type* GetType(void) { return &type_; }
 
 protected:
     std::unique_ptr<Obj3d> body_{ std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj") };

@@ -4,6 +4,8 @@
 #include <string>
 #include "BlockManager.h"
 #include "NormalBlock.h"
+#include "StartBlock.h"
+#include "Hook.h"
 
 void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
 {
@@ -37,6 +39,12 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
             break;
         case IBlock::Type::NORMAL:
             BlockManager::Register(new NormalBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)},pCamera });
+            break;
+        case IBlock::Type::START:
+            BlockManager::Register(new StartBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)},pCamera });
+            break;
+        case IBlock::Type::HOOK:
+            BlockManager::Register(new Hook{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)},pCamera });
             break;
         }
 

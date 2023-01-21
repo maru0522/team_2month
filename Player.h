@@ -5,8 +5,17 @@
 
 class Player
 {
+private: // íËã`
+    enum class State
+    {
+        DEFAULT,
+        ROPE,
+        TARZAN,
+    };
+
 public: // íËêî
     static constexpr float speed_{ 0.4f };
+    static constexpr float ropeSpeed_{ 0.2f };
     static constexpr float jumpPower_{ 1.2f }; // 2.4f -> 1.2f
     static constexpr float jumpAttenuation_{ 0.125f };
     static constexpr float gravity_{ 0.35f };
@@ -30,13 +39,22 @@ public: // íËêî
 private:
     void Move(void);
     void Jump(void);
+    void Controll(DirectX::XMFLOAT3& vel);
+    void ControllState(void);
     void Collision(DirectX::XMFLOAT3& vel);
+
+    void SetState(State state) { state_ = state; }
 
 private: // ïœêî
     std::unique_ptr<Obj3d> object_{};
 
+    // Ç∂Ç·ÇÒÇ’
     float jumpValue_{ 0.0f };
 
     bool isJump_{ false };
     bool isFloat_{ false };
+
+    // èÛë‘
+    State state_{ State::DEFAULT };
+    bool isUnderHook_{ false }; // UIï\é¶ÇÃÇΩÇﬂÇÃÇ‡ÇÃ
 };

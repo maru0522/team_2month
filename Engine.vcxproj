@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BlockManager.cpp" />
+    <ClCompile Include="Hook.cpp" />
     <ClCompile Include="IBlock.cpp" />
     <ClCompile Include="AbstractSceneFactory.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
@@ -237,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlockManager.h" />
+    <ClInclude Include="Hook.h" />
     <ClInclude Include="IBlock.h" />
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="AssimpLoader.h" />
