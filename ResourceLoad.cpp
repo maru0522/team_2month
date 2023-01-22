@@ -18,6 +18,8 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/title.png");
     Texture::Load("Resources/Image/title2.png");
     Texture::Load("Resources/Image/Reset.png");
+    Texture::Load("Resources/Image/KEY_ENTER.png");
+    Texture::Load("Resources/Image/KEY_ENTER_PRESS.png");
 
     // 3d.objì«Ç›çûÇ›
     Model::Load("Resources/3dModels/cube/cube.obj");

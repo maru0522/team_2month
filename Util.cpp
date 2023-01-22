@@ -16,10 +16,21 @@ inline int32_t Util::Timer::GetNowCount(void)
 void Util::Timer::Start(float_t endTime)
 {
     startTime_ = GetNowCount<milliseconds>();
+    endTime_ = endTime;
 }
 
 const bool Util::Timer::GetIsEnd(void)
 {
     float_t elapsedTime = (GetNowCount<milliseconds>() - startTime_) / 1000.0f;
     return endTime_ < elapsedTime;
+}
+
+const float_t Util::Timer::GetElapsedTime(void)
+{
+    return float_t{ (GetNowCount<milliseconds>() - startTime_) / 1000.0f };
+}
+
+const float_t& Util::Timer::GetEndTime(void) const
+{
+    return endTime_;
 }

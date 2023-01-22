@@ -218,7 +218,7 @@ void GameScene::Update(void)
 
 void GameScene::Draw3d(void)
 {
-    player_->Draw();
+    player_->Draw3d();
 
     //obj3dT_->Draw();
     //blockT_->Draw();
@@ -229,6 +229,7 @@ void GameScene::Draw3d(void)
 void GameScene::Draw2d(void)
 {
     reset_->Draw();
+    player_->Draw2d();
 }
 
 void GameScene::Finalize(void)

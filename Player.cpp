@@ -1,10 +1,14 @@
 #include "Player.h"
 #include "Input.h"
 #include "BlockManager.h"
+#include "Util.h"
 
 Player::Player(Camera* pCamera)
 {
     object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
+    ropeUseKey_sprite_->SetPosition({ 1118,654 });
+    ropeUseKeyPress_sprite_->SetPosition({ 1118,660 });
+    ropeKeyTimer_->Start(1.5f);
 }
 
 void Player::Update(void)
@@ -12,11 +16,28 @@ void Player::Update(void)
     Move();
 
     object_->Update();
+
+    ControllKeyTimer();
+
+    ropeUseKey_sprite_->Update();
+    ropeUseKeyPress_sprite_->Update();
 }
 
-void Player::Draw(void)
+void Player::Draw3d(void)
 {
     object_->Draw();
+}
+
+void Player::Draw2d(void)
+{
+    if (isUnderHook_) {
+        if (ropeKeyTimer_->GetElapsedTime() <= ropeKeyTimer_->GetEndTime() / 2.f ) {
+            ropeUseKey_sprite_->Draw();
+        }
+        else {
+            ropeUseKeyPress_sprite_->Draw();
+        }
+    }
 }
 
 void Player::Move(void)
@@ -35,6 +56,10 @@ void Player::Move(void)
     object_->worldCoordinate_.position_.x += vel.x;
     object_->worldCoordinate_.position_.y += vel.y;
     object_->worldCoordinate_.position_.z += vel.z;
+
+#ifdef _DEBUG
+    DrawImgui(vel);
+#endif // _DEBUG
 }
 
 void Player::Jump(void)
@@ -104,7 +129,9 @@ void Player::ControllState(void)
     {
     case Player::State::DEFAULT:
         if (isUnderHook_) {
-            if (KEYS::IsTrigger(DIK_RETURN)) SetState(State::ROPE);
+            if (KEYS::IsTrigger(DIK_RETURN)) {
+                SetState(State::ROPE);
+            }
         }
         break;
 
@@ -124,8 +151,8 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
 
         // y軸,z軸においてプレイヤーがブロック内の座標にある時。
-        if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0 &&
-            std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0) {
+        if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0.f &&
+            std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0.f) {
             // DirectionX
             // 移動先(+vel)がblock内かどうか
             if (std::abs(block->GetPos()->x - (object_->worldCoordinate_.position_.x + vel.x)) - (block->GetRadius()->x + Player::radius_.x) <= 0) {
@@ -141,8 +168,8 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
         }
 
         // x軸,z軸においてプレイヤーがブロック内の座標にある時。
-        if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0 &&
-            std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0) {
+        if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0.f &&
+            std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0.f) {
             // DirectionY
             // 移動先(+vel)がblock内かどうか
             if (std::abs(block->GetPos()->y - (object_->worldCoordinate_.position_.y + vel.y)) - (block->GetRadius()->y + Player::radius_.y) <= 0) {
@@ -150,18 +177,26 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                     // block内に入らないようvelの値がblockとピッタリになるように。
                     vel.y = std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y);
                     isJump_ = false;
+                    isFloat_ = false;
                 }
                 else {
                     // block内に入らないようvelの値がblockとピッタリになるように。
                     vel.y = -(std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y));
                     isJump_ = false;
+                    isFloat_ = false;
                 }
             }
+            else {
+                isFloat_ = true;
+            }
+        }
+        else if(block->GetPos()->y + block->GetRadius()->y < object_->worldCoordinate_.position_.y - Player::radius_.y) {
+            isFloat_ = true;
         }
 
         // x軸,y軸においてプレイヤーがブロック内の座標にある時。
-        if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0 &&
-            std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0) {
+        if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0.f &&
+            std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0.f) {
             // DirectionZ
             // 移動先(+vel)がblock内かどうか
             if (std::abs(block->GetPos()->z - (object_->worldCoordinate_.position_.z + vel.z)) - (block->GetRadius()->z + Player::radius_.z) <= 0) {
@@ -179,18 +214,50 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
 
         if (*block->GetType() == IBlock::Type::HOOK) { // block の type が HOOK の場合
             // x軸,z軸においてプレイヤーがブロック内の座標にある時。
-            if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < -0.2f && // ※<-ちょっと範囲狭めてる
-                std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < -0.2f) {
+            if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < -0.4f && // ※<-ちょっと範囲狭めてる
+                std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < -0.4f) {
                 // DirectionY
                 // HOOK ブロックから下方向6ブロック以内にいるか
                 if (block->GetPos()->y - (block->GetRadius()->y + Player::radius_.y) >= object_->worldCoordinate_.position_.y &&
                     object_->worldCoordinate_.position_.y > block->GetPos()->y - ((block->GetRadius()->y * 2) * 6 + block->GetRadius()->y)) {
                     isUnderHook_ = true;
                 }
-                else {
-                    isUnderHook_ = false;
-                }
+            }
+            else {
+                isUnderHook_ = false;
             }
         }
     }
+}
+
+void Player::ControllKeyTimer(void)
+{
+    if (ropeKeyTimer_->GetIsEnd()) ropeKeyTimer_->Start(1.5f);
+}
+
+void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
+{
+    ImGui::Begin("Player info");;
+    ImGui::Text(isUnderHook_ ? "isUnderHook_ : true" : "isUnderHook_ : false");
+    ImGui::RadioButton("true", (int*)&isUnderHook_, true);
+    ImGui::SameLine();
+    ImGui::RadioButton("false", (int*)&isUnderHook_, false);
+
+    ImGui::Spacing();
+
+    ImGui::Text("PlayerCoordinate : %.3f,%.3f,%.3f", object_->worldCoordinate_.position_.x, object_->worldCoordinate_.position_.y, object_->worldCoordinate_.position_.z);
+    ImGui::Text("PlayerVec : %.3f,%.3f,%.3f", vel.x, vel.y, vel.z);
+
+    ImGui::Spacing();
+
+    ImGui::Text("ropeKeyTimer_elapsedTime : ropeKeyTimer_endTime");
+    ImGui::Text("%.6f : %.6f", ropeKeyTimer_->GetElapsedTime(), ropeKeyTimer_->GetEndTime());
+    ImGui::Text(ropeKeyTimer_->GetIsEnd() ? "isEnd_ : true" : "isEnd_ : false");
+
+    ImGui::Spacing();
+
+    ImGui::Text(isJump_ ? "isJump_ : true" : "isJump_ : false");
+    ImGui::Text(isFloat_ ? "isFloat_ : true" : "isFloat_ : false");
+
+    ImGui::End();
 }

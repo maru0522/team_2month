@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "ResourceLoad.h"
 #include "TitleScene.h"
+#include "ImGuiController.h"
 
 GameSystem::GameSystem(void)
 {
@@ -36,6 +37,8 @@ void GameSystem::Draw(void)
     sceneManager_->Draw2d();
 
     // ---------2DUI‚Ì•`‰æ---------
+
+    imGuiController_->Draw();
 
     iDX_->PostDraw();
 }

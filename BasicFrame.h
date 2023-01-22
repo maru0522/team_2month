@@ -22,10 +22,10 @@ public: // ŠÖ”
 protected: // •Ï”
     InitDirectX* iDX_{ nullptr };
     std::unique_ptr<SceneManager> sceneManager_{ nullptr };
+    std::unique_ptr<ImGuiController> imGuiController_{ nullptr };
 
 
 private: // •Ï”
     Window* wnd_{ nullptr };
-    std::unique_ptr<ImGuiController> imGuiController_{ nullptr };
 };
 

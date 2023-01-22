@@ -14,7 +14,7 @@ public: // ä÷êî
     ImGuiController(void);
     ~ImGuiController(void);
 
-    void Update(void);
+    //void Update(void);
     void Begin(void);
     void End(void);
     void Draw(void);

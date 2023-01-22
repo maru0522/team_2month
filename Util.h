@@ -35,6 +35,8 @@ namespace Util {
         void Start(float_t endTime = 1.0f);
 
         // getter
+        const float_t GetElapsedTime(void);
+        const float_t& GetEndTime(void) const;
         const bool GetIsEnd(void);
 
     private: // •Ï”

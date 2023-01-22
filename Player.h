@@ -2,6 +2,8 @@
 #include "Obj3d.h"
 #include <memory>
 #include "Camera.h"
+#include <imgui.h>
+#include "Sprite.h"
 
 class Player
 {
@@ -25,7 +27,9 @@ public: // íËêî
     Player(Camera* pCamera);
 
     void Update(void);
-    void Draw(void);
+    void Draw3d(void);
+    void Draw2d(void);
+    void DrawImgui(const DirectX::XMFLOAT3& vel);
 
     const std::unique_ptr<Obj3d>& GetObject3d(void) const { return object_; }
 
@@ -43,6 +47,8 @@ private:
     void ControllState(void);
     void Collision(DirectX::XMFLOAT3& vel);
 
+    void ControllKeyTimer(void);
+
     void SetState(State state) { state_ = state; }
 
 private: // ïœêî
@@ -57,4 +63,8 @@ private: // ïœêî
     // èÛë‘
     State state_{ State::DEFAULT };
     bool isUnderHook_{ false }; // UIï\é¶ÇÃÇΩÇﬂÇÃÇ‡ÇÃ
+    std::unique_ptr<Util::Timer> ropeKeyTimer_{ std::make_unique<Util::Timer>() };
+
+    std::unique_ptr<Sprite> ropeUseKey_sprite_{ std::make_unique<Sprite>("Resources/Image/KEY_ENTER.png",CMode::PATH) };
+    std::unique_ptr<Sprite> ropeUseKeyPress_sprite_{ std::make_unique<Sprite>("Resources/Image/KEY_ENTER_PRESS.png",CMode::PATH) };
 };

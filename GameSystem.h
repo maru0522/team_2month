@@ -2,6 +2,7 @@
 #include <memory>
 #include "BasicFrame.h"
 #include "BaseScene.h"
+#include "ImGuiController.h"
 
 class GameSystem : public BasicFrame
 {

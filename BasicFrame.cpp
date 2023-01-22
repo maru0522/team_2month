@@ -52,7 +52,9 @@ void BasicFrame::Update(void)
     DPAD::Update();
     XPAD::Update();
 
+    imGuiController_->Begin();
     sceneManager_->Update();
+    imGuiController_->End();
 }
 
 void BasicFrame::Draw(void)
