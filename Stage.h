@@ -9,6 +9,5 @@ private:
 
 public:
     static void LoadCsv(Camera* pCamera, const fsPath& path);
-
 };
 

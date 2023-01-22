@@ -12,11 +12,11 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     // •Ï”‰Šú‰»
     cameraT_ = std::make_unique<Camera>();
-    cameraT_->eye_ = { -35.f, 68.f, -18.f };
+    cameraT_->eye_ = { -50.f, 70.f, -20.f };
     cameraT_->target_ = { 30 ,-4, 30 };
 
     player_ = std::make_unique<Player>(cameraT_.get());
-    player_->SetPos({ 2.0f,4.0f,2.0f });
+    player_->SetPos({ 0.0f,4.0f,0.0f });
 
     Stage::LoadCsv(cameraT_.get(),"Resources/Csv/tutorial.csv");
 }

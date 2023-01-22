@@ -8,7 +8,7 @@
 class NormalBlock : public IBlock
 {
 public: // ä÷êî
-    NormalBlock(DirectX::XMFLOAT3 pos, Camera* pCamera);
+    NormalBlock(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, Camera* pCamera);
 
     void Update(void) override;
     void Draw(void) override;

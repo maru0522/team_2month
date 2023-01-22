@@ -8,7 +8,7 @@
 class StartBlock : public IBlock
 {
 public: // ä÷êî
-    StartBlock(DirectX::XMFLOAT3 pos, Camera* pCamera);
+    StartBlock(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, Camera* pCamera);
 
     void Update(void) override;
     void Draw(void) override;
