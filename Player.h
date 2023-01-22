@@ -18,10 +18,12 @@ private: // íËã`
 public: // íËêî
     static constexpr float speed_{ 0.4f };
     static constexpr float ropeSpeed_{ 0.2f };
-    static constexpr float jumpPower_{ 1.2f }; // 2.4f -> 1.2f
-    static constexpr float jumpAttenuation_{ 0.125f };
-    static constexpr float gravity_{ 0.35f };
+    static constexpr float jumpPower_{ 2.7f }; // 2.4f -> 1.2f
+    static constexpr float jumpAttenuation_{ 0.23f };
+    static constexpr float gravity_{ 0.75f };
     static constexpr DirectX::XMFLOAT3 radius_{ 1.0f,1.0f,1.0f };
+
+    static constexpr float epsilon_{ 0.1f };
 
     // ä÷êî
     Player(Camera* pCamera);
@@ -39,7 +41,7 @@ public: // íËêî
     void SetPosZ(const float posZ) { object_->worldCoordinate_.position_.z = posZ; }
 
     void SetJumpFlag(bool isJump) { isJump_ = isJump; }
-    void SetFloatFlag(bool isFloat) { isFloat_ = isFloat; }
+
 private:
     void Move(void);
     void Jump(void);
@@ -58,7 +60,6 @@ private: // ïœêî
     float jumpValue_{ 0.0f };
 
     bool isJump_{ false };
-    bool isFloat_{ false };
 
     // èÛë‘
     State state_{ State::DEFAULT };

@@ -52,6 +52,10 @@ void Player::Move(void)
     // 当たり判定
     Collision(vel);
 
+    if (vel.y < 0) {
+        isJump_ = true;
+    }
+
     // 補正されたvelosityを加算
     object_->worldCoordinate_.position_.x += vel.x;
     object_->worldCoordinate_.position_.y += vel.y;
@@ -64,7 +68,7 @@ void Player::Move(void)
 
 void Player::Jump(void)
 {
-    if (KEYS::IsTrigger(DIK_SPACE) && isJump_ == false && isFloat_ == false) {
+    if (KEYS::IsTrigger(DIK_SPACE) && isJump_ == false) {
         isJump_ = true;
         jumpValue_ = jumpPower_;
     }
@@ -176,22 +180,12 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 if (vel.y > 0) {
                     // block内に入らないようvelの値がblockとピッタリになるように。
                     vel.y = std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y);
-                    isJump_ = false;
-                    isFloat_ = false;
                 }
                 else {
                     // block内に入らないようvelの値がblockとピッタリになるように。
                     vel.y = -(std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y));
-                    isJump_ = false;
-                    isFloat_ = false;
                 }
             }
-            else {
-                isFloat_ = true;
-            }
-        }
-        else if(block->GetPos()->y + block->GetRadius()->y < object_->worldCoordinate_.position_.y - Player::radius_.y) {
-            isFloat_ = true;
         }
 
         // x軸,y軸においてプレイヤーがブロック内の座標にある時。
@@ -257,7 +251,6 @@ void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
     ImGui::Spacing();
 
     ImGui::Text(isJump_ ? "isJump_ : true" : "isJump_ : false");
-    ImGui::Text(isFloat_ ? "isFloat_ : true" : "isFloat_ : false");
 
     ImGui::End();
 }

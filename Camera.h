@@ -6,6 +6,7 @@
 #include <d3d12.h>
 
 #pragma comment(lib,"d3d12.lib")
+#include <imgui.h>
 
 class Camera
 {
@@ -19,6 +20,7 @@ public: // íËã`
     // ä÷êî
     Camera(void);
     void Update(void);
+    void DrawImgui(void);
 
     void SetProjection(Camera::Projection projectionType);
     void SwitchProjection(void);
