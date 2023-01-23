@@ -18,6 +18,7 @@ public:
         HOOK,           // 4
         POWERSUPPLY,    // 5
         POWERRECEIVE,   // 6
+        SWITCH,         // 7
     };
 
     virtual ~IBlock(void) = default;

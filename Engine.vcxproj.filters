@@ -76,6 +76,12 @@
     <Filter Include="ソース ファイル\Object\Block">
       <UniqueIdentifier>{306fbd3d-aade-423b-9494-521bdaa3b2a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\Block\Gimmick">
+      <UniqueIdentifier>{bdd9f3da-773f-4af7-a434-426ae55c0470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Block\Gimmick">
+      <UniqueIdentifier>{3488bc70-8ba2-4011-aead-9bb66611b13d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,9 +177,6 @@
     <ClCompile Include="NormalBlock.cpp">
       <Filter>ソース ファイル\Object\Block</Filter>
     </ClCompile>
-    <ClCompile Include="PowerSupplyBlock.cpp">
-      <Filter>ソース ファイル\Object\Block</Filter>
-    </ClCompile>
     <ClCompile Include="StartBlock.cpp">
       <Filter>ソース ファイル\Object\Block</Filter>
     </ClCompile>
@@ -183,11 +186,17 @@
     <ClCompile Include="Stage.cpp">
       <Filter>ソース ファイル\MakeGame</Filter>
     </ClCompile>
-    <ClCompile Include="PowerReceiveBlock.cpp">
-      <Filter>ソース ファイル\Object\Block</Filter>
-    </ClCompile>
     <ClCompile Include="IGimmickBlock.cpp">
-      <Filter>ソース ファイル\Object\Block</Filter>
+      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerReceiveBlock.cpp">
+      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerSupplyBlock.cpp">
+      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchBlock.cpp">
+      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,9 +310,6 @@
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
-    <ClInclude Include="PowerSupplyBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
-    </ClInclude>
     <ClInclude Include="Hook.h">
       <Filter>ヘッダー ファイル\Object\Block</Filter>
     </ClInclude>
@@ -322,11 +328,17 @@
     <ClInclude Include="BlockManager.h">
       <Filter>ヘッダー ファイル\MakeGame</Filter>
     </ClInclude>
-    <ClInclude Include="PowerReceiveBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
-    </ClInclude>
     <ClInclude Include="IGimmickBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
+      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerReceiveBlock.h">
+      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerSupplyBlock.h">
+      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchBlock.h">
+      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

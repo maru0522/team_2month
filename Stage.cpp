@@ -6,6 +6,8 @@
 #include "NormalBlock.h"
 #include "StartBlock.h"
 #include "Hook.h"
+#include "PowerSupplyBlock.h"
+#include "PowerReceiveBlock.h"
 
 void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
 {
@@ -16,6 +18,7 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
     std::array<float, 3> coordinate{};
     std::array<float, 3> scale{};
     IBlock::Type blockType{ IBlock::Type::INIT };
+    uint32_t idxConnect{};
 
     while (std::getline(ifs, line)) {
         size_t loopX{};
@@ -31,6 +34,11 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
             }
             else if (loopX == 6) {
                 blockType = static_cast<IBlock::Type>(std::stoi(tmp));
+            }
+            else if (loopX == 7) { // POWERRECEIVEà»ç~
+                if (static_cast<int>(blockType) >= static_cast<int>(IBlock::Type::POWERRECEIVE)) {
+                    idxConnect = std::stoi(tmp);
+                }
             }
             else {
                 OutputDebugStringA("csv file error. Block information can be up to 4 per line.");
@@ -50,6 +58,13 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
         case IBlock::Type::HOOK:
             BlockManager::Register(new Hook{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });
             break;
+        case IBlock::Type::POWERSUPPLY:
+            BlockManager::Register(new PowerSupplyBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });
+            break;
+        case IBlock::Type::POWERRECEIVE:
+            BlockManager::Register(new PowerReceiveBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idxConnect, pCamera });
+            break;
+
         }
 
         coordinate.fill(0.f);

@@ -13,6 +13,10 @@ private: // ’è‹`
         DEFAULT,
         ROPE,
         TARZAN,
+
+#ifdef _DEBUG
+        S_DEBUG,
+#endif // _DEBUG
     };
 
 public: // ’è”

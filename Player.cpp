@@ -31,7 +31,7 @@ void Player::Draw3d(void)
 void Player::Draw2d(void)
 {
     if (isUnderHook_) {
-        if (ropeKeyTimer_->GetElapsedTime() <= ropeKeyTimer_->GetEndTime() / 2.f ) {
+        if (ropeKeyTimer_->GetElapsedTime() <= ropeKeyTimer_->GetEndTime() / 2.f) {
             ropeUseKey_sprite_->Draw();
         }
         else {
@@ -124,6 +124,35 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
         break;
     case Player::State::TARZAN:
         break;
+
+#ifdef _DEBUG
+    case Player::State::S_DEBUG:
+        // 入力処理
+        vel.z += (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
+        vel.x += (KEYS::IsDown(DIK_D) - KEYS::IsDown(DIK_A));
+
+        // 正規化 
+        if (std::sqrtf(vel.x * vel.x + vel.y * vel.y + vel.z * vel.z) != 0) {
+            vel.x = vel.x / std::sqrtf(vel.x * vel.x + vel.y * vel.y + vel.z * vel.z);
+            vel.z = vel.z / std::sqrtf(vel.x * vel.x + vel.y * vel.y + vel.z * vel.z);
+        }
+
+        // 移動量計算
+        vel.x *= speed_;
+        vel.z *= speed_;
+        Jump();
+
+
+        if (KEYS::IsDown(DIK_UPARROW)) {
+            vel.y += speed_;
+        }
+        if (KEYS::IsDown(DIK_DOWNARROW)) {
+            vel.y -= speed_;
+        }
+
+        break;
+#endif // _DEBUG
+
     }
 }
 
@@ -137,6 +166,15 @@ void Player::ControllState(void)
                 SetState(State::ROPE);
             }
         }
+
+#ifdef _DEBUG
+        if (KEYS::IsDown(DIK_LSHIFT)) {
+            if (KEYS::IsTrigger(DIK_NUMPAD9)) {
+                SetState(State::S_DEBUG);
+            }
+        }
+#endif // _DEBUG
+
         break;
 
     case Player::State::ROPE:
@@ -147,6 +185,15 @@ void Player::ControllState(void)
 
     case Player::State::TARZAN:
         break;
+
+#ifdef _DEBUG
+    case Player::State::S_DEBUG:
+        if (KEYS::IsDown(DIK_LSHIFT)) {
+            if (KEYS::IsTrigger(DIK_NUMPAD9)) {
+                SetState(State::DEFAULT);
+            }
+        }
+#endif // _DEBUG
     }
 }
 
@@ -211,9 +258,9 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
             if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < -0.4f && // ※<-ちょっと範囲狭めてる
                 std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < -0.4f) {
                 // DirectionY
-                // HOOK ブロックから下方向6ブロック以内にいるか
+                // HOOK ブロックから下方向10ブロック以内にいるか
                 if (block->GetPos()->y - (block->GetRadius()->y + Player::radius_.y) >= object_->worldCoordinate_.position_.y &&
-                    object_->worldCoordinate_.position_.y > block->GetPos()->y - ((block->GetRadius()->y * 2) * 6 + block->GetRadius()->y)) {
+                    object_->worldCoordinate_.position_.y > block->GetPos()->y - ((block->GetRadius()->y * 2) * 10 + block->GetRadius()->y)) {
                     isUnderHook_ = true;
                 }
             }
@@ -231,7 +278,26 @@ void Player::ControllKeyTimer(void)
 
 void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
 {
-    ImGui::Begin("Player info");;
+#ifdef _DEBUG
+    ImGui::Begin("Player info");
+
+    switch (state_)
+    {
+    case Player::State::DEFAULT:
+        ImGui::Text("PlayerState : DEFAULT");
+        break;
+    case Player::State::ROPE:
+        ImGui::Text("PlayerState : ROPE");
+        break;
+    case Player::State::TARZAN:
+        ImGui::Text("PlayerState : TARZAN");
+        break;
+    case Player::State::S_DEBUG:
+        ImGui::Text("PlayerState : S_DEBUG");
+        break;
+    }
+    ImGui::Spacing();
+
     ImGui::Text(isUnderHook_ ? "isUnderHook_ : true" : "isUnderHook_ : false");
     ImGui::RadioButton("true", (int*)&isUnderHook_, true);
     ImGui::SameLine();
@@ -253,4 +319,5 @@ void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
     ImGui::Text(isJump_ ? "isJump_ : true" : "isJump_ : false");
 
     ImGui::End();
+#endif // _DEBUG
 }
