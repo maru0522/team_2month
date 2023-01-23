@@ -16,6 +16,14 @@ void GraphicsPipeline::Initialize(void)
     gPipeline3d_ = GraphicsPipeline(GraphicsPipeline::GPType::MODEL);
 }
 
+void GraphicsPipeline::Finalize(void)
+{
+    gPipeline2d_.rootSignature_.Reset();
+    gPipeline2d_.pipelineState_.Reset();
+    gPipeline3d_.rootSignature_.Reset();
+    gPipeline3d_.pipelineState_.Reset();
+}
+
 GraphicsPipeline::GraphicsPipeline(GPType type)
 {
     // インスタンス取得

@@ -66,6 +66,8 @@ void BasicFrame::Finalize(void)
     if (imGuiController_) imGuiController_.reset();
     if (sceneManager_) sceneManager_.reset();
 
+    GraphicsPipeline::Finalize();
+
     // ウィンドウクラスを登録解除
     wnd_->DelWindow();
 }

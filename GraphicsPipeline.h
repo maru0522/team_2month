@@ -1,5 +1,6 @@
 #pragma once
 #include <wrl.h>
+#include <memory>
 #include <d3d12.h>
 
 #pragma comment(lib,"d3d12.lib")
@@ -19,6 +20,7 @@ private: // ’è‹`
 
 public: // Ã“IŠÖ”
     static void Initialize(void);
+    static void Finalize(void);
 
     static GraphicsPipeline* GetGraphicsPipeLine2d(void) { return &gPipeline2d_; }
     static GraphicsPipeline* GetGraphicsPipeLine3d(void) { return &gPipeline3d_; }
