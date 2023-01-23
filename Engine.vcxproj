@@ -156,8 +156,11 @@
     <ClCompile Include="AbstractSceneFactory.cpp" />
     <ClCompile Include="AssimpLoader.cpp" />
     <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="IGimmickBlock.cpp" />
     <ClCompile Include="NormalBlock.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PowerReceiveBlock.cpp" />
+    <ClCompile Include="PowerSupplyBlock.cpp" />
     <ClCompile Include="ResourceLoad.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -244,8 +247,11 @@
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="AssimpLoader.h" />
     <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="IGimmickBlock.h" />
     <ClInclude Include="NormalBlock.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PowerReceiveBlock.h" />
+    <ClInclude Include="PowerSupplyBlock.h" />
     <ClInclude Include="ResourceLoad.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="Stage.h" />

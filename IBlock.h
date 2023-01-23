@@ -11,11 +11,13 @@ private:
 public:
     enum class Type
     {
-        INIT,
-        NORMAL,
-        START,
-        GOAL,
-        HOOK,
+        INIT,           // 0
+        NORMAL,         // 1
+        START,          // 2
+        GOAL,           // 3
+        HOOK,           // 4
+        POWERSUPPLY,    // 5
+        POWERRECEIVE,   // 6
     };
 
     virtual ~IBlock(void) = default;

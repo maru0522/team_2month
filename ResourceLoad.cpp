@@ -15,6 +15,9 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/Type_START.png");
     Texture::Load("Resources/Image/Type_PATH.png");
     Texture::Load("Resources/Image/Type_HOOK.png");
+    Texture::Load("Resources/Image/Type_POWERSUPPLY.png");
+    Texture::Load("Resources/Image/Type_POWERRECEIVE.png");
+    Texture::Load("Resources/Image/Type_HOOK.png");
     Texture::Load("Resources/Image/title.png");
     Texture::Load("Resources/Image/title2.png");
     Texture::Load("Resources/Image/Reset.png");
