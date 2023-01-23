@@ -14,11 +14,15 @@ namespace Input {
     // エイリアステンプレート
     template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+    void Initialize(void);
+    void Finalize(void);
+
     class Keyboard
     {
     public: // 関数
         static void Initialize(void);
         static void Update(void);
+        static void Finalize(void);
 
         // 押した瞬間
         static bool IsTrigger(UINT8 key) { return !keysPre_[key] && keys_[key]; }
@@ -40,6 +44,7 @@ namespace Input {
     public: // 関数
         static void Initialize(void);
         static void Update(void);
+        static void Finalize(void);
 
         // 押した瞬間
         static bool IsTrigger(uint8_t button) { return !diStatePre_.rgbButtons[button] && diState_.rgbButtons[button]; }

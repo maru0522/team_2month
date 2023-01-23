@@ -44,6 +44,8 @@ private: // ’è‹`
 public: // Ã“IŠÖ”
     static void Load(const fsPath& pathAndObjName); // .obj‚Ü‚Å“ü‚ê‚é
 
+    static void Finalize(void);
+
 #pragma region getter
     static const MODEL_VALUE* GetMODEL_VALUE(const fsPath& pathAndObjName);
 #pragma endregion

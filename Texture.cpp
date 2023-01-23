@@ -29,6 +29,14 @@ void Texture::Initialize(void)
     GenerateMissingTexture();
 }
 
+void Texture::Finalize(void)
+{
+    for (std::pair<const TEXTURE_KEY, TEXTURE_VALUE>& mpElem : textures_) {
+        if (mpElem.second.buff_) mpElem.second.buff_.Reset();
+    }
+    if (srvHeap_) srvHeap_.Reset();
+}
+
 void Texture::Load(const fsPath& pathAndFileName)
 {
 #pragma region ‚¢‚ë‚¢‚ëŠm”F

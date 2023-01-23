@@ -74,6 +74,11 @@ void Input::Keyboard::Update(void)
     keyboard_->GetDeviceState((DWORD)size(keys_), keys_.data());
 }
 
+void Input::Keyboard::Finalize(void)
+{
+    if (keyboard_) keyboard_.Reset();
+}
+
 void Input::DIPad::Initialize(void)
 {
     // ウィンドウのインスタンス取得
@@ -112,6 +117,11 @@ void Input::DIPad::Update(void)
     diPad_->GetDeviceState(sizeof(diState_), &diState_);
 
     //std::copy(std::begin(pad.rgbButtons), std::end(pad.rgbButtons), pad_.rgbButtons);
+}
+
+void Input::DIPad::Finalize(void)
+{
+    if (diPad_)diPad_.Reset();
 }
 
 BOOL __stdcall Input::DIPad::DeviceFindCallBack(const DIDEVICEINSTANCE* pdidInstance, void* pContext)
@@ -226,4 +236,17 @@ void Input::XPad::Vibrate(int32_t lPower, int32_t rPower)
     v.wRightMotorSpeed = rPower;
 
     XInputSetState(0, &v);
+}
+
+void Input::Initialize(void)
+{
+    Keyboard::Initialize();
+    DIPad::Initialize();
+    XPad::Initialize();
+}
+
+void Input::Finalize(void)
+{
+    Keyboard::Finalize();
+    DIPad::Finalize();
 }

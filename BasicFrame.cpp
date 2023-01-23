@@ -48,9 +48,7 @@ void BasicFrame::Initialize(void)
 void BasicFrame::Update(void)
 {
     // キーボード情報の取得
-    KEYS::Update();
-    DPAD::Update();
-    XPAD::Update();
+    Input::Initialize();
 
     imGuiController_->Begin();
     sceneManager_->Update();
@@ -67,6 +65,9 @@ void BasicFrame::Finalize(void)
     if (sceneManager_) sceneManager_.reset();
 
     GraphicsPipeline::Finalize();
+    Texture::Finalize();
+    Model::Finalize();
+    Input::Finalize();
 
     // ウィンドウクラスを登録解除
     wnd_->DelWindow();

@@ -229,6 +229,14 @@ void Model::Load(const fsPath& pathAndObjName)
     models_.insert_or_assign(tmp.name_, tmp.info_); // ‘ã“ü‚Å‚ ‚Á‚Ä‚à‘S‚­“¯‚¶VALUE‚ª“ü‚é‚Æ‚Ív‚í‚ê‚éB
 }
 
+void Model::Finalize(void)
+{
+    for (std::pair<const MODEL_KEY, MODEL_VALUE>& mpElem : models_) {
+        if(mpElem.second.vertBuff_)mpElem.second.vertBuff_.Reset();
+        if(mpElem.second.indexBuff_)mpElem.second.indexBuff_.Reset();
+    }
+}
+
 const Model::MODEL_VALUE* Model::GetMODEL_VALUE(const fsPath& pathAndObjName)
 {
     return &models_.at(pathAndObjName);

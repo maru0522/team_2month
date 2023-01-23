@@ -31,6 +31,7 @@ public: // Ã“IŠÖ”
 
     // srv‚Ì‰Šú‰»
     static void Initialize(void);
+    static void Finalize(void);
 
     // “Ç 
     static void Load(const fsPath& pathAndFileName);
