@@ -81,7 +81,7 @@ private: // ä÷êî
 
 private: // singleton design
 	InitDirectX(void) {};
-	~InitDirectX(void) {};
+	~InitDirectX(void);
 	InitDirectX(const InitDirectX&) = delete;
 	InitDirectX& operator=(const InitDirectX&) = delete;
 };
