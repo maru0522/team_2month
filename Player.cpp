@@ -6,8 +6,8 @@
 Player::Player(Camera* pCamera)
 {
     object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
-    ropeUseKey_sprite_->SetPosition({ 1118,654 });
-    ropeUseKeyPress_sprite_->SetPosition({ 1118,660 });
+    ropeUseKey_sprite_->SetPosition({ 1098,634 });
+    ropeUseKeyPress_sprite_->SetPosition({ 1098,640 });
     ropeKeyTimer_->Start(1.5f);
 }
 
@@ -46,8 +46,6 @@ void Player::Move(void)
 
     // stateごとの移動処理を管理
     Controll(vel);
-
-    ControllState();
 
     // 当たり判定
     Collision(vel);
@@ -88,7 +86,7 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
 {
     switch (state_)
     {
-    case Player::State::DEFAULT:
+    case Player::MoveState::DEFAULT:
         // 入力処理
         vel.z += (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
         vel.x += (KEYS::IsDown(DIK_D) - KEYS::IsDown(DIK_A));
@@ -109,7 +107,7 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
         vel.y += jumpValue_;
 
         break;
-    case Player::State::ROPE:
+    case Player::MoveState::ROPE:
         // 入力処理
         vel.y += (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
 
@@ -122,11 +120,11 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
         vel.y *= ropeSpeed_;
 
         break;
-    case Player::State::TARZAN:
+    case Player::MoveState::TARZAN:
         break;
 
 #ifdef _DEBUG
-    case Player::State::S_DEBUG:
+    case Player::MoveState::S_DEBUG:
         // 入力処理
         vel.z += (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
         vel.x += (KEYS::IsDown(DIK_D) - KEYS::IsDown(DIK_A));
@@ -156,41 +154,77 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
     }
 }
 
-void Player::ControllState(void)
+void Player::ControllState(std::unique_ptr<IBlock>& block)
 {
     switch (state_)
     {
-    case Player::State::DEFAULT:
+    case Player::MoveState::DEFAULT:
         if (isUnderHook_) {
             if (KEYS::IsTrigger(DIK_RETURN)) {
-                SetState(State::ROPE);
+                SetState(MoveState::ROPE);
+            }
+        }
+
+        {
+            std::string testString;
+
+            if (isNearSupply_) {
+                if (KEYS::IsTrigger(DIK_NUMPAD7)) {
+                    testString += "Trigger ON";
+                    if (isConnecting_) {
+                        isConnecting_ = false;
+                    }
+                    else {
+                        isConnecting_ = true;
+                    }
+                }
+                else {
+                    testString += "Trigger OFF";
+                }
+            }
+
+            testString += "\n";
+
+            OutputDebugStringA(testString.c_str());
+        }
+
+        if (isNearReceive_) {
+            if (KEYS::IsTrigger(DIK_NUMPAD7)) {
+                if (isConnecting_) {
+                    BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = true;
+                    isConnecting_ = false;
+                }
+                else {
+                    BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = false;
+                    isConnecting_ = true;
+                }
             }
         }
 
 #ifdef _DEBUG
         if (KEYS::IsDown(DIK_LSHIFT)) {
             if (KEYS::IsTrigger(DIK_NUMPAD9)) {
-                SetState(State::S_DEBUG);
+                SetState(MoveState::S_DEBUG);
             }
         }
 #endif // _DEBUG
 
         break;
 
-    case Player::State::ROPE:
+    case Player::MoveState::ROPE:
         if (isUnderHook_) {
-            if (KEYS::IsTrigger(DIK_RETURN)) SetState(State::DEFAULT);
+            if (KEYS::IsTrigger(DIK_RETURN)) SetState(MoveState::DEFAULT);
         }
         break;
 
-    case Player::State::TARZAN:
+    case Player::MoveState::TARZAN:
         break;
 
 #ifdef _DEBUG
-    case Player::State::S_DEBUG:
+    case Player::MoveState::S_DEBUG:
         if (KEYS::IsDown(DIK_LSHIFT)) {
             if (KEYS::IsTrigger(DIK_NUMPAD9)) {
-                SetState(State::DEFAULT);
+                SetState(MoveState::DEFAULT);
             }
         }
 #endif // _DEBUG
@@ -200,6 +234,14 @@ void Player::ControllState(void)
 void Player::Collision(DirectX::XMFLOAT3& vel)
 {
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
+
+        ControllState(block);
+
+        if (*block->GetType() == IBlock::Type::SWITCH) {
+            if (BlockManager::GetConnectMap()->at(block->GetIdxConnect()) == false) {
+                return;
+            }
+        }
 
         // y軸,z軸においてプレイヤーがブロック内の座標にある時。
         if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0.f &&
@@ -252,6 +294,37 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
             }
         }
 
+        if (*block->GetType() == IBlock::Type::POWERSUPPLY) { // block の type が POWERSUPPLY の場合
+            // y軸おいてプレイヤーがブロック内の座標にある時。
+            if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < -1.f) { // ほぼ同一のy座標値において
+                if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 1.f && // 
+                    std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 1.f) {
+                    isNearSupply_ = true;
+                }
+                else {
+                    isNearSupply_ = false;
+                }
+            }
+            else {
+                isNearSupply_ = false;
+            }
+        }
+
+        if (*block->GetType() == IBlock::Type::POWERRECEIVE) { // block の type が POWERRECIEVE の場合
+            // y軸おいてプレイヤーがブロック内の座標にある時。
+            if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < -1.f) { // ほぼ同一のy座標値において
+                if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 1.f && // 
+                    std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 1.f) {
+                    isNearReceive_ = true;
+                }
+                else {
+                    isNearReceive_ = false;
+                }
+            }
+            else {
+                isNearReceive_ = false;
+            }
+        }
 
         if (*block->GetType() == IBlock::Type::HOOK) { // block の type が HOOK の場合
             // x軸,z軸においてプレイヤーがブロック内の座標にある時。
@@ -283,16 +356,16 @@ void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
 
     switch (state_)
     {
-    case Player::State::DEFAULT:
+    case Player::MoveState::DEFAULT:
         ImGui::Text("PlayerState : DEFAULT");
         break;
-    case Player::State::ROPE:
+    case Player::MoveState::ROPE:
         ImGui::Text("PlayerState : ROPE");
         break;
-    case Player::State::TARZAN:
+    case Player::MoveState::TARZAN:
         ImGui::Text("PlayerState : TARZAN");
         break;
-    case Player::State::S_DEBUG:
+    case Player::MoveState::S_DEBUG:
         ImGui::Text("PlayerState : S_DEBUG");
         break;
     }
@@ -317,6 +390,12 @@ void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
     ImGui::Spacing();
 
     ImGui::Text(isJump_ ? "isJump_ : true" : "isJump_ : false");
+
+    ImGui::Spacing();
+
+    ImGui::Text(isNearSupply_ ? "isNearSupply_ : true" : "isNearSupply_ : false");
+    ImGui::Text(isNearReceive_ ? "isNearReceive_ : true" : "isNearReceive_ : false");
+    ImGui::Text(isConnecting_ ? "isConnecting_ : true" : "isConnecting_ : false");
 
     ImGui::End();
 #endif // _DEBUG

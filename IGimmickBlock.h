@@ -9,8 +9,5 @@ public:
     virtual void Update(void) = 0;
     virtual void Draw(void) = 0;
 
-    const uint32_t GetIdxConnect(void) { return idxConnect_; }
-protected:
-    uint32_t idxConnect_{}; // PowerReceive‚ÆGimmick‚ð‚Â‚È‚®‚à‚Ì
 };
 

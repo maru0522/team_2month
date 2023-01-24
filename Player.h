@@ -4,11 +4,12 @@
 #include "Camera.h"
 #include <imgui.h>
 #include "Sprite.h"
+#include "IBlock.h"
 
 class Player
 {
 private: // 定義
-    enum class State
+    enum class MoveState
     {
         DEFAULT,
         ROPE,
@@ -50,12 +51,12 @@ private:
     void Move(void);
     void Jump(void);
     void Controll(DirectX::XMFLOAT3& vel);
-    void ControllState(void);
+    void ControllState(std::unique_ptr<IBlock>& block);
     void Collision(DirectX::XMFLOAT3& vel);
 
     void ControllKeyTimer(void);
 
-    void SetState(State state) { state_ = state; }
+    void SetState(MoveState state) { state_ = state; }
 
 private: // 変数
     std::unique_ptr<Obj3d> object_{};
@@ -66,9 +67,15 @@ private: // 変数
     bool isJump_{ false };
 
     // 状態
-    State state_{ State::DEFAULT };
+    MoveState state_{ MoveState::DEFAULT };
     bool isUnderHook_{ false }; // UI表示のためのもの
     std::unique_ptr<Util::Timer> ropeKeyTimer_{ std::make_unique<Util::Timer>() };
+
+    bool isNearSupply_{ false }; // 電源ブロックの近くにいるか
+    bool isNearReceive_{ false }; // 受源ブロックの近くにいるか
+
+    bool isConnecting_{ false }; // ワイヤーをつなげている最中かどうか
+
 
     std::unique_ptr<Sprite> ropeUseKey_sprite_{ std::make_unique<Sprite>("Resources/Image/KEY_ENTER.png",CMode::PATH) };
     std::unique_ptr<Sprite> ropeUseKeyPress_sprite_{ std::make_unique<Sprite>("Resources/Image/KEY_ENTER_PRESS.png",CMode::PATH) };

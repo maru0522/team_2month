@@ -8,7 +8,7 @@ SwitchBlock::SwitchBlock(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, uint32_
     idxConnect_ = idxConnect;
     type_ = Type::SWITCH;
     body_->SetCamera(pCamera);
-    body_->SetTexture("Resources/Image/Type_POWERRECEIVE.png");
+    body_->SetTexture("Resources/Image/Type_SWITCH.png");
 }
 
 void SwitchBlock::Update(void)
