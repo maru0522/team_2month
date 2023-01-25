@@ -3,6 +3,7 @@
 std::list<std::unique_ptr<IBlock>> BlockManager::blocks_{};
 std::map<BlockManager::IdxHook, bool> BlockManager::isUnderHooksMp_{};
 std::map<BlockManager::IdxSupply, bool> BlockManager::isSupplyMp_{};
+std::map<BlockManager::IdxReceive, bool> BlockManager::isReceiveMp_{};
 std::map<BlockManager::IdxConnect, bool> BlockManager::isConnectMp_{}; // receive‚ªÚ‘±‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð•\‚·
 
 void BlockManager::Register(IBlock* blockPtr)
@@ -14,6 +15,7 @@ void BlockManager::Register(IBlock* blockPtr)
         isSupplyMp_.emplace(blockPtr->GetIdxSupply(), false);
     }
     if (*blockPtr->GetType() == IBlock::Type::POWERRECEIVE) {
+        isReceiveMp_.emplace(blockPtr->GetIdxReceive(), false);
         isConnectMp_.emplace(blockPtr->GetIdxConnect(), false);
     }
     blocks_.emplace_back(blockPtr);
@@ -37,7 +39,7 @@ void BlockManager::Draw(void)
 
 void BlockManager::DrawImgui(void)
 {
-    ImGui::Begin("BlockManager");
+    ImGui::Begin("isConnectMp");
     ImGui::Text("isConnectMp");
     for (std::pair<const IdxConnect,bool>& connectPair : isConnectMp_) {
         ImGui::Text("IdxConnect : %d", connectPair.first);
@@ -46,7 +48,7 @@ void BlockManager::DrawImgui(void)
     }
     ImGui::End();
 
-    ImGui::Begin("BlockManager");
+    ImGui::Begin("isUnderHooksMp");
     ImGui::Text("isUnderHooksMp");
     for (std::pair<const IdxHook, bool>& hookPair : isUnderHooksMp_) {
         ImGui::Text("IdxHooks : %d", hookPair.first);
@@ -55,12 +57,21 @@ void BlockManager::DrawImgui(void)
     }
     ImGui::End();
 
-    ImGui::Begin("BlockManager");
+    ImGui::Begin("isSupplyMp");
     ImGui::Text("isSupplyMp");
     for (std::pair<const IdxHook, bool>& supplyPair : isSupplyMp_) {
         ImGui::Text("IdxSupplies : %d", supplyPair.first);
         ImGui::SameLine();
         ImGui::Text(supplyPair.second ? "bool : true" : "bool : false");
+    }
+    ImGui::End();
+
+    ImGui::Begin("isReceiveMp");
+    ImGui::Text("isReceiveMp");
+    for (std::pair<const IdxReceive, bool>& receivePair : isReceiveMp_) {
+        ImGui::Text("IdxRecieves : %d", receivePair.first);
+        ImGui::SameLine();
+        ImGui::Text(receivePair.second ? "bool : true" : "bool : false");
     }
     ImGui::End();
 }

@@ -231,6 +231,7 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
 {
     bool resultAllHooks{ false };
     bool resultAllSupplies{ false };
+    bool resultAllReceives{ false };
 
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
 
@@ -301,6 +302,16 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 }
                 else {
                     BlockManager::GetSupplyMap()->at(block->GetIdxSupply()) = false;
+
+                    for (std::pair<const BlockManager::IdxSupply, bool>& supply : *BlockManager::GetSupplyMap()) {
+                        if (supply.second) {
+                            resultAllSupplies = true;
+                            break;
+                        }
+                    }
+                    if (resultAllSupplies == false) {
+                        isNearSupply_ = false;
+                    }
                 }
             }
             else {
@@ -324,13 +335,34 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 1.f && // 
                     std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 1.f) {
                     isNearReceive_ = true;
+                    BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = true;
                 }
                 else {
-                    isNearReceive_ = false;
+                    BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = false;
+
+                    for (std::pair<const BlockManager::IdxReceive, bool>& receive : *BlockManager::GetReceiveMap()) {
+                        if (receive.second) {
+                            resultAllReceives = true;
+                            break;
+                        }
+                    }
+                    if (resultAllReceives == false) {
+                        isNearReceive_ = false;
+                    }
                 }
             }
             else {
-                isNearReceive_ = false;
+                BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = false;
+
+                for (std::pair<const BlockManager::IdxReceive, bool>& receive : *BlockManager::GetReceiveMap()) {
+                    if (receive.second) {
+                        resultAllReceives = true;
+                        break;
+                    }
+                }
+                if (resultAllReceives == false) {
+                    isNearReceive_ = false;
+                }
             }
 
             if (isNearReceive_) {

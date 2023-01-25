@@ -6,6 +6,7 @@ class BlockManager
 public:
     using IdxHook = uint32_t;
     using IdxSupply = uint32_t;
+    using IdxReceive = uint32_t;
     using IdxConnect = uint32_t;
 
     // íËêî
@@ -16,6 +17,7 @@ public:
     static std::list<std::unique_ptr<IBlock>>* GetBlockList(void) { return &blocks_; }
     static std::map<IdxHook, bool>* GetUnderHooksMap(void) { return &isUnderHooksMp_; }
     static std::map<IdxSupply, bool>* GetSupplyMap(void) { return &isSupplyMp_; }
+    static std::map<IdxReceive, bool>* GetReceiveMap(void) { return &isReceiveMp_; }
     static std::map<IdxConnect, bool>* GetConnectMap(void) { return &isConnectMp_; }
 
     static void Update(void);
@@ -29,5 +31,6 @@ private:
     static std::list<std::unique_ptr<IBlock>> blocks_;
     static std::map<IdxHook, bool> isUnderHooksMp_;
     static std::map<IdxSupply, bool> isSupplyMp_;
+    static std::map<IdxReceive, bool> isReceiveMp_;
     static std::map<IdxConnect, bool> isConnectMp_;
 };

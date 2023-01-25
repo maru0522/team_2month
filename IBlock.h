@@ -34,6 +34,7 @@ public:
     
     const uint32_t GetIdxHook(void) { return idxHook_; }
     const uint32_t GetIdxSupply(void) { return idxSupply_; }
+    const uint32_t GetIdxReceive(void) { return idxReceive_; }
     const uint32_t GetIdxConnect(void) { return idxConnect_; }
 
 protected:
@@ -42,5 +43,6 @@ protected:
     Type type_{};
     uint32_t idxHook_{}; // Hook‚Ì”Ô†
     uint32_t idxSupply_{}; // Supply‚Ì”Ô†
+    uint32_t idxReceive_{}; // Receive‚Ì”Ô†
     uint32_t idxConnect_{}; // PowerReceive‚ÆGimmick‚ğ‚Â‚È‚®‚à‚Ì
 };
