@@ -47,6 +47,8 @@ void Player::Move(void)
     // stateごとの移動処理を管理
     Controll(vel);
 
+    ControllState();
+
     // 当たり判定
     Collision(vel);
 
@@ -154,8 +156,10 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
     }
 }
 
-void Player::ControllState(std::unique_ptr<IBlock>& block)
+void Player::ControllState(void)
 {
+    oldConnecting_ = isConnecting_;
+
     switch (state_)
     {
     case Player::MoveState::DEFAULT:
@@ -165,38 +169,30 @@ void Player::ControllState(std::unique_ptr<IBlock>& block)
             }
         }
 
-        {
-            std::string testString;
-
-            if (isNearSupply_) {
-                if (KEYS::IsTrigger(DIK_NUMPAD7)) {
-                    testString += "Trigger ON";
-                    if (isConnecting_) {
-                        isConnecting_ = false;
-                    }
-                    else {
-                        isConnecting_ = true;
-                    }
-                }
-                else {
-                    testString += "Trigger OFF";
-                }
-            }
-
-            testString += "\n";
-
-            OutputDebugStringA(testString.c_str());
-        }
-
-        if (isNearReceive_) {
+        if (isNearSupply_) {
             if (KEYS::IsTrigger(DIK_NUMPAD7)) {
                 if (isConnecting_) {
-                    BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = true;
                     isConnecting_ = false;
                 }
                 else {
-                    BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = false;
                     isConnecting_ = true;
+                }
+            }
+        }
+
+        if (isNearReceive_) { // 受電ブロックが近くにあるとき
+            if (KEYS::IsTrigger(DIK_NUMPAD7)) { //特定のキーを押したとき
+                if (isConnecting_) { // ワイヤーをつなげようとしてる最中なら
+                    isConnecting_ = false; // つなげて、最中ではなくなる
+                }
+                else { // ワイヤーをつなげようとしてる最中でないなら
+                    for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) { // ブロックを全検索 ※まじで苦肉の策
+                        if (*block->GetType() == IBlock::Type::POWERRECEIVE) { // 対象のブロックタイプが受電ブロックのとき
+                            if (BlockManager::GetConnectMap()->at(block->GetIdxConnect())) { // 対応する[接続番号]のbool値がtrueなら
+                                isConnecting_ = true; // ワイヤーをつなげようとしてる最中になる。 -> 対応するブロックのbool値は自動的にfalseになる
+                            }
+                        } // 要約すると、ワイヤーをつなげようとしていない時は、受電ブロックの近くでキーを押しても、[つなげようとしてる最中]の状態にならない
+                    }
                 }
             }
         }
@@ -235,11 +231,9 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
 {
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
 
-        ControllState(block);
-
         if (*block->GetType() == IBlock::Type::SWITCH) {
             if (BlockManager::GetConnectMap()->at(block->GetIdxConnect()) == false) {
-                return;
+                continue;
             }
         }
 
@@ -323,6 +317,15 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
             }
             else {
                 isNearReceive_ = false;
+            }
+
+            if (isNearReceive_) {
+                if (!oldConnecting_ && isConnecting_) {
+                    BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = false;
+                }
+                else if (oldConnecting_ && !isConnecting_) {
+                    BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = true;
+                }
             }
         }
 

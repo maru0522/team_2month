@@ -38,3 +38,9 @@ void BlockManager::DrawImgui(void)
     }
     ImGui::End();
 }
+
+void BlockManager::ClearAll(void)
+{
+    blocks_.clear();
+    isConnectMp_.clear();
+}

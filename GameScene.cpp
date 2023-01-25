@@ -28,6 +28,12 @@ void GameScene::Update(void)
         sceneManager_->RequestChangeScene(nextScene);
     }
 
+    // ホットリロード
+    if (KEYS::IsTrigger(DIK_5)) {
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/tutorial.csv");
+    }
+
     //if (KEYS::IsDown(DIK_W)) {
     //    cameraT_->eye_.z += 5;
     //}

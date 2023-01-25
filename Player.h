@@ -51,7 +51,7 @@ private:
     void Move(void);
     void Jump(void);
     void Controll(DirectX::XMFLOAT3& vel);
-    void ControllState(std::unique_ptr<IBlock>& block);
+    void ControllState(void);
     void Collision(DirectX::XMFLOAT3& vel);
 
     void ControllKeyTimer(void);
@@ -74,6 +74,7 @@ private: // 変数
     bool isNearSupply_{ false }; // 電源ブロックの近くにいるか
     bool isNearReceive_{ false }; // 受源ブロックの近くにいるか
 
+    bool oldConnecting_{ false }; // 苦肉
     bool isConnecting_{ false }; // ワイヤーをつなげている最中かどうか
 
 

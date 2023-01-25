@@ -16,6 +16,8 @@ public:
 
     static void DrawImgui(void);
 
+    static void ClearAll(void);
+
 private:
     static std::list<std::unique_ptr<IBlock>> blocks_;
     static std::map<IdxConnect,bool> isConnectMp_;

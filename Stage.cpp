@@ -8,6 +8,7 @@
 #include "Hook.h"
 #include "PowerSupplyBlock.h"
 #include "PowerReceiveBlock.h"
+#include "SwitchBlock.h"
 
 void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
 {
@@ -64,7 +65,9 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
         case IBlock::Type::POWERRECEIVE:
             BlockManager::Register(new PowerReceiveBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idxConnect, pCamera });
             break;
-
+        case IBlock::Type::SWITCH:
+            BlockManager::Register(new SwitchBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idxConnect, pCamera });
+            break;
         }
 
         coordinate.fill(0.f);
