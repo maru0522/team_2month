@@ -230,6 +230,7 @@ void Player::ControllState(void)
 void Player::Collision(DirectX::XMFLOAT3& vel)
 {
     bool resultAllHooks{ false };
+    bool resultAllSupplies{ false };
 
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
 
@@ -296,13 +297,24 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 1.f && // 
                     std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 1.f) {
                     isNearSupply_ = true;
+                    BlockManager::GetSupplyMap()->at(block->GetIdxSupply()) = true;
                 }
                 else {
-                    isNearSupply_ = false;
+                    BlockManager::GetSupplyMap()->at(block->GetIdxSupply()) = false;
                 }
             }
             else {
-                isNearSupply_ = false;
+                BlockManager::GetSupplyMap()->at(block->GetIdxSupply()) = false;
+
+                for (std::pair<const BlockManager::IdxSupply, bool>& supply : *BlockManager::GetSupplyMap()) {
+                    if (supply.second) {
+                        resultAllSupplies = true;
+                        break;
+                    }
+                }
+                if (resultAllSupplies == false) {
+                    isNearSupply_ = false;
+                }
             }
         }
 

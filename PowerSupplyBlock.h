@@ -8,7 +8,7 @@
 class PowerSupplyBlock : public IBlock
 {
 public: // ä÷êî
-    PowerSupplyBlock(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, Camera* pCamera);
+    PowerSupplyBlock(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, uint32_t idxSupply, Camera* pCamera);
 
     void Update(void) override;
     void Draw(void) override;

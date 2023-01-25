@@ -10,15 +10,18 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 {
     BaseScene::Initialize(pSceneManager);
 
+
     // •Ï”‰Šú‰»
     cameraT_ = std::make_unique<Camera>();
+
+    Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
+
     cameraT_->eye_ = { -50.f, 70.f, -20.f };
-    cameraT_->target_ = { 30 ,-4, 30 };
+    cameraT_->target_ = { 30 ,-4, Stage::maxBlockPosZValue_ / 2.f };
 
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
 
-    Stage::LoadCsv(cameraT_.get(),"Resources/Csv/stage2.csv");
 }
 
 void GameScene::Update(void)
@@ -84,8 +87,7 @@ void GameScene::Update(void)
 
     reset_->Update();
 
-    //cameraT_->eye_.x = player_->GetObject3d()->worldCoordinate_.position_.x;
-    //cameraT_->target_.x = player_->GetObject3d()->worldCoordinate_.position_.x;
+    cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
 }
 
 void GameScene::Draw3d(void)

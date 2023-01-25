@@ -10,6 +10,8 @@
 #include "PowerReceiveBlock.h"
 #include "SwitchBlock.h"
 
+float Stage::maxBlockPosZValue_{};
+
 void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
 {
     std::ifstream ifs{ path };
@@ -20,7 +22,10 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
     std::array<float, 3> scale{};
     IBlock::Type blockType{ IBlock::Type::INIT };
     uint32_t idXHook{};
+    uint32_t idXSupply{};
     uint32_t idxConnect{};
+
+    maxBlockPosZValue_ = 0;
 
     while (std::getline(ifs, line)) {
         size_t loopX{};
@@ -30,6 +35,9 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
         while (std::getline(line_stream, tmp, ',')) {
             if (loopX <= 2) {
                 coordinate[loopX] = std::stof(tmp);
+                if (coordinate[2] > maxBlockPosZValue_) {
+                    maxBlockPosZValue_ = coordinate[2];
+                }
             }
             else if (3 <= loopX && loopX <= 5) {
                 scale[loopX - 3] = std::stof(tmp);
@@ -38,6 +46,9 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
                 blockType = static_cast<IBlock::Type>(std::stoi(tmp));
                 if (blockType == IBlock::Type::HOOK) {
                     idXHook++;
+                }
+                if (blockType == IBlock::Type::POWERSUPPLY) {
+                    idXSupply++;
                 }
             }
             else if (loopX == 7) { // POWERRECEIVEà»ç~
@@ -64,7 +75,7 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
             BlockManager::Register(new Hook{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idXHook, pCamera });
             break;
         case IBlock::Type::POWERSUPPLY:
-            BlockManager::Register(new PowerSupplyBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });
+            BlockManager::Register(new PowerSupplyBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idXSupply, pCamera });
             break;
         case IBlock::Type::POWERRECEIVE:
             BlockManager::Register(new PowerReceiveBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idxConnect, pCamera });

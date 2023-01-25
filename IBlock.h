@@ -33,6 +33,7 @@ public:
     const Type* GetType(void) { return &type_; }
     
     const uint32_t GetIdxHook(void) { return idxHook_; }
+    const uint32_t GetIdxSupply(void) { return idxSupply_; }
     const uint32_t GetIdxConnect(void) { return idxConnect_; }
 
 protected:
@@ -40,5 +41,6 @@ protected:
     DirectX::XMFLOAT3 radius_{1.0f,1.0f,1.0f}; // À•W’†S“_‚©‚ç‚Ì‹——£ ¦”¼Œa
     Type type_{};
     uint32_t idxHook_{}; // Hook‚Ì”Ô†
+    uint32_t idxSupply_{}; // Supply‚Ì”Ô†
     uint32_t idxConnect_{}; // PowerReceive‚ÆGimmick‚ğ‚Â‚È‚®‚à‚Ì
 };

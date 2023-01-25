@@ -9,5 +9,7 @@ private:
 
 public:
     static void LoadCsv(Camera* pCamera, const fsPath& path);
+
+    static float maxBlockPosZValue_;
 };
 
