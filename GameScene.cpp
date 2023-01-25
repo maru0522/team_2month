@@ -18,7 +18,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
 
-    Stage::LoadCsv(cameraT_.get(),"Resources/Csv/tutorial.csv");
+    Stage::LoadCsv(cameraT_.get(),"Resources/Csv/stage2.csv");
 }
 
 void GameScene::Update(void)
