@@ -1,10 +1,14 @@
 #include "BlockManager.h"
 
 std::list<std::unique_ptr<IBlock>> BlockManager::blocks_{};
+std::map<BlockManager::IdxHook, bool> BlockManager::isUnderHooksMp_{};
 std::map<BlockManager::IdxConnect, bool> BlockManager::isConnectMp_{}; // receive‚ªÚ‘±‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ð•\‚·
 
 void BlockManager::Register(IBlock* blockPtr)
 {
+    if (*blockPtr->GetType() == IBlock::Type::HOOK) {
+        isUnderHooksMp_.emplace(blockPtr->GetIdxHook(), false);
+    }
     if (*blockPtr->GetType() == IBlock::Type::POWERRECEIVE) {
         isConnectMp_.emplace(blockPtr->GetIdxConnect(), false);
     }

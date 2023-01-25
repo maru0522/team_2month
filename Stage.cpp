@@ -19,6 +19,7 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
     std::array<float, 3> coordinate{};
     std::array<float, 3> scale{};
     IBlock::Type blockType{ IBlock::Type::INIT };
+    uint32_t idXHook{};
     uint32_t idxConnect{};
 
     while (std::getline(ifs, line)) {
@@ -35,6 +36,9 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
             }
             else if (loopX == 6) {
                 blockType = static_cast<IBlock::Type>(std::stoi(tmp));
+                if (blockType == IBlock::Type::HOOK) {
+                    idXHook++;
+                }
             }
             else if (loopX == 7) { // POWERRECEIVEà»ç~
                 if (static_cast<int>(blockType) >= static_cast<int>(IBlock::Type::POWERRECEIVE)) {
@@ -57,7 +61,7 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
             BlockManager::Register(new StartBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });
             break;
         case IBlock::Type::HOOK:
-            BlockManager::Register(new Hook{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });
+            BlockManager::Register(new Hook{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idXHook, pCamera });
             break;
         case IBlock::Type::POWERSUPPLY:
             BlockManager::Register(new PowerSupplyBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });

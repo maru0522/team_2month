@@ -12,8 +12,5 @@ public: // ä÷êî
 
     void Update(void) override;
     void Draw(void) override;
-
-private:
-    bool isReceive_{ false };
 };
 

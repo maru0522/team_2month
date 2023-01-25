@@ -18,7 +18,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
 
-    Stage::LoadCsv(cameraT_.get(),"Resources/Csv/tutorial.csv");
+    Stage::LoadCsv(cameraT_.get(),"Resources/Csv/stage2.csv");
 }
 
 void GameScene::Update(void)
@@ -46,13 +46,16 @@ void GameScene::Update(void)
     //if (KEYS::IsDown(DIK_D)) {
     //    cameraT_->eye_.x += 5;
     //}
-    if (KEYS::IsDown(DIK_UPARROW)) {
-        cameraT_->eye_.y += 2;
-        cameraT_->target_.y += 2;
-    }
-    if (KEYS::IsDown(DIK_DOWNARROW)) {
-        cameraT_->eye_.y -= 5;
-        cameraT_->target_.y -= 5;
+
+    if (KEYS::IsDown(DIK_LSHIFT)) {
+        if (KEYS::IsDown(DIK_UPARROW)) {
+            cameraT_->eye_.y += 2;
+            cameraT_->target_.y += 2;
+        }
+        if (KEYS::IsDown(DIK_DOWNARROW)) {
+            cameraT_->eye_.y -= 5;
+            cameraT_->target_.y -= 5;
+        }
     }
 
     if (KEYS::IsDown(DIK_NUMPAD8)) {

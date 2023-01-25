@@ -229,6 +229,8 @@ void Player::ControllState(void)
 
 void Player::Collision(DirectX::XMFLOAT3& vel)
 {
+    bool resultAllHooks{ false };
+
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
 
         if (*block->GetType() == IBlock::Type::SWITCH) {
@@ -338,10 +340,21 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 if (block->GetPos()->y - (block->GetRadius()->y + Player::radius_.y) >= object_->worldCoordinate_.position_.y &&
                     object_->worldCoordinate_.position_.y > block->GetPos()->y - ((block->GetRadius()->y * 2) * 10 + block->GetRadius()->y)) {
                     isUnderHook_ = true;
+                    BlockManager::GetUnderHooksMap()->at(block->GetIdxHook()) = true;
                 }
             }
             else {
-                isUnderHook_ = false;
+                BlockManager::GetUnderHooksMap()->at(block->GetIdxHook()) = false;
+
+                for (std::pair<const BlockManager::IdxHook, bool>& hook : *BlockManager::GetUnderHooksMap()) {
+                    if (hook.second) {
+                        resultAllHooks = true;
+                        break;
+                    }
+                }
+                if (resultAllHooks == false) {
+                    isUnderHook_ = false;
+                }
             }
         }
     }
