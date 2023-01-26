@@ -9,6 +9,7 @@
 #include "PowerSupplyBlock.h"
 #include "PowerReceiveBlock.h"
 #include "SwitchBlock.h"
+#include "FanBlock.h"
 
 float Stage::maxBlockPosZValue_{};
 
@@ -86,6 +87,9 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
             break;
         case IBlock::Type::SWITCH:
             BlockManager::Register(new SwitchBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idxConnect, pCamera });
+            break;
+        case IBlock::Type::FAN:
+            BlockManager::Register(new FanBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idxConnect, pCamera });
             break;
         }
 

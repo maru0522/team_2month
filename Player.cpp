@@ -401,6 +401,21 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 }
             }
         }
+
+        if (*block->GetType() == IBlock::Type::FAN) {
+            if (BlockManager::GetConnectMap()->at(block->GetIdxConnect()) == true) {
+                // x軸,z軸においてプレイヤーがブロック内の座標にある時。
+                if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0.f && // ※<-ちょっと範囲狭めてる
+                    std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0.f) {
+                    // DirectionY
+                    // FAN ブロックから上方向10ブロック以内にいるか
+                    if (block->GetPos()->y + (block->GetRadius()->y + Player::radius_.y) <= object_->worldCoordinate_.position_.y &&
+                        object_->worldCoordinate_.position_.y < block->GetPos()->y - ((block->GetRadius()->y * 2) * 10 + block->GetRadius()->y)) {
+                        vel.y = IBlock::fanUpVecSpeed_;
+                    }
+                }
+            }
+        }
     }
 }
 

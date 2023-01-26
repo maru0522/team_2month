@@ -9,6 +9,7 @@ private:
     using fsPath = std::experimental::filesystem::path;
 
 public:
+    // íËã`
     enum class Type
     {
         INIT,           // 0
@@ -19,7 +20,11 @@ public:
         POWERSUPPLY,    // 5
         POWERRECEIVE,   // 6
         SWITCH,         // 7
+        FAN,            // 8
     };
+
+    // íËêî
+    static constexpr float fanUpVecSpeed_{ 0.35f };
 
     virtual ~IBlock(void) = default;
 
