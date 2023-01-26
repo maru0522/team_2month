@@ -31,6 +31,11 @@ void GameScene::Update(void)
         sceneManager_->RequestChangeScene(nextScene);
     }
 
+    if (KEYS::IsTrigger(DIK_0)) {
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("TITLE") };
+        sceneManager_->RequestChangeScene(nextScene);
+    }
+
     // ホットリロード
     if (KEYS::IsTrigger(DIK_5)) {
         BlockManager::ClearAll();
