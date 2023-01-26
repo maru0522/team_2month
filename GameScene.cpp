@@ -16,7 +16,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
 
-    cameraT_->eye_ = { -50.f, 70.f, -20.f };
+    cameraT_->eye_ = { -50.f, 70.f, -50.f };
     cameraT_->target_ = { 30 ,-4, Stage::maxBlockPosZValue_ / 2.f };
 
     player_ = std::make_unique<Player>(cameraT_.get());
@@ -36,11 +36,13 @@ void GameScene::Update(void)
         sceneManager_->RequestChangeScene(nextScene);
     }
 
+#ifdef _DEBUG
     // ホットリロード
     if (KEYS::IsTrigger(DIK_5)) {
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
     }
+#endif // _DEBUG
 
     //if (KEYS::IsDown(DIK_W)) {
     //    cameraT_->eye_.z += 5;

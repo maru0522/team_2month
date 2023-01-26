@@ -6,6 +6,7 @@
 Player::Player(Camera* pCamera)
 {
     object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
+    cameraPtr_ = pCamera;
     ropeUseKey_sprite_->SetPosition({ 1098,634 });
     ropeUseKeyPress_sprite_->SetPosition({ 1098,640 });
     ropeKeyTimer_->Start(1.5f);
@@ -86,12 +87,46 @@ void Player::Jump(void)
 
 void Player::Controll(DirectX::XMFLOAT3& vel)
 {
+#pragma region カメラの正面ベクトル取得
+    // 正面ベクトル取得
+    DirectX::XMFLOAT3 frontVec{ cameraPtr_->target_.x - cameraPtr_->eye_.x, cameraPtr_->target_.y - cameraPtr_->eye_.y, cameraPtr_->target_.z - cameraPtr_->eye_.z };
+    // ノルム取得
+    float length{ std::sqrtf(frontVec.x * frontVec.x + frontVec.y * frontVec.y + frontVec.z * frontVec.z) };
+    // 正規化
+    if (length != 0) {
+        frontVec.x /= length;
+        frontVec.y /= length;
+        frontVec.z /= length;
+    }
+    // 右ベクトル取得
+    DirectX::XMFLOAT3 rightVec{ frontVec.y * cameraPtr_->up_.z - frontVec.z - cameraPtr_->up_.y,
+                                frontVec.z * cameraPtr_->up_.x - frontVec.x - cameraPtr_->up_.z,
+                                frontVec.x * cameraPtr_->up_.y - frontVec.y - cameraPtr_->up_.x };
+
+    // 右ベクトルのノルム
+    float crossLength{ std::sqrtf(rightVec.x * rightVec.x + rightVec.y * rightVec.y + rightVec.z * rightVec.z) };
+
+    // 右ベクトルの正規化
+    if (crossLength != 0) {
+        rightVec.x /= crossLength;
+        rightVec.y /= crossLength;
+        rightVec.z /= crossLength;
+    }
+#pragma endregion
+
     switch (state_)
     {
     case Player::MoveState::DEFAULT:
         // 入力処理
-        vel.z += (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
-        vel.x += (KEYS::IsDown(DIK_D) - KEYS::IsDown(DIK_A));
+        // y以外
+        frontVec.x *= (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
+        frontVec.z *= (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
+
+        rightVec.x *= (KEYS::IsDown(DIK_A) - KEYS::IsDown(DIK_D));
+        rightVec.z *= (KEYS::IsDown(DIK_A) - KEYS::IsDown(DIK_D));
+
+        vel.x += frontVec.x + rightVec.x;
+        vel.z += frontVec.z + rightVec.z;
 
         // 正規化 
         if (std::sqrtf(vel.x * vel.x + vel.y * vel.y + vel.z * vel.z) != 0) {
@@ -241,23 +276,6 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
             }
         }
 
-        // y軸,z軸においてプレイヤーがブロック内の座標にある時。
-        if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0.f &&
-            std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0.f) {
-            // DirectionX
-            // 移動先(+vel)がblock内かどうか
-            if (std::abs(block->GetPos()->x - (object_->worldCoordinate_.position_.x + vel.x)) - (block->GetRadius()->x + Player::radius_.x) <= 0) {
-                if (vel.x > 0) {
-                    // block内に入らないようvelの値がblockとピッタリになるように。
-                    vel.x = std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x);
-                }
-                else {
-                    // block内に入らないようvelの値がblockとピッタリになるように。
-                    vel.x = -(std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x));
-                }
-            }
-        }
-
         // x軸,z軸においてプレイヤーがブロック内の座標にある時。
         if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0.f &&
             std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0.f) {
@@ -271,6 +289,23 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 else {
                     // block内に入らないようvelの値がblockとピッタリになるように。
                     vel.y = -(std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y));
+                }
+            }
+        }
+
+        // y軸,z軸においてプレイヤーがブロック内の座標にある時。
+        if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < 0.f &&
+            std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0.f) {
+            // DirectionX
+            // 移動先(+vel)がblock内かどうか
+            if (std::abs(block->GetPos()->x - (object_->worldCoordinate_.position_.x + vel.x)) - (block->GetRadius()->x + Player::radius_.x) <= 0) {
+                if (vel.x > 0) {
+                    // block内に入らないようvelの値がblockとピッタリになるように。
+                    vel.x = std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x);
+                }
+                else {
+                    // block内に入らないようvelの値がblockとピッタリになるように。
+                    vel.x = -(std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x));
                 }
             }
         }

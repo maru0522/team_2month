@@ -61,6 +61,8 @@ private:
 private: // •Ï”
     std::unique_ptr<Obj3d> object_{};
 
+    Camera* cameraPtr_{ nullptr };
+
     // ‚¶‚á‚ñ‚Õ
     float jumpValue_{ 0.0f };
 
