@@ -12,6 +12,9 @@ void Camera::Update(void)
 
 void Camera::DrawImgui(void)
 {
+#ifdef _DEBUG
+
+
     ImGui::Begin("camera info");
     //ImGui::SliderFloat3("slider float3", vec4f, 0.0f, 1.0f);
     float sliderLocal_eye[3]{ eye_.x,eye_.y,eye_.z };
@@ -23,6 +26,7 @@ void Camera::DrawImgui(void)
 
     eye_ = { sliderLocal_eye[0],sliderLocal_eye[1],sliderLocal_eye[2] };
     target_ = { sliderLocal_target[0],sliderLocal_target[1],sliderLocal_target[2] };
+#endif // _DEBUG
 }
 
 void Camera::SetProjection(Camera::Projection projectionType)

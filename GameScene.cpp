@@ -34,7 +34,7 @@ void GameScene::Update(void)
     // ホットリロード
     if (KEYS::IsTrigger(DIK_5)) {
         BlockManager::ClearAll();
-        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/tutorial.csv");
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
     }
 
     //if (KEYS::IsDown(DIK_W)) {

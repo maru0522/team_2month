@@ -39,6 +39,7 @@ void BlockManager::Draw(void)
 
 void BlockManager::DrawImgui(void)
 {
+#ifdef _DEBUG
     ImGui::Begin("isConnectMp");
     ImGui::Text("isConnectMp");
     for (std::pair<const IdxConnect,bool>& connectPair : isConnectMp_) {
@@ -74,6 +75,7 @@ void BlockManager::DrawImgui(void)
         ImGui::Text(receivePair.second ? "bool : true" : "bool : false");
     }
     ImGui::End();
+#endif // _DEBUG
 }
 
 void BlockManager::ClearAll(void)
