@@ -159,6 +159,7 @@
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="IGimmickBlock.cpp" />
     <ClCompile Include="NormalBlock.cpp" />
+    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PowerReceiveBlock.cpp" />
     <ClCompile Include="PowerSupplyBlock.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="IGimmickBlock.h" />
     <ClInclude Include="NormalBlock.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PowerReceiveBlock.h" />
     <ClInclude Include="PowerSupplyBlock.h" />
