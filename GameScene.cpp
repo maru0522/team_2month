@@ -83,7 +83,7 @@ void GameScene::Update(void)
         cameraT_->eye_.x -= 5;
         cameraT_->target_.x -= 5;
     }
-
+    cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
     cameraT_->Update();
     player_->Update();
 
