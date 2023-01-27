@@ -21,7 +21,7 @@ private: // íËã`
     };
 
 public: // íËêî
-    static constexpr float speed_{ 0.4f };
+    static constexpr float speed_{ 0.3f };
     static constexpr float ropeSpeed_{ 0.2f };
     static constexpr float jumpPower_{ 2.7f }; // 2.4f -> 1.2f
     static constexpr float jumpAttenuation_{ 0.23f };
@@ -80,6 +80,12 @@ private: // ïœêî
     bool isConnecting_{ false }; // ÉèÉCÉÑÅ[ÇÇ¬Ç»Ç∞ÇƒÇ¢ÇÈç≈íÜÇ©Ç«Ç§Ç©
 
 
-    std::unique_ptr<Sprite> ropeUseKey_sprite_{ std::make_unique<Sprite>("Resources/Image/KEY_ENTER.png",CMode::PATH) };
-    std::unique_ptr<Sprite> ropeUseKeyPress_sprite_{ std::make_unique<Sprite>("Resources/Image/KEY_ENTER_PRESS.png",CMode::PATH) };
+    std::unique_ptr<Sprite> ropeUsePad_sprite_{ std::make_unique<Sprite>("XPAD_RB",CMode::ID) };
+    std::unique_ptr<Sprite> ropeUsePadPress_sprite_{ std::make_unique<Sprite>("XPAD_RB_PRESS",CMode::ID) };
+    std::unique_ptr<Sprite> connectUsePad_sprite_{ std::make_unique<Sprite>("XPAD_X",CMode::ID) };
+    std::unique_ptr<Sprite> connectUsePadPress_sprite_{ std::make_unique<Sprite>("XPAD_X_PRESS",CMode::ID) };
+
+    std::unique_ptr<Sprite> default_sprite_{ std::make_unique<Sprite>("p_default",CMode::ID) };
+    std::unique_ptr<Sprite> rope_sprite_{ std::make_unique<Sprite>("p_rope",CMode::ID) };
+    std::unique_ptr<Sprite> connect_sprite_{ std::make_unique<Sprite>("p_connect",CMode::ID) };
 };

@@ -34,3 +34,31 @@ const float_t& Util::Timer::GetEndTime(void) const
 {
     return endTime_;
 }
+
+float Util::EaseInOutSine(float t)
+{
+    return -(std::cosf(MY_PI * t) - 1.f) / 2.f;
+}
+
+float Util::EaseInOutSine(float start, float end, float t)
+{
+    float time = -(std::cosf(MY_PI * t) - 1.f) / 2.f;
+    return start * (1.f - time) + end * time;
+}
+
+float Util::EaseInOutCubic(float t)
+{
+    return t < 0.5f ? 4 * t * t * t : 1.f - std::powf(-2.f * t + 2.f, 3.f) / 2.f;
+}
+
+float Util::EaseInOutCubic(float start, float end, float t)
+{
+    float time;
+    if (t < 0.5f) {
+        time = 4.f * t * t * t;
+    }
+    else {
+        time = 1.f - std::powf(-2.f * t + 2.f, 3.f) / 2.f;
+    }
+    return start * (1.f - time) + end * time;
+}

@@ -26,7 +26,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
 void GameScene::Update(void)
 {
-    if (KEYS::IsTrigger(DIK_R)) {
+#ifdef _DEBUG
+    if (KEYS::IsTrigger(DIK_R) || XPAD::IsTrigger(XPAD_Y)) {
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
         sceneManager_->RequestChangeScene(nextScene);
     }
@@ -36,26 +37,11 @@ void GameScene::Update(void)
         sceneManager_->RequestChangeScene(nextScene);
     }
 
-#ifdef _DEBUG
     // ホットリロード
     if (KEYS::IsTrigger(DIK_5)) {
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
     }
-#endif // _DEBUG
-
-    //if (KEYS::IsDown(DIK_W)) {
-    //    cameraT_->eye_.z += 5;
-    //}
-    //if (KEYS::IsDown(DIK_S)) {
-    //    cameraT_->eye_.z -= 5;
-    //}
-    //if (KEYS::IsDown(DIK_A)) {
-    //    cameraT_->eye_.x -= 5;
-    //}
-    //if (KEYS::IsDown(DIK_D)) {
-    //    cameraT_->eye_.x += 5;
-    //}
 
     if (KEYS::IsDown(DIK_LSHIFT)) {
         if (KEYS::IsDown(DIK_UPARROW)) {
@@ -85,6 +71,8 @@ void GameScene::Update(void)
         cameraT_->eye_.x -= 5;
         cameraT_->target_.x -= 5;
     }
+#endif // _DEBUG
+
     cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
     cameraT_->Update();
     player_->Update();

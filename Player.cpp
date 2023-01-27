@@ -2,14 +2,25 @@
 #include "Input.h"
 #include "BlockManager.h"
 #include "Util.h"
+#include <algorithm>
+#include "Window.h"
 
 Player::Player(Camera* pCamera)
 {
     object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
     cameraPtr_ = pCamera;
-    ropeUseKey_sprite_->SetPosition({ 1098,634 });
-    ropeUseKeyPress_sprite_->SetPosition({ 1098,640 });
+    ropeUsePad_sprite_->SetPosition({ Window::width_ - 103 - 10,51 });
+    ropeUsePadPress_sprite_->SetPosition({ Window::width_ - 103 - 10,51 });
+    connectUsePad_sprite_->SetPosition({ Window::width_ - 103 - 10,124 });
+    connectUsePadPress_sprite_->SetPosition({ Window::width_ - 103 - 10,124 });
     ropeKeyTimer_->Start(1.5f);
+
+    default_sprite_->SetSize({ 53,101 });
+    default_sprite_->SetPosition({ Window::width_ - 53 - 10, 10 });
+    rope_sprite_->SetSize({ 53,101 });
+    rope_sprite_->SetPosition({ Window::width_ - 53 - 10, 10 });
+    connect_sprite_->SetSize({ 53,53 });
+    connect_sprite_->SetPosition({ Window::width_ - 53 - 10, 121 });
 }
 
 void Player::Update(void)
@@ -20,8 +31,14 @@ void Player::Update(void)
 
     ControllKeyTimer();
 
-    ropeUseKey_sprite_->Update();
-    ropeUseKeyPress_sprite_->Update();
+    ropeUsePad_sprite_->Update();
+    ropeUsePadPress_sprite_->Update();
+    connectUsePad_sprite_->Update();
+    connectUsePadPress_sprite_->Update();
+
+    default_sprite_->Update();
+    rope_sprite_->Update();
+    connect_sprite_->Update();
 }
 
 void Player::Draw3d(void)
@@ -33,11 +50,36 @@ void Player::Draw2d(void)
 {
     if (isUnderHook_) {
         if (ropeKeyTimer_->GetElapsedTime() <= ropeKeyTimer_->GetEndTime() / 2.f) {
-            ropeUseKey_sprite_->Draw();
+            ropeUsePad_sprite_->Draw();
         }
         else {
-            ropeUseKeyPress_sprite_->Draw();
+            ropeUsePadPress_sprite_->Draw();
         }
+    }
+
+    if (isNearSupply_ || (isConnecting_ && isNearReceive_)) {
+        if (ropeKeyTimer_->GetElapsedTime() <= ropeKeyTimer_->GetEndTime() / 2.f) {
+            connectUsePad_sprite_->Draw();
+        }
+        else {
+            connectUsePadPress_sprite_->Draw();
+        }
+    }
+
+    if (isConnecting_) {
+        connect_sprite_->Draw();
+    }
+
+    switch (state_)
+    {
+    case Player::MoveState::DEFAULT:
+        default_sprite_->Draw();
+        break;
+    case Player::MoveState::ROPE:
+        rope_sprite_->Draw();
+        break;
+    case Player::MoveState::TARZAN:
+        break;
     }
 }
 
@@ -70,6 +112,11 @@ void Player::Move(void)
 void Player::Jump(void)
 {
     if (KEYS::IsTrigger(DIK_SPACE) && isJump_ == false) {
+        isJump_ = true;
+        jumpValue_ = jumpPower_;
+    }
+
+    if (XPAD::IsTrigger(XPAD_A) && isJump_ == false) {
         isJump_ = true;
         jumpValue_ = jumpPower_;
     }
@@ -114,16 +161,41 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
     }
 #pragma endregion
 
+    // padのスティック入力情報処理
+    DirectX::XMFLOAT2 inputLStick{ XPAD::GetLStick().x ,XPAD::GetLStick().y };
+
+    if (inputLStick.x > 0) {
+        inputLStick.x /= INT16_MAX;
+    }
+    else if (inputLStick.x < 0) {
+        inputLStick.x /= INT16_MIN;
+        inputLStick.x = -inputLStick.x;
+    }
+    else {
+        inputLStick.x = 0.f;
+    }
+
+    if (inputLStick.y > 0) {
+        inputLStick.y /= INT16_MAX;
+    }
+    else if (inputLStick.y < 0) {
+        inputLStick.y /= INT16_MIN;
+        inputLStick.y = -inputLStick.y;
+    }
+    else {
+        inputLStick.y = 0.f;
+    }
+
     switch (state_)
     {
     case Player::MoveState::DEFAULT:
         // 入力処理
         // y以外
-        frontVec.x *= (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
-        frontVec.z *= (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
+        frontVec.x *= inputLStick.y/* * normalizeLStick.y*/;
+        frontVec.z *= inputLStick.y/* * normalizeLStick.y*/;
 
-        rightVec.x *= (KEYS::IsDown(DIK_A) - KEYS::IsDown(DIK_D));
-        rightVec.z *= (KEYS::IsDown(DIK_A) - KEYS::IsDown(DIK_D));
+        rightVec.x *= -inputLStick.x/* * normalizeLStick.x*/;
+        rightVec.z *= -inputLStick.x/* * normalizeLStick.x*/;
 
         vel.x += frontVec.x + rightVec.x;
         vel.z += frontVec.z + rightVec.z;
@@ -145,13 +217,8 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
 
         break;
     case Player::MoveState::ROPE:
-        // 入力処理
-        vel.y += (KEYS::IsDown(DIK_W) - KEYS::IsDown(DIK_S));
-
-        // 正規化
-        if (std::sqrtf(vel.x * vel.x + vel.y * vel.y + vel.z * vel.z) != 0) {
-            vel.y = vel.y / std::sqrtf(vel.x * vel.x + vel.y * vel.y + vel.z * vel.z);
-        }
+        // 入力値（正規化済）を移動量の礎として代入
+        vel.y += inputLStick.y;
 
         // 移動量計算
         vel.y *= ropeSpeed_;
@@ -202,10 +269,14 @@ void Player::ControllState(void)
             if (KEYS::IsTrigger(DIK_RETURN)) {
                 SetState(MoveState::ROPE);
             }
+
+            if (XPAD::IsTrigger(XPAD_RB)) {
+                SetState(MoveState::ROPE);
+            }
         }
 
         if (isNearSupply_) {
-            if (KEYS::IsTrigger(DIK_NUMPAD7)) {
+            if (XPAD::IsTrigger(XPAD_X)) {
                 if (isConnecting_) {
                     isConnecting_ = false;
                 }
@@ -216,7 +287,7 @@ void Player::ControllState(void)
         }
 
         if (isNearReceive_) { // 受電ブロックが近くにあるとき
-            if (KEYS::IsTrigger(DIK_NUMPAD7)) { //特定のキーを押したとき
+            if (XPAD::IsTrigger(XPAD_X)) { //特定のキーを押したとき
                 if (isConnecting_) { // ワイヤーをつなげようとしてる最中なら
                     isConnecting_ = false; // つなげて、最中ではなくなる
                 }
@@ -245,6 +316,7 @@ void Player::ControllState(void)
     case Player::MoveState::ROPE:
         if (isUnderHook_) {
             if (KEYS::IsTrigger(DIK_RETURN)) SetState(MoveState::DEFAULT);
+            if (XPAD::IsTrigger(XPAD_RB)) SetState(MoveState::DEFAULT);
         }
         break;
 
@@ -506,6 +578,11 @@ void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
     ImGui::Text(isNearSupply_ ? "isNearSupply_ : true" : "isNearSupply_ : false");
     ImGui::Text(isNearReceive_ ? "isNearReceive_ : true" : "isNearReceive_ : false");
     ImGui::Text(isConnecting_ ? "isConnecting_ : true" : "isConnecting_ : false");
+
+    ImGui::Spacing();
+
+    ImGui::Text("XPAD_LStick");
+    ImGui::Text("LS_X : %f, LS_Y : %f", XPAD::GetLStick().x, XPAD::GetLStick().y);
 
     ImGui::End();
 #endif // _DEBUG

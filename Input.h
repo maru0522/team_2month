@@ -54,11 +54,31 @@ namespace Input {
         static BOOL __stdcall DeviceFindCallBack(const DIDEVICEINSTANCE* pdidInstance, void* pContext);
 
     private: // 変数
-        static ComPtr<IDirectInputDevice8> diPad_; 
+        static ComPtr<IDirectInputDevice8> diPad_;
         static DIJOYSTATE diStatePre_;
         static DIJOYSTATE diState_;
         static bool isConnect_;
     };
+
+// button
+#define XPAD_A XINPUT_GAMEPAD_A
+#define XPAD_B XINPUT_GAMEPAD_B
+#define XPAD_X XINPUT_GAMEPAD_X
+#define XPAD_Y XINPUT_GAMEPAD_Y
+
+// arrow
+#define XPAD_UP XINPUT_GAMEPAD_DPAD_UP
+#define XPAD_DOWN XINPUT_GAMEPAD_DPAD_DOWN
+#define XPAD_LEFT XINPUT_GAMEPAD_DPAD_LEFT
+#define XPAD_RIGHT XINPUT_GAMEPAD_DPAD_RIGHT
+
+// thumb
+#define XPAD_LT XINPUT_GAMEPAD_LEFT_THUMB
+#define XPAD_RT XINPUT_GAMEPAD_RIGHT_THUMB
+
+// shoulder
+#define XPAD_LB XINPUT_GAMEPAD_LEFT_SHOULDER
+#define XPAD_RB XINPUT_GAMEPAD_RIGHT_SHOULDER
 
     class XPad
     {
@@ -84,6 +104,11 @@ namespace Input {
         // 離された瞬間
         static bool IsReleased(uint16_t button) { return xStatePre_.Gamepad.wButtons == button && xState_.Gamepad.wButtons != button; }
 
+        // some
+        static bool IsTriggerSome(void) { return xStatePre_.Gamepad.wButtons != 0 && xState_.Gamepad.wButtons == 0; }
+        static bool IsDownSome(void) { return xState_.Gamepad.wButtons != 0; }
+        static bool IsReleasedSome(void) { return xStatePre_.Gamepad.wButtons == 0 && xState_.Gamepad.wButtons != 0; }
+
         static const DirectX::XMFLOAT2 GetLStick(void);
         static const DirectX::XMFLOAT2 GetLStickRaw(void);
         static const DirectX::XMFLOAT2 GetLStickCustom(void);
@@ -99,7 +124,7 @@ namespace Input {
         static uint8_t GetRT(void) { return xState_.Gamepad.bRightTrigger; }
 
         static void Vibrate(int32_t lPower = 0, int32_t rPower = 0); // 引数なしで振動停止
-        
+
 #pragma region setter
         static void SetDeadZone(const CustomDeadZone& deadzone) { deadZone_ = deadzone; }
 #pragma endregion
