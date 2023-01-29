@@ -33,6 +33,13 @@ public:
 	/// </summary>
 	void SetMoveSpeed(float setSpeed) { moveSpeed = setSpeed; };
 
+
+	//重力の影響を与えるか
+	void SetIsGravity(bool flag) { isGravity = flag; };
+
+	//生存しているか
+	bool GetIsAlive() { return isAlive; };
+
 private:
 
 	void Init(Camera* camera);
@@ -52,11 +59,17 @@ private:
 	//生存フラグ
 	bool isAlive = true;
 
+	//重力を与えるか
+	bool isGravity = false;
+
+	//重力
+	float gravity = 1.0f;
+
 	//移動方向
 	DirectX::XMFLOAT3 moveVec = { 0,1,0 };
 
 	//移動スピード
-	float moveSpeed = 2;
+	float moveSpeed = 0.1f;
 
 	//パーティクルの初期サイズ
 	DirectX::XMFLOAT3 startScale = { 1,1,1 };

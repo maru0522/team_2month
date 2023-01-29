@@ -204,6 +204,9 @@
     <ClCompile Include="Particle.cpp">
       <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>ソース ファイル\Object\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicVS.hlsl" />
@@ -350,6 +353,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
+      <Filter>ヘッダー ファイル\Object\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
       <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
   </ItemGroup>

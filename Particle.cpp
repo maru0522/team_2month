@@ -32,7 +32,7 @@ void Particle::Update()
 
 	lerpScale = DirectX::XMVectorLerp(start, { 0,0,0,0 }, aliveTime / maxAliveTime);
 
-	obj->worldCoordinate_.position_ = { obj->worldCoordinate_.position_.x +moveVec.x*moveSpeed, obj->worldCoordinate_.position_.y + moveVec.y * moveSpeed ,obj->worldCoordinate_.position_.z + moveVec.z * moveSpeed };
+	obj->worldCoordinate_.position_ = { obj->worldCoordinate_.position_.x +moveVec.x*moveSpeed, obj->worldCoordinate_.position_.y + moveVec.y * moveSpeed - (isGravity*(gravity * aliveTime)) ,obj->worldCoordinate_.position_.z + moveVec.z * moveSpeed};
 
 	obj->worldCoordinate_.scale_ = { lerpScale.m128_f32[0],lerpScale.m128_f32[1] ,lerpScale.m128_f32[2] };
 
