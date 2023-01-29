@@ -1,8 +1,23 @@
 #pragma once
 #include <string>
 #include <chrono>
+#include <random>
+
+std::random_device seed_gen;
+std::mt19937 engine(seed_gen());
+
+
 
 namespace Util {
+
+    template<typename T>
+    const T& Random(const double min, const double max) {
+        assert(min < max);
+
+        std::uniform_real_distribution<> dist1(min, max);
+
+        return static_cast<T>(dist1(engine));
+    }
 
     template<typename T>
     const T& Clamp(const T& value, const T& min, const T& max) {
