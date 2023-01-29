@@ -3,17 +3,20 @@
 #include <chrono>
 #include <random>
 
-namespace Util {
+std::random_device seed_gen;
+std::mt19937 engine(seed_gen());
 
+
+
+namespace Util {
 
     template<typename T>
     const T& Random(const double min, const double max) {
-        static std::random_device randomSeed;
-        static std::mt19937 generator(randomSeed());
+        assert(min < max);
 
         std::uniform_real_distribution<> dist1(min, max);
 
-        return static_cast<T>(dist1(generator));
+        return static_cast<T>(dist1(engine));
     }
 
     template<typename T>
