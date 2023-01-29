@@ -38,6 +38,8 @@ public: // 関数
             IID_PPV_ARGS(&buffer_));
         assert(SUCCEEDED(r));
 
+        buffer_->SetName(L"constbufferclassBuffer");
+
         // 定数バッファのマッピング
         CBMap();
         //SetColorは使用先に委任

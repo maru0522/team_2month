@@ -5,8 +5,13 @@
 
 InitDirectX* InitDirectX::GetInstance(void)
 {
-	static InitDirectX mIDX;
-	return &mIDX;
+    static InitDirectX* mIDX = new InitDirectX{};
+	return mIDX;
+}
+
+void InitDirectX::DeleteInstance(void)
+{
+    delete GetInstance();
 }
 
 void InitDirectX::Initialize(void)
@@ -235,8 +240,9 @@ void InitDirectX::DXGIDevice(void)
 void InitDirectX::SuppressErrors(void)
 {
 	if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&infoQueue_)))) {
-		infoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);    //‚â‚Î‚¢ƒGƒ‰[‚ÌŽžŽ~‚Ü‚é
-		infoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);        //ƒGƒ‰[‚ÌŽžŽ~‚Ü‚é
+        infoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);    // ‚â‚Î‚¢ƒGƒ‰[ˆêŽž‚ÉŽ~‚Ü‚é
+        infoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);        // ƒGƒ‰[Žž‚ÉŽ~‚Ü‚é
+        //infoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);    // ƒ[ƒjƒ“ƒOŽž‚ÉŽ~‚Ü‚é
 	}
 
 	//—}§‚·‚éƒGƒ‰[
@@ -407,6 +413,8 @@ void InitDirectX::DepthBuffer(void)
 		IID_PPV_ARGS(&depthBuff_)
 	);
 
+    depthBuff_->SetName(L"InitDirectXDepthBuffer");
+
 #ifdef _DEBUG
 	assert(SUCCEEDED(r));
 #endif // _DEBUG
@@ -486,14 +494,14 @@ InitDirectX::~InitDirectX(void)
             backBuffer.Reset();
         }
     }
-    if (depthBuff_)depthBuff_.Reset();
+    //if (depthBuff_)depthBuff_.Reset();
     if (dsvHeap_)dsvHeap_.Reset();
     if (fence_)fence_.Reset();
 
-    ComPtr<ID3D12DebugDevice> debugInterface;
+    //ComPtr<ID3D12DebugDevice> debugInterface;
 
-    if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&debugInterface))))
-    {
-        debugInterface->ReportLiveDeviceObjects(D3D12_RLDO_DETAIL | D3D12_RLDO_IGNORE_INTERNAL);
-    }
+    //if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&debugInterface))))
+    //{
+    //    debugInterface->ReportLiveDeviceObjects(D3D12_RLDO_DETAIL | D3D12_RLDO_IGNORE_INTERNAL);
+    //}
 }

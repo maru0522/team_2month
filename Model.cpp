@@ -151,6 +151,9 @@ void Model::Load(const fsPath& pathAndObjName)
         D3D12_RESOURCE_STATE_GENERIC_READ,
         nullptr,
         IID_PPV_ARGS(&tmp.info_.vertBuff_));
+
+    tmp.info_.vertBuff_->SetName(L"modelclassVertBuff");
+
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG
@@ -207,6 +210,8 @@ void Model::Load(const fsPath& pathAndObjName)
         IID_PPV_ARGS(&tmp.info_.indexBuff_));
 #pragma endregion
 
+    tmp.info_.indexBuff_->SetName(L"modelIndexBuffer");
+
 #pragma region インデックスバッファのマッピング
     // インデックスバッファをマッピング
     uint16_t* indexMap = nullptr;
@@ -232,9 +237,10 @@ void Model::Load(const fsPath& pathAndObjName)
 void Model::Finalize(void)
 {
     for (std::pair<const MODEL_KEY, MODEL_VALUE>& mpElem : models_) {
-        if(mpElem.second.vertBuff_)mpElem.second.vertBuff_.Reset();
-        if(mpElem.second.indexBuff_)mpElem.second.indexBuff_.Reset();
+        //if(mpElem.second.vertBuff_)mpElem.second.vertBuff_.Reset();
+        //if(mpElem.second.indexBuff_)mpElem.second.indexBuff_.Reset();
     }
+    models_.clear();
 }
 
 const Model::MODEL_VALUE* Model::GetMODEL_VALUE(const fsPath& pathAndObjName)

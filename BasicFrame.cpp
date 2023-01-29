@@ -31,9 +31,7 @@ void BasicFrame::Initialize(void)
     iDX_->Initialize();
 
     // Input初期化
-    KEYS::Initialize();
-    DPAD::Initialize();
-    XPAD::Initialize();
+    Input::Initialize();
 
     // graphicsPipeline初期化
     GraphicsPipeline::Initialize();
@@ -48,7 +46,6 @@ void BasicFrame::Initialize(void)
 void BasicFrame::Update(void)
 {
     // キーボード情報の取得
-    Input::Initialize();
 
     imGuiController_->Begin();
     sceneManager_->Update();

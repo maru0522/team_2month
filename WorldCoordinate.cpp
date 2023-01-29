@@ -13,6 +13,7 @@ WorldCoordinate::WorldCoordinate(void)
 WorldCoordinate::WorldCoordinate(Camera* pCamera) :
     pCamera_(pCamera)
 {
+    cbData_->GetBuffer()->SetName(L"worldcoordinateConstBuffer");
 }
 
 void WorldCoordinate::Update(void)
@@ -60,5 +61,5 @@ void WorldCoordinate::TransferMatrix(void)
         matProjection = pCamera_->GetProjection();
     }
 
-    cbData_.GetConstBuffMap()->mat_ = matWorld_ * matView * matProjection;
+    cbData_->GetConstBuffMap()->mat_ = matWorld_ * matView * matProjection;
 }

@@ -41,6 +41,6 @@ void SceneManager::Finalize(void)
 {
     if (currentScene_) {
         currentScene_->Finalize();
-        currentScene_.reset();
+        //currentScene_.reset();
     }
 }

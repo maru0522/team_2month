@@ -22,6 +22,9 @@ void Texture::Initialize(void)
 
     // 設定を元にSRV用デスクリプタヒープを作成
     HRESULT r = iDX_->GetDevice()->CreateDescriptorHeap(&srvDescHeapDesc, IID_PPV_ARGS(&srvHeap_));
+
+    srvHeap_->SetName(L"textureDescriptorHeap");
+
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG
@@ -32,9 +35,10 @@ void Texture::Initialize(void)
 void Texture::Finalize(void)
 {
     for (std::pair<const TEXTURE_KEY, TEXTURE_VALUE>& mpElem : textures_) {
-        if (mpElem.second.buff_) mpElem.second.buff_.Reset();
+        //if (mpElem.second.buff_) mpElem.second.buff_.Reset();
     }
-    if (srvHeap_) srvHeap_.Reset();
+    textures_.clear();
+    //if (srvHeap_) srvHeap_.Reset();
 }
 
 void Texture::Load(const fsPath& pathAndFileName)
@@ -124,6 +128,9 @@ void Texture::Load(const fsPath& pathAndFileName)
         D3D12_RESOURCE_STATE_GENERIC_READ,
         nullptr,
         IID_PPV_ARGS(&tmp.info_.buff_)); // MAP_VALUEのbuff_へ書き込み
+
+    tmp.info_.buff_->SetName(L"textureclassBuff");
+
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG

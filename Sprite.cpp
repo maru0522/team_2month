@@ -354,6 +354,9 @@ void Sprite::ConstructorCommon(void)
         D3D12_RESOURCE_STATE_GENERIC_READ,
         nullptr,
         IID_PPV_ARGS(&vertBuff_));
+
+    vertBuff_->SetName(L"spriteclassVertBuff");
+
 #ifdef _DEBUG
     assert(SUCCEEDED(r));
 #endif // _DEBUG

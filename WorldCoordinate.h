@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "ConstBuffer.h"
 #include "SharedStruct.h"
+#include <memory>
 
 class WorldCoordinate
 {
@@ -31,7 +32,7 @@ public: // ŠÖ”
 #pragma endregion
 
 #pragma region getter
-    ConstBuffer<CBDataB0>* GetCBData(void) { return &cbData_; }
+    ConstBuffer<CBDataB0>* GetCBData(void) { return cbData_.get(); }
 #pragma endregion
 
 public: // •Ï”
@@ -45,7 +46,7 @@ private: // ŠÖ”
 private: // •Ï”
     DirectX::XMMATRIX matWorld_{ DirectX::XMMatrixIdentity() }; 
 
-    ConstBuffer<CBDataB0> cbData_{};
+    std::unique_ptr<ConstBuffer<CBDataB0>> cbData_{};
 
     WorldCoordinate* parent_{ nullptr };
     Camera* pCamera_{ nullptr };

@@ -12,6 +12,7 @@ class InitDirectX
 {
 public: // Ã“IŠÖ”
 	static InitDirectX* GetInstance(void);
+    static void DeleteInstance(void);
 
 public: // ŠÖ”
 	void Initialize(void);

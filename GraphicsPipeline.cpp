@@ -18,10 +18,10 @@ void GraphicsPipeline::Initialize(void)
 
 void GraphicsPipeline::Finalize(void)
 {
-    gPipeline2d_.rootSignature_.Reset();
-    gPipeline2d_.pipelineState_.Reset();
-    gPipeline3d_.rootSignature_.Reset();
-    gPipeline3d_.pipelineState_.Reset();
+    //gPipeline2d_.rootSignature_.Reset();
+    //gPipeline2d_.pipelineState_.Reset();
+    //gPipeline3d_.rootSignature_.Reset();
+    //gPipeline3d_.pipelineState_.Reset();
 }
 
 GraphicsPipeline::GraphicsPipeline(GPType type)
@@ -217,6 +217,9 @@ GraphicsPipeline::GraphicsPipeline(GPType type)
 
         r = iDX->GetDevice()->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(),
             IID_PPV_ARGS(&rootSignature_));
+
+        rootSignature_->SetName(L"rootSignature2d");
+
 #ifdef _DEBUG
         assert(SUCCEEDED(r));
 #endif // _DEBUG
@@ -416,6 +419,9 @@ GraphicsPipeline::GraphicsPipeline(GPType type)
     assert(SUCCEEDED(r));
     r = iDX->GetDevice()->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(),
         IID_PPV_ARGS(&rootSignature_));
+
+    rootSignature_->SetName(L"rootSignature3d");
+
     assert(SUCCEEDED(r));
 #pragma endregion
 
