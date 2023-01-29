@@ -29,6 +29,9 @@ public:
 	/// </summary>
 	void SetAliveTime(float setTime) { aliveTime = setTime; };
 
+	//起動しているかどうかを変える
+	void SetisActive(bool flag) { isActive = flag; };
+
 	//噴水のように飛び出すパーティクル(パラメータをセットしてupdateを呼ぶ)
 	void FountainParticle();
 
@@ -63,12 +66,14 @@ private:
 	DirectX::XMFLOAT3 moveVec = { 0,1,0 };
 
 	//パーティクルの移動スピード
-	float moveSpeed = 2;
+	float moveSpeed = 0.5f;
 
 	//パーティクルの生存時間
 	float aliveTime = 10;
 
 	bool isGravity = false;
+
+	bool isActive = true;
 
 };
 

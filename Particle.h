@@ -63,13 +63,13 @@ private:
 	bool isGravity = false;
 
 	//重力
-	float gravity = 1.0f;
+	float gravity = 0.2f;
 
 	//移動方向
 	DirectX::XMFLOAT3 moveVec = { 0,1,0 };
 
 	//移動スピード
-	float moveSpeed = 0.1f;
+	float moveSpeed = 2.0f;
 
 	//パーティクルの初期サイズ
 	DirectX::XMFLOAT3 startScale = { 1,1,1 };

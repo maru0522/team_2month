@@ -62,26 +62,29 @@ void ParticleSystem::popParticle()
 void ParticleSystem::FountainParticle()
 {
 
-	//–³‘Ê‚ÈŒvZ‚ğ‚µ‚È‚¢‚½‚ß‚É
-	if (particles.size() < particleNum)
+	if (isActive)
 	{
-		moveVec = { Util::Random<float>(-5,5),0,Util::Random<float>(-5,5) };
+		//–³‘Ê‚ÈŒvZ‚ğ‚µ‚È‚¢‚½‚ß‚É
+		if (particles.size() < particleNum)
+		{
+			moveVec = { Util::Random<float>(-5,5),0,Util::Random<float>(-5,5) };
 
-		// ƒmƒ‹ƒ€æ“¾
-		float length{ std::sqrtf(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z) };
-		// ³‹K‰»
-		if (length != 0) {
-			moveVec.x /= length;
-			moveVec.y /= length;
-			moveVec.z /= length;
+			// ƒmƒ‹ƒ€æ“¾
+			float length{ std::sqrtf(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z) };
+			// ³‹K‰»
+			if (length != 0) {
+				moveVec.x /= length;
+				moveVec.y /= length;
+				moveVec.z /= length;
+			}
+
+			isGravity = true;
+
+
 		}
 
-		isGravity = true;
-
-
+		popParticle();
 	}
-
-	popParticle();
 
 	Update();
 
