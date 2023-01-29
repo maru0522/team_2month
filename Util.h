@@ -13,7 +13,7 @@ namespace Util {
 
         std::uniform_real_distribution<> dist1(min, max);
 
-        return static_cast<T>(dist1(generator));
+        return static_cast<T>(dist1(generator)); 
     }
 
     template<typename T>
