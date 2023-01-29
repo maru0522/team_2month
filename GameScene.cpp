@@ -13,6 +13,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     // •Ï”‰Šú‰»
     cameraT_ = std::make_unique<Camera>();
+<<<<<<< HEAD
 
     Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
 
@@ -22,10 +23,15 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
 
+=======
+    spriteT_ = std::make_unique<Sprite>("Resources/reimu.png", CMode::PATH);
+    objT_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", cameraT_.get());
+>>>>>>> parent of 5499b30 (playerã§ããŸ)
 }
 
 void GameScene::Update(void)
 {
+<<<<<<< HEAD
 #ifdef _DEBUG
     if (KEYS::IsTrigger(DIK_R) || XPAD::IsTrigger(XPAD_Y)) {
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
@@ -83,20 +89,54 @@ void GameScene::Update(void)
     reset_->Update();
 
     cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
+=======
+    cameraT_->Update();
+
+    if (KEYS::IsDown(DIK_W)) {
+        cameraT_->eye_.z += 5;
+    }
+    if (KEYS::IsDown(DIK_S)) {
+        cameraT_->eye_.z -= 5;
+    }
+    if (KEYS::IsDown(DIK_A)) {
+        cameraT_->eye_.x -= 5;
+    }
+    if (KEYS::IsDown(DIK_D)) {
+        cameraT_->eye_.x += 5;
+    }
+
+    if (KEYS::IsDown(DIK_LEFTARROW)) {
+        objT_->worldCoordinate_.position_.x -= 2;
+    }
+    if (KEYS::IsDown(DIK_RIGHTARROW)) {
+        objT_->worldCoordinate_.position_.x += 2;
+    }
+
+    spriteT_->Update();
+    objT_->Update();
+>>>>>>> parent of 5499b30 (playerã§ããŸ)
 }
 
 void GameScene::Draw3d(void)
 {
+<<<<<<< HEAD
     player_->Draw3d();
 
 
     BlockManager::Draw();
+=======
+    objT_->Draw();
+>>>>>>> parent of 5499b30 (playerã§ããŸ)
 }
 
 void GameScene::Draw2d(void)
 {
+<<<<<<< HEAD
     reset_->Draw();
     player_->Draw2d();
+=======
+    spriteT_->Draw();
+>>>>>>> parent of 5499b30 (playerã§ããŸ)
 }
 
 void GameScene::Finalize(void)
