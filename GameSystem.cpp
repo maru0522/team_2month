@@ -38,7 +38,7 @@ void GameSystem::Draw(void)
 
     // ---------2DUI‚Ì•`‰æ---------
 
-    imGuiController_->Draw();
+    //imGuiController_->Draw();
 
     iDX_->PostDraw();
 }

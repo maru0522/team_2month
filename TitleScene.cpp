@@ -40,9 +40,9 @@ void TitleScene::Update(void)
     }
 
 #ifdef _DEBUG
-    ImGui::Begin("title screen");
-    ImGui::Text("alpha : %f", alpha);
-    ImGui::End();
+    //ImGui::Begin("title screen");
+    //ImGui::Text("alpha : %f", alpha);
+    //ImGui::End();
 #endif // _DEBUG
 }
 

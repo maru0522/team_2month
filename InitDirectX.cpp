@@ -473,27 +473,27 @@ void InitDirectX::ClearDepthBuff(void)
 InitDirectX::~InitDirectX(void)
 {
     // device以外をリセット
-    if (debugController_) debugController_.Reset();
-    if (dxgiFactory_) dxgiFactory_.Reset();
-    if (infoQueue_) infoQueue_.Reset();
-    if (cmdAllocator_)cmdAllocator_.Reset();
-    if (commandList_) commandList_.Reset();
-    if (commandQueue_)commandQueue_.Reset();
-    if (swapChain_)swapChain_.Reset();
-    if (rtvHeap_) rtvHeap_.Reset();
-    for (ComPtr<ID3D12Resource>& backBuffer : backBuffers_) {
-        if (backBuffer) {
-            backBuffer.Reset();
-        }
-    }
-    if (depthBuff_)depthBuff_.Reset();
-    if (dsvHeap_)dsvHeap_.Reset();
-    if (fence_)fence_.Reset();
+    //if (debugController_) debugController_.Reset();
+    //if (dxgiFactory_) dxgiFactory_.Reset();
+    //if (infoQueue_) infoQueue_.Reset();
+    //if (cmdAllocator_)cmdAllocator_.Reset();
+    //if (commandList_) commandList_.Reset();
+    //if (commandQueue_)commandQueue_.Reset();
+    //if (swapChain_)swapChain_.Reset();
+    //if (rtvHeap_) rtvHeap_.Reset();
+    //for (ComPtr<ID3D12Resource>& backBuffer : backBuffers_) {
+    //    if (backBuffer) {
+    //        backBuffer.Reset();
+    //    }
+    //}
+    //if (depthBuff_)depthBuff_.Reset();
+    //if (dsvHeap_)dsvHeap_.Reset();
+    //if (fence_)fence_.Reset();
 
-    ComPtr<ID3D12DebugDevice> debugInterface;
+    //ComPtr<ID3D12DebugDevice> debugInterface;
 
-    if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&debugInterface))))
-    {
-        debugInterface->ReportLiveDeviceObjects(D3D12_RLDO_DETAIL | D3D12_RLDO_IGNORE_INTERNAL);
-    }
+    //if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&debugInterface))))
+    //{
+    //    debugInterface->ReportLiveDeviceObjects(D3D12_RLDO_DETAIL | D3D12_RLDO_IGNORE_INTERNAL);
+    //}
 }
