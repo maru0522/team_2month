@@ -38,7 +38,7 @@ void BasicFrame::Initialize(void)
     // graphicsPipeline初期化
     GraphicsPipeline::Initialize();
 
-    //imGuiController_ = std::make_unique<ImGuiController>();
+    imGuiController_ = std::make_unique<ImGuiController>();
     sceneManager_ = std::make_unique<SceneManager>();
 
     // テクスチャ初期化
@@ -52,9 +52,9 @@ void BasicFrame::Update(void)
     DPAD::Update();
     XPAD::Update();
 
-    //imGuiController_->Begin();
+    imGuiController_->Begin();
     sceneManager_->Update();
-    //imGuiController_->End();
+    imGuiController_->End();
 }
 
 void BasicFrame::Draw(void)
@@ -63,7 +63,7 @@ void BasicFrame::Draw(void)
 
 void BasicFrame::Finalize(void)
 {
-    //if (imGuiController_) imGuiController_.reset();
+    if (imGuiController_) imGuiController_.reset();
     if (sceneManager_) sceneManager_.reset();
 
     // ウィンドウクラスを登録解除
