@@ -40,41 +40,41 @@ void BlockManager::Draw(void)
 void BlockManager::DrawImgui(void)
 {
 #ifdef _DEBUG
-    //ImGui::Begin("isConnectMp");
-    //ImGui::Text("isConnectMp");
-    //for (std::pair<const IdxConnect,bool>& connectPair : isConnectMp_) {
-    //    ImGui::Text("IdxConnect : %d", connectPair.first);
-    //    ImGui::SameLine();
-    //    ImGui::Text(connectPair.second ? "bool : true" : "bool : false");
-    //}
-    //ImGui::End();
+    ImGui::Begin("isConnectMp");
+    ImGui::Text("isConnectMp");
+    for (std::pair<const IdxConnect,bool>& connectPair : isConnectMp_) {
+        ImGui::Text("IdxConnect : %d", connectPair.first);
+        ImGui::SameLine();
+        ImGui::Text(connectPair.second ? "bool : true" : "bool : false");
+    }
+    ImGui::End();
 
-    //ImGui::Begin("isUnderHooksMp");
-    //ImGui::Text("isUnderHooksMp");
-    //for (std::pair<const IdxHook, bool>& hookPair : isUnderHooksMp_) {
-    //    ImGui::Text("IdxHooks : %d", hookPair.first);
-    //    ImGui::SameLine();
-    //    ImGui::Text(hookPair.second ? "bool : true" : "bool : false");
-    //}
-    //ImGui::End();
+    ImGui::Begin("isUnderHooksMp");
+    ImGui::Text("isUnderHooksMp");
+    for (std::pair<const IdxHook, bool>& hookPair : isUnderHooksMp_) {
+        ImGui::Text("IdxHooks : %d", hookPair.first);
+        ImGui::SameLine();
+        ImGui::Text(hookPair.second ? "bool : true" : "bool : false");
+    }
+    ImGui::End();
 
-    //ImGui::Begin("isSupplyMp");
-    //ImGui::Text("isSupplyMp");
-    //for (std::pair<const IdxHook, bool>& supplyPair : isSupplyMp_) {
-    //    ImGui::Text("IdxSupplies : %d", supplyPair.first);
-    //    ImGui::SameLine();
-    //    ImGui::Text(supplyPair.second ? "bool : true" : "bool : false");
-    //}
-    //ImGui::End();
+    ImGui::Begin("isSupplyMp");
+    ImGui::Text("isSupplyMp");
+    for (std::pair<const IdxHook, bool>& supplyPair : isSupplyMp_) {
+        ImGui::Text("IdxSupplies : %d", supplyPair.first);
+        ImGui::SameLine();
+        ImGui::Text(supplyPair.second ? "bool : true" : "bool : false");
+    }
+    ImGui::End();
 
-    //ImGui::Begin("isReceiveMp");
-    //ImGui::Text("isReceiveMp");
-    //for (std::pair<const IdxReceive, bool>& receivePair : isReceiveMp_) {
-    //    ImGui::Text("IdxRecieves : %d", receivePair.first);
-    //    ImGui::SameLine();
-    //    ImGui::Text(receivePair.second ? "bool : true" : "bool : false");
-    //}
-    //ImGui::End();
+    ImGui::Begin("isReceiveMp");
+    ImGui::Text("isReceiveMp");
+    for (std::pair<const IdxReceive, bool>& receivePair : isReceiveMp_) {
+        ImGui::Text("IdxRecieves : %d", receivePair.first);
+        ImGui::SameLine();
+        ImGui::Text(receivePair.second ? "bool : true" : "bool : false");
+    }
+    ImGui::End();
 #endif // _DEBUG
 }
 

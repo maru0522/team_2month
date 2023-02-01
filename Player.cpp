@@ -482,9 +482,11 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
             if (isNearReceive_) {
                 if (!oldConnecting_ && isConnecting_) {
                     BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = false;
+                    isNearReceive_ = false;
                 }
                 else if (oldConnecting_ && !isConnecting_) {
                     BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = true;
+                    isNearReceive_ = false;
                 }
             }
         }
@@ -554,56 +556,56 @@ void Player::ControllKeyTimer(void)
 void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
 {
 #ifdef _DEBUG
-    //ImGui::Begin("Player info");
+    ImGui::Begin("Player info");
 
-    //switch (state_)
-    //{
-    //case Player::MoveState::DEFAULT:
-    //    ImGui::Text("PlayerState : DEFAULT");
-    //    break;
-    //case Player::MoveState::ROPE:
-    //    ImGui::Text("PlayerState : ROPE");
-    //    break;
-    //case Player::MoveState::TARZAN:
-    //    ImGui::Text("PlayerState : TARZAN");
-    //    break;
-    //case Player::MoveState::S_DEBUG:
-    //    ImGui::Text("PlayerState : S_DEBUG");
-    //    break;
-    //}
-    //ImGui::Spacing();
+    switch (state_)
+    {
+    case Player::MoveState::DEFAULT:
+        ImGui::Text("PlayerState : DEFAULT");
+        break;
+    case Player::MoveState::ROPE:
+        ImGui::Text("PlayerState : ROPE");
+        break;
+    case Player::MoveState::TARZAN:
+        ImGui::Text("PlayerState : TARZAN");
+        break;
+    case Player::MoveState::S_DEBUG:
+        ImGui::Text("PlayerState : S_DEBUG");
+        break;
+    }
+    ImGui::Spacing();
 
-    //ImGui::Text(isUnderHook_ ? "isUnderHook_ : true" : "isUnderHook_ : false");
-    //ImGui::RadioButton("true", (int*)&isUnderHook_, true);
-    //ImGui::SameLine();
-    //ImGui::RadioButton("false", (int*)&isUnderHook_, false);
+    ImGui::Text(isUnderHook_ ? "isUnderHook_ : true" : "isUnderHook_ : false");
+    ImGui::RadioButton("true", (int*)&isUnderHook_, true);
+    ImGui::SameLine();
+    ImGui::RadioButton("false", (int*)&isUnderHook_, false);
 
-    //ImGui::Spacing();
+    ImGui::Spacing();
 
-    //ImGui::Text("PlayerCoordinate : %.3f,%.3f,%.3f", object_->worldCoordinate_.position_.x, object_->worldCoordinate_.position_.y, object_->worldCoordinate_.position_.z);
-    //ImGui::Text("PlayerVec : %.3f,%.3f,%.3f", vel.x, vel.y, vel.z);
+    ImGui::Text("PlayerCoordinate : %.3f,%.3f,%.3f", object_->worldCoordinate_.position_.x, object_->worldCoordinate_.position_.y, object_->worldCoordinate_.position_.z);
+    ImGui::Text("PlayerVec : %.3f,%.3f,%.3f", vel.x, vel.y, vel.z);
 
-    //ImGui::Spacing();
+    ImGui::Spacing();
 
-    //ImGui::Text("ropeKeyTimer_elapsedTime : ropeKeyTimer_endTime");
-    //ImGui::Text("%.6f : %.6f", ropeKeyTimer_->GetElapsedTime(), ropeKeyTimer_->GetEndTime());
-    //ImGui::Text(ropeKeyTimer_->GetIsEnd() ? "isEnd_ : true" : "isEnd_ : false");
+    ImGui::Text("ropeKeyTimer_elapsedTime : ropeKeyTimer_endTime");
+    ImGui::Text("%.6f : %.6f", ropeKeyTimer_->GetElapsedTime(), ropeKeyTimer_->GetEndTime());
+    ImGui::Text(ropeKeyTimer_->GetIsEnd() ? "isEnd_ : true" : "isEnd_ : false");
 
-    //ImGui::Spacing();
+    ImGui::Spacing();
 
-    //ImGui::Text(isJump_ ? "isJump_ : true" : "isJump_ : false");
+    ImGui::Text(isJump_ ? "isJump_ : true" : "isJump_ : false");
 
-    //ImGui::Spacing();
+    ImGui::Spacing();
 
-    //ImGui::Text(isNearSupply_ ? "isNearSupply_ : true" : "isNearSupply_ : false");
-    //ImGui::Text(isNearReceive_ ? "isNearReceive_ : true" : "isNearReceive_ : false");
-    //ImGui::Text(isConnecting_ ? "isConnecting_ : true" : "isConnecting_ : false");
+    ImGui::Text(isNearSupply_ ? "isNearSupply_ : true" : "isNearSupply_ : false");
+    ImGui::Text(isNearReceive_ ? "isNearReceive_ : true" : "isNearReceive_ : false");
+    ImGui::Text(isConnecting_ ? "isConnecting_ : true" : "isConnecting_ : false");
 
-    //ImGui::Spacing();
+    ImGui::Spacing();
 
-    //ImGui::Text("XPAD_LStick");
-    //ImGui::Text("LS_X : %f, LS_Y : %f", XPAD::GetLStick().x, XPAD::GetLStick().y);
+    ImGui::Text("XPAD_LStick");
+    ImGui::Text("LS_X : %f, LS_Y : %f", XPAD::GetLStick().x, XPAD::GetLStick().y);
 
-    //ImGui::End();
+    ImGui::End();
 #endif // _DEBUG
 }
