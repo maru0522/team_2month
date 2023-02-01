@@ -13,6 +13,7 @@ class GameScene : public BaseScene
 {
 private:
     static constexpr float rangeIntoPlayer_{ 50.0f };
+    static constexpr float cameraRotateSpeed_{ 2.f };
 
 public: // ä÷êî
     void Initialize(SceneManager* sceneManager) override;
@@ -22,12 +23,13 @@ public: // ä÷êî
     void Finalize(void) override;
 
 private:
-
-
-private:
     unique_ptr<Camera> cameraT_{ std::make_unique<Camera>() };
     unique_ptr<Player> player_{ std::make_unique<Player>(cameraT_.get()) };
 
     unique_ptr<Sprite> reset_{ std::make_unique<Sprite>("Resources/Image/Reset.png",CMode::PATH) };
+
+    // ÉJÉÅÉâmode - auto / controll
+    DirectX::XMFLOAT3 oldCameraEye_{}, oldCameraTarget_{};
+    bool isAutoCameraMode_{ true };
 };
 

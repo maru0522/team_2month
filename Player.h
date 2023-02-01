@@ -22,7 +22,12 @@ private: // 定義
 
 public: // 定数
     static constexpr float speed_{ 0.3f };
+
     static constexpr float ropeSpeed_{ 0.2f };
+    static constexpr float ropeStartLength_{ 10.f };
+    static constexpr float powerBlockConnectRopeNecessary_{ 1.f };
+    static constexpr float necessaryRopeLengthUseHook_{ 5.f };
+
     static constexpr float jumpPower_{ 2.7f }; // 2.4f -> 1.2f
     static constexpr float jumpAttenuation_{ 0.23f };
     static constexpr float gravity_{ 0.75f };
@@ -39,6 +44,8 @@ public: // 定数
     void DrawImgui(const DirectX::XMFLOAT3& vel);
 
     const std::unique_ptr<Obj3d>& GetObject3d(void) const { return object_; }
+
+    const bool GetIsGoal(void)const { return isGoal_; }
 
     void SetPos(const DirectX::XMFLOAT3& pos) { object_->worldCoordinate_.position_ = pos; }
     void SetPosX(const float posX) { object_->worldCoordinate_.position_.x = posX; }
@@ -79,6 +86,9 @@ private: // 変数
     bool oldConnecting_{ false }; // 苦肉
     bool isConnecting_{ false }; // ワイヤーをつなげている最中かどうか
 
+    bool isGoal_{ false }; // ゴールブロックの上に乗ったか
+
+    float ropeLength_{ ropeStartLength_ };
 
     std::unique_ptr<Sprite> ropeUsePad_sprite_{ std::make_unique<Sprite>("XPAD_RB",CMode::ID) };
     std::unique_ptr<Sprite> ropeUsePadPress_sprite_{ std::make_unique<Sprite>("XPAD_RB_PRESS",CMode::ID) };

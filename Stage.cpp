@@ -10,8 +10,9 @@
 #include "PowerReceiveBlock.h"
 #include "SwitchBlock.h"
 #include "FanBlock.h"
+#include "GoalBlock.h"
 
-float Stage::maxBlockPosZValue_{};
+DirectX::XMFLOAT3 Stage::maxBlockPosValue_{};
 
 void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
 {
@@ -27,7 +28,7 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
     uint32_t idXReceive{};
     uint32_t idxConnect{};
 
-    maxBlockPosZValue_ = 0;
+    maxBlockPosValue_ = {0,0,0};
 
     while (std::getline(ifs, line)) {
         size_t loopX{};
@@ -37,8 +38,11 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
         while (std::getline(line_stream, tmp, ',')) {
             if (loopX <= 2) {
                 coordinate[loopX] = std::stof(tmp);
-                if (coordinate[2] > maxBlockPosZValue_) {
-                    maxBlockPosZValue_ = coordinate[2];
+                if (coordinate[0] > maxBlockPosValue_.x) {
+                    maxBlockPosValue_.x = coordinate[0];
+                }
+                if (coordinate[2] > maxBlockPosValue_.z) {
+                    maxBlockPosValue_.z = coordinate[2];
                 }
             }
             else if (3 <= loopX && loopX <= 5) {
@@ -75,6 +79,9 @@ void Stage::LoadCsv(Camera* pCamera, const fsPath& path)
             break;
         case IBlock::Type::START:
             BlockManager::Register(new StartBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });
+            break;
+        case IBlock::Type::GOAL:
+            BlockManager::Register(new GoalBlock{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, pCamera });
             break;
         case IBlock::Type::HOOK:
             BlockManager::Register(new Hook{ {coordinate.at(0),coordinate.at(1),coordinate.at(2)}, {scale.at(0),scale.at(1),scale.at(2)}, idXHook, pCamera });

@@ -271,7 +271,9 @@ void Player::ControllState(void)
             }
 
             if (XPAD::IsTrigger(XPAD_RB)) {
-                SetState(MoveState::ROPE);
+                if (ropeLength_ >= necessaryRopeLengthUseHook_) {
+                    SetState(MoveState::ROPE);
+                }
             }
         }
 
@@ -290,6 +292,7 @@ void Player::ControllState(void)
             if (XPAD::IsTrigger(XPAD_X)) { //特定のキーを押したとき
                 if (isConnecting_) { // ワイヤーをつなげようとしてる最中なら
                     isConnecting_ = false; // つなげて、最中ではなくなる
+                    ropeLength_ -= powerBlockConnectRopeNecessary_; // 手持ちのロープの長さを減らす。
                 }
                 else { // ワイヤーをつなげようとしてる最中でないなら
                     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) { // ブロックを全検索 ※まじで苦肉の策
@@ -299,6 +302,10 @@ void Player::ControllState(void)
                             }
                         } // 要約すると、ワイヤーをつなげようとしていない時は、受電ブロックの近くでキーを押しても、[つなげようとしてる最中]の状態にならない
                     }
+                }
+
+                if (isConnecting_) {
+                    ropeLength_ += powerBlockConnectRopeNecessary_; // 手持ちのロープの長さを増やす。
                 }
             }
         }
@@ -484,8 +491,8 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
 
         if (*block->GetType() == IBlock::Type::HOOK) { // block の type が HOOK の場合
             // x軸,z軸においてプレイヤーがブロック内の座標にある時。
-            if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < -0.4f && // ※<-ちょっと範囲狭めてる
-                std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < -0.4f) {
+            if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < -1.1f && // ※<-ちょっと範囲狭めてる
+                std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < -1.1f) {
                 // DirectionY
                 // HOOK ブロックから下方向10ブロック以内にいるか
                 if (block->GetPos()->y - (block->GetRadius()->y + Player::radius_.y) >= object_->worldCoordinate_.position_.y &&
@@ -517,9 +524,22 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                     // DirectionY
                     // FAN ブロックから上方向10ブロック以内にいるか
                     if (block->GetPos()->y + (block->GetRadius()->y + Player::radius_.y) <= object_->worldCoordinate_.position_.y &&
-                        object_->worldCoordinate_.position_.y < block->GetPos()->y - ((block->GetRadius()->y * 2) * 10 + block->GetRadius()->y)) {
+                        object_->worldCoordinate_.position_.y < block->GetPos()->y + ((block->GetRadius()->y * 2) * 10 + block->GetRadius()->y)) {
                         vel.y = IBlock::fanUpVecSpeed_;
                     }
+                }
+            }
+        }
+
+        if (*block->GetType() == IBlock::Type::GOAL) {
+            // x軸,z軸においてプレイヤーがブロック内の座標にある時。
+            if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 0.f && // ※<-ちょっと範囲狭めてる
+                std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 0.f) {
+                // DirectionY
+                // GOAL ブロックから上方向1ブロック以内にいるか
+                if (block->GetPos()->y + (block->GetRadius()->y + Player::radius_.y) <= object_->worldCoordinate_.position_.y &&
+                    object_->worldCoordinate_.position_.y < block->GetPos()->y + ((block->GetRadius()->y * 2) * 1 + block->GetRadius()->y)) {
+                    isGoal_ = true;
                 }
             }
         }

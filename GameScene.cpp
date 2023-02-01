@@ -14,28 +14,45 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     // 変数初期化
     cameraT_ = std::make_unique<Camera>();
 
-    Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
+    Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage5.csv");
 
     cameraT_->eye_ = { -50.f, 70.f, -50.f };
-    cameraT_->target_ = { 30 ,-4, Stage::maxBlockPosZValue_ / 2.f };
+    cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2.f ,-4, Stage::maxBlockPosValue_.z / 2.f };
+    
 
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
-
 }
 
 void GameScene::Update(void)
 {
-#ifdef _DEBUG
     if (KEYS::IsTrigger(DIK_R) || XPAD::IsTrigger(XPAD_Y)) {
+        BlockManager::ClearAll();
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
         sceneManager_->RequestChangeScene(nextScene);
     }
 
     if (KEYS::IsTrigger(DIK_0)) {
+        BlockManager::ClearAll();
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("TITLE") };
         sceneManager_->RequestChangeScene(nextScene);
     }
+
+    // プレイヤーが落下したら強制リセット（初期足場から５ブロック下の座標以下になったとき）
+    if (player_->GetObject3d()->worldCoordinate_.position_.y <= -10.f) {
+        BlockManager::ClearAll();
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
+        sceneManager_->RequestChangeScene(nextScene);
+    }
+
+    // プレイヤーがクリアしたら強制リセット（ゴールブロックを踏んだら強制リセット）
+    if (player_->GetIsGoal()) {
+        BlockManager::ClearAll();
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
+        sceneManager_->RequestChangeScene(nextScene);
+    }
+
+#ifdef _DEBUG
 
     // ホットリロード
     if (KEYS::IsTrigger(DIK_5)) {
@@ -73,7 +90,15 @@ void GameScene::Update(void)
     }
 #endif // _DEBUG
 
-    cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
+    if (isAutoCameraMode_) {
+        cameraT_->eye_.x = { player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.x };
+        cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
+    }
+    else {
+
+    }
+
+    //cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
     cameraT_->Update();
     player_->Update();
 
@@ -82,7 +107,7 @@ void GameScene::Update(void)
 
     reset_->Update();
 
-    cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
+
 }
 
 void GameScene::Draw3d(void)

@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="BlockManager.cpp" />
     <ClCompile Include="FanBlock.cpp" />
+    <ClCompile Include="GoalBlock.cpp" />
     <ClCompile Include="Hook.cpp" />
     <ClCompile Include="IBlock.cpp" />
     <ClCompile Include="AbstractSceneFactory.cpp" />
@@ -247,6 +248,7 @@
   <ItemGroup>
     <ClInclude Include="BlockManager.h" />
     <ClInclude Include="FanBlock.h" />
+    <ClInclude Include="GoalBlock.h" />
     <ClInclude Include="Hook.h" />
     <ClInclude Include="IBlock.h" />
     <ClInclude Include="AbstractSceneFactory.h" />
