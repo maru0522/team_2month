@@ -166,6 +166,7 @@
     <ClCompile Include="PowerReceiveBlock.cpp" />
     <ClCompile Include="PowerSupplyBlock.cpp" />
     <ClCompile Include="ResourceLoad.cpp" />
+    <ClCompile Include="sceenChenge.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StartBlock.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="PowerReceiveBlock.h" />
     <ClInclude Include="PowerSupplyBlock.h" />
     <ClInclude Include="ResourceLoad.h" />
+    <ClInclude Include="sceenChenge.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StartBlock.h" />

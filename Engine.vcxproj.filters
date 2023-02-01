@@ -210,6 +210,9 @@
     <ClCompile Include="GoalBlock.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="sceenChenge.cpp">
+      <Filter>ソース ファイル\MakeGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicVS.hlsl" />
@@ -363,6 +366,9 @@
     </ClInclude>
     <ClInclude Include="GoalBlock.h">
       <Filter>ヘッダー ファイル\Object\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="sceenChenge.h">
+      <Filter>ヘッダー ファイル\MakeGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

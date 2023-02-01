@@ -43,6 +43,11 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
 
     // 3d.objì«Ç›çûÇ›
     Model::Load("Resources/3dModels/cube/cube.obj");
+    Model::Load("Resources/3dModels/playertest2/playertest2.obj");
+    Model::Load("Resources/3dModels/ropetest/ropetest.obj");
+
+   
+    Model::Load("Resources/3dModels/buttonX/buttonX.obj");
 }
 
 void ResourceLoad::Update(void)
