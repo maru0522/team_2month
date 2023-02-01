@@ -14,9 +14,9 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     // •Ï”‰Šú‰»
     cameraT_ = std::make_unique<Camera>();
 
-    Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage4.csv");
+    Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage5.csv");
 
-    cameraT_->eye_ = { -50.f, 70.f, -50.f };
+    cameraT_->eye_ = { -50.f, 90.f, -50.f };
     cameraT_->target_ = { 30 ,-4, Stage::maxBlockPosZValue_ / 2.f };
 
     player_ = std::make_unique<Player>(cameraT_.get());
