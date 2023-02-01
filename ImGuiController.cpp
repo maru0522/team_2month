@@ -13,7 +13,7 @@ ImGuiController::ImGuiController(void)
 
 ImGuiController::~ImGuiController(void)
 {
-
+    Finalize();
 }
 
 void ImGuiController::Begin(void)
@@ -79,7 +79,7 @@ void ImGuiController::Finalize(void)
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
 
-    // srvHeap_.Reset();
+     srvHeap_.Reset();
 }
 
 void ImGuiController::CreateSRVHeap(void)

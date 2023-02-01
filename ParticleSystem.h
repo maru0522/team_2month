@@ -32,8 +32,17 @@ public:
 	//起動しているかどうかを変える
 	void SetisActive(bool flag) { isActive = flag; };
 
-	//噴水のように飛び出すパーティクル(パラメータをセットしてupdateを呼ぶ)
+	//パーティクルの発生間隔を変える
+	void SetCoolTime(float time) { coolTime = time; };
+
+	//重力に従いパーティクル(中でパラメータをセットしてupdateを呼んでくれる)
 	void FountainParticle();
+
+	//上に上がって消える
+	void UpParticle();
+
+	//渡したベクトルの方向に出す
+	void testParticle(DirectX::XMFLOAT3 vec,DirectX::XMFLOAT2 xRandlen = { 1.0f,3.0f }, DirectX::XMFLOAT2 yRandlen = { 1.0f,3.0f }, DirectX::XMFLOAT2 zRandlen = { 1.0f,3.0f });
 
 private:
 
@@ -64,6 +73,12 @@ private:
 
 	//パーティクルの移動方向
 	DirectX::XMFLOAT3 moveVec = { 0,1,0 };
+
+	//パーティクルの発生間隔
+	float coolTime = 1;
+
+	//cooltime用の時間計測
+	float timeCount = 0;
 
 	//パーティクルの移動スピード
 	float moveSpeed = 0.5f;

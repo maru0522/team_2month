@@ -61,31 +61,139 @@ void ParticleSystem::popParticle()
 
 void ParticleSystem::FountainParticle()
 {
-
-	if (isActive)
+	if (timeCount >= coolTime)
 	{
-		//–³‘Ê‚ÈŒvZ‚ğ‚µ‚È‚¢‚½‚ß‚É
-		if (particles.size() < particleNum)
+		if (isActive)
 		{
-			moveVec = { Util::Random<float>(-5,5),0,Util::Random<float>(-5,5) };
+			//–³‘Ê‚ÈŒvZ‚ğ‚µ‚È‚¢‚½‚ß‚É
+			if (particles.size() < particleNum)
+			{
+				moveVec = { Util::Random<float>(-5,5),0,Util::Random<float>(-5,5) };
 
-			// ƒmƒ‹ƒ€æ“¾
-			float length{ std::sqrtf(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z) };
-			// ³‹K‰»
-			if (length != 0) {
-				moveVec.x /= length;
-				moveVec.y /= length;
-				moveVec.z /= length;
+				// ƒmƒ‹ƒ€æ“¾
+				float length{ std::sqrtf(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z) };
+				// ³‹K‰»
+				if (length != 0) {
+					moveVec.x /= length;
+					moveVec.y /= length;
+					moveVec.z /= length;
+				}
+
+				isGravity = true;
+
+
 			}
 
-			isGravity = true;
-
-
+			popParticle();
+			timeCount = 0;
 		}
-
-		popParticle();
 	}
 
 	Update();
+
+	timeCount++;
+
+}
+
+void ParticleSystem::UpParticle()
+{
+
+	if (timeCount >= coolTime)
+	{
+
+		if (isActive)
+		{
+			//–³‘Ê‚ÈŒvZ‚ğ‚µ‚È‚¢‚½‚ß‚É
+			if (particles.size() < particleNum)
+			{
+				moveVec = { Util::Random<float>(-3,3),5,Util::Random<float>(-3,3) };
+
+				// ƒmƒ‹ƒ€æ“¾
+				float length{ std::sqrtf(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z) };
+				// ³‹K‰»
+				if (length != 0) {
+					moveVec.x /= length;
+					moveVec.y /= length;
+					moveVec.z /= length;
+				}
+
+				isGravity = false;
+
+				startScale = { 0.8f,0.8f,0.8f };
+
+				aliveTime = Util::Random<float>(5, 20);
+				moveSpeed = 1.0f;
+
+
+			}
+
+			popParticle();
+			timeCount = 0;
+		}
+
+	}
+
+	Update();
+	timeCount++;
+
+}
+
+void ParticleSystem::testParticle(DirectX::XMFLOAT3 vec, DirectX::XMFLOAT2 xRandlen, DirectX::XMFLOAT2 yRandlen, DirectX::XMFLOAT2 zRandlen)
+{
+
+	if (timeCount >= coolTime)
+	{
+
+		if (isActive)
+		{
+			//–³‘Ê‚ÈŒvZ‚ğ‚µ‚È‚¢‚½‚ß‚É
+			if (particles.size() < particleNum)
+			{
+				DirectX::XMFLOAT3 norVec = vec;
+				// ƒmƒ‹ƒ€æ“¾
+				float vecLength{ std::sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z) };
+				// ³‹K‰»
+				if (vecLength != 0) {
+					norVec.x /= vecLength;
+					norVec.y /= vecLength;
+					norVec.z /= vecLength;
+				}
+
+				moveVec = { norVec.x * Util::Random<float>(xRandlen.x,xRandlen.y),norVec.y * Util::Random<float>(yRandlen.x,yRandlen.y),norVec.z * Util::Random<float>(zRandlen.x,zRandlen.y) };
+
+				// ƒmƒ‹ƒ€æ“¾
+				float length{ std::sqrtf(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z) };
+				// ³‹K‰»
+				if (length != 0) {
+					moveVec.x /= length;
+					moveVec.y /= length;
+					moveVec.z /= length;
+				}
+
+				isGravity = false;
+
+				startScale = { 0.5f,0.5f,0.5f };
+
+
+			}
+
+			popParticle();
+			timeCount = 0;
+		}
+
+	}
+
+	Update();
+	if (coolTime >= timeCount)
+	{
+		timeCount++;
+	}
+
+	ImGui::Begin("num");
+
+	ImGui::Text("%d", particles.size());
+
+	ImGui::End();
+
 
 }
