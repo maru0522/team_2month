@@ -195,5 +195,13 @@ void ParticleSystem::testParticle(DirectX::XMFLOAT3 vec, DirectX::XMFLOAT2 xRand
 
 	ImGui::End();
 
+	ImGui::Begin("Particle");
+
+	ImGui::InputInt("maxNum", &particleNum);
+	ImGui::SliderFloat("cooltime", &coolTime, 0.0f, 50.0f, "%.3f");
+	ImGui::SliderFloat("aliveTime", &aliveTime, 0.0f, 50.0f, "%.3f");
+
+	ImGui::End();
+
 
 }
