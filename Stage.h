@@ -10,6 +10,6 @@ private:
 public:
     static void LoadCsv(Camera* pCamera, const fsPath& path);
 
-    static float maxBlockPosZValue_;
+    static DirectX::XMFLOAT3 maxBlockPosValue_;
 };
 

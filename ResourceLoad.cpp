@@ -13,6 +13,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/mario.jpg");
     Texture::Load("Resources/thinking.png");
     Texture::Load("Resources/Image/Type_START.png");
+    Texture::Load("Resources/Image/Type_GOAL.png");
     Texture::Load("Resources/Image/Type_PATH.png");
     Texture::Load("Resources/Image/Type_HOOK.png");
     Texture::Load("Resources/Image/Type_POWERSUPPLY.png");

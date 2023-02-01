@@ -207,6 +207,9 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
+    <ClCompile Include="GoalBlock.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="BasicVS.hlsl" />
@@ -357,6 +360,9 @@
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
       <Filter>ヘッダー ファイル\Object\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalBlock.h">
+      <Filter>ヘッダー ファイル\Object\Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -82,4 +82,7 @@ void BlockManager::ClearAll(void)
 {
     blocks_.clear();
     isConnectMp_.clear();
+    isUnderHooksMp_.clear();
+    isSupplyMp_.clear();
+    isReceiveMp_.clear();
 }
