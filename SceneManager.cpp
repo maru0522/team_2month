@@ -10,6 +10,8 @@ SceneManager::SceneManager(void)
     Texture::Load("Resources/Image/testplayercheng2_R.png");
     Texture::Load("Resources/Image/testplayercheng2_L.png");
     Texture::Load("Resources/Image/testropecheng.png");
+
+    insertAnimation_->SetSprite();
 }
 
 SceneManager::~SceneManager(void)
@@ -32,6 +34,7 @@ void SceneManager::Update(void)
     if (isInsertOk_) {
         insertAnimation_->Update();
         if (nextScene_) {
+            if (insertAnimation_->GetIsResetOk()) insertAnimation_->Reset();
 
             if (insertAnimation_->GetIsStart() == false) {
                 insertAnimation_->SetIsStart(true);

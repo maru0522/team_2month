@@ -24,6 +24,15 @@ SceenChenge::~SceenChenge()
 {
 }
 
+void SceenChenge::SetSprite(void)
+{
+    player = std::make_unique<Sprite>("Resources/Image/testplayercheng.png", CMode::PATH);
+    playerR = std::make_unique<Sprite>("Resources/Image/testplayercheng2_R.png", CMode::PATH);
+    playerL = std::make_unique<Sprite>("Resources/Image/testplayercheng2_L.png", CMode::PATH);
+    rope = std::make_unique<Sprite>("Resources/Image/testropecheng.png", CMode::PATH);
+    chenge = std::make_unique<Sprite>("Resources/Image/testcheng.png", CMode::PATH);
+}
+
 void SceenChenge::Update()
 {
 	//ropeObj->Update();
@@ -94,10 +103,7 @@ void SceenChenge::Update()
 		if (maxChengeMoveTime <= ChengeMoveTime)
 		{
 
-			isEnd = false;
-			ChengeMoveTime = 0;
-			waitTime = 0;
-			isStart = false;
+            isResetOk_ = true;
 
 		}
 
@@ -168,6 +174,15 @@ void SceenChenge::Draw()
 #endif // _DEBUG
 
 
+}
+
+void SceenChenge::Reset(void)
+{
+    isEnd = false;
+    ChengeMoveTime = 0;
+    waitTime = 0;
+    isStart = false;
+    isResetOk_ = false;
 }
 
 float SceenChenge::easeOutBack(float start, float end, float time)

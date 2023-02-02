@@ -10,15 +10,19 @@ public:
 	SceenChenge();
 	~SceenChenge();
 
+    void SetSprite(void);
+
 	void Update();
 
 	void Draw();
 
     bool GetIsStart(void) { return isStart; }
     bool GetIsEnd(void) { return isEnd; }
-
+    bool GetIsResetOk(void) { return isResetOk_; }
 
 	void SetIsStart(bool flag) { isStart = flag; };
+
+    void Reset(void);
 
 private:
 
@@ -35,14 +39,14 @@ private:
 	std::unique_ptr<Obj3d> ropeObj;
 	std::unique_ptr<Obj3d> playerObj;
 
-	std::unique_ptr<Sprite> player{ std::make_unique<Sprite>("Resources/Image/testplayercheng.png",CMode::PATH) };
-	std::unique_ptr<Sprite> playerR{ std::make_unique<Sprite>("Resources/Image/testplayercheng2_R.png",CMode::PATH) };
-	std::unique_ptr<Sprite> playerL{ std::make_unique<Sprite>("Resources/Image/testplayercheng2_L.png",CMode::PATH) };
-
-	std::unique_ptr<Sprite> rope{ std::make_unique<Sprite>("Resources/Image/testropecheng.png",CMode::PATH) };
+    std::unique_ptr<Sprite> player = std::make_unique<Sprite>("Resources/Image/testplayercheng.png", CMode::PATH);
+    std::unique_ptr<Sprite> playerR = std::make_unique<Sprite>("Resources/Image/testplayercheng2_R.png", CMode::PATH);
+    std::unique_ptr<Sprite> playerL = std::make_unique<Sprite>("Resources/Image/testplayercheng2_L.png", CMode::PATH);
+    
+    std::unique_ptr<Sprite> rope = std::make_unique<Sprite>("Resources/Image/testropecheng.png", CMode::PATH);
 	
-
-	std::unique_ptr<Sprite> chenge{ std::make_unique<Sprite>("Resources/Image/testcheng.png",CMode::PATH) };
+    
+	std::unique_ptr<Sprite> chenge{ std::make_unique<Sprite>("Resources/Image/testcheng.png", CMode::PATH) };
 
 	Camera* cameraPtr{ nullptr };
 
@@ -66,5 +70,7 @@ private:
 	bool isStart = false;
 
 	bool checkDebug = false;
+
+    bool isResetOk_{ false };
 };
 

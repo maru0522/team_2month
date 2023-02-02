@@ -41,8 +41,8 @@ void BasicFrame::Initialize(void)
     // テクスチャ初期化
     Texture::Initialize();
 
-    imGuiController_ = std::make_unique<ImGuiController>();
     sceneManager_ = std::make_unique<SceneManager>();
+    imGuiController_ = std::make_unique<ImGuiController>();
 
 }
 
