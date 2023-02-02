@@ -13,6 +13,7 @@ void TitleScene::Initialize(SceneManager* pSceneManager)
     anybutton_sprite_->SetPosition({ 500,500 });
     anybutton_sprite_->SetColor({ 1.f,1.f,1.f,1.f });
     anybuttonTimer_->Start(2.5f);
+
 }
 
 void TitleScene::Update(void)
@@ -35,14 +36,15 @@ void TitleScene::Update(void)
     }
 
     if (XPAD::IsTriggerSome()) {
+        SceneManager::isInsertOk_ = true;
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("STAGESELECT") };
         sceneManager_->RequestChangeScene(nextScene);
     }
 
 #ifdef _DEBUG
-    //ImGui::Begin("title screen");
-    //ImGui::Text("alpha : %f", alpha);
-    //ImGui::End();
+    ImGui::Begin("title screen");
+    ImGui::Text("alpha : %f", alpha);
+    ImGui::End();
 #endif // _DEBUG
 }
 

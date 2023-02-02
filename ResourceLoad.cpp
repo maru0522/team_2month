@@ -41,12 +41,6 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/KEY_ENTER.png");
     Texture::Load("Resources/Image/KEY_ENTER_PRESS.png");
 
-    Texture::Load("Resources/Image/testcheng.png");
-    Texture::Load("Resources/Image/testplayercheng.png");
-    Texture::Load("Resources/Image/testplayercheng2_R.png");
-    Texture::Load("Resources/Image/testplayercheng2_L.png");
-    Texture::Load("Resources/Image/testropecheng.png");
-
     // 3d.objì«Ç›çûÇ›
     Model::Load("Resources/3dModels/cube/cube.obj");
     Model::Load("Resources/3dModels/playertest2/playertest2.obj");

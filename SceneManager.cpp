@@ -1,4 +1,16 @@
 #include "SceneManager.h"
+#include "Texture.h"
+
+bool SceneManager::isInsertOk_{ false };
+
+SceneManager::SceneManager(void)
+{
+    Texture::Load("Resources/Image/testcheng.png");
+    Texture::Load("Resources/Image/testplayercheng.png");
+    Texture::Load("Resources/Image/testplayercheng2_R.png");
+    Texture::Load("Resources/Image/testplayercheng2_L.png");
+    Texture::Load("Resources/Image/testropecheng.png");
+}
 
 SceneManager::~SceneManager(void)
 {
@@ -10,21 +22,52 @@ std::unique_ptr<BaseScene> SceneManager::CreateScene(const std::string& sceneNam
     return std::move(sceneFactory_->CreateScene(sceneName));
 }
 
+void SceneManager::RequestChangeScene(unique_ptr<BaseScene>& nextScene)
+{
+    nextScene_ = std::move(nextScene);
+}
+
 void SceneManager::Update(void)
 {
-    if (nextScene_) {
-        if (currentScene_) {
-            currentScene_->Finalize();
-            currentScene_.reset();
+    if (isInsertOk_) {
+        insertAnimation_->Update();
+        if (nextScene_) {
+
+            if (insertAnimation_->GetIsStart() == false) {
+                insertAnimation_->SetIsStart(true);
+            }
+
+            if (insertAnimation_->GetIsEnd() == true) {
+                if (currentScene_) {
+                    currentScene_->Finalize();
+                    currentScene_.reset();
+                }
+
+                currentScene_ = std::move(nextScene_);
+                nextScene_.reset();
+
+                currentScene_->Initialize(this);
+            }
         }
 
-        currentScene_ = std::move(nextScene_);
-        nextScene_.reset();
-        
-        currentScene_->Initialize(this);
+        if (insertAnimation_->GetIsEnd() == true) {
+            currentScene_->Update();
+        }
     }
+    else {
+        if (nextScene_) {
+            if (currentScene_) {
+                currentScene_->Finalize();
+                currentScene_.reset();
+            }
 
-    currentScene_->Update();
+            currentScene_ = std::move(nextScene_);
+            nextScene_.reset();
+
+            currentScene_->Initialize(this);
+        }
+        currentScene_->Update();
+    }
 }
 
 void SceneManager::Draw3d(void)
@@ -34,7 +77,8 @@ void SceneManager::Draw3d(void)
 
 void SceneManager::Draw2d(void)
 {
-    currentScene_->Draw2d();
+     currentScene_->Draw2d();
+    if (insertAnimation_->GetIsStart()) insertAnimation_->Draw();
 }
 
 void SceneManager::Finalize(void)

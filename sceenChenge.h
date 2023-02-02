@@ -14,7 +14,11 @@ public:
 
 	void Draw();
 
-	void SetIsstart(bool flag) { isStart = flag; };
+    bool GetIsStart(void) { return isStart; }
+    bool GetIsEnd(void) { return isEnd; }
+
+
+	void SetIsStart(bool flag) { isStart = flag; };
 
 private:
 
@@ -62,7 +66,5 @@ private:
 	bool isStart = false;
 
 	bool checkDebug = false;
-	
-
 };
 
