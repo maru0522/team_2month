@@ -1,374 +1,386 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="ソース ファイル\Resource">
-      <UniqueIdentifier>{831a65b3-bab0-437b-b86e-3ff7637b9b49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Resource">
-      <UniqueIdentifier>{d390da2b-0705-49ca-8832-1cbad99b2d2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソース ファイル\shader">
-      <UniqueIdentifier>{e3667543-9039-4809-bddd-a57c5f67affa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object">
-      <UniqueIdentifier>{da1920c6-d477-4bdc-ab90-32a611e86d41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\3d">
-      <UniqueIdentifier>{17b32238-6a64-4172-bf6d-8b3866c8b3c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\2d">
-      <UniqueIdentifier>{33f2f4f6-8429-42fd-9f14-625d13345626}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\elem">
-      <UniqueIdentifier>{ebcae5f9-1690-4e99-a478-8919935e14b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\MakeGame">
-      <UniqueIdentifier>{1187e140-c136-4337-a213-3f85e6d9a584}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Base">
-      <UniqueIdentifier>{c1683018-51dc-4601-a2b7-ddd81c97d6d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Base">
-      <UniqueIdentifier>{6e74f6e1-bf99-4361-a4fb-8a3ddd6cda8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object">
-      <UniqueIdentifier>{6d6c8107-95d3-44c2-b027-88358890eeb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\2d">
-      <UniqueIdentifier>{ca88b857-684b-4fae-a9d1-f847023fa16d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\3d">
-      <UniqueIdentifier>{c0ad25a2-b40b-4eb1-bde0-e134dd505c61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\elem">
-      <UniqueIdentifier>{f0d46203-b032-427f-9da2-9a0c159c3e70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\MakeGame">
-      <UniqueIdentifier>{d3e6502a-f343-4e6c-91ef-1361126ce9c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Base\Scene">
-      <UniqueIdentifier>{66ce161e-9113-4a47-840a-8343a912b6f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\MakeGame\Scene">
-      <UniqueIdentifier>{9a53d678-2ccd-4f90-b655-3abe43dc10ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Base\Scene">
-      <UniqueIdentifier>{a8c604e3-ce20-4aec-a07f-7d9fe3be8423}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\MakeGame\Scene">
-      <UniqueIdentifier>{8652458c-7107-4f83-a4b1-9d350c6a5931}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\Block">
-      <UniqueIdentifier>{c44f5c8b-d538-4504-b6d2-80d402e6d22a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\Block">
-      <UniqueIdentifier>{306fbd3d-aade-423b-9494-521bdaa3b2a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Object\Block\Gimmick">
-      <UniqueIdentifier>{bdd9f3da-773f-4af7-a434-426ae55c0470}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Object\Block\Gimmick">
-      <UniqueIdentifier>{3488bc70-8ba2-4011-aead-9bb66611b13d}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="CtrlFPS.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="InitDirectX.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル\Object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>ソース ファイル\Object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル\Object\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>ソース ファイル\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj3d.cpp">
-      <Filter>ソース ファイル\Object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="AssimpLoader.cpp">
-      <Filter>ソース ファイル\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="XAudio.cpp">
-      <Filter>ソース ファイル\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldCoordinate.cpp">
-      <Filter>ソース ファイル\Object\elem</Filter>
-    </ClCompile>
-    <ClCompile Include="SharedStruct.cpp">
-      <Filter>ソース ファイル\Object\elem</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsPipeline.cpp">
-      <Filter>ソース ファイル\Object\elem</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
-    </ClCompile>
-    <ClCompile Include="ImGuiController.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicFrame.cpp">
-      <Filter>ソース ファイル\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="AbstractSceneFactory.cpp">
-      <Filter>ソース ファイル\Base\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseScene.cpp">
-      <Filter>ソース ファイル\Base\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneFactory.cpp">
-      <Filter>ソース ファイル\Base\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル\MakeGame\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル\MakeGame\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLoad.cpp">
-      <Filter>ソース ファイル\MakeGame\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Hook.cpp">
-      <Filter>ソース ファイル\Object\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="IBlock.cpp">
-      <Filter>ソース ファイル\Object\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalBlock.cpp">
-      <Filter>ソース ファイル\Object\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="StartBlock.cpp">
-      <Filter>ソース ファイル\Object\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockManager.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
-    </ClCompile>
-    <ClCompile Include="IGimmickBlock.cpp">
-      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerReceiveBlock.cpp">
-      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerSupplyBlock.cpp">
-      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="SwitchBlock.cpp">
-      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="FanBlock.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>ソース ファイル\Object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>ソース ファイル\Object\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="GoalBlock.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="sceenChenge.cpp">
-      <Filter>ソース ファイル\MakeGame</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="BasicVS.hlsl" />
-    <FxCompile Include="BasicPS.hlsl" />
-    <FxCompile Include="Resources\Shaders\ModelVS.hlsl">
-      <Filter>リソース ファイル\shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ModelPS.hlsl">
-      <Filter>リソース ファイル\shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\SpriteVS.hlsl">
-      <Filter>リソース ファイル\shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\SpritePS.hlsl">
-      <Filter>リソース ファイル\shader</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Basic.hlsli" />
-    <None Include="packages.config" />
-    <None Include="Resources\Shaders\Model.hlsli">
-      <Filter>リソース ファイル\shader</Filter>
-    </None>
-    <None Include="Resources\Shaders\Sprite.hlsli">
-      <Filter>リソース ファイル\shader</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Window.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="CtrlFPS.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="InitDirectX.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル\Object\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル\Object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>ヘッダー ファイル\Object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>ヘッダー ファイル\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj3d.h">
-      <Filter>ヘッダー ファイル\Object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>ヘッダー ファイル\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="AssimpLoader.h">
-      <Filter>ヘッダー ファイル\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="XAudio.h">
-      <Filter>ヘッダー ファイル\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstBuffer.h">
-      <Filter>ヘッダー ファイル\Object\elem</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsPipeline.h">
-      <Filter>ヘッダー ファイル\Object\elem</Filter>
-    </ClInclude>
-    <ClInclude Include="SharedStruct.h">
-      <Filter>ヘッダー ファイル\Object\elem</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldCoordinate.h">
-      <Filter>ヘッダー ファイル\Object\elem</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGuiController.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSystem.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicFrame.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseScene.h">
-      <Filter>ヘッダー ファイル\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractSceneFactory.h">
-      <Filter>ヘッダー ファイル\Base\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneFactory.h">
-      <Filter>ヘッダー ファイル\Base\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceLoad.h">
-      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\Object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Hook.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="IBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="StartBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockManager.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
-    <ClInclude Include="IGimmickBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerReceiveBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerSupplyBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="SwitchBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="FanBlock.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>ヘッダー ファイル\Object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>ヘッダー ファイル\Object\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="GoalBlock.h">
-      <Filter>ヘッダー ファイル\Object\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="sceenChenge.h">
-      <Filter>ヘッダー ファイル\MakeGame</Filter>
-    </ClInclude>
-  </ItemGroup>
+	<ItemGroup>
+		<Filter Include="ソース ファイル">
+			<UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+			<Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+		</Filter>
+		<Filter Include="ヘッダー ファイル">
+			<UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+			<Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+		</Filter>
+		<Filter Include="リソース ファイル">
+			<UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+			<Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+		</Filter>
+		<Filter Include="ソース ファイル\Resource">
+			<UniqueIdentifier>{831a65b3-bab0-437b-b86e-3ff7637b9b49}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Resource">
+			<UniqueIdentifier>{d390da2b-0705-49ca-8832-1cbad99b2d2c}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="リソース ファイル\shader">
+			<UniqueIdentifier>{e3667543-9039-4809-bddd-a57c5f67affa}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Object">
+			<UniqueIdentifier>{da1920c6-d477-4bdc-ab90-32a611e86d41}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Object\3d">
+			<UniqueIdentifier>{17b32238-6a64-4172-bf6d-8b3866c8b3c9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Object\2d">
+			<UniqueIdentifier>{33f2f4f6-8429-42fd-9f14-625d13345626}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Object\elem">
+			<UniqueIdentifier>{ebcae5f9-1690-4e99-a478-8919935e14b7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\MakeGame">
+			<UniqueIdentifier>{1187e140-c136-4337-a213-3f85e6d9a584}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Base">
+			<UniqueIdentifier>{c1683018-51dc-4601-a2b7-ddd81c97d6d4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Base">
+			<UniqueIdentifier>{6e74f6e1-bf99-4361-a4fb-8a3ddd6cda8d}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Object">
+			<UniqueIdentifier>{6d6c8107-95d3-44c2-b027-88358890eeb9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Object\2d">
+			<UniqueIdentifier>{ca88b857-684b-4fae-a9d1-f847023fa16d}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Object\3d">
+			<UniqueIdentifier>{c0ad25a2-b40b-4eb1-bde0-e134dd505c61}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Object\elem">
+			<UniqueIdentifier>{f0d46203-b032-427f-9da2-9a0c159c3e70}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\MakeGame">
+			<UniqueIdentifier>{d3e6502a-f343-4e6c-91ef-1361126ce9c7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Base\Scene">
+			<UniqueIdentifier>{66ce161e-9113-4a47-840a-8343a912b6f9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\MakeGame\Scene">
+			<UniqueIdentifier>{9a53d678-2ccd-4f90-b655-3abe43dc10ff}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Base\Scene">
+			<UniqueIdentifier>{a8c604e3-ce20-4aec-a07f-7d9fe3be8423}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\MakeGame\Scene">
+			<UniqueIdentifier>{8652458c-7107-4f83-a4b1-9d350c6a5931}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Object\Block">
+			<UniqueIdentifier>{c44f5c8b-d538-4504-b6d2-80d402e6d22a}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Object\Block">
+			<UniqueIdentifier>{306fbd3d-aade-423b-9494-521bdaa3b2a4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ソース ファイル\Object\Block\Gimmick">
+			<UniqueIdentifier>{bdd9f3da-773f-4af7-a434-426ae55c0470}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="ヘッダー ファイル\Object\Block\Gimmick">
+			<UniqueIdentifier>{3488bc70-8ba2-4011-aead-9bb66611b13d}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="main.cpp">
+			<Filter>ソース ファイル</Filter>
+		</ClCompile>
+		<ClCompile Include="CtrlFPS.cpp">
+			<Filter>ソース ファイル\Base</Filter>
+		</ClCompile>
+		<ClCompile Include="InitDirectX.cpp">
+			<Filter>ソース ファイル\Base</Filter>
+		</ClCompile>
+		<ClCompile Include="Window.cpp">
+			<Filter>ソース ファイル\Base</Filter>
+		</ClCompile>
+		<ClCompile Include="Camera.cpp">
+			<Filter>ソース ファイル\Object\3d</Filter>
+		</ClCompile>
+		<ClCompile Include="Cube.cpp">
+			<Filter>ソース ファイル\Object\3d</Filter>
+		</ClCompile>
+		<ClCompile Include="Sprite.cpp">
+			<Filter>ソース ファイル\Object\2d</Filter>
+		</ClCompile>
+		<ClCompile Include="Texture.cpp">
+			<Filter>ソース ファイル\Resource</Filter>
+		</ClCompile>
+		<ClCompile Include="Obj3d.cpp">
+			<Filter>ソース ファイル\Object\3d</Filter>
+		</ClCompile>
+		<ClCompile Include="Input.cpp">
+			<Filter>ソース ファイル\Base</Filter>
+		</ClCompile>
+		<ClCompile Include="Model.cpp">
+			<Filter>ソース ファイル\Resource</Filter>
+		</ClCompile>
+		<ClCompile Include="AssimpLoader.cpp">
+			<Filter>ソース ファイル\Resource</Filter>
+		</ClCompile>
+		<ClCompile Include="XAudio.cpp">
+			<Filter>ソース ファイル\Resource</Filter>
+		</ClCompile>
+		<ClCompile Include="WorldCoordinate.cpp">
+			<Filter>ソース ファイル\Object\elem</Filter>
+		</ClCompile>
+		<ClCompile Include="SharedStruct.cpp">
+			<Filter>ソース ファイル\Object\elem</Filter>
+		</ClCompile>
+		<ClCompile Include="GraphicsPipeline.cpp">
+			<Filter>ソース ファイル\Object\elem</Filter>
+		</ClCompile>
+		<ClCompile Include="SceneManager.cpp">
+			<Filter>ソース ファイル\MakeGame</Filter>
+		</ClCompile>
+		<ClCompile Include="Util.cpp">
+			<Filter>ソース ファイル\MakeGame</Filter>
+		</ClCompile>
+		<ClCompile Include="ImGuiController.cpp">
+			<Filter>ソース ファイル\Base</Filter>
+		</ClCompile>
+		<ClCompile Include="GameSystem.cpp">
+			<Filter>ソース ファイル\MakeGame</Filter>
+		</ClCompile>
+		<ClCompile Include="BasicFrame.cpp">
+			<Filter>ソース ファイル\Base</Filter>
+		</ClCompile>
+		<ClCompile Include="AbstractSceneFactory.cpp">
+			<Filter>ソース ファイル\Base\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="BaseScene.cpp">
+			<Filter>ソース ファイル\Base\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="SceneFactory.cpp">
+			<Filter>ソース ファイル\Base\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="GameScene.cpp">
+			<Filter>ソース ファイル\MakeGame\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="TitleScene.cpp">
+			<Filter>ソース ファイル\MakeGame\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="ResourceLoad.cpp">
+			<Filter>ソース ファイル\MakeGame\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="Player.cpp">
+			<Filter>ソース ファイル\Object\3d</Filter>
+		</ClCompile>
+		<ClCompile Include="Hook.cpp">
+			<Filter>ソース ファイル\Object\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="IBlock.cpp">
+			<Filter>ソース ファイル\Object\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="NormalBlock.cpp">
+			<Filter>ソース ファイル\Object\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="StartBlock.cpp">
+			<Filter>ソース ファイル\Object\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="BlockManager.cpp">
+			<Filter>ソース ファイル\MakeGame</Filter>
+		</ClCompile>
+		<ClCompile Include="Stage.cpp">
+			<Filter>ソース ファイル\MakeGame</Filter>
+		</ClCompile>
+		<ClCompile Include="IGimmickBlock.cpp">
+			<Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+		</ClCompile>
+		<ClCompile Include="PowerReceiveBlock.cpp">
+			<Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+		</ClCompile>
+		<ClCompile Include="PowerSupplyBlock.cpp">
+			<Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+		</ClCompile>
+		<ClCompile Include="SwitchBlock.cpp">
+			<Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+		</ClCompile>
+		<ClCompile Include="Particle.cpp">
+			<Filter>ソース ファイル\Object\3d</Filter>
+		</ClCompile>
+		<ClCompile Include="ParticleSystem.cpp">
+			<Filter>ソース ファイル\Object\3d</Filter>
+		</ClCompile>
+		<ClCompile Include="sceenChenge.cpp">
+			<Filter>ソース ファイル\MakeGame</Filter>
+		</ClCompile>
+		<ClCompile Include="GoalBlock.cpp">
+			<Filter>ソース ファイル\Object\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="FanBlock.cpp">
+			<Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+		</ClCompile>
+		<ClCompile Include="StageSelectScene.cpp">
+			<Filter>ソース ファイル\MakeGame\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="TutorialScene.cpp">
+			<Filter>ソース ファイル\MakeGame\Scene</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<FxCompile Include="BasicVS.hlsl" />
+		<FxCompile Include="BasicPS.hlsl" />
+		<FxCompile Include="Resources\Shaders\ModelVS.hlsl">
+			<Filter>リソース ファイル\shader</Filter>
+		</FxCompile>
+		<FxCompile Include="Resources\Shaders\ModelPS.hlsl">
+			<Filter>リソース ファイル\shader</Filter>
+		</FxCompile>
+		<FxCompile Include="Resources\Shaders\SpriteVS.hlsl">
+			<Filter>リソース ファイル\shader</Filter>
+		</FxCompile>
+		<FxCompile Include="Resources\Shaders\SpritePS.hlsl">
+			<Filter>リソース ファイル\shader</Filter>
+		</FxCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Basic.hlsli" />
+		<None Include="packages.config" />
+		<None Include="Resources\Shaders\Model.hlsli">
+			<Filter>リソース ファイル\shader</Filter>
+		</None>
+		<None Include="Resources\Shaders\Sprite.hlsli">
+			<Filter>リソース ファイル\shader</Filter>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="Window.h">
+			<Filter>ヘッダー ファイル\Base</Filter>
+		</ClInclude>
+		<ClInclude Include="CtrlFPS.h">
+			<Filter>ヘッダー ファイル\Base</Filter>
+		</ClInclude>
+		<ClInclude Include="InitDirectX.h">
+			<Filter>ヘッダー ファイル\Base</Filter>
+		</ClInclude>
+		<ClInclude Include="Sprite.h">
+			<Filter>ヘッダー ファイル\Object\2d</Filter>
+		</ClInclude>
+		<ClInclude Include="Camera.h">
+			<Filter>ヘッダー ファイル\Object\3d</Filter>
+		</ClInclude>
+		<ClInclude Include="Cube.h">
+			<Filter>ヘッダー ファイル\Object\3d</Filter>
+		</ClInclude>
+		<ClInclude Include="Texture.h">
+			<Filter>ヘッダー ファイル\Resource</Filter>
+		</ClInclude>
+		<ClInclude Include="Obj3d.h">
+			<Filter>ヘッダー ファイル\Object\3d</Filter>
+		</ClInclude>
+		<ClInclude Include="Input.h">
+			<Filter>ヘッダー ファイル\Base</Filter>
+		</ClInclude>
+		<ClInclude Include="Model.h">
+			<Filter>ヘッダー ファイル\Resource</Filter>
+		</ClInclude>
+		<ClInclude Include="AssimpLoader.h">
+			<Filter>ヘッダー ファイル\Resource</Filter>
+		</ClInclude>
+		<ClInclude Include="XAudio.h">
+			<Filter>ヘッダー ファイル\Resource</Filter>
+		</ClInclude>
+		<ClInclude Include="ConstBuffer.h">
+			<Filter>ヘッダー ファイル\Object\elem</Filter>
+		</ClInclude>
+		<ClInclude Include="GraphicsPipeline.h">
+			<Filter>ヘッダー ファイル\Object\elem</Filter>
+		</ClInclude>
+		<ClInclude Include="SharedStruct.h">
+			<Filter>ヘッダー ファイル\Object\elem</Filter>
+		</ClInclude>
+		<ClInclude Include="WorldCoordinate.h">
+			<Filter>ヘッダー ファイル\Object\elem</Filter>
+		</ClInclude>
+		<ClInclude Include="SceneManager.h">
+			<Filter>ヘッダー ファイル\MakeGame</Filter>
+		</ClInclude>
+		<ClInclude Include="Util.h">
+			<Filter>ヘッダー ファイル\MakeGame</Filter>
+		</ClInclude>
+		<ClInclude Include="ImGuiController.h">
+			<Filter>ヘッダー ファイル\Base</Filter>
+		</ClInclude>
+		<ClInclude Include="GameSystem.h">
+			<Filter>ヘッダー ファイル\MakeGame</Filter>
+		</ClInclude>
+		<ClInclude Include="BasicFrame.h">
+			<Filter>ヘッダー ファイル\Base</Filter>
+		</ClInclude>
+		<ClInclude Include="BaseScene.h">
+			<Filter>ヘッダー ファイル\Base</Filter>
+		</ClInclude>
+		<ClInclude Include="AbstractSceneFactory.h">
+			<Filter>ヘッダー ファイル\Base\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="SceneFactory.h">
+			<Filter>ヘッダー ファイル\Base\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="GameScene.h">
+			<Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="ResourceLoad.h">
+			<Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="TitleScene.h">
+			<Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="Player.h">
+			<Filter>ヘッダー ファイル\Object\3d</Filter>
+		</ClInclude>
+		<ClInclude Include="Hook.h">
+			<Filter>ヘッダー ファイル\Object\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="IBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="NormalBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="StartBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Stage.h">
+			<Filter>ヘッダー ファイル\MakeGame</Filter>
+		</ClInclude>
+		<ClInclude Include="BlockManager.h">
+			<Filter>ヘッダー ファイル\MakeGame</Filter>
+		</ClInclude>
+		<ClInclude Include="IGimmickBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+		</ClInclude>
+		<ClInclude Include="PowerReceiveBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+		</ClInclude>
+		<ClInclude Include="PowerSupplyBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+		</ClInclude>
+		<ClInclude Include="SwitchBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+		</ClInclude>
+		<ClInclude Include="Particle.h">
+			<Filter>ヘッダー ファイル\Object\3d</Filter>
+		</ClInclude>
+		<ClInclude Include="ParticleSystem.h">
+			<Filter>ヘッダー ファイル\Object\3d</Filter>
+		</ClInclude>
+		<ClInclude Include="GoalBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="sceenChenge.h">
+			<Filter>ヘッダー ファイル\MakeGame</Filter>
+		</ClInclude>
+		<ClInclude Include="FanBlock.h">
+			<Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+		</ClInclude>
+		<ClInclude Include="StageSelectScene.h">
+			<Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="TutorialScene.h">
+			<Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+		</ClInclude>
+	</ItemGroup>
 </Project>
