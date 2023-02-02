@@ -169,9 +169,11 @@
     <ClCompile Include="sceenChenge.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="StartBlock.cpp" />
     <ClCompile Include="SwitchBlock.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="XAudio.cpp" />
     <ClCompile Include="BasicFrame.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -266,9 +268,11 @@
     <ClInclude Include="sceenChenge.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="StartBlock.h" />
     <ClInclude Include="SwitchBlock.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="XAudio.h" />
     <ClInclude Include="BasicFrame.h" />
     <ClInclude Include="Camera.h" />

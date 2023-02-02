@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "Stage.h"
 #include "BlockManager.h"
+#include "StageSelectScene.h"
 
 void GameScene::Initialize(SceneManager* pSceneManager)
 {
@@ -14,11 +15,41 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     // •Ï”‰Šú‰»
     cameraT_ = std::make_unique<Camera>();
 
-    Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage6.csv");
+    switch (StageSelectScene::GetStageIdx())
+    {
+    case 1:
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage1.csv");
+        break;
+    case 2:
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
+        break;
+    case 3:
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage3.csv");
+        break;
+    case 4:
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage4.csv");
+        break;
+    case 5:
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage5.csv");
+        break;
+    case 6:
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage6.csv");
+        break;
+    default:
+        BlockManager::ClearAll();
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/tutorial.csv");
+        break;
+    }
 
     cameraT_->eye_ = { -100.f, 70.f, -100.f };
     cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2.f ,-4, Stage::maxBlockPosValue_.z / 2.f };
-    
+
 
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });

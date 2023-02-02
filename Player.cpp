@@ -347,6 +347,8 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
     bool resultAllSupplies{ false };
     bool resultAllReceives{ false };
 
+    uint32_t trueIdxReceive{ 0 };
+
     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) {
 
         if (*block->GetType() == IBlock::Type::SWITCH) {
@@ -448,45 +450,42 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
             if (std::abs(block->GetPos()->y - object_->worldCoordinate_.position_.y) - (block->GetRadius()->y + Player::radius_.y) < -1.f) { // ‚Ù‚Ú“¯ˆê‚ÌyÀ•W’l‚É‚¨‚¢‚Ä
                 if (std::abs(block->GetPos()->x - object_->worldCoordinate_.position_.x) - (block->GetRadius()->x + Player::radius_.x) < 1.f && // 
                     std::abs(block->GetPos()->z - object_->worldCoordinate_.position_.z) - (block->GetRadius()->z + Player::radius_.z) < 1.f) {
-                    isNearReceive_ = true;
                     BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = true;
+                    trueIdxReceive = block->GetIdxReceive();
                 }
                 else {
                     BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = false;
-
-                    for (std::pair<const BlockManager::IdxReceive, bool>& receive : *BlockManager::GetReceiveMap()) {
-                        if (receive.second) {
-                            resultAllReceives = true;
-                            break;
-                        }
-                    }
-                    if (resultAllReceives == false) {
-                        isNearReceive_ = false;
-                    }
                 }
             }
             else {
                 BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = false;
+            }
 
-                for (std::pair<const BlockManager::IdxReceive, bool>& receive : *BlockManager::GetReceiveMap()) {
-                    if (receive.second) {
-                        resultAllReceives = true;
-                        break;
-                    }
+            for (std::pair<const BlockManager::IdxReceive, bool>& receive : *BlockManager::GetReceiveMap()) {
+                if (receive.second) {
+                    resultAllReceives = true;
+                    break;
                 }
-                if (resultAllReceives == false) {
-                    isNearReceive_ = false;
-                }
+            }
+            if (resultAllReceives) {
+                isNearReceive_ = true;
+            }
+            else {
+                isNearReceive_ = false;
             }
 
             if (isNearReceive_) {
                 if (!oldConnecting_ && isConnecting_) {
                     BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = false;
-                    isNearReceive_ = false;
+                    BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = false;
                 }
                 else if (oldConnecting_ && !isConnecting_) {
-                    BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = true;
-                    isNearReceive_ = false;
+                    if (0 < trueIdxReceive && trueIdxReceive <= BlockManager::GetReceiveMap()->size()) {
+                        BlockManager::GetReceiveMap()->at(trueIdxReceive) ? 
+                            BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = true :
+                            BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = false;
+                    }
+                    BlockManager::GetReceiveMap()->at(block->GetIdxReceive()) = false;
                 }
             }
         }

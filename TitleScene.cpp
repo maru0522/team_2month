@@ -35,7 +35,7 @@ void TitleScene::Update(void)
     }
 
     if (XPAD::IsTriggerSome()) {
-        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("STAGESELECT") };
         sceneManager_->RequestChangeScene(nextScene);
     }
 

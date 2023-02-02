@@ -198,20 +198,26 @@
     <ClCompile Include="SwitchBlock.cpp">
       <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="FanBlock.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Particle.cpp">
       <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>ソース ファイル\Object\3d</Filter>
     </ClCompile>
-    <ClCompile Include="GoalBlock.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="sceenChenge.cpp">
       <Filter>ソース ファイル\MakeGame</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalBlock.cpp">
+      <Filter>ソース ファイル\Object\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="FanBlock.cpp">
+      <Filter>ソース ファイル\Object\Block\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectScene.cpp">
+      <Filter>ソース ファイル\MakeGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>ソース ファイル\MakeGame\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,9 +361,6 @@
     <ClInclude Include="SwitchBlock.h">
       <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="FanBlock.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>ヘッダー ファイル\Object\3d</Filter>
     </ClInclude>
@@ -369,6 +372,15 @@
     </ClInclude>
     <ClInclude Include="sceenChenge.h">
       <Filter>ヘッダー ファイル\MakeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="FanBlock.h">
+      <Filter>ヘッダー ファイル\Object\Block\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectScene.h">
+      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>ヘッダー ファイル\MakeGame\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
