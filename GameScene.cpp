@@ -122,8 +122,8 @@ void GameScene::Update(void)
 #endif // _DEBUG
 
     if (isAutoCameraMode_) {
-        cameraT_->eye_.x = { player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.x };
-        cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
+        cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
+        cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * 1.2f;
     }
     else {
 
