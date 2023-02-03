@@ -30,10 +30,10 @@ void TitleScene::Update(void)
     anybutton_sprite_->SetColor({ 1.f,1.f,1.f,alpha });
 
 
-    if (KEYS::IsTrigger(DIK_RETURN)) {
-        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
-        sceneManager_->RequestChangeScene(nextScene);
-    }
+    //if (KEYS::IsTrigger(DIK_RETURN)) {
+    //    std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
+    //    sceneManager_->RequestChangeScene(nextScene);
+    //}
 
     if (XPAD::IsTriggerSome()) {
         SceneManager::isInsertOk_ = true;

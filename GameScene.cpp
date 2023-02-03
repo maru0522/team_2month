@@ -102,23 +102,23 @@ void GameScene::Update(void)
         }
     }
 
-    if (KEYS::IsDown(DIK_NUMPAD8)) {
-        cameraT_->eye_.z += 5;
-        cameraT_->target_.z += 5;
-    }
-    if (KEYS::IsDown(DIK_NUMPAD2)) {
-        cameraT_->eye_.z -= 5;
-        cameraT_->target_.z -= 5;
-    }
+    //if (KEYS::IsDown(DIK_NUMPAD8)) {
+    //    cameraT_->eye_.z += 5;
+    //    cameraT_->target_.z += 5;
+    //}
+    //if (KEYS::IsDown(DIK_NUMPAD2)) {
+    //    cameraT_->eye_.z -= 5;
+    //    cameraT_->target_.z -= 5;
+    //}
 
-    if (KEYS::IsDown(DIK_RIGHTARROW)) {
-        cameraT_->eye_.x += 5;
-        cameraT_->target_.x += 5;
-    }
-    if (KEYS::IsDown(DIK_LEFTARROW)) {
-        cameraT_->eye_.x -= 5;
-        cameraT_->target_.x -= 5;
-    }
+    //if (KEYS::IsDown(DIK_RIGHTARROW)) {
+    //    cameraT_->eye_.x += 5;
+    //    cameraT_->target_.x += 5;
+    //}
+    //if (KEYS::IsDown(DIK_LEFTARROW)) {
+    //    cameraT_->eye_.x -= 5;
+    //    cameraT_->target_.x -= 5;
+    //}
 #endif // _DEBUG
 
     if (isAutoCameraMode_) {
