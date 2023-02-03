@@ -31,5 +31,7 @@ private:
     // ƒJƒƒ‰mode - auto / controll
     DirectX::XMFLOAT3 oldCameraEye_{}, oldCameraTarget_{};
     bool isAutoCameraMode_{ true };
+
+    float cameraSpeed = 1.2f;
 };
 

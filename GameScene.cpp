@@ -39,7 +39,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         break;
     case 6:
         BlockManager::ClearAll();
-        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage6.csv");
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage8.csv");
         break;
     default:
         BlockManager::ClearAll();
@@ -47,8 +47,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         break;
     }
 
-    cameraT_->eye_ = { -100.f, 70.f, -100.f };
-    cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2.f ,-4, Stage::maxBlockPosValue_.z / 2.f };
+    cameraT_->eye_ = { -100.f, 60.f, -100.f };
+    cameraT_->target_ = { Stage::maxBlockPosValue_.x/2 ,-4, Stage::maxBlockPosValue_.z/2};
 
 
     player_ = std::make_unique<Player>(cameraT_.get());
@@ -123,13 +123,13 @@ void GameScene::Update(void)
 
     if (isAutoCameraMode_) {
         cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
-        cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * 1.2f;
+        cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * cameraSpeed;
     }
     else {
 
     }
 
-    //cameraT_->eye_.z = { player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z };
+  
     cameraT_->Update();
     player_->Update();
 
