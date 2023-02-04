@@ -501,6 +501,9 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                     isUnderHook_ = true;
                     BlockManager::GetUnderHooksMap()->at(block->GetIdxHook()) = true;
                 }
+                else {
+                    BlockManager::GetUnderHooksMap()->at(block->GetIdxHook()) = false;
+                }
             }
             else {
                 BlockManager::GetUnderHooksMap()->at(block->GetIdxHook()) = false;
