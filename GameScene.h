@@ -33,5 +33,6 @@ private:
     bool isAutoCameraMode_{ true };
 
     float cameraSpeed = 1.2f;
+    float cameraPosY = 0.0f;
 };
 
