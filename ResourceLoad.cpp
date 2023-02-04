@@ -30,6 +30,8 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     //ステージセレクト
     Texture::Load("Resources/Image/num.png");
     Texture::Load("Resources/Image/selectRope.png");
+    Texture::Load("Resources/Image/selecttile.png");
+    Texture::Load("Resources/Image/selectpoint.png");
 
     // ゲーム - player
     Texture::Load("Resources/Image/Game/Player/player_default.png","p_default");

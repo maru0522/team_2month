@@ -5,11 +5,7 @@ bool SceneManager::isInsertOk_{ false };
 
 SceneManager::SceneManager(void)
 {
-    Texture::Load("Resources/Image/testcheng.png");
-    Texture::Load("Resources/Image/testplayercheng.png");
-    Texture::Load("Resources/Image/testplayercheng2_R.png");
-    Texture::Load("Resources/Image/testplayercheng2_L.png");
-    Texture::Load("Resources/Image/testropecheng.png");
+    
 
     insertAnimation_->SetSprite();
 }

@@ -11,10 +11,33 @@ void StageSelectScene::Initialize(SceneManager* pSceneManager)
     BaseScene::Initialize(pSceneManager);
 
     selectStageIdx_ = oldStageIdx_;
+
+    selecttile1 = std::make_unique<Sprite>("Resources/Image/selecttile.png", CMode::PATH);
+    selecttile2 = std::make_unique<Sprite>("Resources/Image/selecttile.png", CMode::PATH);
+    selecttile3 = std::make_unique<Sprite>("Resources/Image/selecttile.png", CMode::PATH);
+
+    selectRope12 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+    selectRope23 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+
+    selectpoint = std::make_unique<Sprite>("Resources/Image/selectpoint.png", CMode::PATH);
+
+    selecttile1->SetPosition(selecttile1Pos);
+    selecttile2->SetPosition(selecttile2Pos);
+    selecttile3->SetPosition(selecttile3Pos);
+
+
+    selectRope12->SetPosition(selectRope12Pos);
+    selectRope23->SetPosition(selectRope23Pos);
+
+    selectpoint->SetPosition(selectpointPos);
+    
+
 }
 
 void StageSelectScene::Update(void)
 {
+   
+
     if (preStick == false && 0 < XPAD::GetLStick().x) {
         preStick = true;
         selectStageIdx_ < 6 /*stageNumMax*/ ? selectStageIdx_++ : selectStageIdx_ = 6;
@@ -53,6 +76,33 @@ void StageSelectScene::Update(void)
         }
     }
 
+    selecttile1Pos.x = -128+(640 - 512 * selectStageIdx_);
+    selecttile2Pos.x = (-256 + 640) + (640 - 512 * selectStageIdx_);
+    selecttile3Pos.x = (-128 + 1024) + (640 - 512 * selectStageIdx_);
+
+    selectRope12Pos.x = (-128 + 256) + (640 - 512 * selectStageIdx_);
+    selectRope23Pos.x = (-128 + 768) + (640 - 512 * selectStageIdx_);
+
+    selecttile1->SetPosition(selecttile1Pos);
+    selecttile2->SetPosition(selecttile2Pos);
+    selecttile3->SetPosition(selecttile3Pos);
+
+
+    selectRope12->SetPosition(selectRope12Pos);
+    selectRope23->SetPosition(selectRope23Pos);
+
+    selectpoint->SetPosition(selectpointPos);
+
+    selecttile1->Update();
+    selecttile2->Update();
+    selecttile3->Update();
+
+
+    selectRope12->Update();
+    selectRope23->Update();
+
+    selectpoint->Update();
+
     DrawImGui();
 }
 
@@ -62,6 +112,17 @@ void StageSelectScene::Draw3d(void)
 
 void StageSelectScene::Draw2d(void)
 {
+
+    selecttile1->Draw();
+    selecttile2->Draw();
+    selecttile3->Draw();
+
+
+    selectRope12->Draw();
+    selectRope23->Draw();
+
+    selectpoint->Draw();
+
 }
 
 void StageSelectScene::Finalize(void)
