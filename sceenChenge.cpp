@@ -38,12 +38,6 @@ void SceenChenge::Update()
 	//ropeObj->Update();
 	//playerObj->Update();
 
-	player->Update();
-	playerR->Update();
-	playerL->Update();
-	rope->Update();
-	chenge->Update();
-
 #ifdef _DEBUG
 
 	ImGui::Begin("pos");
@@ -91,6 +85,8 @@ void SceenChenge::Update()
 				isEnd = true;
 				ropeMoveTime = 0;
 				playerMoveTime = 0;
+
+				ropepos = { 510,720 };
 			}
 
 			if (maxWait > waitTime)
@@ -143,6 +139,12 @@ void SceenChenge::Update()
 	chenge->SetPosition(chengepos);
 #endif // _DEBUG
 
+
+	player->Update();
+	playerR->Update();
+	playerL->Update();
+	rope->Update();
+	chenge->Update();
 
 }
 
