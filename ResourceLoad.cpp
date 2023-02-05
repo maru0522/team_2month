@@ -32,6 +32,17 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/selectRope.png");
     Texture::Load("Resources/Image/selecttile.png");
     Texture::Load("Resources/Image/selectpoint.png");
+    Texture::Load("Resources/Image/num1.png");
+    Texture::Load("Resources/Image/num2.png");
+    Texture::Load("Resources/Image/num3.png");
+    Texture::Load("Resources/Image/num4.png");
+    Texture::Load("Resources/Image/num5.png");
+    Texture::Load("Resources/Image/num6.png");
+    Texture::Load("Resources/Image/num7.png");
+    Texture::Load("Resources/Image/num8.png");
+    Texture::Load("Resources/Image/num9.png");
+    Texture::Load("Resources/Image/num10.png");
+    Texture::Load("Resources/Image/num11.png");
 
     // ÉQÅ[ÉÄ - player
     Texture::Load("Resources/Image/Game/Player/player_default.png","p_default");

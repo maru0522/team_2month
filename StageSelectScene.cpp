@@ -12,22 +12,50 @@ void StageSelectScene::Initialize(SceneManager* pSceneManager)
 
     selectStageIdx_ = oldStageIdx_;
 
-    selecttile1 = std::make_unique<Sprite>("Resources/Image/selecttile.png", CMode::PATH);
-    selecttile2 = std::make_unique<Sprite>("Resources/Image/selecttile.png", CMode::PATH);
-    selecttile3 = std::make_unique<Sprite>("Resources/Image/selecttile.png", CMode::PATH);
+    for (int i = 0; i < 8; i++)
+    {
 
+        selecttile[i] = std::make_unique<Sprite>("Resources/Image/selecttile.png", CMode::PATH);
+
+    }
+
+    numSprite[0] = std::make_unique<Sprite>("Resources/Image/num11.png", CMode::PATH);
+    numSprite[1] = std::make_unique<Sprite>("Resources/Image/num1.png", CMode::PATH);
+    numSprite[2] = std::make_unique<Sprite>("Resources/Image/num2.png", CMode::PATH);
+    numSprite[3] = std::make_unique<Sprite>("Resources/Image/num3.png", CMode::PATH);
+    numSprite[4] = std::make_unique<Sprite>("Resources/Image/num4.png", CMode::PATH);
+    numSprite[5] = std::make_unique<Sprite>("Resources/Image/num5.png", CMode::PATH);
+    numSprite[6] = std::make_unique<Sprite>("Resources/Image/num6.png", CMode::PATH);
+    numSprite[7] = std::make_unique<Sprite>("Resources/Image/num7.png", CMode::PATH);
+    numSprite[8] = std::make_unique<Sprite>("Resources/Image/num8.png", CMode::PATH);
+    numSprite[9] = std::make_unique<Sprite>("Resources/Image/num9.png", CMode::PATH);
+    numSprite[10] = std::make_unique<Sprite>("Resources/Image/num10.png", CMode::PATH);
+
+    selectRope01 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
     selectRope12 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
     selectRope23 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+    selectRope34 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+    selectRope45 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+    selectRope56 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+    selectRope67 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
 
     selectpoint = std::make_unique<Sprite>("Resources/Image/selectpoint.png", CMode::PATH);
 
-    selecttile1->SetPosition(selecttile1Pos);
-    selecttile2->SetPosition(selecttile2Pos);
-    selecttile3->SetPosition(selecttile3Pos);
+    for (int i = 0; i < 8; i++)
+    {
+
+        selecttile[i]->SetPosition(selecttilePos[i]);
+
+    }
 
 
+    selectRope01->SetPosition(selectRope12Pos);
     selectRope12->SetPosition(selectRope12Pos);
     selectRope23->SetPosition(selectRope23Pos);
+    selectRope34->SetPosition(selectRope34Pos);
+    selectRope45->SetPosition(selectRope45Pos);
+    selectRope56->SetPosition(selectRope56Pos);
+    selectRope67->SetPosition(selectRope67Pos);
 
     selectpoint->SetPosition(selectpointPos);
     
@@ -76,31 +104,59 @@ void StageSelectScene::Update(void)
         }
     }
 
+    for (int i = 0; i < 8; i++)
+    {
+        selecttilePos[i].x = (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_);
+    }
+
     //ŒÅ’è’l‚¾‚ª
-    selecttile1Pos.x = -128+(640 - 512 * selectStageIdx_);
-    selecttile2Pos.x = (-256 + 640) + (640 - 512 * selectStageIdx_);
-    selecttile3Pos.x = (-128 + 1024) + (640 - 512 * selectStageIdx_);
 
-    selectRope12Pos.x = (-128 + 256) + (640 - 512 * selectStageIdx_);
-    selectRope23Pos.x = (-128 + 768) + (640 - 512 * selectStageIdx_);
-
-    selecttile1->SetPosition(selecttile1Pos);
-    selecttile2->SetPosition(selecttile2Pos);
-    selecttile3->SetPosition(selecttile3Pos);
+    selectRope01Pos.x = (-128 - 256) + (640 - 512 * (float)selectStageIdx_);
+    selectRope12Pos.x = (-128 + 256) + (640 - 512 * (float)selectStageIdx_);
+    selectRope23Pos.x = (-128 + 768) + (640 - 512 * (float)selectStageIdx_);
+    selectRope34Pos.x = (-128 + 1280) + (640 - 512 * (float)selectStageIdx_);
+    selectRope45Pos.x = (-128 + 1792) + (640 - 512 * (float)selectStageIdx_);
+    selectRope56Pos.x = (-128 + 2304) + (640 - 512 * (float)selectStageIdx_);
+    selectRope67Pos.x = (-128 + 2816) + (640 - 512 * (float)selectStageIdx_);
 
 
+    for (int i = 0; i < 8; i++)
+    {
+
+        selecttile[i]->SetPosition(selecttilePos[i]);
+        numSprite[i]->SetPosition(selecttilePos[i]);
+
+    }
+
+
+    selectRope01->SetPosition(selectRope01Pos);
     selectRope12->SetPosition(selectRope12Pos);
     selectRope23->SetPosition(selectRope23Pos);
+    selectRope34->SetPosition(selectRope34Pos);
+    selectRope45->SetPosition(selectRope45Pos);
+    selectRope56->SetPosition(selectRope56Pos);
+    selectRope67->SetPosition(selectRope67Pos);
 
     selectpoint->SetPosition(selectpointPos);
 
-    selecttile1->Update();
-    selecttile2->Update();
-    selecttile3->Update();
+
+    for (int i = 0; i < 8; i++)
+    {
+
+        selecttile[i]->Update();
+        numSprite[i]->Update();
+        
+
+    }
 
 
+    selectRope01->Update();
     selectRope12->Update();
     selectRope23->Update();
+    selectRope34->Update();
+    selectRope45->Update();
+    selectRope56->Update();
+    selectRope67->Update();
 
     selectpoint->Update();
 
@@ -114,13 +170,22 @@ void StageSelectScene::Draw3d(void)
 void StageSelectScene::Draw2d(void)
 {
 
-    selecttile1->Draw();
-    selecttile2->Draw();
-    selecttile3->Draw();
+    for (int i = 0; i < 8; i++)
+    {
+
+        selecttile[i]->Draw();
+        numSprite[i]->Draw();
+
+    }
 
 
+    selectRope01->Draw();
     selectRope12->Draw();
     selectRope23->Draw();
+    selectRope34->Draw();
+    selectRope45->Draw();
+    selectRope56->Draw();
+    selectRope67->Draw();
 
     selectpoint->Draw();
 
