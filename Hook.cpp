@@ -9,6 +9,7 @@ Hook::Hook(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, uint32_t idxHook, Cam
     type_ = Type::HOOK;
     body_->SetCamera(pCamera);
     body_->SetTexture("Resources/Image/Type_HOOK.png");
+    body_->worldCoordinate_.scale_ = { 4,4,4 };
     //body_->SetModel("フックのパス");
 }
 
