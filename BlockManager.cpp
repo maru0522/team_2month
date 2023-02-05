@@ -10,6 +10,7 @@ void BlockManager::Register(IBlock* blockPtr)
 {
     if (*blockPtr->GetType() == IBlock::Type::HOOK) {
         isUnderHooksMp_.emplace(blockPtr->GetIdxHook(), false);
+        blockPtr->SetModel("Resources/3dModels/ropepin/ropepin.obj");
     }
     if (*blockPtr->GetType() == IBlock::Type::POWERSUPPLY) {
         isSupplyMp_.emplace(blockPtr->GetIdxSupply(), false);

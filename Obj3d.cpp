@@ -95,7 +95,7 @@ void Obj3d::SetModel(const fsPath& path)
 
     model_.SetMODEL_VALUE(*Model::GetMODEL_VALUE(path));
 
-    srvGpuHandleCopy_ = srvGpuHandleCopy_ = Texture::GetTextureInfo(path)->srvGpuHandle_;
+    srvGpuHandleCopy_ = srvGpuHandleCopy_ = Texture::GetTextureInfo(path.parent_path() / path.stem() += ".png")->srvGpuHandle_;
 }
 
 void Obj3d::SetTexture(const fsPath& pathAndFileName)
