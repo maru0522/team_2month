@@ -19,6 +19,18 @@ void StageSelectScene::Initialize(SceneManager* pSceneManager)
 
     }
 
+    numSprite[0] = std::make_unique<Sprite>("Resources/Image/num11.png", CMode::PATH);
+    numSprite[1] = std::make_unique<Sprite>("Resources/Image/num1.png", CMode::PATH);
+    numSprite[2] = std::make_unique<Sprite>("Resources/Image/num2.png", CMode::PATH);
+    numSprite[3] = std::make_unique<Sprite>("Resources/Image/num3.png", CMode::PATH);
+    numSprite[4] = std::make_unique<Sprite>("Resources/Image/num4.png", CMode::PATH);
+    numSprite[5] = std::make_unique<Sprite>("Resources/Image/num5.png", CMode::PATH);
+    numSprite[6] = std::make_unique<Sprite>("Resources/Image/num6.png", CMode::PATH);
+    numSprite[7] = std::make_unique<Sprite>("Resources/Image/num7.png", CMode::PATH);
+    numSprite[8] = std::make_unique<Sprite>("Resources/Image/num8.png", CMode::PATH);
+    numSprite[9] = std::make_unique<Sprite>("Resources/Image/num9.png", CMode::PATH);
+    numSprite[10] = std::make_unique<Sprite>("Resources/Image/num10.png", CMode::PATH);
+
     selectRope01 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
     selectRope12 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
     selectRope23 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
@@ -112,6 +124,7 @@ void StageSelectScene::Update(void)
     {
 
         selecttile[i]->SetPosition(selecttilePos[i]);
+        numSprite[i]->SetPosition(selecttilePos[i]);
 
     }
 
@@ -131,6 +144,8 @@ void StageSelectScene::Update(void)
     {
 
         selecttile[i]->Update();
+        numSprite[i]->Update();
+        
 
     }
 
@@ -159,6 +174,7 @@ void StageSelectScene::Draw2d(void)
     {
 
         selecttile[i]->Draw();
+        numSprite[i]->Draw();
 
     }
 
