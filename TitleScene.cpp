@@ -32,7 +32,7 @@ void TitleScene::Update(void)
 
     if (KEYS::IsTrigger(DIK_RETURN)) {
         SceneManager::isInsertOk_ = true;
-        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("STAGESELECT") };
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("TITLE") };
         sceneManager_->RequestChangeScene(nextScene);
     }
 
