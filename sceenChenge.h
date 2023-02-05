@@ -46,9 +46,9 @@ private:
 	float rotate = 0;
 	DirectX::XMFLOAT2 scale = { 1,1 };
 
-	float maxRopeMoveTime = 50;
-	float maxPlayerMoveTime = 80;
-	float maxChengeMoveTime = 50;
+	float maxRopeMoveTime = 30;
+	float maxPlayerMoveTime =30;
+	float maxChengeMoveTime = 30;
 
 	float maxWait = 30;
 	float waitTime = 0;

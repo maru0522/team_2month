@@ -19,7 +19,6 @@ SceenChenge::SceenChenge()
 	Texture::Load("Resources/Image/testropecheng.png");
 
 	chenge = std::make_unique<Sprite>("Resources/Image/cheng.png", CMode::PATH);
-
 }
 
 SceenChenge::~SceenChenge()
@@ -61,25 +60,23 @@ void SceenChenge::Update()
 
 		if (isEnd == false)
 		{
-			rotate = lerp(0, 1000, playerMoveTime / maxPlayerMoveTime);
-			scale.x = lerp(1, 3000, playerMoveTime / maxPlayerMoveTime);
-			scale.y = lerp(1, 3000, playerMoveTime / maxPlayerMoveTime);
+			rotate = lerp(0, 1000, ropeMoveTime / maxRopeMoveTime);
+			scale.x = lerp(1, 2000, ropeMoveTime / maxRopeMoveTime);
+			scale.y = lerp(1, 2000, ropeMoveTime / maxRopeMoveTime);
 		}
 		else
 		{
 			rotate = lerp(1000, 0, ChengeMoveTime / maxChengeMoveTime);
-			scale.x = lerp(3000, 0, ChengeMoveTime / maxChengeMoveTime);
-			scale.y = lerp(3000, 0, ChengeMoveTime / maxChengeMoveTime);
+			scale.x = lerp(2000, 0, ChengeMoveTime / maxChengeMoveTime);
+			scale.y = lerp(2000, 0, ChengeMoveTime / maxChengeMoveTime);
 		}
 
-		if (maxPlayerMoveTime <= playerMoveTime and isEnd == false)
+		if (maxRopeMoveTime <= ropeMoveTime and isEnd == false)
 		{
 			if (waitTime >= maxWait)
 			{
 				isEnd = true;
 				ropeMoveTime = 0;
-				playerMoveTime = 0;
-
 				
 			}
 
@@ -105,11 +102,6 @@ void SceenChenge::Update()
 			ropeMoveTime++;
 		}
 
-		if (maxRopeMoveTime <= ropeMoveTime and maxPlayerMoveTime > playerMoveTime and isEnd == false)
-		{
-			playerMoveTime++;
-		}
-
 		if (isEnd and maxChengeMoveTime > ChengeMoveTime)
 		{
 
@@ -120,6 +112,8 @@ void SceenChenge::Update()
 		chenge->Update();
 
 	}
+
+	chenge->Update();
 
 #ifdef _DEBUG
 
