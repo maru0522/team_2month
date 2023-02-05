@@ -15,6 +15,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     // 変数初期化
     cameraT_ = std::make_unique<Camera>();
 
+    targetPoint_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", cameraT_.get());
+
     switch (StageSelectScene::GetStageIdx())
     {
     case 1:
@@ -47,10 +49,12 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         break;
     }
 
-    cameraT_->eye_ = { -100.f, 60.f, -100.f };
-    cameraT_->target_ = { Stage::maxBlockPosValue_.x ,-4, Stage::maxBlockPosValue_.z/2};
+    //cameraT_->eye_ = { -100.f, 60.f, -100.f };
+    cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
 
-    cameraPosY = cameraT_->eye_.y;
+    //cameraPosY = cameraT_->eye_.y;
+
+    targetPoint_->worldCoordinate_.position_ = cameraT_->target_;
 
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
@@ -92,16 +96,16 @@ void GameScene::Update(void)
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
     }
 
-    if (KEYS::IsDown(DIK_LSHIFT)) {
-        if (KEYS::IsDown(DIK_UPARROW)) {
-            cameraT_->eye_.y += 2;
-            cameraT_->target_.y += 2;
-        }
-        if (KEYS::IsDown(DIK_DOWNARROW)) {
-            cameraT_->eye_.y -= 5;
-            cameraT_->target_.y -= 5;
-        }
-    }
+    //if (KEYS::IsDown(DIK_LSHIFT)) {
+    //    if (KEYS::IsDown(DIK_UPARROW)) {
+    //        cameraT_->eye_.y += 2;
+    //        cameraT_->target_.y += 2;
+    //    }
+    //    if (KEYS::IsDown(DIK_DOWNARROW)) {
+    //        cameraT_->eye_.y -= 5;
+    //        cameraT_->target_.y -= 5;
+    //    }
+    //}
 
     //if (KEYS::IsDown(DIK_NUMPAD8)) {
     //    cameraT_->eye_.z += 5;
@@ -123,25 +127,44 @@ void GameScene::Update(void)
 #endif // _DEBUG
 
     if (isAutoCameraMode_) {
-        cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
-        cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * cameraSpeed;
+        // 中央（注視点）からプレイヤーまでのベクトル算出
+        DirectX::XMFLOAT3 tagToPlayer{
+            player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.x,
+            player_->GetObject3d()->worldCoordinate_.position_.y - cameraT_->target_.y,
+            player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.z
+        };
+        // 該当ベクトルを正規化
+        float ttpLength{ std::sqrtf(tagToPlayer.x * tagToPlayer.x + tagToPlayer.y * tagToPlayer.y + tagToPlayer.z * tagToPlayer.z) };
+        DirectX::XMFLOAT3 ttpNormalized{};
+        if (ttpLength != 0) {
+            ttpNormalized.x = tagToPlayer.x / ttpLength;
+            ttpNormalized.y = tagToPlayer.y / ttpLength;
+            ttpNormalized.z = tagToPlayer.z / ttpLength;
+        }
 
-        cameraT_->eye_.y = (player_->GetObject3d()->worldCoordinate_.position_.y + cameraPosY);
+        cameraT_->eye_.x = cameraT_->target_.x + ttpNormalized.x * distancePlayerToCamera_;
+        cameraT_->eye_.y = cameraT_->target_.y + ttpNormalized.y * distancePlayerToCamera_;
+        cameraT_->eye_.z = cameraT_->target_.z + ttpNormalized.z * distancePlayerToCamera_;
+
+        //cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
+        //cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * cameraSpeed;
+
+        //cameraT_->eye_.y = (player_->GetObject3d()->worldCoordinate_.position_.y + cameraPosY);
     }
     else {
 
     }
 
-  
+
     cameraT_->Update();
     player_->Update();
 
 
     BlockManager::Update();
 
+    targetPoint_->Update();
+
     reset_->Update();
-
-
 }
 
 void GameScene::Draw3d(void)
@@ -150,6 +173,8 @@ void GameScene::Draw3d(void)
 
 
     BlockManager::Draw();
+
+    targetPoint_->Draw();
 }
 
 void GameScene::Draw2d(void)

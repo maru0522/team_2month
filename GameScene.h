@@ -12,8 +12,7 @@ using std::unique_ptr;
 class GameScene : public BaseScene
 {
 private:
-    static constexpr float rangeIntoPlayer_{ 50.0f };
-    static constexpr float cameraRotateSpeed_{ 2.f };
+    static constexpr float distancePlayerToCamera_{ 200.f };
 
 public: // ä÷êî
     void Initialize(SceneManager* sceneManager) override;
@@ -34,5 +33,7 @@ private:
 
     float cameraSpeed = 1.2f;
     float cameraPosY = 0.0f;
+
+    unique_ptr<Obj3d> targetPoint_{};
 };
 
