@@ -145,19 +145,22 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
         frontVec.y /= length;
         frontVec.z /= length;
     }
+
     // 右ベクトル取得
-    DirectX::XMFLOAT3 rightVec{ frontVec.y * cameraPtr_->up_.z - frontVec.z - cameraPtr_->up_.y,
-                                frontVec.z * cameraPtr_->up_.x - frontVec.x - cameraPtr_->up_.z,
-                                frontVec.x * cameraPtr_->up_.y - frontVec.y - cameraPtr_->up_.x };
+    DirectX::XMFLOAT3 rightVec{};
+
+    rightVec.x = frontVec.y * 0.f - frontVec.z * 1.f;
+    rightVec.y = frontVec.z * 0.f - frontVec.x * 0.f;
+    rightVec.z = frontVec.x * 1.f - frontVec.y * 0.f;
 
     // 右ベクトルのノルム
-    float crossLength{ std::sqrtf(rightVec.x * rightVec.x + rightVec.y * rightVec.y + rightVec.z * rightVec.z) };
+    float rightLength{ std::sqrtf(rightVec.x * rightVec.x + rightVec.y * rightVec.y + rightVec.z * rightVec.z) };
 
     // 右ベクトルの正規化
-    if (crossLength != 0) {
-        rightVec.x /= crossLength;
-        rightVec.y /= crossLength;
-        rightVec.z /= crossLength;
+    if (rightLength != 0) {
+        rightVec.x /= rightLength;
+        rightVec.y /= rightLength;
+        rightVec.z /= rightLength;
     }
 #pragma endregion
 
@@ -481,7 +484,7 @@ void Player::Collision(DirectX::XMFLOAT3& vel)
                 }
                 else if (oldConnecting_ && !isConnecting_) {
                     if (0 < trueIdxReceive && trueIdxReceive <= BlockManager::GetReceiveMap()->size()) {
-                        BlockManager::GetReceiveMap()->at(trueIdxReceive) ? 
+                        BlockManager::GetReceiveMap()->at(trueIdxReceive) ?
                             BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = true :
                             BlockManager::GetConnectMap()->at(block->GetIdxConnect()) = false;
                     }
