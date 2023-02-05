@@ -13,8 +13,10 @@ FanBlock::FanBlock(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, uint32_t idxC
 
 void FanBlock::Update(void)
 {
+    body_->Update();
 }
 
 void FanBlock::Draw(void)
 {
+    body_->Draw();
 }

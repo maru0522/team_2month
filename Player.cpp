@@ -7,7 +7,7 @@
 
 Player::Player(Camera* pCamera)
 {
-    object_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", pCamera);
+    object_ = std::make_unique<Obj3d>("Resources/3dModels/player/player.obj", pCamera);
     cameraPtr_ = pCamera;
     ropeUsePad_sprite_->SetPosition({ Window::width_ - 103 - 10,51 });
     ropeUsePadPress_sprite_->SetPosition({ Window::width_ - 103 - 10,51 });
@@ -21,6 +21,8 @@ Player::Player(Camera* pCamera)
     rope_sprite_->SetPosition({ Window::width_ - 53 - 10, 10 });
     connect_sprite_->SetSize({ 53,53 });
     connect_sprite_->SetPosition({ Window::width_ - 53 - 10, 121 });
+
+    object_->worldCoordinate_.scale_ = { 2,2,2 };
 }
 
 void Player::Update(void)

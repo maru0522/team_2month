@@ -14,10 +14,17 @@ void BlockManager::Register(IBlock* blockPtr)
     }
     if (*blockPtr->GetType() == IBlock::Type::POWERSUPPLY) {
         isSupplyMp_.emplace(blockPtr->GetIdxSupply(), false);
+        blockPtr->SetModel("Resources/3dModels/powerBlock/powerBlock.obj");
     }
     if (*blockPtr->GetType() == IBlock::Type::POWERRECEIVE) {
         isReceiveMp_.emplace(blockPtr->GetIdxReceive(), false);
         isConnectMp_.emplace(blockPtr->GetIdxConnect(), false);
+        blockPtr->SetModel("Resources/3dModels/receiveBlock/receiveBlock.obj");
+    }
+    //—³ŠªƒuƒƒbƒN
+    if (*blockPtr->GetType() == IBlock::Type::FAN)
+    {
+      blockPtr->SetModel("Resources/3dModels/blowerBlock/blowerBlock.obj");
     }
     blocks_.emplace_back(blockPtr);
 }

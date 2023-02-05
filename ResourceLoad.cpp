@@ -62,7 +62,12 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Model::Load("Resources/3dModels/rope75/rope75.obj");
     Model::Load("Resources/3dModels/rope100/rope100.obj");
    
+    //ブロック読み込み
     Model::Load("Resources/3dModels/powerBlock/powerBlock.obj");
+    //受電ブロック
+    Model::Load("Resources/3dModels/receiveBlock/receiveBlock.obj");
+    //竜巻
+    Model::Load("Resources/3dModels/blowerBlock/blowerBlock.obj");
 
     Model::Load("Resources/3dModels/ropepin/ropepin.obj");
     Model::Load("Resources/3dModels/pinandrope_end/pinandrope_end.obj");
