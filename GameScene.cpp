@@ -146,10 +146,10 @@ void GameScene::Update(void)
         cameraT_->eye_.y = cameraT_->target_.y + ttpNormalized.y * distancePlayerToCamera_;
         cameraT_->eye_.z = cameraT_->target_.z + ttpNormalized.z * distancePlayerToCamera_;
 
-        //cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
-        //cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * cameraSpeed;
+       /* cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
+        cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * cameraSpeed;
 
-        //cameraT_->eye_.y = (player_->GetObject3d()->worldCoordinate_.position_.y + cameraPosY);
+        cameraT_->eye_.y = (player_->GetObject3d()->worldCoordinate_.position_.y + cameraPosY);*/
     }
     else {
 
