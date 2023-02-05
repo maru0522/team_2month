@@ -76,6 +76,7 @@ void StageSelectScene::Update(void)
         }
     }
 
+    //ŒÅ’è’l‚¾‚ª
     selecttile1Pos.x = -128+(640 - 512 * selectStageIdx_);
     selecttile2Pos.x = (-256 + 640) + (640 - 512 * selectStageIdx_);
     selecttile3Pos.x = (-128 + 1024) + (640 - 512 * selectStageIdx_);

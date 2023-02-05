@@ -36,27 +36,15 @@ private:
 
 private:
 
-	std::unique_ptr<Obj3d> ropeObj;
-	std::unique_ptr<Obj3d> playerObj;
-
-    //std::unique_ptr<Sprite> player = std::make_unique<Sprite>("Resources/Image/testplayercheng.png", CMode::PATH);
-    std::unique_ptr<Sprite> playerR;
-    std::unique_ptr<Sprite> playerL;
-    
-    std::unique_ptr<Sprite> rope;
-    std::unique_ptr<Sprite> rope2;
-    std::unique_ptr<Sprite> rope3;
+	
 	
     
 	std::unique_ptr<Sprite> chenge;
 
 	Camera* cameraPtr{ nullptr };
 
-	DirectX::XMFLOAT2 playerpos = {500,720 };
-	DirectX::XMFLOAT2 ropepos = { 500 ,720 };
-	DirectX::XMFLOAT2 ropepos2 = { 500 ,720 };
-	DirectX::XMFLOAT2 ropepos3 = { 500 ,720 };
-	DirectX::XMFLOAT2 chengepos = {0,720};
+	float rotate = 0;
+	DirectX::XMFLOAT2 scale = { 1,1 };
 
 	float maxRopeMoveTime = 50;
 	float maxPlayerMoveTime = 80;
@@ -68,6 +56,8 @@ private:
 	float ropeMoveTime = 0;
 	float playerMoveTime = 0;
 	float ChengeMoveTime = 0;
+
+	DirectX::XMFLOAT2 testPos = {1500,0};
 
 	bool isEnd = false;
 
