@@ -12,7 +12,7 @@ using std::unique_ptr;
 class GameScene : public BaseScene
 {
 private:
-    static constexpr float distancePlayerToCamera_{ 200.f };
+    static constexpr float distancePlayerToCamera_{ 120.f };
 
 public: // ä÷êî
     void Initialize(SceneManager* sceneManager) override;

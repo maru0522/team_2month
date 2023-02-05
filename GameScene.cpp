@@ -162,7 +162,7 @@ void GameScene::Update(void)
 
     BlockManager::Update();
 
-    targetPoint_->Update();
+    //targetPoint_->Update();
 
     reset_->Update();
 }
@@ -174,7 +174,7 @@ void GameScene::Draw3d(void)
 
     BlockManager::Draw();
 
-    targetPoint_->Draw();
+    //targetPoint_->Draw();
 }
 
 void GameScene::Draw2d(void)
