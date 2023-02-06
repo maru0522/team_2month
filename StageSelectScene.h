@@ -26,15 +26,15 @@ public:
 
 private:
 
-    DirectX::XMFLOAT2 selecttilePos[8] = { {-512,232},{ 0,232 },{ 512 ,232 },{ 1024 ,232 },{ 1536 ,232 },{ 2048 ,232 },{ 2560 ,232 },{ 3072 ,232 } };
+    DirectX::XMFLOAT2 selecttilePos[8] = { {0,232},{ 512,232 },{ 1024 ,232 },{ 1536 ,232 },{ 2048 ,232 },{ 2560 ,232 },{ 3072 ,232 },{ 3584 ,232 } };
 
-    DirectX::XMFLOAT2 selectRope01Pos = { -256 ,328 };
-    DirectX::XMFLOAT2 selectRope12Pos = { 256 ,328 };
-    DirectX::XMFLOAT2 selectRope23Pos = { 768,328 };
-    DirectX::XMFLOAT2 selectRope34Pos = { 1280,328 };
-    DirectX::XMFLOAT2 selectRope45Pos = { 1792,328 };
-    DirectX::XMFLOAT2 selectRope56Pos = { 2304,328 };
-    DirectX::XMFLOAT2 selectRope67Pos = { 2816,328 };
+    DirectX::XMFLOAT2 selectRope01Pos = { 0 ,328 };
+    DirectX::XMFLOAT2 selectRope12Pos = { 512 ,328 };
+    DirectX::XMFLOAT2 selectRope23Pos = { 1024,328 };
+    DirectX::XMFLOAT2 selectRope34Pos = { 1536,328 };
+    DirectX::XMFLOAT2 selectRope45Pos = { 2048,328 };
+    DirectX::XMFLOAT2 selectRope56Pos = { 2560,328 };
+    DirectX::XMFLOAT2 selectRope67Pos = { 3072,328 };
 
     DirectX::XMFLOAT2 selectpointPos = { 640,360 };
 

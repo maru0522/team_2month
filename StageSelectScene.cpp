@@ -109,18 +109,90 @@ void StageSelectScene::Update(void)
 
     for (int i = 0; i < 8; i++)
     {
-        selecttilePos[i].x = (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_);
+        //selecttilePos[i].x = (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_);
+        if (selecttilePos[i].x < (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_))
+        {
+            selecttilePos[i].x+=16;
+        }
+        else if(selecttilePos[i].x > (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_))
+        {
+            selecttilePos[i].x-=16;
+        }
+
     }
 
     //ŒÅ’è’l‚¾‚ª
 
-    selectRope01Pos.x = (-128 - 256) + (640 - 512 * (float)selectStageIdx_);
-    selectRope12Pos.x = (-128 + 256) + (640 - 512 * (float)selectStageIdx_);
-    selectRope23Pos.x = (-128 + 768) + (640 - 512 * (float)selectStageIdx_);
-    selectRope34Pos.x = (-128 + 1280) + (640 - 512 * (float)selectStageIdx_);
-    selectRope45Pos.x = (-128 + 1792) + (640 - 512 * (float)selectStageIdx_);
-    selectRope56Pos.x = (-128 + 2304) + (640 - 512 * (float)selectStageIdx_);
-    selectRope67Pos.x = (-128 + 2816) + (640 - 512 * (float)selectStageIdx_);
+    if (selectRope01Pos.x < (-128 - 256) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope01Pos.x += 16;
+    }
+    else if (selectRope01Pos.x > (-128 - 256) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope01Pos.x -= 16;
+    }
+
+    if (selectRope12Pos.x < (-128 + 256) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope12Pos.x += 16;
+    }
+    else if (selectRope12Pos.x > (-128 + 256) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope12Pos.x -= 16;
+    }
+
+    if (selectRope23Pos.x < (-128 + 768) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope23Pos.x += 16;
+    }
+    else if (selectRope23Pos.x > (-128 + 768) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope23Pos.x -= 16;
+    }
+
+    if (selectRope34Pos.x < (-128 + 1280) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope34Pos.x += 16;
+    }
+    else if (selectRope34Pos.x > (-128 + 1280) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope34Pos.x -= 16;
+    }
+
+    if (selectRope45Pos.x < (-128 + 1792) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope45Pos.x += 16;
+    }
+    else if (selectRope45Pos.x > (-128 + 1792) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope45Pos.x -= 16;
+    }
+
+    if (selectRope56Pos.x < (-128 + 2304) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope56Pos.x += 16;
+    }
+    else if (selectRope56Pos.x > (-128 + 2304) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope56Pos.x -= 16;
+    }
+
+    if (selectRope67Pos.x < (-128 + 2816) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope67Pos.x += 16;
+    }
+    else if (selectRope67Pos.x > (-128 + 2816) + (640 - 512 * (float)selectStageIdx_))
+    {
+        selectRope67Pos.x -= 16;
+    }
+
+    //selectRope01Pos.x = (-128 - 256) + (640 - 512 * (float)selectStageIdx_);
+    //selectRope12Pos.x = (-128 + 256) + (640 - 512 * (float)selectStageIdx_);
+    //selectRope23Pos.x = (-128 + 768) + (640 - 512 * (float)selectStageIdx_);
+    //selectRope34Pos.x = (-128 + 1280) + (640 - 512 * (float)selectStageIdx_);
+    //selectRope45Pos.x = (-128 + 1792) + (640 - 512 * (float)selectStageIdx_);
+    //selectRope56Pos.x = (-128 + 2304) + (640 - 512 * (float)selectStageIdx_);
+    //selectRope67Pos.x = (-128 + 2816) + (640 - 512 * (float)selectStageIdx_);
 
 
     for (int i = 0; i < 8; i++)
