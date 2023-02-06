@@ -84,7 +84,7 @@ void GameScene::Update(void)
     // プレイヤーがクリアしたら強制リセット（ゴールブロックを踏んだら強制リセット）
     if (player_->GetIsGoal()) {
         BlockManager::ClearAll();
-        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };
+        std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("STAGESELECT") };
         sceneManager_->RequestChangeScene(nextScene);
     }
 
