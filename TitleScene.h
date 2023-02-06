@@ -18,7 +18,7 @@ public: // ä÷êî
     void Finalize(void) override;
 
 private:
-    unique_ptr<Sprite> titleName_sprite_{ std::make_unique<Sprite>("titleName", CMode::ID) };
+    unique_ptr<Sprite> titleName_sprite_{ std::make_unique<Sprite>("title", CMode::ID) };
     unique_ptr<Sprite> anybutton_sprite_{ std::make_unique<Sprite>("anybutton", CMode::ID) };
 
     unique_ptr<Util::Timer> anybuttonTimer_{ std::make_unique<Util::Timer>() };

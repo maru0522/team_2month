@@ -14,6 +14,8 @@ void TitleScene::Initialize(SceneManager* pSceneManager)
     anybutton_sprite_->SetColor({ 1.f,1.f,1.f,1.f });
     anybuttonTimer_->Start(2.5f);
 
+    titleName_sprite_->SetPosition({400,250});
+   /* titleName_sprite_->SetSize({512.f,128.f});*/ //Œ³‚Ì‰æ‘œ‚Ì2”{
 }
 
 void TitleScene::Update(void)
