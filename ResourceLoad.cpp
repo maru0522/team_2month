@@ -43,6 +43,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/num9.png");
     Texture::Load("Resources/Image/num10.png");
     Texture::Load("Resources/Image/num11.png");
+    Texture::Load("Resources/Image/selectBack.png");
 
     // ÉQÅ[ÉÄ - player
     Texture::Load("Resources/Image/Game/Player/player_default.png","p_default");

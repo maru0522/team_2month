@@ -42,6 +42,8 @@ private:
 
     std::unique_ptr<Sprite> numSprite[11];
 
+    std::unique_ptr<Sprite> selectBack;
+
 
     std::unique_ptr<Sprite> selectRope01 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
     std::unique_ptr<Sprite> selectRope12 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);

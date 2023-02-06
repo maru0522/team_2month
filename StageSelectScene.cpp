@@ -41,6 +41,8 @@ void StageSelectScene::Initialize(SceneManager* pSceneManager)
 
     selectpoint = std::make_unique<Sprite>("Resources/Image/selectpoint.png", CMode::PATH);
 
+    selectBack = std::make_unique<Sprite>("Resources/Image/selectBack.png", CMode::PATH);
+
     for (int i = 0; i < 8; i++)
     {
 
@@ -104,6 +106,7 @@ void StageSelectScene::Update(void)
         }
     }
 
+
     for (int i = 0; i < 8; i++)
     {
         selecttilePos[i].x = (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_);
@@ -160,6 +163,8 @@ void StageSelectScene::Update(void)
 
     selectpoint->Update();
 
+    selectBack->Update();
+
     DrawImGui();
 }
 
@@ -169,6 +174,8 @@ void StageSelectScene::Draw3d(void)
 
 void StageSelectScene::Draw2d(void)
 {
+
+    selectBack->Draw();
 
     for (int i = 0; i < 8; i++)
     {
