@@ -197,7 +197,9 @@ void StageSelectScene::Finalize(void)
 
 void StageSelectScene::DrawImGui(void)
 {
+#ifdef _DEBUG
     ImGui::Begin("StageSelectScene");
     ImGui::Text("stageIdx : %d",selectStageIdx_);
     ImGui::End();
+#endif // _DEBUG
 }
