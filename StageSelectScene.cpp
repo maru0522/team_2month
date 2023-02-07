@@ -43,13 +43,22 @@ void StageSelectScene::Initialize(SceneManager* pSceneManager)
 
     selectBack = std::make_unique<Sprite>("Resources/Image/selectBack.png", CMode::PATH);
 
+
+
     for (int i = 0; i < 8; i++)
     {
-
+        selecttilePos[i].x = (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_);
         selecttile[i]->SetPosition(selecttilePos[i]);
 
     }
 
+    selectRope01Pos.x = (-128 - 256) + (640 - 512 * (float)selectStageIdx_);
+    selectRope12Pos.x = (-128 + 256) + (640 - 512 * (float)selectStageIdx_);
+    selectRope23Pos.x = (-128 + 768) + (640 - 512 * (float)selectStageIdx_);
+    selectRope34Pos.x = (-128 + 1280) + (640 - 512 * (float)selectStageIdx_);
+    selectRope45Pos.x = (-128 + 1792) + (640 - 512 * (float)selectStageIdx_);
+    selectRope56Pos.x = (-128 + 2304) + (640 - 512 * (float)selectStageIdx_);
+    selectRope67Pos.x = (-128 + 2816) + (640 - 512 * (float)selectStageIdx_);
 
     selectRope01->SetPosition(selectRope12Pos);
     selectRope12->SetPosition(selectRope12Pos);
