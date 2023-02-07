@@ -19,6 +19,13 @@ void StageSelectScene::Initialize(SceneManager* pSceneManager)
 
     }
 
+    for (int i = 0; i < 7; i++)
+    {
+
+        selectRope[i] = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+
+    }
+
     numSprite[0] = std::make_unique<Sprite>("Resources/Image/num11.png", CMode::PATH);
     numSprite[1] = std::make_unique<Sprite>("Resources/Image/num1.png", CMode::PATH);
     numSprite[2] = std::make_unique<Sprite>("Resources/Image/num2.png", CMode::PATH);
@@ -31,35 +38,29 @@ void StageSelectScene::Initialize(SceneManager* pSceneManager)
     numSprite[9] = std::make_unique<Sprite>("Resources/Image/num9.png", CMode::PATH);
     numSprite[10] = std::make_unique<Sprite>("Resources/Image/num10.png", CMode::PATH);
 
-    selectRope01 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    selectRope12 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    selectRope23 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    selectRope34 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    selectRope45 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    selectRope56 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    selectRope67 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-
-    selectpoint = std::make_unique<Sprite>("Resources/Image/selectpoint.png", CMode::PATH);
 
     selectBack = std::make_unique<Sprite>("Resources/Image/selectBack.png", CMode::PATH);
 
+    for (int i = 0; i < 6; i++)
+    {
+        elecSprite[i] = std::make_unique<Sprite>("Resources/Image/elecTex.png", CMode::PATH);
+    }
+
     for (int i = 0; i < 8; i++)
     {
-
+        selecttilePos[i].x = (-128 + (-512 + (512 * i))) + (640 - 512 * (float)selectStageIdx_);
         selecttile[i]->SetPosition(selecttilePos[i]);
 
     }
 
+  
+    for (int i = 0; i < 7; i++)
+    {
 
-    selectRope01->SetPosition(selectRope12Pos);
-    selectRope12->SetPosition(selectRope12Pos);
-    selectRope23->SetPosition(selectRope23Pos);
-    selectRope34->SetPosition(selectRope34Pos);
-    selectRope45->SetPosition(selectRope45Pos);
-    selectRope56->SetPosition(selectRope56Pos);
-    selectRope67->SetPosition(selectRope67Pos);
+        selectRopePos[i].x = (-128 + (-256 + (512 * i))) + (640 - 512 * (float)selectStageIdx_);
+        selectRope[i]->SetPosition(selectRopePos[i]);
 
-    selectpoint->SetPosition(selectpointPos);
+    }
     
 
 }
@@ -123,76 +124,19 @@ void StageSelectScene::Update(void)
 
     //ŒÅ’è’l‚¾‚ª
 
-    if (selectRope01Pos.x < (-128 - 256) + (640 - 512 * (float)selectStageIdx_))
+    for (int i = 0; i < 7; i++)
     {
-        selectRope01Pos.x += 16;
-    }
-    else if (selectRope01Pos.x > (-128 - 256) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope01Pos.x -= 16;
-    }
 
-    if (selectRope12Pos.x < (-128 + 256) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope12Pos.x += 16;
-    }
-    else if (selectRope12Pos.x > (-128 + 256) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope12Pos.x -= 16;
-    }
+        if (selectRopePos[i].x < (-128 + (-256 + (512 * i))) + (640 - 512 * (float)selectStageIdx_))
+        {
+            selectRopePos[i].x += 16;
+        }
+        else if (selectRopePos[i].x > (-128 + (-256 + (512 * i))) + (640 - 512 * (float)selectStageIdx_))
+        {
+            selectRopePos[i].x -= 16;
+        }
 
-    if (selectRope23Pos.x < (-128 + 768) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope23Pos.x += 16;
     }
-    else if (selectRope23Pos.x > (-128 + 768) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope23Pos.x -= 16;
-    }
-
-    if (selectRope34Pos.x < (-128 + 1280) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope34Pos.x += 16;
-    }
-    else if (selectRope34Pos.x > (-128 + 1280) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope34Pos.x -= 16;
-    }
-
-    if (selectRope45Pos.x < (-128 + 1792) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope45Pos.x += 16;
-    }
-    else if (selectRope45Pos.x > (-128 + 1792) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope45Pos.x -= 16;
-    }
-
-    if (selectRope56Pos.x < (-128 + 2304) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope56Pos.x += 16;
-    }
-    else if (selectRope56Pos.x > (-128 + 2304) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope56Pos.x -= 16;
-    }
-
-    if (selectRope67Pos.x < (-128 + 2816) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope67Pos.x += 16;
-    }
-    else if (selectRope67Pos.x > (-128 + 2816) + (640 - 512 * (float)selectStageIdx_))
-    {
-        selectRope67Pos.x -= 16;
-    }
-
-    //selectRope01Pos.x = (-128 - 256) + (640 - 512 * (float)selectStageIdx_);
-    //selectRope12Pos.x = (-128 + 256) + (640 - 512 * (float)selectStageIdx_);
-    //selectRope23Pos.x = (-128 + 768) + (640 - 512 * (float)selectStageIdx_);
-    //selectRope34Pos.x = (-128 + 1280) + (640 - 512 * (float)selectStageIdx_);
-    //selectRope45Pos.x = (-128 + 1792) + (640 - 512 * (float)selectStageIdx_);
-    //selectRope56Pos.x = (-128 + 2304) + (640 - 512 * (float)selectStageIdx_);
-    //selectRope67Pos.x = (-128 + 2816) + (640 - 512 * (float)selectStageIdx_);
 
 
     for (int i = 0; i < 8; i++)
@@ -203,17 +147,83 @@ void StageSelectScene::Update(void)
 
     }
 
+    for (int i = 0; i < 7; i++)
+    {
 
-    selectRope01->SetPosition(selectRope01Pos);
-    selectRope12->SetPosition(selectRope12Pos);
-    selectRope23->SetPosition(selectRope23Pos);
-    selectRope34->SetPosition(selectRope34Pos);
-    selectRope45->SetPosition(selectRope45Pos);
-    selectRope56->SetPosition(selectRope56Pos);
-    selectRope67->SetPosition(selectRope67Pos);
+        selectRope[i]->SetPosition(selectRopePos[i]);
 
-    selectpoint->SetPosition(selectpointPos);
+    }
 
+    elecSprite[1]->SetRotation(3.141592f / 2);
+    elecSprite[3]->SetRotation(3.141592f / 2);
+
+    for (int i = 0; i < 8; i++)
+    {
+        if (selecttilePos[i].x <= 640 + 128 and selecttilePos[i].x >= 640 - 128)
+        {
+            elecPos[0] = { selecttilePos[i].x,selecttilePos[i].y - 32 };
+            elecPos[1] = { selecttilePos[i].x + 288,selecttilePos[i].y };
+            elecPos[2] = { selecttilePos[i].x,selecttilePos[i].y + 256 };
+            elecPos[3] = { selecttilePos[i].x,selecttilePos[i].y };
+            elecTileDraw = true;
+            break;
+        }
+        else
+        {
+            elecTileDraw = false;
+        }
+    }
+
+    for (int i = 0; i < 8; i++)
+    {
+        if (selecttilePos[i].x <= 640 + 128 and selecttilePos[i].x >= 640 - 128)
+        {
+            elecPos[0] = { selecttilePos[i].x,selecttilePos[i].y - 32 };
+            elecPos[1] = { selecttilePos[i].x + 288,selecttilePos[i].y };
+            elecPos[2] = { selecttilePos[i].x,selecttilePos[i].y + 256 };
+            elecPos[3] = { selecttilePos[i].x,selecttilePos[i].y };
+            elecTileDraw = true;
+            break;
+        }
+        else
+        {
+            elecTileDraw = false;
+        }
+    }
+
+    for (int i = 0; i < 7; i++)
+    {
+        if (selectRopePos[i].x + 128 <= 640 + 160 and selecttilePos[i].x + 128 >= 640 - 160)
+        {
+            elecPos[4] = { selectRopePos[i].x,selectRopePos[i].y - 16 };
+            elecPos[5] = { selectRopePos[i].x,selectRopePos[i].y + 64 };
+            elecRopeDraw = true;
+            break;
+        }
+        else
+        {
+            elecRopeDraw = false;
+        }
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+
+        if (i == 1 or i == 3)
+        {
+            elecPos[i].x += sinf(elecMoveTime);
+        }
+        else
+        {
+            elecPos[i].y += sinf(elecMoveTime);
+        }
+
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        elecSprite[i]->SetPosition(elecPos[i]);
+    }
 
     for (int i = 0; i < 8; i++)
     {
@@ -224,18 +234,22 @@ void StageSelectScene::Update(void)
 
     }
 
+    for (int i = 0; i < 7; i++)
+    {
 
-    selectRope01->Update();
-    selectRope12->Update();
-    selectRope23->Update();
-    selectRope34->Update();
-    selectRope45->Update();
-    selectRope56->Update();
-    selectRope67->Update();
+        selectRope[i]->Update();
 
-    selectpoint->Update();
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        elecSprite[i]->Update();
+    }
+
 
     selectBack->Update();
+
+    elecMoveTime++;
 
     DrawImGui();
 }
@@ -257,16 +271,29 @@ void StageSelectScene::Draw2d(void)
 
     }
 
+    for (int i = 0; i < 7; i++)
+    {
 
-    selectRope01->Draw();
-    selectRope12->Draw();
-    selectRope23->Draw();
-    selectRope34->Draw();
-    selectRope45->Draw();
-    selectRope56->Draw();
-    selectRope67->Draw();
+        selectRope[i]->Draw();
 
-    selectpoint->Draw();
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (elecTileDraw)
+        {
+            elecSprite[i]->Draw();
+        }
+    }
+
+    for (int i = 4; i < 6; i++)
+    {
+        if (elecRopeDraw)
+        {
+            elecSprite[i]->Draw();
+        }
+    }
+
 
 }
 

@@ -11,12 +11,8 @@ SceenChenge::SceenChenge()
 
 	playerObj->worldCoordinate_.position_ = { -0.0f, -10.0f, -92.0f };
 	playerObj->worldCoordinate_.rotation_ = { 0.0f,3.141592653589f / 5.0f,0.0f };*/
-	Texture::Load("Resources/Image/testcheng.png");
 	Texture::Load("Resources/Image/cheng.png");
 	//Texture::Load("Resources/Image/testplayercheng.png");
-	Texture::Load("Resources/Image/testplayercheng2_R.png");
-	Texture::Load("Resources/Image/testplayercheng2_L.png");
-	Texture::Load("Resources/Image/testropecheng.png");
 
 	chenge = std::make_unique<Sprite>("Resources/Image/cheng.png", CMode::PATH);
 }

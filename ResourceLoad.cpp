@@ -28,7 +28,6 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/Title/gameTitle.png", "title");
 
     //ステージセレクト
-    Texture::Load("Resources/Image/num.png");
     Texture::Load("Resources/Image/selectRope.png");
     Texture::Load("Resources/Image/selecttile.png");
     Texture::Load("Resources/Image/selectpoint.png");
@@ -44,6 +43,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/num10.png");
     Texture::Load("Resources/Image/num11.png");
     Texture::Load("Resources/Image/selectBack.png");
+    Texture::Load("Resources/Image/elecTex.png");
 
     // ゲーム - player
     Texture::Load("Resources/Image/Game/Player/player_default.png","p_default");

@@ -28,32 +28,25 @@ private:
 
     DirectX::XMFLOAT2 selecttilePos[8] = { {0,232},{ 512,232 },{ 1024 ,232 },{ 1536 ,232 },{ 2048 ,232 },{ 2560 ,232 },{ 3072 ,232 },{ 3584 ,232 } };
 
-    DirectX::XMFLOAT2 selectRope01Pos = { 0 ,328 };
-    DirectX::XMFLOAT2 selectRope12Pos = { 512 ,328 };
-    DirectX::XMFLOAT2 selectRope23Pos = { 1024,328 };
-    DirectX::XMFLOAT2 selectRope34Pos = { 1536,328 };
-    DirectX::XMFLOAT2 selectRope45Pos = { 2048,328 };
-    DirectX::XMFLOAT2 selectRope56Pos = { 2560,328 };
-    DirectX::XMFLOAT2 selectRope67Pos = { 3072,328 };
+    DirectX::XMFLOAT2 selectRopePos[7] = { { 0 ,328 } ,{ 512 ,328 } ,{ 1024,328 },{ 1536,328 },{ 2048,328 },{ 2560,328 },{ 3072,328 } };
 
-    DirectX::XMFLOAT2 selectpointPos = { 640,360 };
+    DirectX::XMFLOAT2 elecPos[6] = { {512,200},{800,232},{512,488},{512,232} };
+
+    bool elecTileDraw = false;
+    bool elecRopeDraw = false;
+
+    float elecMoveTime = 0;
 
     std::unique_ptr<Sprite> selecttile[8];
 
     std::unique_ptr<Sprite> numSprite[11];
 
+    std::unique_ptr<Sprite> elecSprite[6];
+
     std::unique_ptr<Sprite> selectBack;
 
+    std::unique_ptr<Sprite> selectRope[7];
 
-    std::unique_ptr<Sprite> selectRope01 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    std::unique_ptr<Sprite> selectRope12 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    std::unique_ptr<Sprite> selectRope23 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    std::unique_ptr<Sprite> selectRope34 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    std::unique_ptr<Sprite> selectRope45 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    std::unique_ptr<Sprite> selectRope56 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-    std::unique_ptr<Sprite> selectRope67 = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
-
-    std::unique_ptr<Sprite> selectpoint = std::make_unique<Sprite>("Resources/Image/selectpoint.png", CMode::PATH);
 
 };
 
