@@ -344,6 +344,13 @@ void Player::ControllState(void)
         }
 #endif // _DEBUG
     }
+
+    if (!oldConnecting_ && isConnecting_) {
+        object_->SetTexture("Resources/Image/yellow1x1.png");
+    }
+    if (oldConnecting_ && !isConnecting_) {
+        object_->SetTexture("Resources/3dModels/player/player.png");
+    }
 }
 
 void Player::Collision(DirectX::XMFLOAT3& vel)

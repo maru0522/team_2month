@@ -49,6 +49,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/Game/Player/player_default.png","p_default");
     Texture::Load("Resources/Image/Game/Player/player_rope.png","p_rope");
     Texture::Load("Resources/Image/Game/Player/player_isConnect.png","p_connect");
+    Texture::Load("Resources/Image/yellow1x1.png");
 
     // XPAD
     Texture::Load("Resources/Image/XPAD/XPAD_A.png","XPAD_A");
