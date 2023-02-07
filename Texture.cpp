@@ -392,6 +392,9 @@ void Texture::GenerateMissingTexture(void)
 
 const Texture::TEXTURE_VALUE* Texture::GetTextureInfo(const fsPath& pathAndFileName)
 {
+    if (textures_.count(pathAndFileName) == false) {
+    return &textures_.at("Resources/Image/white1x1.png");
+    }
     return &textures_.at(pathAndFileName);
 }
 

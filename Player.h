@@ -66,9 +66,12 @@ private:
     void SetState(MoveState state) { state_ = state; }
 
 private: // 変数
+    // プレイヤーモデル
     std::unique_ptr<Obj3d> object_{};
 
     Camera* cameraPtr_{ nullptr };
+
+    //float degree_{};
 
     // じゃんぷ
     float jumpValue_{ 0.0f };

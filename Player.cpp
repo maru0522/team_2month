@@ -8,6 +8,7 @@
 Player::Player(Camera* pCamera)
 {
     object_ = std::make_unique<Obj3d>("Resources/3dModels/player/player.obj", pCamera);
+
     cameraPtr_ = pCamera;
     ropeUsePad_sprite_->SetPosition({ Window::width_ - 103 - 10,51 });
     ropeUsePadPress_sprite_->SetPosition({ Window::width_ - 103 - 10,51 });
@@ -201,6 +202,9 @@ void Player::Controll(DirectX::XMFLOAT3& vel)
 
         rightVec.x *= -inputLStick.x/* * normalizeLStick.x*/;
         rightVec.z *= -inputLStick.x/* * normalizeLStick.x*/;
+
+        //(frontVec.x * rightVec.x + frontVec.z * rightVec.z) / (std::sqrtf(frontVec.x * frontVec.x + frontVec.z * frontVec.z) * std::sqrtf(rightVec.x * rightVec.x + rightVec.z * rightVec.z));
+        //degree_ = 
 
         vel.x += frontVec.x + rightVec.x;
         vel.z += frontVec.z + rightVec.z;
@@ -619,6 +623,10 @@ void Player::DrawImgui(const DirectX::XMFLOAT3& vel)
 
     ImGui::Text("XPAD_LStick");
     ImGui::Text("LS_X : %f, LS_Y : %f", XPAD::GetLStick().x, XPAD::GetLStick().y);
+
+    ImGui::Spacing();
+
+    ImGui::Text("rope length : %f", ropeLength_);
 
     ImGui::End();
 #endif // _DEBUG

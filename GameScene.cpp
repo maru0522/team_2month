@@ -165,6 +165,7 @@ void GameScene::Update(void)
     //targetPoint_->Update();
 
     reset_->Update();
+    bokashi_->Update();
 }
 
 void GameScene::Draw3d(void)
@@ -181,6 +182,7 @@ void GameScene::Draw2d(void)
 {
     reset_->Draw();
     player_->Draw2d();
+    bokashi_->Draw();
 }
 
 void GameScene::Finalize(void)

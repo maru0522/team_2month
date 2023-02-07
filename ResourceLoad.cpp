@@ -50,6 +50,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/Game/Player/player_rope.png","p_rope");
     Texture::Load("Resources/Image/Game/Player/player_isConnect.png","p_connect");
     Texture::Load("Resources/Image/yellow1x1.png");
+    Texture::Load("Resources/Image/white1x1.png");
 
     // XPAD
     Texture::Load("Resources/Image/XPAD/XPAD_A.png","XPAD_A");
@@ -59,6 +60,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/XPAD/XPAD_RB.png","XPAD_RB");
     Texture::Load("Resources/Image/XPAD/XPAD_RB_PRESS.png","XPAD_RB_PRESS");
 
+    Texture::Load("Resources/Image/Game/bokashi.png");
     Texture::Load("Resources/Image/Reset.png");
     Texture::Load("Resources/Image/KEY_ENTER.png");
     Texture::Load("Resources/Image/KEY_ENTER_PRESS.png");
@@ -81,12 +83,13 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Model::Load("Resources/3dModels/receiveBlock/receiveBlock.obj");
     //ó≥ä™
     Model::Load("Resources/3dModels/blowerBlock/blowerBlock.obj");
+    // è„å¸Ç´ñÓàÛ
+    Model::Load("Resources/3dModels/upArrow/upArrow.obj");
 
     Model::Load("Resources/3dModels/ropepin/ropepin.obj");
     Model::Load("Resources/3dModels/pinandrope_end/pinandrope_end.obj");
     Model::Load("Resources/3dModels/pinandrope_rope/pinandrope_rope.obj");
     Model::Load("Resources/3dModels/pinandrope2_tex/pinandrope2_tex.obj");
-
 
 
     Model::Load("Resources/3dModels/buttonX/buttonX.obj");
