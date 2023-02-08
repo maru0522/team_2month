@@ -174,26 +174,9 @@ void StageSelectScene::Update(void)
         }
     }
 
-    for (int i = 0; i < 8; i++)
-    {
-        if (selecttilePos[i].x <= 640 + 128 and selecttilePos[i].x >= 640 - 128)
-        {
-            elecPos[0] = { selecttilePos[i].x,selecttilePos[i].y - 32 };
-            elecPos[1] = { selecttilePos[i].x + 288,selecttilePos[i].y };
-            elecPos[2] = { selecttilePos[i].x,selecttilePos[i].y + 256 };
-            elecPos[3] = { selecttilePos[i].x,selecttilePos[i].y };
-            elecTileDraw = true;
-            break;
-        }
-        else
-        {
-            elecTileDraw = false;
-        }
-    }
-
     for (int i = 0; i < 7; i++)
     {
-        if (selectRopePos[i].x + 128 <= 640 + 160 and selecttilePos[i].x + 128 >= 640 - 160)
+        if (selectRopePos[i].x + 128 <= 640 + 160 and selecttilePos[i].x + 128 >= 640 - 256)
         {
             elecPos[4] = { selectRopePos[i].x,selectRopePos[i].y - 16 };
             elecPos[5] = { selectRopePos[i].x,selectRopePos[i].y + 64 };

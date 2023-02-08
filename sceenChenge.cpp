@@ -2,17 +2,7 @@
 
 SceenChenge::SceenChenge()
 {
-
-	/*ropeObj = std::make_unique<Obj3d>("Resources/3dModels/ropetest/ropetest.obj");
-	playerObj = std::make_unique<Obj3d>("Resources/3dModels/playertest2/playertest2.obj");
-	ropeObj->worldCoordinate_.scale_ = { 5,5,5 };
-	ropeObj->worldCoordinate_.position_ = { -0.0f, -10.0f, -92.0f };
-	ropeObj->worldCoordinate_.rotation_ = {0.0f,3.141592653589f/2,0.0f };
-
-	playerObj->worldCoordinate_.position_ = { -0.0f, -10.0f, -92.0f };
-	playerObj->worldCoordinate_.rotation_ = { 0.0f,3.141592653589f / 5.0f,0.0f };*/
 	Texture::Load("Resources/Image/cheng.png");
-	//Texture::Load("Resources/Image/testplayercheng.png");
 
 	chenge = std::make_unique<Sprite>("Resources/Image/cheng.png", CMode::PATH);
 }
@@ -28,8 +18,6 @@ void SceenChenge::SetSprite(void)
 
 void SceenChenge::Update()
 {
-	//ropeObj->Update();
-	//playerObj->Update();
 
 	chenge->SetPosition({ 630,360 });
 	chenge->SetAnchorPoint({ 0.5f,0.5f });
@@ -56,12 +44,14 @@ void SceenChenge::Update()
 
 		if (isEnd == false)
 		{
+			//çLÇ™ÇÈìÆçÏ
 			rotate = lerp(0, 1000, ropeMoveTime / maxRopeMoveTime);
 			scale.x = lerp(1, 2000, ropeMoveTime / maxRopeMoveTime);
 			scale.y = lerp(1, 2000, ropeMoveTime / maxRopeMoveTime);
 		}
 		else
 		{
+			//èkÇﬁìÆçÏ
 			rotate = lerp(1000, 0, ChengeMoveTime / maxChengeMoveTime);
 			scale.x = lerp(2000, 0, ChengeMoveTime / maxChengeMoveTime);
 			scale.y = lerp(2000, 0, ChengeMoveTime / maxChengeMoveTime);
@@ -69,6 +59,7 @@ void SceenChenge::Update()
 
 		if (maxRopeMoveTime <= ropeMoveTime and isEnd == false)
 		{
+			//âÊñ ëSëÃÇ…è≠ÇµÇ¢ÇÈÇΩÇﬂÇ…ïKóv
 			if (waitTime >= maxWait)
 			{
 				isEnd = true;
@@ -111,35 +102,16 @@ void SceenChenge::Update()
 
 	chenge->Update();
 
-#ifdef _DEBUG
-
-
-#endif // _DEBUG
-
-
-	
-
 }
 
 void SceenChenge::Draw()
 {
-	//ropeObj->Draw();
-	//playerObj->Draw();
 
 	if (isStart)
 	{
 		chenge->Draw();
 		
 	}
-#ifdef _DEBUG
-
-	if (checkDebug)
-	{
-		
-	}
-
-#endif // _DEBUG
-
 
 }
 
