@@ -19,7 +19,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     for (size_t i = 0; i < arrow_.size(); i++)
     {
-        arrow_.at(i) = std::make_unique<Obj3d>("Resources/3dModels/upArrow/upArrow.obj", cameraT_.get());
+        arrow_.at(i) = std::make_unique<Obj3d>("Resources/3dModels/hookShadow/hookShadow.obj", cameraT_.get());
+        /*arrow_[i]->worldCoordinate_.scale_ = { 4,4,4 };*/
     }
 
     switch (StageSelectScene::GetStageIdx())
@@ -33,9 +34,9 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
         cameraT_->target_ = { 40.f, -20.f,80.f };
-        arrow_[0]->worldCoordinate_.position_ = { 0,22,14 };
-        arrow_[1]->worldCoordinate_.position_ = { 0,22,90 };
-        arrow_[2]->worldCoordinate_.position_ = {0,36,64};
+        arrow_[0]->worldCoordinate_.position_ = { 0,1,14 };
+        arrow_[1]->worldCoordinate_.position_ = { 0,1,90 };
+        arrow_[2]->worldCoordinate_.position_ = {0,15,64};
         break;
     case 3:
         BlockManager::ClearAll();

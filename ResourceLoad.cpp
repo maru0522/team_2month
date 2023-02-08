@@ -92,6 +92,9 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     // ãŒü‚«–îˆó
     Model::Load("Resources/3dModels/upArrow/upArrow.obj");
 
+    //ƒ[ƒv‚Ì‰e
+    Model::Load("Resources/3dModels/hookShadow/hookShadow.obj");
+
     Model::Load("Resources/3dModels/ropepin/ropepin.obj");
     Model::Load("Resources/3dModels/pinandrope_end/pinandrope_end.obj");
     Model::Load("Resources/3dModels/pinandrope_rope/pinandrope_rope.obj");
