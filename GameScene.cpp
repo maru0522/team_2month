@@ -69,7 +69,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     default:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/tutorial.csv");
-        cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
+        cameraT_->target_ = { 30.f, -20.f,50.f };
         break;
     }
 
@@ -93,6 +93,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     for (size_t i = 0; i < wireArray_.size(); i++) {
         wireArray_.at(i) = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+        wireArray_.at(i)->SetSize({ 32,16 });
+        wireArray_.at(i)->SetPosition({ 15 + i * 32.f, 580 });
     }
     reset_->SetPosition({10,10});
     select_->SetPosition({10,70});
@@ -239,6 +241,9 @@ void GameScene::Update(void)
     tutorial1_->Update();
     tutorial2_->Update();
     tutorial3_->Update();
+    for (size_t i = 0; i < wireArray_.size(); i++) {
+        wireArray_.at(i)->Update();
+    }
 }
 
 void GameScene::Draw3d(void)
@@ -304,6 +309,11 @@ void GameScene::Draw2d(void)
         else
         {
             tutorial3_->Draw();
+        }
+    }
+    for (size_t i = 0; i < wireArray_.size(); i++) {
+        if (i <= static_cast<size_t>( player_->GetRopeLength() - 1.f)) {
+            wireArray_.at(i)->Draw();
         }
     }
 }

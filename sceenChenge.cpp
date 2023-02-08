@@ -135,7 +135,7 @@ float SceenChenge::easeOutBack(float start, float end, float time)
 DirectX::XMFLOAT2 SceenChenge::Vec2EaseOutBack(DirectX::XMFLOAT2 start, DirectX::XMFLOAT2 end, float time)
 {
 
-	DirectX::XMFLOAT2 ans;
+    DirectX::XMFLOAT2 ans{};
 
 	ans.x = easeOutBack(start.x, end.x, time);
 	ans.y = easeOutBack(start.y, end.y, time);

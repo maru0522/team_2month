@@ -54,6 +54,8 @@ public: // ’è”
 
     void SetJumpFlag(bool isJump) { isJump_ = isJump; }
 
+    float GetRopeLength(void) { return ropeLength_; }
+
     int GetTutorialCount() { return tutorialCount; }
 private:
     void Move(void);
