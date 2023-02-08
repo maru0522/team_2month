@@ -10,7 +10,7 @@ void TitleScene::Initialize(SceneManager* pSceneManager)
     BaseScene::Initialize(pSceneManager);
 
     // •Ï”‰Šú‰»
-    anybutton_sprite_->SetPosition({ 500,500 });
+    anybutton_sprite_->SetPosition({ 480,500 });
     anybutton_sprite_->SetColor({ 1.f,1.f,1.f,1.f });
     anybuttonTimer_->Start(2.5f);
 
