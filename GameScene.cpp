@@ -22,26 +22,32 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     case 1:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage1.csv");
+        cameraT_->target_ = { 30.f, -20.f,60.f };
         break;
     case 2:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
+        cameraT_->target_ = { 40.f, -20.f,80.f };
         break;
     case 3:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage3.csv");
+        cameraT_->target_ = { 40.f, -20.f,60.f };
         break;
     case 4:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage4.csv");
+        cameraT_->target_ = { 40.f, -20.f,60.f };
         break;
     case 5:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage5.csv");
+        cameraT_->target_ = { 40.f, -20.f,60.f };
         break;
     case 6:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage8.csv");
+        cameraT_->target_ = { 40.f, -20.f,80.f };
         break;
     default:
         BlockManager::ClearAll();
@@ -55,7 +61,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -4.f, Stage::maxBlockPosValue_.z / 2 };
     cameraPosY = cameraT_->eye_.y;*/
 
-    cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
+    //cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
 
     targetPoint_->worldCoordinate_.position_ = cameraT_->target_;
 
