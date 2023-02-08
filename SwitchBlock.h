@@ -1,5 +1,7 @@
 #pragma once
 #include "IGimmickBlock.h"
+#include "IBlock.h"
+#include "BlockManager.h"
 class SwitchBlock :
     public IGimmickBlock
 {
@@ -8,5 +10,8 @@ public: // ä÷êî
 
     void Update(void) override;
     void Draw(void) override;
+public:
+    bool isConnect_;
+    IBlock* idxConnect = nullptr;
 };
 
