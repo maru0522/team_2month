@@ -103,10 +103,14 @@ void GameScene::Update(void)
     }
 
     // プレイヤーがクリアしたらへステージセレクト（ゴールブロックを踏んだらステージセレクト）
-    if (player_->GetIsGoal() || XPAD::IsTrigger(XPAD_START)) {
+    if (goalTimer<0.0f|| XPAD::IsTrigger(XPAD_START)) {
         BlockManager::ClearAll();
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("STAGESELECT") };
         sceneManager_->RequestChangeScene(nextScene);
+    }
+    if (player_->GetIsGoal())
+    {
+        goalTimer--;
     }
 #ifdef _DEBUG
 

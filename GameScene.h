@@ -41,6 +41,8 @@ private:
     float cameraSpeed = 1.2f;
     float cameraPosY = 0.0f;
 
+    float goalTimer = 60.0f;
+
     unique_ptr<Obj3d> skydome_{};
     unique_ptr<Obj3d> targetPoint_{};
 };
