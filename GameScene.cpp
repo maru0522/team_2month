@@ -42,21 +42,29 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage3.csv");
         cameraT_->target_ = { 40.f, -20.f,60.f };
+        arrow_[0]->worldCoordinate_.position_ = { 0,1,20 };
+        arrow_[1]->worldCoordinate_.position_ = { 0,1,72 };
         break;
     case 4:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage4.csv");
         cameraT_->target_ = { 40.f, -20.f,60.f };
+        arrow_[0]->worldCoordinate_.position_ = { 2,1,54 };
+        arrow_[1]->worldCoordinate_.position_ = { 0,15,0 };
         break;
     case 5:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage5.csv");
         cameraT_->target_ = { 40.f, -20.f,60.f };
+        arrow_[0]->worldCoordinate_.position_ = { 2,1,28 };
+        arrow_[1]->worldCoordinate_.position_ = { 2,1,58 };
+        arrow_[2]->worldCoordinate_.position_ = { 0,1,88 };
         break;
     case 6:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage8.csv");
         cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
+
         break;
     default:
         BlockManager::ClearAll();
@@ -247,13 +255,17 @@ void GameScene::Draw3d(void)
         
         break;
     case 3:
-       
+        arrow_[0]->Draw();
+        arrow_[1]->Draw();
         break;
     case 4:
-       
+        arrow_[0]->Draw();
+        arrow_[1]->Draw();
         break;
     case 5:
-       
+        arrow_[0]->Draw();
+        arrow_[1]->Draw();
+        arrow_[2]->Draw();
         break;
     case 6:
        
