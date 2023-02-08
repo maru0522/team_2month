@@ -106,6 +106,7 @@ void TitleScene::Update(void)
         else
         {
             isCheng = true;
+            isEffectEnd = true;
         }
 
 
