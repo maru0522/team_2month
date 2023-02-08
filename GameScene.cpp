@@ -47,11 +47,12 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     case 6:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage8.csv");
-        cameraT_->target_ = { 40.f, -20.f,80.f };
+        cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
         break;
     default:
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/tutorial.csv");
+        cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
         break;
     }
 
