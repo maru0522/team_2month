@@ -166,6 +166,18 @@ void GameScene::Update(void)
     //}
 #endif // _DEBUG
 
+    if (XPAD::IsTrigger(XPAD_LB))
+    {
+        if (isAutoCameraMode_)
+        {
+            isAutoCameraMode_ = false;
+        }
+        else
+        {
+            isAutoCameraMode_ = true;
+        }
+    }
+
     if (isAutoCameraMode_) {
         // 中央（注視点）からプレイヤーまでのベクトル算出
         DirectX::XMFLOAT3 tagToPlayer{
@@ -192,7 +204,7 @@ void GameScene::Update(void)
         cameraT_->eye_.y = (player_->GetObject3d()->worldCoordinate_.position_.y + cameraPosY);*/
     }
     else {
-
+        cameraT_->eye_ ={ -150.f, 60.f, 50.f };
     }
 
     skydome_->Update();;
