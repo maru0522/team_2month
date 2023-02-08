@@ -94,6 +94,9 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     for (size_t i = 0; i < wireArray_.size(); i++) {
         wireArray_.at(i) = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
     }
+    reset_->SetPosition({10,10});
+    select_->SetPosition({10,70});
+
     skydome_ = std::make_unique<Obj3d>("Resources/3dModels/skydome/skydome.obj", cameraT_.get());
     skydome_->worldCoordinate_.scale_ = { 30,30,30 };
     tutorial1_->SetPosition({ 150,550 });
@@ -230,6 +233,7 @@ void GameScene::Update(void)
     //targetPoint_->Update();
 
     reset_->Update();
+    select_->Update();
     bokashi_->Update();
     wireString_->Update();
     tutorial1_->Update();
@@ -282,6 +286,7 @@ void GameScene::Draw3d(void)
 void GameScene::Draw2d(void)
 {
     reset_->Draw();
+    select_->Draw();
     player_->Draw2d();
     bokashi_->Draw();
     wireString_->Draw();

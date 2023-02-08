@@ -68,6 +68,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
 
     Texture::Load("Resources/Image/Game/bokashi.png");
     Texture::Load("Resources/Image/Reset.png");
+    Texture::Load("Resources/Image/select.png");
     Texture::Load("Resources/Image/KEY_ENTER.png");
     Texture::Load("Resources/Image/KEY_ENTER_PRESS.png");
 

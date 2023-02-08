@@ -26,6 +26,7 @@ private:
     unique_ptr<Player> player_{ std::make_unique<Player>(cameraT_.get()) };
 
     unique_ptr<Sprite> reset_{ std::make_unique<Sprite>("Resources/Image/Reset.png",CMode::PATH) };
+    unique_ptr<Sprite> select_{ std::make_unique<Sprite>("Resources/Image/select.png",CMode::PATH) };
     unique_ptr<Sprite> bokashi_{ std::make_unique<Sprite>("Resources/Image/Game/bokashi.png",CMode::PATH) };
     unique_ptr<Sprite> wireString_{ std::make_unique<Sprite>("Resources/Image/Title/gameTitle.png",CMode::PATH) };
     std::array<unique_ptr<Sprite>, 5> wireArray_{};
