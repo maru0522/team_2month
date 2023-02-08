@@ -77,7 +77,7 @@ void TitleScene::Update(void)
     
     if (ropeMoveTime < maxRopeMoveTime and isEffectEnd == false)
     {
-        titleRopeSprite->SetPosition({ easeInQuint(-1248.0f,256.0f,ropeMoveTime / maxRopeMoveTime),720.0f - 80.0f });
+        titleRopeSprite->SetPosition({ easeInQuint(-1248.0f,230.0f,ropeMoveTime / maxRopeMoveTime),720.0f - 80.0f });
         ropeMoveTime++;
     }
 
