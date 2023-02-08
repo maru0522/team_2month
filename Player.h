@@ -54,6 +54,7 @@ public: // 定数
 
     void SetJumpFlag(bool isJump) { isJump_ = isJump; }
 
+    int GetTutorialCount() { return tutorialCount; }
 private:
     void Move(void);
     void Jump(void);
@@ -92,6 +93,8 @@ private: // 変数
     bool isGoal_{ false }; // ゴールブロックの上に乗ったか
 
     float ropeLength_{ ropeStartLength_ };
+
+    int tutorialCount = 0;
 
     std::unique_ptr<Sprite> ropeUsePad_sprite_{ std::make_unique<Sprite>("XPAD_RB",CMode::ID) };
     std::unique_ptr<Sprite> ropeUsePadPress_sprite_{ std::make_unique<Sprite>("XPAD_RB_PRESS",CMode::ID) };

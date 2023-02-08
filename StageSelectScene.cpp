@@ -94,12 +94,12 @@ void StageSelectScene::Update(void)
             std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("TITLE") };
             sceneManager_->RequestChangeScene(nextScene);
         }
-        else if (selectStageIdx_ == 0) {
+      /*  else if (selectStageIdx_ == 0) {
             BlockManager::ClearAll();
             std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("TUTORIAL") };
             sceneManager_->RequestChangeScene(nextScene);
-        }
-        else if (selectStageIdx_ >= 1) {
+        }*/
+        else if (selectStageIdx_ >= 0) {
             oldStageIdx_ = selectStageIdx_;
             BlockManager::ClearAll();
             std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("GAMEPLAY") };

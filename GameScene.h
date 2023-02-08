@@ -31,6 +31,9 @@ private:
     std::array<unique_ptr<Sprite>, 5> wireArray_{};
 
 
+    unique_ptr<Sprite> tutorial1_{ std::make_unique<Sprite>("Resources/Image/tutorial1.png",CMode::PATH) };
+    unique_ptr<Sprite> tutorial2_{ std::make_unique<Sprite>("Resources/Image/tutorial2.png",CMode::PATH) };
+    unique_ptr<Sprite> tutorial3_{ std::make_unique<Sprite>("Resources/Image/tutorial3.png",CMode::PATH) };
     // ÉJÉÅÉâmode - auto / controll
     DirectX::XMFLOAT3 oldCameraEye_{}, oldCameraTarget_{};
     bool isAutoCameraMode_{ true };
@@ -38,6 +41,7 @@ private:
     float cameraSpeed = 1.2f;
     float cameraPosY = 0.0f;
 
+    unique_ptr<Obj3d> skydome_{};
     unique_ptr<Obj3d> targetPoint_{};
 };
 

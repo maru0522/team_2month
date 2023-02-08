@@ -45,6 +45,10 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/selectBack.png");
     Texture::Load("Resources/Image/elecTex.png");
 
+    Texture::Load("Resources/Image/tutorial1.png");
+    Texture::Load("Resources/Image/tutorial2.png");
+    Texture::Load("Resources/Image/tutorial3.png");
+
     // ÉQÅ[ÉÄ - player
     Texture::Load("Resources/Image/Game/Player/player_default.png","p_default");
     Texture::Load("Resources/Image/Game/Player/player_rope.png","p_rope");
@@ -91,6 +95,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Model::Load("Resources/3dModels/pinandrope_rope/pinandrope_rope.obj");
     Model::Load("Resources/3dModels/pinandrope2_tex/pinandrope2_tex.obj");
 
+    Model::Load("Resources/3dModels/skydome/skydome.obj");
 
     Model::Load("Resources/3dModels/buttonX/buttonX.obj");
 }

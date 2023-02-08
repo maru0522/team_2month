@@ -4,6 +4,7 @@
 #include "Util.h"
 #include <algorithm>
 #include "Window.h"
+#include "StageSelectScene.h"
 
 Player::Player(Camera* pCamera)
 {
@@ -293,6 +294,10 @@ void Player::ControllState(void)
                 }
                 else {
                     isConnecting_ = true;
+                    if (StageSelectScene::GetStageIdx() == 0)//チュートリアルシーンなら
+                    {
+                        tutorialCount++;//カウントを進める
+                    }
                 }
             }
         }
@@ -302,6 +307,10 @@ void Player::ControllState(void)
                 if (isConnecting_) { // ワイヤーをつなげようとしてる最中なら
                     isConnecting_ = false; // つなげて、最中ではなくなる
                     ropeLength_ -= powerBlockConnectRopeNecessary_; // 手持ちのロープの長さを減らす。
+                    if (StageSelectScene::GetStageIdx() == 0)//チュートリアルシーンなら
+                    {
+                        tutorialCount++;//カウントを進める
+                    }
                 }
                 else { // ワイヤーをつなげようとしてる最中でないなら
                     for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList()) { // ブロックを全検索 ※まじで苦肉の策

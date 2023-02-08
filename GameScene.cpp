@@ -41,7 +41,7 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         break;
     case 6:
         BlockManager::ClearAll();
-        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage6.csv");
+        Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage8.csv");
         break;
     default:
         BlockManager::ClearAll();
@@ -49,10 +49,13 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         break;
     }
 
-    //cameraT_->eye_ = { -100.f, 60.f, -100.f };
-    cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
+  
 
-    //cameraPosY = cameraT_->eye_.y;
+    /*cameraT_->eye_ = { -100.f, 60.f, -100.f };
+    cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -4.f, Stage::maxBlockPosValue_.z / 2 };
+    cameraPosY = cameraT_->eye_.y;*/
+
+    cameraT_->target_ = { Stage::maxBlockPosValue_.x / 2, -20.f, Stage::maxBlockPosValue_.z / 2 };
 
     targetPoint_->worldCoordinate_.position_ = cameraT_->target_;
 
@@ -67,6 +70,15 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     for (size_t i = 0; i < wireArray_.size(); i++) {
         wireArray_.at(i) = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
     }
+    skydome_ = std::make_unique<Obj3d>("Resources/3dModels/skydome/skydome.obj", cameraT_.get());
+    skydome_->worldCoordinate_.scale_ = { 30,30,30 };
+    tutorial1_->SetPosition({ 150,550 });
+    tutorial2_->SetPosition({ 150,550 });
+    tutorial3_->SetPosition({ 150,550 });
+
+    tutorial1_->SetSize({ 900,96});
+    tutorial2_->SetSize({ 900,96 });
+    tutorial3_->SetSize({ 900,96 });
 }
 
 void GameScene::Update(void)
@@ -90,13 +102,12 @@ void GameScene::Update(void)
         sceneManager_->RequestChangeScene(nextScene);
     }
 
-    // プレイヤーがクリアしたら強制リセット（ゴールブロックを踏んだら強制リセット）
-    if (player_->GetIsGoal()) {
+    // プレイヤーがクリアしたらへステージセレクト（ゴールブロックを踏んだらステージセレクト）
+    if (player_->GetIsGoal() || XPAD::IsTrigger(XPAD_START)) {
         BlockManager::ClearAll();
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("STAGESELECT") };
         sceneManager_->RequestChangeScene(nextScene);
     }
-
 #ifdef _DEBUG
 
     // ホットリロード
@@ -155,7 +166,7 @@ void GameScene::Update(void)
         cameraT_->eye_.y = cameraT_->target_.y + ttpNormalized.y * distancePlayerToCamera_;
         cameraT_->eye_.z = cameraT_->target_.z + ttpNormalized.z * distancePlayerToCamera_;
 
-       /* cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
+        /*cameraT_->eye_.x = (player_->GetObject3d()->worldCoordinate_.position_.x - cameraT_->target_.z);
         cameraT_->eye_.z = (player_->GetObject3d()->worldCoordinate_.position_.z - cameraT_->target_.x) * cameraSpeed;
 
         cameraT_->eye_.y = (player_->GetObject3d()->worldCoordinate_.position_.y + cameraPosY);*/
@@ -164,6 +175,7 @@ void GameScene::Update(void)
 
     }
 
+    skydome_->Update();;
 
     cameraT_->Update();
     player_->Update();
@@ -176,10 +188,14 @@ void GameScene::Update(void)
     reset_->Update();
     bokashi_->Update();
     wireString_->Update();
+    tutorial1_->Update();
+    tutorial2_->Update();
+    tutorial3_->Update();
 }
 
 void GameScene::Draw3d(void)
 {
+    skydome_->Draw();
     player_->Draw3d();
 
 
@@ -194,6 +210,22 @@ void GameScene::Draw2d(void)
     player_->Draw2d();
     bokashi_->Draw();
     wireString_->Draw();
+    if (StageSelectScene::GetStageIdx() == 0)
+    {
+        if (player_->GetTutorialCount() == 0)
+        {
+            
+            tutorial1_->Draw();
+        }
+        else if (player_->GetTutorialCount() == 1)
+        {
+            tutorial2_->Draw();
+        }
+        else
+        {
+            tutorial3_->Draw();
+        }
+    }
 }
 
 void GameScene::Finalize(void)
