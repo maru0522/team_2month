@@ -63,6 +63,13 @@ void GameScene::Initialize(SceneManager* pSceneManager)
     player_->SetPos({ 0.0f,4.0f,0.0f });
     skydome_ = std::make_unique<Obj3d>("Resources/3dModels/skydome/skydome.obj", cameraT_.get());
     skydome_->worldCoordinate_.scale_ = { 30,30,30 };
+    tutorial1_->SetPosition({ 150,550 });
+    tutorial2_->SetPosition({ 150,550 });
+    tutorial3_->SetPosition({ 150,550 });
+
+    tutorial1_->SetSize({ 900,96});
+    tutorial2_->SetSize({ 900,96 });
+    tutorial3_->SetSize({ 900,96 });
 }
 
 void GameScene::Update(void)
@@ -172,6 +179,9 @@ void GameScene::Update(void)
 
     reset_->Update();
     bokashi_->Update();
+    tutorial1_->Update();
+    tutorial2_->Update();
+    tutorial3_->Update();
 }
 
 void GameScene::Draw3d(void)
@@ -190,6 +200,22 @@ void GameScene::Draw2d(void)
     reset_->Draw();
     player_->Draw2d();
     bokashi_->Draw();
+    if (StageSelectScene::GetStageIdx() == 0)
+    {
+        if (player_->GetTutorialCount() == 0)
+        {
+            
+            tutorial1_->Draw();
+        }
+        else if (player_->GetTutorialCount() == 1)
+        {
+            tutorial2_->Draw();
+        }
+        else
+        {
+            tutorial3_->Draw();
+        }
+    }
 }
 
 void GameScene::Finalize(void)

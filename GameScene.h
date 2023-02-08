@@ -27,7 +27,9 @@ private:
 
     unique_ptr<Sprite> reset_{ std::make_unique<Sprite>("Resources/Image/Reset.png",CMode::PATH) };
     unique_ptr<Sprite> bokashi_{ std::make_unique<Sprite>("Resources/Image/Game/bokashi.png",CMode::PATH) };
-
+    unique_ptr<Sprite> tutorial1_{ std::make_unique<Sprite>("Resources/Image/tutorial1.png",CMode::PATH) };
+    unique_ptr<Sprite> tutorial2_{ std::make_unique<Sprite>("Resources/Image/tutorial2.png",CMode::PATH) };
+    unique_ptr<Sprite> tutorial3_{ std::make_unique<Sprite>("Resources/Image/tutorial3.png",CMode::PATH) };
     // ÉJÉÅÉâmode - auto / controll
     DirectX::XMFLOAT3 oldCameraEye_{}, oldCameraTarget_{};
     bool isAutoCameraMode_{ true };
