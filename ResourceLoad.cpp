@@ -26,6 +26,8 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Texture::Load("Resources/Image/Title/title.png","titleName");
     Texture::Load("Resources/Image/Title/title_anybutton.png","anybutton");
     Texture::Load("Resources/Image/Title/gameTitle.png", "title");
+    Texture::Load("Resources/Image/titleeffect.png");
+    Texture::Load("Resources/Image/titleRope.png");
 
     //ステージセレクト
     Texture::Load("Resources/Image/selectRope.png");
