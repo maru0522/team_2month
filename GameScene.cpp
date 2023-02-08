@@ -93,13 +93,12 @@ void GameScene::Update(void)
         sceneManager_->RequestChangeScene(nextScene);
     }
 
-    // プレイヤーがクリアしたら強制リセット（ゴールブロックを踏んだら強制リセット）
-    if (player_->GetIsGoal()) {
+    // プレイヤーがクリアしたらへステージセレクト（ゴールブロックを踏んだらステージセレクト）
+    if (player_->GetIsGoal() || XPAD::IsTrigger(XPAD_START)) {
         BlockManager::ClearAll();
         std::unique_ptr<BaseScene> nextScene{ sceneManager_->CreateScene("STAGESELECT") };
         sceneManager_->RequestChangeScene(nextScene);
     }
-
 #ifdef _DEBUG
 
     // ホットリロード
