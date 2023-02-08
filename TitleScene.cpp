@@ -64,14 +64,24 @@ void TitleScene::Update(void)
 
         isEffectEnd = true;
     }
+
+    if (isEffectEnd)
+    {
+        ropeMoveTime = maxRopeMoveTime;
+        ChengWaitTime1 = 0;
+        ChengWaitTime2 = 0;
+        ChengWaitTime3 = 0;
+        ChengWaitTime4 = 0;
+        isCheng = true;
+    }
     
-    if (ropeMoveTime < maxRopeMoveTime)
+    if (ropeMoveTime < maxRopeMoveTime and isEffectEnd == false)
     {
         titleRopeSprite->SetPosition({ easeInQuint(-1248.0f,256.0f,ropeMoveTime / maxRopeMoveTime),720.0f - 80.0f });
         ropeMoveTime++;
     }
 
-    if (ropeMoveTime >= maxRopeMoveTime)
+    if (ropeMoveTime >= maxRopeMoveTime and isEffectEnd == false)
     {
         if (ChengWaitTime1 > 0)
         {
