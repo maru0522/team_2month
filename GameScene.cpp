@@ -58,6 +58,15 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
+
+    wireString_->SetCutStartPoint({ 297,0 });
+    wireString_->SetCutLength({ 215,64 });
+    wireString_->SetPosition({ 15,516 });
+    wireString_->SetSize({ 215,64 });
+
+    for (size_t i = 0; i < wireArray_.size(); i++) {
+        wireArray_.at(i) = std::make_unique<Sprite>("Resources/Image/selectRope.png", CMode::PATH);
+    }
 }
 
 void GameScene::Update(void)
@@ -166,6 +175,7 @@ void GameScene::Update(void)
 
     reset_->Update();
     bokashi_->Update();
+    wireString_->Update();
 }
 
 void GameScene::Draw3d(void)
@@ -183,6 +193,7 @@ void GameScene::Draw2d(void)
     reset_->Draw();
     player_->Draw2d();
     bokashi_->Draw();
+    wireString_->Draw();
 }
 
 void GameScene::Finalize(void)
