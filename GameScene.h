@@ -45,5 +45,6 @@ private:
 
     unique_ptr<Obj3d> skydome_{};
     unique_ptr<Obj3d> targetPoint_{};
+    std::array<unique_ptr<Obj3d>, 5>arrow_{};
 };
 

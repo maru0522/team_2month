@@ -17,6 +17,11 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     targetPoint_ = std::make_unique<Obj3d>("Resources/3dModels/cube/cube.obj", cameraT_.get());
 
+    for (size_t i = 0; i < arrow_.size(); i++)
+    {
+        arrow_.at(i) = std::make_unique<Obj3d>("Resources/3dModels/upArrow/upArrow.obj", cameraT_.get());
+    }
+
     switch (StageSelectScene::GetStageIdx())
     {
     case 1:
@@ -28,6 +33,9 @@ void GameScene::Initialize(SceneManager* pSceneManager)
         BlockManager::ClearAll();
         Stage::LoadCsv(cameraT_.get(), "Resources/Csv/stage2.csv");
         cameraT_->target_ = { 40.f, -20.f,80.f };
+        arrow_[0]->worldCoordinate_.position_ = { 0,22,14 };
+        arrow_[1]->worldCoordinate_.position_ = { 0,22,90 };
+        arrow_[2]->worldCoordinate_.position_ = {0,36,64};
         break;
     case 3:
         BlockManager::ClearAll();
@@ -191,6 +199,10 @@ void GameScene::Update(void)
     cameraT_->Update();
     player_->Update();
 
+    for (size_t i = 0; i < arrow_.size(); i++)
+    {
+        arrow_.at(i)->Update();
+    }
 
     BlockManager::Update();
 
@@ -209,7 +221,34 @@ void GameScene::Draw3d(void)
     skydome_->Draw();
     player_->Draw3d();
 
-
+  
+    switch (StageSelectScene::GetStageIdx())
+    {
+    case 1:
+       
+        break;
+    case 2:
+          arrow_[0]->Draw();
+          arrow_[1]->Draw();
+          arrow_[2]->Draw();
+        
+        break;
+    case 3:
+       
+        break;
+    case 4:
+       
+        break;
+    case 5:
+       
+        break;
+    case 6:
+       
+        break;
+    default:
+       
+        break;
+    }
     BlockManager::Draw();
 
     //targetPoint_->Draw();
