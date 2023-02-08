@@ -91,6 +91,7 @@ void ResourceLoad::Initialize(SceneManager* pSceneManager)
     Model::Load("Resources/3dModels/pinandrope_rope/pinandrope_rope.obj");
     Model::Load("Resources/3dModels/pinandrope2_tex/pinandrope2_tex.obj");
 
+    Model::Load("Resources/3dModels/skydome/skydome.obj");
 
     Model::Load("Resources/3dModels/buttonX/buttonX.obj");
 }

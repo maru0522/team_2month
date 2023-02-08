@@ -61,6 +61,8 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     player_ = std::make_unique<Player>(cameraT_.get());
     player_->SetPos({ 0.0f,4.0f,0.0f });
+    skydome_ = std::make_unique<Obj3d>("Resources/3dModels/skydome/skydome.obj", cameraT_.get());
+    skydome_->worldCoordinate_.scale_ = { 30,30,30 };
 }
 
 void GameScene::Update(void)
@@ -158,6 +160,7 @@ void GameScene::Update(void)
 
     }
 
+    skydome_->Update();;
 
     cameraT_->Update();
     player_->Update();
@@ -173,6 +176,7 @@ void GameScene::Update(void)
 
 void GameScene::Draw3d(void)
 {
+    skydome_->Draw();
     player_->Draw3d();
 
 
