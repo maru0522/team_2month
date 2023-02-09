@@ -13,7 +13,7 @@ SwitchBlock::SwitchBlock(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 scale, uint32_
 
 void SwitchBlock::Update(void)
 {
-   /* for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList())
+    for (std::unique_ptr<IBlock>& block : *BlockManager::GetBlockList())
     {
         if (*block->GetType() == IBlock::Type::SWITCH) {
             isConnect_ = BlockManager::GetConnectMap()->at(block->GetIdxConnect());
@@ -27,7 +27,8 @@ void SwitchBlock::Update(void)
     else
     {
         body_->SetTexture("Resources/Image/selecttile.png");
-    }*/
+    }
+        
     body_->Update();
 }
 
