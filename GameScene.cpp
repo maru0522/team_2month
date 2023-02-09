@@ -101,13 +101,13 @@ void GameScene::Initialize(SceneManager* pSceneManager)
 
     skydome_ = std::make_unique<Obj3d>("Resources/3dModels/skydome/skydome.obj", cameraT_.get());
     skydome_->worldCoordinate_.scale_ = { 30,30,30 };
-    tutorial1_->SetPosition({ 150,550 });
-    tutorial2_->SetPosition({ 150,550 });
-    tutorial3_->SetPosition({ 150,550 });
+    tutorial1_->SetPosition({ 250,600 });
+    tutorial2_->SetPosition({ 250,600 });
+    tutorial3_->SetPosition({ 250,600 });
 
-    tutorial1_->SetSize({ 900,96});
-    tutorial2_->SetSize({ 900,96 });
-    tutorial3_->SetSize({ 900,96 });
+    tutorial1_->SetSize({ 800,96});
+    tutorial2_->SetSize({ 800,96 });
+    tutorial3_->SetSize({ 800,96 });
 }
 
 void GameScene::Update(void)
