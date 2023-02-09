@@ -31,7 +31,7 @@ LRESULT Window::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
     return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-const wchar_t Window::windowClassName_[] = L"maruyamaEngine";
+const wchar_t Window::windowClassName_[] = L"コンダクションワイヤー";
 
 Window::Window()
 {
